@@ -2,3 +2,4 @@
 
 **Contributors**
 - [Blake Fletcher](https://github.com/blkfltchr)
+- [Henry Neal](https://github.com/henron1)
