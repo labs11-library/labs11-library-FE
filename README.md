@@ -7,4 +7,3 @@
 - [Jacob Layton](https://github.com/JacobLayton)
 - [David Flack](https://github.com/Zooheck)
 - [Scott Vojik](https://github.com/sk-vojik)
-
