@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import { withRouter } from "react-router-dom";
 class App extends Component {
   state = {
     users: []
@@ -35,4 +34,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default App;
