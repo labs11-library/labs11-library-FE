@@ -1,34 +1,20 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { Route } from 'react-router-dom';
+
+import BookList from './components/BookList';
+import Users from './components/Users';
 
 class App extends Component {
   state = {
-    users: []
   };
-
-  componentDidMount() {
-    axios
-      .get("https://book-maps.herokuapp.com/users")
-      .then(res => {
-        this.setState({
-          users: res.data
-        });
-      })
-      .catch(err => console.log(err));
-  }
 
   render() {
     console.log(this.state);
     return (
       <div>
-        <p>Book maps 📚🗺</p>
-
-        {this.state.users.map(user => (
-          <>
-            <p>{user.firstName}</p>
-            <img src={user.picture} />
-          </>
-        ))}
+        <p>Book maps <span role="img" aria-label="books">📚</span><span role="img" aria-label="map">🗺</span></p>/p>
+        <Route exact path="/books" component={BookList}/>
+        <Route exact path="/users" component={Users}/>
       </div>
     );
   }
