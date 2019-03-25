@@ -21,12 +21,10 @@ class Users extends Component {
     console.log(this.state);
     return (
       <div>
-        <p>Book maps 📚🗺</p>
-
         {this.state.users.map(user => (
           <>
             <p>{user.firstName}</p>
-            <img src={user.picture} />
+            <img alt={user.firstName} src={user.picture} />
           </>
         ))}
       </div>

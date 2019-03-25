@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Route } from 'react-router-dom';
 
 import BookList from './components/BookList';
@@ -13,6 +12,7 @@ class App extends Component {
     console.log(this.state);
     return (
       <div>
+        <p>Book maps <span role="img" aria-label="books">📚</span><span role="img" aria-label="map">🗺</span></p>/p>
         <Route exact path="/books" component={BookList}/>
         <Route exact path="/users" component={Users}/>
       </div>
