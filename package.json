@@ -4,8 +4,17 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.2",
+    "@progress/kendo-react-buttons": "^2.8.0",
+    "@progress/kendo-react-conversational-ui": "^2.8.0",
+    "@progress/kendo-react-inputs": "^2.8.0",
+    "@progress/kendo-react-intl": "^2.8.0",
+    "@progress/kendo-theme-material": "^2.3.2",
     "axios": "^0.18.0",
+<<<<<<< HEAD
     "leaflet": "^1.4.0",
+=======
+    "dotenv": "^7.0.0",
+>>>>>>> 9e885f9982dc7f787774397e4d33805e926dac9c
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-leaflet": "^2.2.1",
@@ -15,7 +24,8 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "twilio-chat": "^3.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
