@@ -1,0 +1,42 @@
+import axios from "axios";
+
+export const FETCHING_USERS = "FETCHING_USERS";
+export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
+
+export const GETTING_FIRST_USER = "GETTING_FIRST_USER";
+export const GET_FIRST_USER_SUCCESS = "GET_FIRST_USER_SUCCESS";
+
+const baseUrl = "https://book-maps.herokuapp.com";
+
+export const getUsers = state => dispatch => {
+  dispatch({ type: FETCHING_USERS });
+  axios
+    .get(`${baseUrl}/users`)
+    .then(res => {
+      dispatch({
+        type: FETCH_USERS_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => console.log(err));
+};
+
+export const getFirstUser = state => dispatch => {
+  dispatch({ type: GETTING_FIRST_USER });
+  // axios.get(`${baseUrl}/users/366`).then(res => {
+  //   dispatch({ type: GET_FIRST_USER_SUCCESS, payload: res.data }).catch(err =>
+  //     console.log(err)
+  //   );
+  // });
+  axios
+    .get(`${baseUrl}/users/366`)
+    .then(res => {
+      dispatch({
+        type: GET_FIRST_USER_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
