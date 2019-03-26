@@ -13,7 +13,6 @@ class UserProfile extends Component {
     this.props.getFirstUser();
   }
   toggleUpdate = e => {
-    e.preventDefault();
     this.setState(prevState => {
       return {
         updatingInfo: !prevState.updatingInfo
@@ -26,7 +25,10 @@ class UserProfile extends Component {
       return (
         <div>
           <h1>Update profile</h1>
-          <UpdateUserProfile loggedInUser={loggedInUser} />
+          <UpdateUserProfile
+            loggedInUser={loggedInUser}
+            toggleUpdate={this.toggleUpdate}
+          />
           <button onClick={this.toggleUpdate}>Cancel Update</button>
         </div>
       );
