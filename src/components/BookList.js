@@ -16,8 +16,8 @@ class Books extends Component {
         <h1>All books</h1>
         <input placeholder="Search books" />
         <div>
-          {this.state.books.map(book => {
-            return <BookDetails book={book} />;
+          {this.state.books.map((book, id) => {
+            return <BookDetails key={id} book={book} />;
           })}
         </div>
       </div>
