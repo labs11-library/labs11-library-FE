@@ -9,6 +9,7 @@ import UserProfile from "./components/UserProfile";
 import NavBar from "./components/NavBar";
 import InventoryList from "./components/InventoryList";
 import CheckedOutList from "./components/CheckedOutList";
+import Mapview from "./components/Mapview";
 import ChatApp from "./components/ChatApp";
 
 class App extends Component {
@@ -41,6 +42,7 @@ class App extends Component {
 				<Route exact path="/profile" component={UserProfile} />
 				<Route exact path="/inventory" component={InventoryList} />
 				<Route exact path="/checkedout" component={CheckedOutList} />
+				<Route exact path="/mapview" component={Mapview} />
 				<Route
 					exact
 					path="/chatapp"
