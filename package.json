@@ -10,11 +10,8 @@
     "@progress/kendo-react-intl": "^2.8.0",
     "@progress/kendo-theme-material": "^2.3.2",
     "axios": "^0.18.0",
-<<<<<<< HEAD
     "leaflet": "^1.4.0",
-=======
     "dotenv": "^7.0.0",
->>>>>>> 9e885f9982dc7f787774397e4d33805e926dac9c
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-leaflet": "^2.2.1",

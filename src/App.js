@@ -9,11 +9,8 @@ import UserProfile from "./components/UserProfile";
 import NavBar from "./components/NavBar";
 import InventoryList from "./components/InventoryList";
 import CheckedOutList from "./components/CheckedOutList";
-<<<<<<< HEAD
 import Mapview from "./components/Mapview";
-=======
 import ChatApp from "./components/ChatApp";
->>>>>>> 9e885f9982dc7f787774397e4d33805e926dac9c
 
 class App extends Component {
   state = {
@@ -45,9 +42,7 @@ class App extends Component {
         <Route exact path="/profile" component={UserProfile} />
         <Route exact path="/inventory" component={InventoryList} />
         <Route exact path="/checkedout" component={CheckedOutList} />
-<<<<<<< HEAD
         <Route exact path="/mapview" component={Mapview} />
-=======
         <Route
           exact
           path="/chatapp"
@@ -55,7 +50,6 @@ class App extends Component {
             <ChatApp {...props} username={this.state.username} />
           )}
         />
->>>>>>> 9e885f9982dc7f787774397e4d33805e926dac9c
       </div>
     );
   }
