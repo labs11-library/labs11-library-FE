@@ -25,6 +25,7 @@ class UserProfile extends Component {
     if (this.state.updatingInfo) {
       return (
         <div>
+          <h1>Update profile</h1>
           <UpdateUserProfile loggedInUser={loggedInUser} />
           <button onClick={this.toggleUpdate}>Cancel Update</button>
         </div>
@@ -32,6 +33,7 @@ class UserProfile extends Component {
     } else {
       return (
         <div>
+          <h1>Profile</h1>
           <UserProfileCard loggedInUser={loggedInUser} />
           <button onClick={this.toggleUpdate}>Update Info</button>
         </div>

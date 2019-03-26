@@ -7,6 +7,8 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import UserProfile from "./components/UserProfile";
 import NavBar from "./components/NavBar";
+import InventoryList from "./components/InventoryList";
+import CheckedOutList from "./components/CheckedOutList";
 
 class App extends Component {
   state = {};
@@ -21,6 +23,8 @@ class App extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/profile" component={UserProfile} />
+        <Route exact path="/inventory" component={InventoryList} />
+        <Route exact path="/checkedout" component={CheckedOutList} />
       </div>
     );
   }
