@@ -3,9 +3,9 @@ import SideBar from "./SideBar";
 import {
 	COMMUNITY_CHAT,
 	MESSAGE_SENT,
-	MESSAGE_RECIEVED,
+	MESSAGE_RECEIVED,
 	TYPING
-} from "../../Events";
+} from "../Events.js";
 import ChatHeading from "./ChatHeading";
 import Messages from "../messages/Messages";
 import MessageInput from "../messages/MessageInput";
@@ -51,7 +51,7 @@ export default class ChatContainer extends Component {
 			activeChat: reset ? chat : this.state.activeChat
 		});
 
-		const messageEvent = `${MESSAGE_RECIEVED}-${chat.id}`;
+		const messageEvent = `${MESSAGE_RECEIVED}-${chat.id}`;
 		const typingEvent = `${TYPING}-${chat.id}`;
 
 		socket.on(typingEvent, this.updateTypingInChat(chat.id));
