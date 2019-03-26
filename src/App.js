@@ -13,46 +13,46 @@ import Mapview from "./components/Mapview";
 import ChatApp from "./components/ChatApp";
 
 class App extends Component {
-  state = {
-    username: "bob"
-  };
+	state = {
+		username: "bob"
+	};
 
-  setUsername = event => {
-    this.setState({
-      username: event.target.value
-    });
-  };
+	setUsername = event => {
+		this.setState({
+			username: event.target.value
+		});
+	};
 
-  render() {
-    console.log(this.state);
-    return (
-      <div>
-        <NavBar />
-        <input
-          onSubmit={this.setUsername}
-          onChange={this.setUsername}
-          value={this.state.username}
-          placeholder="Search books"
-        />
-        <div>{this.state.username}</div>
-        <Route exact path="/books" component={BookList} />
-        <Route exact path="/users" component={Users} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/profile" component={UserProfile} />
-        <Route exact path="/inventory" component={InventoryList} />
-        <Route exact path="/checkedout" component={CheckedOutList} />
-        <Route exact path="/mapview" component={Mapview} />
-        <Route
-          exact
-          path="/chatapp"
-          render={props => (
-            <ChatApp {...props} username={this.state.username} />
-          )}
-        />
-      </div>
-    );
-  }
+	render() {
+		console.log(this.state);
+		return (
+			<div>
+				<NavBar />
+				<input
+					onSubmit={this.setUsername}
+					onChange={this.setUsername}
+					value={this.state.username}
+					placeholder="Search books"
+				/>
+				<div>{this.state.username}</div>
+				<Route exact path="/books" component={BookList} />
+				<Route exact path="/users" component={Users} />
+				<Route exact path="/signup" component={Signup} />
+				<Route exact path="/login" component={Login} />
+				<Route exact path="/profile" component={UserProfile} />
+				<Route exact path="/inventory" component={InventoryList} />
+				<Route exact path="/checkedout" component={CheckedOutList} />
+				<Route exact path="/mapview" component={Mapview} />
+				<Route
+					exact
+					path="/chatapp"
+					render={props => (
+						<ChatApp {...props} username={this.state.username} />
+					)}
+				/>
+			</div>
+		);
+	}
 }
 
 export default App;
