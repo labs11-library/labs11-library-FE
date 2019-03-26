@@ -1,27 +1,17 @@
 import React, { Component } from "react";
-import axios from "axios";
 
+import { connect } from "react-redux";
+import { getUsers } from "../redux/actions";
 class Users extends Component {
-  state = {
-    users: []
-  };
-
   componentDidMount() {
-    axios
-      .get("https://book-maps.herokuapp.com/users")
-      .then(res => {
-        this.setState({
-          users: res.data
-        });
-      })
-      .catch(err => console.log(err));
+    this.props.getUsers();
   }
 
   render() {
     console.log(this.state);
     return (
       <div>
-        {this.state.users.map(user => (
+        {this.props.users.map(user => (
           <>
             <p>{user.firstName}</p>
             <img alt={user.firstName} src={user.picture} />
@@ -32,4 +22,12 @@ class Users extends Component {
   }
 }
 
-export default Users;
+const mapStateToProps = state => ({
+  users: state.users,
+  loading: state.loading
+});
+
+export default connect(
+  mapStateToProps,
+  { getUsers }
+)(Users);
