@@ -2,7 +2,9 @@ import {
   FETCHING_USERS,
   FETCH_USERS_SUCCESS,
   GETTING_FIRST_USER,
-  GET_FIRST_USER_SUCCESS
+  GET_FIRST_USER_SUCCESS,
+  UPDATING_PROFILE,
+  UPDATE_PROFILE_SUCCESS
 } from "./actions";
 
 const initialState = {
@@ -32,6 +34,17 @@ const rootReducer = (state = initialState, action) => {
         loading: true
       };
     case GET_FIRST_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loggedInUser: action.payload
+      };
+    case UPDATING_PROFILE:
+      return {
+        ...state,
+        loading: true
+      };
+    case UPDATE_PROFILE_SUCCESS:
       return {
         ...state,
         loading: false,
