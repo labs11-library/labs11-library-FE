@@ -1,12 +1,13 @@
 import React from 'react'
 
 const BookDetails = (props) => {
+  const { title, author, image, lenderName, location } = props.book
   return (
     <div>
-      <h2>{props.book.title}</h2>
-      <p>by {props.book.author}</p>
-      <img alt={props.book.title} src={props.book.image}/>
-      <p>Contact {props.book.lenderName}</p>
+      <h2>{title}</h2>
+      <p>by {author}</p>
+      <img alt={title} src={image}/>
+      <p>Contact {lenderName} from {location}</p>
       <button>Send message</button>
     </div>
   )
