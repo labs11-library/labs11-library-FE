@@ -5,6 +5,7 @@ import BookList from "./components/BookList";
 import Users from "./components/Users";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
+import UserProfile from "./components/UserProfile";
 
 class App extends Component {
   state = {};
@@ -26,6 +27,7 @@ class App extends Component {
         <Route exact path="/users" component={Users} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/profile" component={UserProfile} />
       </div>
     );
   }
