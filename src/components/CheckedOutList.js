@@ -2,21 +2,21 @@ import React, { Component } from "react";
 import books from "../data";
 import BookDetails from "./BookDetails";
 
-class Books extends Component {
+class CheckedOutList extends Component {
   constructor() {
     super();
     this.state = {
-      books: books
+      checkedout: books
     };
   }
 
   render() {
     return (
       <div>
-        <h1>All books</h1>
-        <input placeholder="Search books" />
+        <h1>Checked Out</h1>
+        <input placeholder="Search checked out" />
         <div>
-          {this.state.books.map(book => {
+          {this.state.checkedout.map(book => {
             return <BookDetails book={book} />;
           })}
         </div>
@@ -25,4 +25,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default CheckedOutList;

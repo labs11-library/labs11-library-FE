@@ -6,6 +6,9 @@ import Users from "./components/Users";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import UserProfile from "./components/UserProfile";
+import NavBar from "./components/NavBar";
+import InventoryList from "./components/InventoryList";
+import CheckedOutList from "./components/CheckedOutList";
 
 class App extends Component {
   state = {};
@@ -14,20 +17,14 @@ class App extends Component {
     console.log(this.state);
     return (
       <div>
-        <p>
-          Book maps{" "}
-          <span role="img" aria-label="books">
-            📚
-          </span>
-          <span role="img" aria-label="map">
-            🗺
-          </span>
-        </p>
+        <NavBar />
         <Route exact path="/books" component={BookList} />
         <Route exact path="/users" component={Users} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/profile" component={UserProfile} />
+        <Route exact path="/inventory" component={InventoryList} />
+        <Route exact path="/checkedout" component={CheckedOutList} />
       </div>
     );
   }
