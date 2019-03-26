@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { connect } from "react-redux";
+import { editProfile } from "../redux/actions.js";
 class UpdateUserProfile extends Component {
   constructor(props) {
     super(props);
@@ -11,15 +13,24 @@ class UpdateUserProfile extends Component {
       bio
     };
   }
+  componentWillReceiveProps(newProps) {
+    if (this.props.loggedInUser !== newProps.loggedInUser) {
+      this.props.toggleUpdate();
+    }
+  }
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({
       [name]: value
     });
   };
+  editProfile = e => {
+    e.preventDefault();
+    this.props.editProfile(this.state);
+  };
   render() {
     return (
-      <div>
+      <form>
         <input
           type="text"
           name="firstName"
@@ -44,9 +55,17 @@ class UpdateUserProfile extends Component {
           value={this.state.bio}
           onChange={this.handleChange}
         />
-      </div>
+        <button onClick={this.editProfile}>Save Updates</button>
+      </form>
     );
   }
 }
 
-export default UpdateUserProfile;
+const mapStateToProps = state => ({
+  loading: state.loading,
+  loggedInUser: state.loggedInUser
+});
+export default connect(
+  mapStateToProps,
+  { editProfile }
+)(UpdateUserProfile);
