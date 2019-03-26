@@ -28,6 +28,7 @@ class Books extends Component {
       return books.filter(book => book.available === true);
     }
   };
+
   render() {
     return (
       <div>
@@ -50,7 +51,13 @@ class Books extends Component {
         </div>
         <div>
           {this.filteredBooks().map((book, id) => {
-            return <BookDetails key={id} book={book} />;
+            return (
+              <BookDetails
+                key={id}
+                book={book}
+                username={this.state.username}
+              />
+            );
           })}
         </div>
       </div>
