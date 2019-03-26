@@ -9,6 +9,8 @@ import logger from "redux-logger";
 import rootReducer from "./redux/reducers";
 // ===================== REACT ROUTER ==========================
 import { BrowserRouter as Router } from "react-router-dom";
+// ===================== Leaflet Stylesheet ====================
+import "leaflet/dist/leaflet.css";
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
