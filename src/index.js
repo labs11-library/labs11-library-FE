@@ -11,6 +11,7 @@ import rootReducer from "./redux/reducers";
 import { BrowserRouter as Router } from "react-router-dom";
 // ===================== Leaflet Stylesheet ====================
 import "leaflet/dist/leaflet.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
