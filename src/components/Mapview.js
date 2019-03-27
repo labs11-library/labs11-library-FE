@@ -1,38 +1,41 @@
 import React, { Component } from "react";
-import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
-import mapboxgl from "mapbox-gl/dist/mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
+// import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
+// import mapboxgl from "mapbox-gl/dist/mapbox-gl";
+// import "mapbox-gl/dist/mapbox-gl.css";
+import axios from "axios";
+import "./mapview.css";
 
-// DEFAULT PUBLIC TOKEN
-const Map = ReactMapboxGl({
-  accessToken:
-    "pk.eyJ1IjoiamFjb2JsYXl0b24iLCJhIjoiY2p0cHlqZDV6MDFtajQ0cGU0dTYyeXQ4NSJ9.rcJGE61Ad30jvn8UMMtH6A"
-});
+const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 class Mapview extends Component {
   constructor() {
     super();
     this.state = {
       location: {
-        lat: 19.8333333,
-        lng: -20
+        lat: 39.8333333,
+        lng: -98.585522
       },
       haveUserLocation: false,
-      zoom: [1.2]
+      zoom: 4,
+      users: []
     };
   }
 
   componentDidMount() {
+    this.getUsers();
+    // this.renderMap();
     navigator.geolocation.getCurrentPosition(
       position => {
+        console.log(position);
         this.setState({
           location: {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           },
           haveUserLocation: true,
-          zoom: [14]
+          zoom: 15
         });
+        this.renderMap();
       },
       () => {
         console.log("User blocked access to location");
@@ -46,30 +49,84 @@ class Mapview extends Component {
                 lng: location.longitude
               },
               haveUserLocation: true,
-              zoom: [11]
+              zoom: 11
             });
+            this.renderMap();
           });
       }
     );
   }
 
+  renderMap = () => {
+    loadScript(
+      `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`
+    );
+    window.initMap = this.initMap;
+  };
+
+  getUsers = () => {
+    const endPoint = "https://book-maps.herokuapp.com/users?";
+    const parameters = {
+      firstName: "",
+      location: ""
+    };
+
+    axios
+      .get(endPoint + new URLSearchParams(parameters))
+      .then(res => {
+        this.setState(
+          {
+            users: res.data
+          },
+          this.renderMap()
+        );
+        console.log(this.state.users);
+      })
+      .catch(err => {
+        console.log("Error" + err);
+      });
+  };
+
+  initMap = () => {
+    // Create A Map
+    var map = new window.google.maps.Map(document.getElementById("map"), {
+      center: this.state.location,
+      zoom: this.state.zoom
+    });
+
+    // this.state.users.map(allUsers => {
+    //   console.log(allUsers.location);
+    //   var marker = new window.google.maps.Marker({
+    //     position: allUsers.location,
+    //     map: map,
+    //     title: "Hello World!"
+    //   });
+    // });
+    if (this.state.haveUserLocation) {
+      var marker = new window.google.maps.Marker({
+        position: this.state.location,
+        map: map,
+        title: "Hello World!"
+      });
+    }
+  };
+
   render() {
     return (
-      <Map
-        style="mapbox://styles/mapbox/streets-v9"
-        center={this.state.location}
-        zoom={this.state.zoom}
-        containerStyle={{
-          height: "500px"
-          // width: "100vw"
-        }}
-      >
-        <Layer type="symbol" id="marker" layout={{ "icon-image": "marker-15" }}>
-          <Feature coordinates={this.state.location} />
-        </Layer>
-      </Map>
+      <main>
+        <div id="map" />
+      </main>
     );
   }
+}
+
+function loadScript(url) {
+  var index = window.document.getElementsByTagName("script")[0];
+  var script = window.document.createElement("script");
+  script.src = url;
+  script.async = true;
+  script.defer = true;
+  index.parentNode.insertBefore(script, index);
 }
 
 export default Mapview;
