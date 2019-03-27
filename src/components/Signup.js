@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import queryString from "query-string";
 import './signup.css'
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
@@ -13,13 +12,6 @@ import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 
 class Signup extends Component {
-  componentWillMount() {
-    var query = queryString.parse(this.props.location.search);
-    if (query.token) {
-      window.localStorage.setItem("jwt", query.token);
-      this.props.history.push("/");
-    }
-  };
 
   render() { 
   return (
