@@ -11,21 +11,38 @@ class Books extends Component {
     super();
     this.state = {
       books: books,
-      filter: "all"
+      filter: "all",
+      searchText: ""
     };
   }
 
-  handleSearch = event => {};
+  handleChange = e => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value
+    });
+  };
+  searchBooks = () => {
+    const { books, searchText } = this.state;
+    if (searchText.length === 0) {
+      return books;
+    } else if (searchText.length > 0) {
+      const searchRegex = new RegExp(searchText, "gi");
+      return books.filter(
+        book => book.title.match(searchRegex) || book.author.match(searchRegex)
+      );
+    }
+  };
   handleSelect = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
   filteredBooks = () => {
-    const { books, filter } = this.state;
+    const { filter } = this.state;
     if (filter === "all") {
-      return books;
+      return this.searchBooks();
     } else if (filter === "available") {
-      return books.filter(book => book.available === true);
+      return this.searchBooks().filter(book => book.available === true);
     }
   };
 
@@ -33,7 +50,12 @@ class Books extends Component {
     return (
       <div>
         <h1>All books</h1>
-        <input placeholder="Search books" />
+        <input
+          placeholder="Search books"
+          name="searchText"
+          value={this.state.searchText}
+          onChange={this.handleChange}
+        />
         <div>
           <InputLabel style={{ padding: "10px" }}>Filter by:</InputLabel>
           <Select
