@@ -2,13 +2,14 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { getUsers } from "../redux/actions";
+
+import Auth from "./Auth";
 class Users extends Component {
   componentDidMount() {
     this.props.getUsers();
   }
 
   render() {
-    console.log(this.state);
     return (
       <div>
         {this.props.users.map(user => (
@@ -27,7 +28,9 @@ const mapStateToProps = state => ({
   loading: state.loading
 });
 
-export default connect(
+const UsersComponent = connect(
   mapStateToProps,
   { getUsers }
 )(Users);
+
+export default Auth(UsersComponent);

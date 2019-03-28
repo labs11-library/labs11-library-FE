@@ -9,7 +9,8 @@ export const GET_FIRST_USER_SUCCESS = "GET_FIRST_USER_SUCCESS";
 export const UPDATING_PROFILE = "UPDATING_PROFILE";
 export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
 
-const baseUrl = "https://book-maps.herokuapp.com";
+const baseUrl = "http://localhost:9001";
+// "https://book-maps.herokuapp.com";
 
 export const getUsers = state => dispatch => {
   dispatch({ type: FETCHING_USERS });
