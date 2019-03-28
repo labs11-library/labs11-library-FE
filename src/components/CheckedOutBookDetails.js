@@ -4,6 +4,7 @@ import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
 
+import * as moment from "moment";
 const BookDetailsWrapper = styled.div`
   width: 60vw;
   border-bottom: 2px solid grey;
@@ -37,6 +38,12 @@ const BookDetails = props => {
   } = props.book;
   const availability = available ? "Available" : "Checked out";
 
+  function timeRemaining(dueDate) {
+    let now = moment(Date.now());
+    let end = moment(dueDate);
+    let duration = moment.duration(now.diff(end)).humanize();
+    return duration;
+  }
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -46,6 +53,7 @@ const BookDetails = props => {
         <h2>{title}</h2>
         <p>by {author}</p>
         <p>Due on: {dueDate}</p>
+        <p>Time until due: {timeRemaining(dueDate)}</p>
         <Availability available={available}>{availability}</Availability>
         <p>
           Contact {lenderName} from {location}
