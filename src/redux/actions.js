@@ -9,6 +9,13 @@ export const GET_FIRST_USER_SUCCESS = "GET_FIRST_USER_SUCCESS";
 export const UPDATING_PROFILE = "UPDATING_PROFILE";
 export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
 
+export const GETTING_SINGLE_INVENTORY = "GETTING_SINGLE_INVENTORY";
+export const GET_SINGLE_INVENTORY_SUCCESS = "GET_SINGLE_INVENTORY_SUCCESS";
+
+export const GETTING_SINGLE_BOOK = "GETTING_SINGLE_BOOK";
+export const GET_SINGLE_BOOK_SUCCESS = "GET_SINGLE_BOOK_SUCCESS";
+
+
 const baseUrl = "http://localhost:9001";
 // "https://book-maps.herokuapp.com";
 
@@ -53,6 +60,36 @@ export const editProfile = updatedUser => dispatch => {
       dispatch({
         type: UPDATE_PROFILE_SUCCESS,
         payload: res.data.editedUser
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+export const getSingleInventory = (userId, bookId) => dispatch => {
+  dispatch({ type: GETTING_SINGLE_INVENTORY });
+  axios
+    .get(`${baseUrl}/users/${userId}/inventory/${bookId}`)
+    .then(res => {
+      dispatch({
+        type: GET_SINGLE_INVENTORY_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+export const getSingleBook = bookId => dispatch => {
+  dispatch({ type: GETTING_SINGLE_BOOK });
+  axios
+    .get(`${baseUrl}/books/${bookId}`)
+    .then(res => {
+      dispatch({
+        type: GET_SINGLE_BOOK_SUCCESS,
+        payload: res.data
       });
     })
     .catch(err => {

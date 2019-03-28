@@ -1,5 +1,6 @@
 const books = [
   {
+    bookId: 1,
     title: "Harry Potter",
     author: "JK Rowling",
     image:
@@ -10,6 +11,7 @@ const books = [
     dueDate: "2019-07-10"
   },
   {
+    bookId: 2,
     title: "The Odyssey",
     author: "Homer",
     image:
@@ -20,6 +22,7 @@ const books = [
     dueDate: "2019-5-13"
   },
   {
+    bookId: 3,
     title: "Tribe of Mentors",
     author: "Tim Ferriss",
     image:
@@ -30,6 +33,7 @@ const books = [
     dueDate: "2019-04-20"
   },
   {
+    bookId: 4,
     title: "Zero To One",
     author: "Peter Thiel",
     image:
@@ -40,6 +44,7 @@ const books = [
     dueDate: "2019-04-01"
   },
   {
+    bookId: 5,
     title: "Paradise Lost",
     author: "John Milton",
     image:
@@ -50,6 +55,7 @@ const books = [
     dueDate: "2019-03-29"
   },
   {
+    bookId: 6,
     title: "Of Mice and Men",
     author: "John Steinbeck",
     image:
