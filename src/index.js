@@ -9,8 +9,6 @@ import logger from "redux-logger";
 import rootReducer from "./redux/reducers";
 // ===================== REACT ROUTER ==========================
 import { BrowserRouter as Router } from "react-router-dom";
-// ===================== MAPBOX STYLESHEET ====================
-import "mapbox-gl/dist/mapbox-gl.css";
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
