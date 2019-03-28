@@ -7586,7 +7586,6 @@ mkdirp@0.5.1, mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@
 moment@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
-  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -9178,7 +9177,6 @@ qs@6.5.2, qs@~6.5.2:
 query-string@^6.4.2:
   version "6.4.2"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.4.2.tgz#8be1dbd105306aebf86022144f575a29d516b713"
-  integrity sha512-DfJqAen17LfLA3rQ+H5S4uXphrF+ANU1lT2ijds4V/Tj4gZxA3gx5/tg1bz7kYCmwna7LyJNCYqO7jNRzo3aLw==
   dependencies:
     decode-uri-component "^0.2.0"
     split-on-first "^1.0.0"
@@ -9373,15 +9371,6 @@ react-is@^16.6.0, react-is@^16.6.3, react-is@^16.7.0, react-is@^16.8.2:
 react-is@^16.8.1:
   version "16.8.4"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.4.tgz#90f336a68c3a29a096a3d648ab80e87ec61482a2"
-
-react-leaflet@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-2.2.1.tgz#c33974f518ffc8b3b7221f72e00c28963b95314d"
-  dependencies:
-    "@babel/runtime" "^7.3.1"
-    fast-deep-equal "^2.0.1"
-    hoist-non-react-statics "^3.3.0"
-    warning "^4.0.3"
 
 react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
@@ -10416,7 +10405,6 @@ spdy@^4.0.0:
 split-on-first@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/split-on-first/-/split-on-first-1.0.0.tgz#648af4ce9a28fbcaadd43274455f298b55025fc6"
-  integrity sha512-mjA57TQtdWztVZ9THAjGNpgbuIrNfsNrGa5IyK94NoPaT4N14M+GI4jD7t4arLjFkYRQWdETC5RxFzLWouoB3A==
 
 split-string@^1.0.1:
   version "1.0.1"
@@ -10531,7 +10519,6 @@ stream-shift@^1.0.0:
 strict-uri-encode@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz#b9c7330c7042862f6b142dc274bbcc5866ce3546"
-  integrity sha1-ucczDHBChi9rFC3CdLvMWGbONUY=
 
 string-length@^2.0.0:
   version "2.0.0"
@@ -11585,7 +11572,7 @@ warning@^3.0.0:
   dependencies:
     loose-envify "^1.0.0"
 
-warning@^4.0.1, warning@^4.0.3:
+warning@^4.0.1:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
   dependencies:
