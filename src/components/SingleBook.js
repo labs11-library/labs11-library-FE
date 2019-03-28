@@ -26,7 +26,7 @@ const Availability = styled.p`
   color: ${props => (props.available ? "green" : "red")};
 `;
 
-const BookDetails = props => {
+const SingleBook = props => {
   const {
     title,
     author,
@@ -59,11 +59,8 @@ const BookDetails = props => {
         <Link to="/chatapp">
           <Button>Send message</Button>
         </Link>
-        <Link to="/books/1">
-          <Button>See more details</Button>
-        </Link>
       </div>
     </BookDetailsWrapper>
   );
 };
-export default BookDetails;
+export default SingleBook;
