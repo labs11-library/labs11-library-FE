@@ -14,6 +14,7 @@ import CheckedOutList from "./components/CheckedOutList";
 import Mapview from "./components/Mapview";
 import ChatApp from "./components/ChatApp";
 import SingleBook from "./components/SingleBook";
+import Sendgrid from "./components/SendGrid";
 
 class App extends Component {
 	state = {
@@ -55,6 +56,7 @@ class App extends Component {
 				<Route exact path="/inventory" component={InventoryList} />
 				<Route exact path="/checkedout" component={CheckedOutList} />
 				<Route exact path="/mapview" component={Mapview} />
+				<Route exact path="/sendgrid" component={Sendgrid} />
 				<Route exact path="/book/1" component={SingleBook} />
 				<Route
 					exact

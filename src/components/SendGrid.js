@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class Sendgrid extends Component {
 	state = {
@@ -12,11 +13,13 @@ class Sendgrid extends Component {
 
 	sendEmail = () => {
 		const { email } = this.state;
-		fetch(
-			`http://localhost:9001/email/send-email?recipient=${
-				email.recipient
-			}&sender=${email.sender}&topic=${email.subject}&text=${email.text}`
-		) //query string url
+		console.log(email);
+		axios
+			.post(
+				`http://localhost:9001/send-email?recipient=${email.recipient}&sender=${
+					email.sender
+				}&topic=${email.subject}&text=${email.text}`
+			) //query string url
 			.catch(err => console.error(err));
 	};
 
