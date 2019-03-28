@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-// import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
-// import mapboxgl from "mapbox-gl/dist/mapbox-gl";
-// import "mapbox-gl/dist/mapbox-gl.css";
 import axios from "axios";
 import "./mapview.css";
 
@@ -24,6 +21,7 @@ class Mapview extends Component {
   componentDidMount() {
     this.getUsers();
     // this.renderMap();
+    // Gets user location from web browser
     navigator.geolocation.getCurrentPosition(
       position => {
         console.log(position);
@@ -38,6 +36,7 @@ class Mapview extends Component {
         this.renderMap();
       },
       () => {
+        // Gets user location from IP address if they block the web browser request
         console.log("User blocked access to location");
         fetch("https://ipapi.co/json")
           .then(res => res.json())
@@ -57,15 +56,18 @@ class Mapview extends Component {
     );
   }
 
+  // Render map
   renderMap = () => {
     loadScript(
-      `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`
+      `https://maps.googleapis.com/maps/api/js?key=AIzaSyDIJcFHjpKOntKFaZR6mBW6YnPY8130Kt4&callback=initMap`
     );
     window.initMap = this.initMap;
   };
 
+  // Get all users from DB ---- swap line 69 & 70 to go from local to heroku
   getUsers = () => {
-    const endPoint = "https://book-maps.herokuapp.com/users?";
+    // const endPoint = "https://book-maps.herokuapp.com/users?"
+    const endPoint = "http://localhost:9001/users?";
     const parameters = {
       firstName: "",
       location: ""
@@ -80,7 +82,7 @@ class Mapview extends Component {
           },
           this.renderMap()
         );
-        console.log(this.state.users);
+        // console.log(this.state.users);
       })
       .catch(err => {
         console.log("Error" + err);
@@ -94,19 +96,39 @@ class Mapview extends Component {
       zoom: this.state.zoom
     });
 
-    // this.state.users.map(allUsers => {
-    //   console.log(allUsers.location);
-    //   var marker = new window.google.maps.Marker({
-    //     position: allUsers.location,
-    //     map: map,
-    //     title: "Hello World!"
-    //   });
-    // });
+    //Map over all users
+    this.state.users.map(allUsers => {
+      var contentString = `A link to ${
+        allUsers.firstName
+      }'s bookshelf will be here`;
+
+      // Create Info Window for all users
+      var infowindow = new window.google.maps.InfoWindow({
+        content: contentString
+      });
+
+      // Create markers for all users
+      var marker = new window.google.maps.Marker({
+        position: {
+          lat: allUsers.latitude,
+          lng: allUsers.longitude
+        },
+        map: map,
+        title: allUsers.firstName
+      });
+
+      // Opens Info Window when marker is clicked
+      marker.addListener("click", function() {
+        infowindow.open(map, marker);
+      });
+    });
+
+    // Create Marker for User
     if (this.state.haveUserLocation) {
       var marker = new window.google.maps.Marker({
         position: this.state.location,
         map: map,
-        title: "Hello World!"
+        title: "You are here"
       });
     }
   };
@@ -120,6 +142,7 @@ class Mapview extends Component {
   }
 }
 
+// Funky way to load script tag since it would read the index.html
 function loadScript(url) {
   var index = window.document.getElementsByTagName("script")[0];
   var script = window.document.createElement("script");
