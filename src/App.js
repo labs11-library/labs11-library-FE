@@ -14,6 +14,7 @@ import CheckedOutList from "./components/CheckedOutList";
 import Mapview from "./components/Mapview";
 import ChatApp from "./components/ChatApp";
 import SingleInventory from "./components/SingleInventory"
+import SingleBook from "./components/SingleBook"
 
 class App extends Component {
   state = {
@@ -59,6 +60,12 @@ class App extends Component {
           path="/users/:userId/inventory/:bookId" 
           render={props => (
             <SingleInventory {...props} />
+          )}
+        />
+        <Route            
+          path="/books/:bookId" 
+          render={props => (
+            <SingleBook {...props} />
           )}
         />
         <Route

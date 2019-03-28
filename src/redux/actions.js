@@ -15,6 +15,8 @@ export const GET_SINGLE_INVENTORY_SUCCESS = "GET_SINGLE_INVENTORY_SUCCESS";
 export const GETTING_SINGLE_BOOK = "GETTING_SINGLE_BOOK";
 export const GET_SINGLE_BOOK_SUCCESS = "GET_SINGLE_BOOK_SUCCESS";
 
+export const FETCHING_BOOKS = "FETCHING_BOOKS";
+export const FETCH_BOOKS_SUCCESS = "FETCH_BOOKS_SUCCESS";
 
 const baseUrl = "http://localhost:9001";
 // "https://book-maps.herokuapp.com";
@@ -26,6 +28,19 @@ export const getUsers = state => dispatch => {
     .then(res => {
       dispatch({
         type: FETCH_USERS_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => console.log(err));
+};
+
+export const getBooks = state => dispatch => {
+  dispatch({ type: FETCHING_BOOKS });
+  axios
+    .get(`${baseUrl}/books`)
+    .then(res => {
+      dispatch({
+        type: FETCH_BOOKS_SUCCESS,
         payload: res.data
       });
     })
