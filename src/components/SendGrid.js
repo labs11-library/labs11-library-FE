@@ -1,25 +1,23 @@
 import React, { Component } from "react";
 
 class Sendgrid extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			email: {
-				recipient: "",
-				sender: "",
-				subject: "",
-				text: ""
-			}
-		};
-	}
+	state = {
+		email: {
+			recipient: "",
+			sender: "",
+			subject: "",
+			text: ""
+		}
+	};
 
 	sendEmail = () => {
 		const { email } = this.state;
 		fetch(
-			`http://localhost:9000/send-email?recipient=${email.recipient}&sender=${
-				email.sender
-			}&topic=${email.subject}&text=${email.text}`
-		).catch(error => console.log(error));
+			`http://localhost:9001/email/send-email?recipient=${
+				email.recipient
+			}&sender=${email.sender}&topic=${email.subject}&text=${email.text}`
+		) //query string url
+			.catch(err => console.error(err));
 	};
 
 	render() {

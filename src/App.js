@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
+import queryString from "query-string";
+import { withRouter } from "react-router";
 
 import BookList from "./components/BookList";
 import Users from "./components/Users";
@@ -11,8 +13,7 @@ import InventoryList from "./components/InventoryList";
 import CheckedOutList from "./components/CheckedOutList";
 import Mapview from "./components/Mapview";
 import ChatApp from "./components/ChatApp";
-import BookPage from "./components/BookPage";
-import Sendgrid from "./components/SendGrid";
+import SingleBook from "./components/SingleBook";
 
 class App extends Component {
 	state = {
@@ -25,11 +26,20 @@ class App extends Component {
 		});
 	};
 
+	componentWillMount() {
+		var query = queryString.parse(this.props.location.search);
+		if (query.token) {
+			window.localStorage.setItem("jwt", query.token);
+			this.props.history.push("/");
+		}
+	}
+
 	render() {
 		console.log(this.state);
 		return (
 			<div>
 				<NavBar />
+				<a href="http://localhost:9001/auth/logout">Logout</a>
 				<input
 					onSubmit={this.setUsername}
 					onChange={this.setUsername}
@@ -45,7 +55,7 @@ class App extends Component {
 				<Route exact path="/inventory" component={InventoryList} />
 				<Route exact path="/checkedout" component={CheckedOutList} />
 				<Route exact path="/mapview" component={Mapview} />
-				<Route exact path="/bookmain" component={BookPage} />
+				<Route exact path="/book/1" component={SingleBook} />
 				<Route
 					exact
 					path="/chatapp"
@@ -53,10 +63,9 @@ class App extends Component {
 						<ChatApp {...props} username={this.state.username} />
 					)}
 				/>
-				<Route exact path="/sendgrid" component={Sendgrid} />
 			</div>
 		);
 	}
 }
 
-export default App;
+export default withRouter(App);
