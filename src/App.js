@@ -13,7 +13,7 @@ import InventoryList from "./components/InventoryList";
 import CheckedOutList from "./components/CheckedOutList";
 import Mapview from "./components/Mapview";
 import ChatApp from "./components/ChatApp";
-import SingleBook from "./components/SingleBook";
+import SingleInventory from "./components/SingleInventory"
 
 class App extends Component {
   state = {
@@ -55,7 +55,12 @@ class App extends Component {
         <Route exact path="/inventory" component={InventoryList} />
         <Route exact path="/checkedout" component={CheckedOutList} />
         <Route exact path="/mapview" component={Mapview} />
-        <Route exact path="/book/1" component={SingleBook} />
+        <Route            
+          path="/users/:userId/inventory/:bookId" 
+          render={props => (
+            <SingleInventory {...props} />
+          )}
+        />
         <Route
           exact
           path="/chatapp"
