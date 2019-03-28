@@ -8,7 +8,6 @@ class Users extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div>
         {this.props.users.map(user => (
