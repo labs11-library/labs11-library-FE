@@ -16,7 +16,7 @@ class Sendgrid extends Component {
 	sendEmail = () => {
 		const { email } = this.state;
 		fetch(
-			`http://localhost:3000/send-email?recipient=${email.recipient}&sender=${
+			`http://localhost:9000/send-email?recipient=${email.recipient}&sender=${
 				email.sender
 			}&topic=${email.subject}&text=${email.text}`
 		).catch(error => console.log(error));
