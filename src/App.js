@@ -13,36 +13,31 @@ import InventoryList from "./components/InventoryList";
 import CheckedOutList from "./components/CheckedOutList";
 import Mapview from "./components/Mapview";
 import ChatApp from "./components/ChatApp";
-import SingleBook from "./components/SingleBook";
-<<<<<<< HEAD
+// import SingleBook from "./components/SingleBook";
 import BookSearch from "./components/AddBook/BookSearch";
-=======
 import Sendgrid from "./components/SendGrid";
->>>>>>> 95242ed4588614e749d3103a3fb0be4952ffd754
 import SingleInventory from "./components/SingleInventory";
 
 class App extends Component {
-	state = {
-		username: "bob"
-	};
+  state = {
+    username: "bob"
+  };
 
-	setUsername = event => {
-		this.setState({
-			username: event.target.value
-		});
-	};
+  setUsername = event => {
+    this.setState({
+      username: event.target.value
+    });
+  };
 
-	componentWillMount() {
-		var query = queryString.parse(this.props.location.search);
-		if (query.token) {
-			window.localStorage.setItem("jwt", query.token);
-			this.props.history.push("/");
-		}
-	}
+  componentWillMount() {
+    var query = queryString.parse(this.props.location.search);
+    if (query.token) {
+      window.localStorage.setItem("jwt", query.token);
+      this.props.history.push("/");
+    }
+  }
 
-<<<<<<< HEAD
   render() {
-    console.log(this.state);
     return (
       <div>
         <NavBar />
@@ -62,7 +57,8 @@ class App extends Component {
         <Route exact path="/inventory" component={InventoryList} />
         <Route exact path="/checkedout" component={CheckedOutList} />
         <Route exact path="/mapview" component={Mapview} />
-        <Route exact path="/book/1" component={SingleBook} />
+        <Route exact path="/sendgrid" component={Sendgrid} />
+        {/* <Route exact path="/book/1" component={SingleBook} /> */}
         <Route exact path="/add-book" component={BookSearch} />
         <Route
           path="/users/:userId/inventory/:bookId"
@@ -78,41 +74,6 @@ class App extends Component {
       </div>
     );
   }
-=======
-	render() {
-		console.log(this.state);
-		return (
-			<div>
-				<NavBar />
-				<a href="http://localhost:9001/auth/logout">Logout</a>
-				<input
-					onSubmit={this.setUsername}
-					onChange={this.setUsername}
-					value={this.state.username}
-					placeholder="Search books"
-				/>
-				<div>{this.state.username}</div>
-				<Route exact path="/books" component={BookList} />
-				<Route exact path="/users" component={Users} />
-				<Route exact path="/signup" component={Signup} />
-				<Route exact path="/login" component={Login} />
-				<Route exact path="/profile" component={UserProfile} />
-				<Route exact path="/inventory" component={InventoryList} />
-				<Route exact path="/checkedout" component={CheckedOutList} />
-				<Route exact path="/mapview" component={Mapview} />
-				<Route exact path="/sendgrid" component={Sendgrid} />
-				<Route exact path="/book/1" component={SingleBook} />
-				<Route
-					exact
-					path="/chatapp"
-					render={props => (
-						<ChatApp {...props} username={this.state.username} />
-					)}
-				/>
-			</div>
-		);
-	}
->>>>>>> 95242ed4588614e749d3103a3fb0be4952ffd754
 }
 
 export default withRouter(App);
