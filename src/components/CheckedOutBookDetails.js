@@ -22,21 +22,12 @@ const BookImg = styled.img`
   height: 100%;
 `;
 
-const Availability = styled.p`
-  color: ${props => (props.available ? "green" : "red")};
+const DueDate = styled.p`
+  color: red;
 `;
 
 const BookDetails = props => {
-  const {
-    title,
-    author,
-    image,
-    lenderName,
-    location,
-    available,
-    dueDate
-  } = props.book;
-  const availability = available ? "Available" : "Checked out";
+  const { title, author, image, lenderName, location, dueDate } = props.book;
 
   function timeRemaining(dueDate) {
     let now = moment(Date.now());
@@ -53,8 +44,7 @@ const BookDetails = props => {
         <h2>{title}</h2>
         <p>by {author}</p>
         <p>Due on: {dueDate}</p>
-        <p>Time until due: {timeRemaining(dueDate)}</p>
-        <Availability available={available}>{availability}</Availability>
+        <DueDate>Time until due: {timeRemaining(dueDate)}</DueDate>
         <p>
           Contact {lenderName} from {location}
         </p>
