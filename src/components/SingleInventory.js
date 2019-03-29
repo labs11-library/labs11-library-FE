@@ -5,8 +5,8 @@ import * as moment from "moment";
 import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
-import { connect } from 'react-redux';
-import { getSingleInventory } from '../redux/actions';
+// import { connect } from 'react-redux';
+// import { getSingleInventory } from '../redux/actions';
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;

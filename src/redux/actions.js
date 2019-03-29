@@ -9,6 +9,12 @@ export const GET_FIRST_USER_SUCCESS = "GET_FIRST_USER_SUCCESS";
 export const UPDATING_PROFILE = "UPDATING_PROFILE";
 export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
 
+export const ADDING_BOOK = "ADDING_BOOK";
+export const ADDING_BOOK_SUCCESS = "ADDING_BOOK_SUCCESS";
+
+// const baseUrl = "http://localhost:9001";
+const baseUrl = "https://book-maps.herokuapp.com";
+
 export const GETTING_SINGLE_INVENTORY = "GETTING_SINGLE_INVENTORY";
 export const GET_SINGLE_INVENTORY_SUCCESS = "GET_SINGLE_INVENTORY_SUCCESS";
 
@@ -17,9 +23,6 @@ export const GET_SINGLE_BOOK_SUCCESS = "GET_SINGLE_BOOK_SUCCESS";
 
 export const FETCHING_BOOKS = "FETCHING_BOOKS";
 export const FETCH_BOOKS_SUCCESS = "FETCH_BOOKS_SUCCESS";
-
-const baseUrl = "http://localhost:9001";
-// "https://book-maps.herokuapp.com";
 
 export const getUsers = state => dispatch => {
   dispatch({ type: FETCHING_USERS });
@@ -81,7 +84,18 @@ export const editProfile = updatedUser => dispatch => {
       console.log(err);
     });
 };
-
+export const addNewBook = state => dispatch => {
+  dispatch({ type: ADDING_BOOK });
+  axios
+    .post(`${baseUrl}/users/366/inventory`, state)
+    .then(res => {
+      dispatch({
+        type: ADDING_BOOK_SUCCESS,
+        payload: res.data.newBook
+      });
+    })
+    .catch(err => console.log(err));
+};
 export const getSingleInventory = (userId, bookId) => dispatch => {
   dispatch({ type: GETTING_SINGLE_INVENTORY });
   axios

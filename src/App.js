@@ -16,28 +16,29 @@ import ChatApp from "./components/ChatApp";
 import SingleInventory from "./components/SingleInventory"
 import SingleBook from "./components/SingleBook"
 import SingleCheckedOutBook from "./components/SingleCheckedOutBook";
+import BookSearch from "./components/AddBook/BookSearch";
+import Sendgrid from "./components/SendGrid";
 
 class App extends Component {
-  state = {
-    username: "bob"
-  };
+	state = {
+		username: "bob"
+	};
 
-  setUsername = event => {
-    this.setState({
-      username: event.target.value
-    });
-  };
+	setUsername = event => {
+		this.setState({
+			username: event.target.value
+		});
+	};
 
-  componentWillMount() {
-    var query = queryString.parse(this.props.location.search);
-    if (query.token) {
-      window.localStorage.setItem("jwt", query.token);
-      this.props.history.push("/");
-    }
-  }
+	componentWillMount() {
+		var query = queryString.parse(this.props.location.search);
+		if (query.token) {
+			window.localStorage.setItem("jwt", query.token);
+			this.props.history.push("/");
+		}
+	}
 
   render() {
-    console.log(this.state);
     return (
       <div>
         <NavBar />
@@ -70,6 +71,8 @@ class App extends Component {
             <SingleInventory {...props} />
           )}
         />
+        <Route exact path="/sendgrid" component={Sendgrid} />
+        <Route exact path="/add-book" component={BookSearch} />
         <Route            
           path="/books/:bookId" 
           render={props => (
