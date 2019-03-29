@@ -37,6 +37,7 @@ const BookDetails = props => {
     dueDate
   } = props.book;
   const availability = available ? "Available" : "Checked out";
+
   function timeRemaining(dueDate) {
     let now = moment(Date.now());
     let end = moment(dueDate);
@@ -51,16 +52,14 @@ const BookDetails = props => {
       <div>
         <h2>{title}</h2>
         <p>by {author}</p>
+        <p>Due on: {dueDate}</p>
+        <p>Time until due: {timeRemaining(dueDate)}</p>
         <Availability available={available}>{availability}</Availability>
-        {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
         <p>
           Contact {lenderName} from {location}
         </p>
         <Link to="/chatapp">
           <Button>Send message</Button>
-        </Link>
-        <Link to="/books/1">
-          <Button>See more details</Button>
         </Link>
       </div>
     </BookDetailsWrapper>
