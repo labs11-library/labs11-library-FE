@@ -13,6 +13,8 @@ import {
   GET_USERS_INVENTORY_SUCCESS,
   GETTING_SINGLE_INVENTORY,
   GET_SINGLE_INVENTORY_SUCCESS,
+  GETTING_SINGLE_CHECKED_OUT_BOOK,
+  GET_SINGLE_CHECKED_OUT_BOOK_SUCCESS,
   GETTING_SINGLE_BOOK,
   GET_SINGLE_BOOK_SUCCESS
 } from "./actions";
@@ -23,7 +25,9 @@ const initialState = {
   loggedInUser: {},
   updatingInfo: false,
   singleInventory: {},
-  books: []
+  books: [],
+  singleBook: {},
+  singleCheckedOutBook: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -105,6 +109,17 @@ const rootReducer = (state = initialState, action) => {
         loading: false,
         singleInventory: action.payload
       };
+    case GETTING_SINGLE_CHECKED_OUT_BOOK:
+      return {
+        ...state,
+        loading: true
+      };
+    case GET_SINGLE_CHECKED_OUT_BOOK_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        singleCheckedOutBook: action.payload
+      };
     case GETTING_SINGLE_BOOK:
       return {
         ...state,
@@ -114,7 +129,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        books: action.payload
+        singleBook: action.payload
       };
     default:
       return state;

@@ -18,6 +18,9 @@ export const GET_USERS_INVENTORY_SUCCESS = "GET_USERS_INVENTORY_SUCCESS";
 export const GETTING_SINGLE_INVENTORY = "GETTING_SINGLE_INVENTORY";
 export const GET_SINGLE_INVENTORY_SUCCESS = "GET_SINGLE_INVENTORY_SUCCESS";
 
+export const GETTING_SINGLE_CHECKED_OUT_BOOK = "GETTING_SINGLE_CHECKED_OUT_BOOK";
+export const GET_SINGLE_CHECKED_OUT_BOOK_SUCCESS = "GET_SINGLE_CHECKED_OUT_BOOK_SUCCESS";
+
 export const GETTING_SINGLE_BOOK = "GETTING_SINGLE_BOOK";
 export const GET_SINGLE_BOOK_SUCCESS = "GET_SINGLE_BOOK_SUCCESS";
 
@@ -119,6 +122,22 @@ export const getSingleInventory = bookId => dispatch => {
     .then(res => {
       dispatch({
         type: GET_SINGLE_INVENTORY_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+export const getSingleCheckedOutBook = checkedOutId => dispatch => {
+  let userId = localStorage.getItem("userId");
+  dispatch({ type: GETTING_SINGLE_CHECKED_OUT_BOOK });
+  axios
+    .get(`${baseUrl}/users/${userId}/checkedOut/${checkedOutId}`)
+    .then(res => {
+      dispatch({
+        type: GET_SINGLE_CHECKED_OUT_BOOK_SUCCESS,
         payload: res.data
       });
     })
