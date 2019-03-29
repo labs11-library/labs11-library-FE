@@ -69,7 +69,7 @@ export const addNewBook = state => dispatch => {
     .then(res => {
       dispatch({
         type: ADDING_BOOK_SUCCESS,
-        payload: res.data
+        payload: res.data.newBook
       });
     })
     .catch(err => {
