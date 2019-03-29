@@ -1,10 +1,16 @@
 import {
   FETCHING_USERS,
   FETCH_USERS_SUCCESS,
-  GETTING_FIRST_USER,
-  GET_FIRST_USER_SUCCESS,
+  FETCHING_BOOKS,
+  FETCH_BOOKS_SUCCESS,
+  GETTING_LOGGED_IN_USER,
+  GET_LOGGED_IN_USER_SUCCESS,
   UPDATING_PROFILE,
   UPDATE_PROFILE_SUCCESS,
+  ADDING_BOOK,
+  ADDING_BOOK_SUCCESS,
+  GETTING_USERS_INVENTORY,
+  GET_USERS_INVENTORY_SUCCESS,
   GETTING_SINGLE_INVENTORY,
   GET_SINGLE_INVENTORY_SUCCESS,
   GETTING_SINGLE_BOOK,
@@ -16,7 +22,7 @@ const initialState = {
   users: [],
   loggedInUser: {},
   updatingInfo: false,
-  inventory:[],
+  inventory: [],
   books: []
 };
 
@@ -33,12 +39,23 @@ const rootReducer = (state = initialState, action) => {
         loading: false,
         users: action.payload
       };
-    case GETTING_FIRST_USER:
+    case FETCHING_BOOKS:
       return {
         ...state,
         loading: true
       };
-    case GET_FIRST_USER_SUCCESS:
+    case FETCH_BOOKS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        books: action.payload
+      };
+    case GETTING_LOGGED_IN_USER:
+      return {
+        ...state,
+        loading: true
+      };
+    case GET_LOGGED_IN_USER_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -55,10 +72,32 @@ const rootReducer = (state = initialState, action) => {
         loading: false,
         loggedInUser: action.payload
       };
+    case ADDING_BOOK:
+      return {
+        ...state,
+        loading: true
+      };
+    case ADDING_BOOK_SUCCESS:
+      return {
+        ...state,
+        loading: false
+        // ^^^ THIS SUCKS CHANGE IT
+      };
+    case GETTING_USERS_INVENTORY:
+      return {
+        ...state,
+        loading: true
+      };
+    case GET_USERS_INVENTORY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        books: action.payload
+      };
     case GETTING_SINGLE_INVENTORY:
       return {
         ...state,
-        loading:true
+        loading: true
       };
     case GET_SINGLE_INVENTORY_SUCCESS:
       return {
@@ -69,13 +108,13 @@ const rootReducer = (state = initialState, action) => {
     case GETTING_SINGLE_BOOK:
       return {
         ...state,
-        loading:true
+        loading: true
       };
     case GET_SINGLE_BOOK_SUCCESS:
       return {
         ...state,
-        loading:false,
-        books:action.payload
+        loading: false,
+        books: action.payload
       };
     default:
       return state;

@@ -6,7 +6,7 @@ class CheckedOutList extends Component {
   constructor() {
     super();
     this.state = {
-      checkedOutBooks: books,
+      checkedOutBooks: books.filter(book => book.available === false),
       filter: "all",
       searchText: ""
     };

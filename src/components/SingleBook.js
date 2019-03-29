@@ -5,8 +5,6 @@ import * as moment from "moment";
 import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
-// import { connect } from 'react-redux';
-// import { getSingleInventory } from '../redux/actions';
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -29,7 +27,7 @@ const Availability = styled.p`
   color: ${props => (props.available ? "green" : "red")};
 `;
 
-class SingleInventory extends Component {
+class SingleBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,11 +41,7 @@ class SingleInventory extends Component {
     } = this.props;
 
     axios
-      .get(
-        `https://book-maps.herokuapp.com/users/${params.userId}/inventory/${
-          params.bookId
-        }`
-      )
+      .get(`https://book-maps.herokuapp.com/books/${params.bookId}`)
       .then(({ data: book }) => {
         console.log("book", book);
 
@@ -56,11 +50,10 @@ class SingleInventory extends Component {
   }
 
   render() {
-    console.log("this.props", this.props);
     console.log("this.state", this.state);
     const {
       title,
-      author,
+      authors,
       image,
       lenderName,
       location,
@@ -85,7 +78,7 @@ class SingleInventory extends Component {
             </BookImgWrapper>
             <div>
               <h2>{title}</h2>
-              <p>by {author}</p>
+              <p>by {authors}</p>
               <Availability available={available}>{availability}</Availability>
               {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
               <p>
@@ -102,14 +95,4 @@ class SingleInventory extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     inventory: state.inventory
-//   }
-// }
-
-export default SingleInventory;
-// connect(
-//   mapStateToProps,
-//   { getSingleInventory }
-//   )(SingleInventory);
+export default SingleBook;
