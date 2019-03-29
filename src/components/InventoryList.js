@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import books from "../data";
+// import books from "../data";
 import BookDetails from "./BookDetails";
 
+import { connect } from "react-redux";
+import { getAllInventory } from "../redux/actions.js";
 class Inventory extends Component {
   constructor() {
     super();
     this.state = {
-      inventory: books,
+      inventory: [],
       searchText: ""
     };
   }
@@ -27,6 +29,16 @@ class Inventory extends Component {
       );
     }
   };
+  componentWillReceiveProps(newProps) {
+    if (newProps.books !== this.state.inventory) {
+      this.setState({
+        inventory: this.props.books
+      });
+    }
+  }
+  componentDidMount() {
+    this.props.getAllInventory();
+  }
   render() {
     return (
       <div>
@@ -47,4 +59,11 @@ class Inventory extends Component {
   }
 }
 
-export default Inventory;
+const mapStateToProps = state => ({
+  loading: state.isLoading,
+  books: state.books
+});
+export default connect(
+  mapStateToProps,
+  { getAllInventory }
+)(Inventory);

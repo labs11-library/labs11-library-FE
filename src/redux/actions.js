@@ -12,6 +12,9 @@ export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
 export const ADDING_BOOK = "ADDING_BOOK";
 export const ADDING_BOOK_SUCCESS = "ADDING_BOOK_SUCCESS";
 
+export const GETTING_USERS_INVENTORY = "GETTING_USERS_INVENTORY";
+export const GET_USERS_INVENTORY_SUCCESS = "GET_USERS_INVENTORY_SUCCESS";
+
 export const GETTING_SINGLE_INVENTORY = "GETTING_SINGLE_INVENTORY";
 export const GET_SINGLE_INVENTORY_SUCCESS = "GET_SINGLE_INVENTORY_SUCCESS";
 
@@ -90,6 +93,19 @@ export const addNewBook = state => dispatch => {
       dispatch({
         type: ADDING_BOOK_SUCCESS,
         payload: res.data.newBook
+      });
+    })
+    .catch(err => console.log(err));
+};
+export const getAllInventory = () => dispatch => {
+  let userId = localStorage.getItem("userId");
+  dispatch({ type: GETTING_USERS_INVENTORY });
+  axios
+    .get(`${baseUrl}/users/${userId}/inventory`)
+    .then(res => {
+      dispatch({
+        type: GET_USERS_INVENTORY_SUCCESS,
+        payload: res.data
       });
     })
     .catch(err => console.log(err));
