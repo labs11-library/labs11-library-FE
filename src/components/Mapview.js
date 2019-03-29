@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./mapview.css";
 
-const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+// const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 class Mapview extends Component {
   constructor() {

@@ -20,6 +20,7 @@ class UserProfile extends Component {
     });
   };
   render() {
+    console.log(localStorage)
     const { loggedInUser } = this.props;
     if (this.state.updatingInfo) {
       return (
