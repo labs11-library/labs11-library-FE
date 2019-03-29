@@ -15,6 +15,8 @@ import Mapview from "./components/Mapview";
 import ChatApp from "./components/ChatApp";
 import SingleBook from "./components/SingleBook";
 import BookSearch from "./components/AddBook/BookSearch";
+import SingleInventory from "./components/SingleInventory";
+
 class App extends Component {
   state = {
     username: "bob"
@@ -57,6 +59,10 @@ class App extends Component {
         <Route exact path="/mapview" component={Mapview} />
         <Route exact path="/book/1" component={SingleBook} />
         <Route exact path="/add-book" component={BookSearch} />
+        <Route
+          path="/users/:userId/inventory/:bookId"
+          render={props => <SingleInventory {...props} />}
+        />
         <Route
           exact
           path="/chatapp"

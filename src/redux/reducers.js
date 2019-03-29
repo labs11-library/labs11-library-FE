@@ -6,7 +6,11 @@ import {
   UPDATING_PROFILE,
   UPDATE_PROFILE_SUCCESS,
   ADDING_BOOK,
-  ADDING_BOOK_SUCCESS
+  ADDING_BOOK_SUCCESS,
+  GETTING_SINGLE_INVENTORY,
+  GET_SINGLE_INVENTORY_SUCCESS,
+  GETTING_SINGLE_BOOK,
+  GET_SINGLE_BOOK_SUCCESS
 } from "./actions";
 
 const initialState = {
@@ -14,6 +18,7 @@ const initialState = {
   users: [],
   loggedInUser: {},
   updatingInfo: false,
+  inventory: [],
   books: []
 };
 
@@ -62,6 +67,28 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         loading: false
         // ^^^ THIS SUCKS CHANGE IT
+      };
+    case GETTING_SINGLE_INVENTORY:
+      return {
+        ...state,
+        loading: true
+      };
+    case GET_SINGLE_INVENTORY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        inventory: action.payload
+      };
+    case GETTING_SINGLE_BOOK:
+      return {
+        ...state,
+        loading: true
+      };
+    case GET_SINGLE_BOOK_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        books: action.payload
       };
     default:
       return state;
