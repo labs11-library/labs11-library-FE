@@ -58,7 +58,7 @@ class App extends Component {
         <Route exact path="/checkedout" component={CheckedOutList} />
         <Route exact path="/mapview" component={Mapview} />
         <Route exact path="/sendgrid" component={Sendgrid} />
-//         <Route exact path="/book/1" component={SingleBook} />
+        {/* <Route exact path="/book/1" component={SingleBook} /> */}
         <Route exact path="/add-book" component={BookSearch} />
         <Route
           path="/users/:userId/inventory/:bookId"
