@@ -29,25 +29,28 @@ const Availability = styled.p`
 
 class SingleBook extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      book: {},
-    }
+      book: {}
+    };
   }
 
   componentDidMount() {
-    const { match: { params } } = this.props;
-  
-    axios.get(`/books/${params.bookId}`)
+    const {
+      match: { params }
+    } = this.props;
+
+    axios
+      .get(`https://book-maps.herokuapp.com/books/${params.bookId}`)
       .then(({ data: book }) => {
-        console.log('book', book);
-  
+        console.log("book", book);
+
         this.setState({ book });
       });
   }
-  
+
   render() {
-    console.log("this.state", this.state)
+    console.log("this.state", this.state);
     const {
       title,
       authors,
@@ -65,31 +68,31 @@ class SingleBook extends Component {
       return duration;
     }
     if (!this.state.book) {
-      return <h1>Loading...</h1>
+      return <h1>Loading...</h1>;
     } else {
       return (
         <div>
-           <BookDetailsWrapper>
-           <BookImgWrapper>
-             <BookImg alt={title} src={image} />
-           </BookImgWrapper>
-           <div>
-             <h2>{title}</h2>
-             <p>by {authors}</p>
-             <Availability available={available}>{availability}</Availability>
-             {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
-             <p>
-               Contact {lenderName} from {location}
-             </p>
-             <Link to="/chatapp">
-               <Button>Send message</Button>
-             </Link>
-           </div>
-         </BookDetailsWrapper>
+          <BookDetailsWrapper>
+            <BookImgWrapper>
+              <BookImg alt={title} src={image} />
+            </BookImgWrapper>
+            <div>
+              <h2>{title}</h2>
+              <p>by {authors}</p>
+              <Availability available={available}>{availability}</Availability>
+              {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
+              <p>
+                Contact {lenderName} from {location}
+              </p>
+              <Link to="/chatapp">
+                <Button>Send message</Button>
+              </Link>
+            </div>
+          </BookDetailsWrapper>
         </div>
       );
     }
   }
-};
+}
 
-export default SingleBook
+export default SingleBook;

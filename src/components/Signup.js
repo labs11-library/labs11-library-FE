@@ -16,9 +16,9 @@ class Signup extends Component {
     return (
       <div style={{ margin: "0 auto", width: "400px" }}>
         <Paper>
-        <Typography component="h1" variant="h5">
-          Log in
-        </Typography>          
+          <Typography component="h1" variant="h5">
+            Log in
+          </Typography>
           <form>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
@@ -45,21 +45,20 @@ class Signup extends Component {
             <Link component={RouterLink} to="/login">
               Log in
             </Link>
-          <a href="http://localhost:9001/auth/google">
-            <button class="loginBtn loginBtn--facebook">
-              Signup with Facebook
-            </button>
-          </a>
-          <a href="http://localhost:9001/auth/facebook">
-            <button class="loginBtn loginBtn--google">
-              Signup with Google
-            </button>
-          </a>
-          
-        </FormControl>
-      </Paper>
-    </div>
-  );
+            <a href="https://book-maps.herokuapp.com/auth/google">
+              <button class="loginBtn loginBtn--facebook">
+                Signup with Facebook
+              </button>
+            </a>
+            <a href="https://book-maps.herokuapp.com/auth/facebook">
+              <button class="loginBtn loginBtn--google">
+                Signup with Google
+              </button>
+            </a>
+          </FormControl>
+        </Paper>
+      </div>
+    );
   }
 }
 

@@ -3,8 +3,8 @@ import {
   FETCH_USERS_SUCCESS,
   FETCHING_BOOKS,
   FETCH_BOOKS_SUCCESS,
-  GETTING_FIRST_USER,
-  GET_FIRST_USER_SUCCESS,
+  GETTING_LOGGED_IN_USER,
+  GET_LOGGED_IN_USER_SUCCESS,
   UPDATING_PROFILE,
   UPDATE_PROFILE_SUCCESS,
   ADDING_BOOK,
@@ -48,12 +48,12 @@ const rootReducer = (state = initialState, action) => {
         loading: false,
         books: action.payload
       };
-    case GETTING_FIRST_USER:
+    case GETTING_LOGGED_IN_USER:
       return {
         ...state,
         loading: true
       };
-    case GET_FIRST_USER_SUCCESS:
+    case GET_LOGGED_IN_USER_SUCCESS:
       return {
         ...state,
         loading: false,

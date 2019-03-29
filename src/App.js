@@ -13,8 +13,8 @@ import InventoryList from "./components/InventoryList";
 import CheckedOutList from "./components/CheckedOutList";
 import Mapview from "./components/Mapview";
 import ChatApp from "./components/ChatApp";
-import SingleInventory from "./components/SingleInventory"
-import SingleBook from "./components/SingleBook"
+import SingleInventory from "./components/SingleInventory";
+import SingleBook from "./components/SingleBook";
 import SingleCheckedOutBook from "./components/SingleCheckedOutBook";
 import BookSearch from "./components/AddBook/BookSearch";
 import Sendgrid from "./components/SendGrid";
@@ -34,7 +34,12 @@ class App extends Component {
     var query = queryString.parse(this.props.location.search);
     if (query.token) {
       window.localStorage.setItem("jwt", query.token);
-      this.props.history.push("/");
+      console.log(query);
+      if (query.token && query.userId) {
+        window.localStorage.setItem("jwt", query.token);
+        window.localStorage.setItem("userId", query.userId);
+        this.props.history.push("/");
+      }
     }
   }
 
@@ -42,7 +47,7 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <a href="http://localhost:9001/auth/logout">Logout</a>
+        <a href="https://book-maps.herokuapp.com/auth/logout">Logout</a>
         <input
           onSubmit={this.setUsername}
           onChange={this.setUsername}
@@ -58,26 +63,20 @@ class App extends Component {
         <Route exact path="/inventory" component={InventoryList} />
         <Route exact path="/checkedout" component={CheckedOutList} />
         <Route exact path="/mapview" component={Mapview} />
-        <Route 
-          exact 
-          path="/users/:userId/checkedOut/:checkedOutId" 
-          render={props => (
-            <SingleCheckedOutBook {...props} />
-          )}
+        <Route
+          exact
+          path="/users/:userId/checkedOut/:checkedOutId"
+          render={props => <SingleCheckedOutBook {...props} />}
         />
-        <Route            
-          path="/users/:userId/inventory/:bookId" 
-          render={props => (
-            <SingleInventory {...props} />
-          )}
+        <Route
+          path="/users/:userId/inventory/:bookId"
+          render={props => <SingleInventory {...props} />}
         />
         <Route exact path="/sendgrid" component={Sendgrid} />
         <Route exact path="/add-book" component={BookSearch} />
-        <Route            
-          path="/books/:bookId" 
-          render={props => (
-            <SingleBook {...props} />
-          )}
+        <Route
+          path="/books/:bookId"
+          render={props => <SingleBook {...props} />}
         />
         <Route
           exact

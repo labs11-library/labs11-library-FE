@@ -66,8 +66,8 @@ class Mapview extends Component {
 
   // Get all users from DB ---- swap line 69 & 70 to go from local to heroku
   getUsers = () => {
-    // const endPoint = "https://book-maps.herokuapp.com/users?"
-    const endPoint = "http://localhost:9001/users?";
+    const endPoint = "https://book-maps.herokuapp.com/users?";
+    // const endPoint = "http://localhost:9001/users?";
     const parameters = {
       firstName: "",
       location: ""
@@ -110,8 +110,8 @@ class Mapview extends Component {
       // Create markers for all users
       var marker = new window.google.maps.Marker({
         position: {
-          lat: allUsers.latitude,
-          lng: allUsers.longitude
+          lat: parseFloat(allUsers.latitude),
+          lng: parseFloat(allUsers.longitude)
         },
         map: map,
         title: allUsers.firstName
