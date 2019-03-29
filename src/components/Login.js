@@ -43,6 +43,16 @@ const Login = () => {
           <Link component={RouterLink} to="/signup">
             Sign up
           </Link>
+          <a href="http://localhost:9001/auth/google">
+            <button class="loginBtn loginBtn--facebook">
+              Login with Facebook
+            </button>
+          </a>
+          <a href="http://localhost:9001/auth/facebook">
+            <button class="loginBtn loginBtn--google">
+              Login with Google
+            </button>
+          </a>
         </FormControl>
       </Paper>
     </div>
