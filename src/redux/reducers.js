@@ -22,7 +22,7 @@ const initialState = {
   users: [],
   loggedInUser: {},
   updatingInfo: false,
-  inventory: [],
+  singleInventory: {},
   books: []
 };
 
@@ -103,7 +103,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        inventory: action.payload
+        singleInventory: action.payload
       };
     case GETTING_SINGLE_BOOK:
       return {

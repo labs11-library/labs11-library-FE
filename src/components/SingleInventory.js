@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import * as moment from "moment";
 import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
-// import { connect } from 'react-redux';
-// import { getSingleInventory } from '../redux/actions';
+import { connect } from 'react-redux';
+import { getSingleInventory } from '../redux/actions.js';
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -33,50 +32,34 @@ class SingleInventory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      book: {}
+      singleInventory: {}
     };
   }
 
   componentDidMount() {
-    const {
-      match: { params }
-    } = this.props;
-
-    axios
-      .get(
-        `https://book-maps.herokuapp.com/users/${params.userId}/inventory/${
-          params.bookId
-        }`
-      )
-      .then(({ data: book }) => {
-        console.log("book", book);
-
-        this.setState({ book });
-      });
+    this.props.getSingleInventory(this.props.match.params.bookId);
   }
-
   render() {
-    console.log("this.props", this.props);
-    console.log("this.state", this.state);
-    const {
-      title,
-      author,
-      image,
-      lenderName,
-      location,
-      available,
-      dueDate
-    } = this.state.book;
-    const availability = available ? "Available" : "Checked out";
+    console.log(this.props.match.params.bookId)
+    if (!this.props.inventory.image) {
+      return <h1>Loading...</h1>
+    } else {
+      const {
+        title,
+        authors,
+        image,
+        lenderName,
+        location,
+        available,
+        dueDate
+      } = this.props.inventory;
+      const availability = available ? "Available" : "Checked out";
     function timeRemaining(dueDate) {
       let now = moment(Date.now());
       let end = moment(dueDate);
       let duration = moment.duration(now.diff(end)).humanize();
       return duration;
     }
-    if (!this.state.book) {
-      return <h1>Loading...</h1>;
-    } else {
       return (
         <div>
           <BookDetailsWrapper>
@@ -85,7 +68,7 @@ class SingleInventory extends Component {
             </BookImgWrapper>
             <div>
               <h2>{title}</h2>
-              <p>by {author}</p>
+              <p>by {authors}</p>
               <Availability available={available}>{availability}</Availability>
               {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
               <p>
@@ -98,18 +81,18 @@ class SingleInventory extends Component {
           </BookDetailsWrapper>
         </div>
       );
-    }
+    }}
+  }
+
+
+const mapStateToProps = state => {
+  return {
+    loading: state.isLoading,
+    inventory: state.singleInventory
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     inventory: state.inventory
-//   }
-// }
-
-export default SingleInventory;
-// connect(
-//   mapStateToProps,
-//   { getSingleInventory }
-//   )(SingleInventory);
+export default connect(
+  mapStateToProps,
+  { getSingleInventory }
+  )(SingleInventory);

@@ -43,12 +43,12 @@ const Login = () => {
           <Link component={RouterLink} to="/signup">
             Sign up
           </Link>
-          <a href="https://book-maps.herokuapp.com/auth/google">
+          <a href="https://book-maps.herokuapp.com/auth/facebook">
             <button class="loginBtn loginBtn--facebook">
               Login with Facebook
             </button>
           </a>
-          <a href="https://book-maps.herokuapp.com/auth/facebook">
+          <a href="https://book-maps.herokuapp.com/auth/google">
             <button class="loginBtn loginBtn--google">Login with Google</button>
           </a>
         </FormControl>

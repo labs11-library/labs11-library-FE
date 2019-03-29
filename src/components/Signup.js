@@ -45,12 +45,12 @@ class Signup extends Component {
             <Link component={RouterLink} to="/login">
               Log in
             </Link>
-            <a href="https://book-maps.herokuapp.com/auth/google">
+            <a href="https://book-maps.herokuapp.com/auth/facebook">
               <button class="loginBtn loginBtn--facebook">
                 Signup with Facebook
               </button>
             </a>
-            <a href="https://book-maps.herokuapp.com/auth/facebook">
+            <a href="https://book-maps.herokuapp.com/auth/google">
               <button class="loginBtn loginBtn--google">
                 Signup with Google
               </button>

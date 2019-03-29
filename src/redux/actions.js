@@ -110,9 +110,11 @@ export const getAllInventory = () => dispatch => {
     })
     .catch(err => console.log(err));
 };
-export const getSingleInventory = (userId, bookId) => dispatch => {
+export const getSingleInventory = bookId => dispatch => {
+  let userId = localStorage.getItem("userId");
   dispatch({ type: GETTING_SINGLE_INVENTORY });
   axios
+    // .get(`${baseUrl}/${userId}/inventory/1`)
     .get(`${baseUrl}/users/${userId}/inventory/${bookId}`)
     .then(res => {
       dispatch({

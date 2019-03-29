@@ -65,7 +65,7 @@ class App extends Component {
           render={props => <SingleCheckedOutBook {...props} />}
         />
         <Route
-          path="/users/:userId/inventory/:bookId"
+          path="/:userId/inventory/:bookId"
           render={props => <SingleInventory {...props} />}
         />
         <Route exact path="/sendgrid" component={Sendgrid} />
