@@ -32,17 +32,13 @@ class App extends Component {
 
   componentWillMount() {
     var query = queryString.parse(this.props.location.search);
-    if (query.token) {
+    console.log(query);
+    if (query.token && query.userId) {
       window.localStorage.setItem("jwt", query.token);
-      console.log(query);
-      if (query.token && query.userId) {
-        window.localStorage.setItem("jwt", query.token);
-        window.localStorage.setItem("userId", query.userId);
-        this.props.history.push("/");
-      }
+      window.localStorage.setItem("userId", query.userId);
+      this.props.history.push("/");
     }
   }
-
   render() {
     return (
       <div>
