@@ -13,12 +13,9 @@ import InventoryList from "./components/InventoryList";
 import CheckedOutList from "./components/CheckedOutList";
 import Mapview from "./components/Mapview";
 import ChatApp from "./components/ChatApp";
-<<<<<<< HEAD
 import SingleBook from "./components/SingleBook";
 import Sendgrid from "./components/SendGrid";
-=======
-import SingleInventory from "./components/SingleInventory"
->>>>>>> ab2880f62d14b874d6dbcd34f682d4be4c38d19b
+import SingleInventory from "./components/SingleInventory";
 
 class App extends Component {
 	state = {
@@ -39,7 +36,6 @@ class App extends Component {
 		}
 	}
 
-<<<<<<< HEAD
 	render() {
 		console.log(this.state);
 		return (
@@ -73,45 +69,6 @@ class App extends Component {
 			</div>
 		);
 	}
-=======
-  render() {
-    console.log(this.state);
-    return (
-      <div>
-        <NavBar />
-        <a href="http://localhost:9001/auth/logout">Logout</a>
-        <input
-          onSubmit={this.setUsername}
-          onChange={this.setUsername}
-          value={this.state.username}
-          placeholder="Search books"
-        />
-        <div>{this.state.username}</div>
-        <Route exact path="/books" component={BookList} />
-        <Route exact path="/users" component={Users} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/profile" component={UserProfile} />
-        <Route exact path="/inventory" component={InventoryList} />
-        <Route exact path="/checkedout" component={CheckedOutList} />
-        <Route exact path="/mapview" component={Mapview} />
-        <Route            
-          path="/users/:userId/inventory/:bookId" 
-          render={props => (
-            <SingleInventory {...props} />
-          )}
-        />
-        <Route
-          exact
-          path="/chatapp"
-          render={props => (
-            <ChatApp {...props} username={this.state.username} />
-          )}
-        />
-      </div>
-    );
-  }
->>>>>>> ab2880f62d14b874d6dbcd34f682d4be4c38d19b
 }
 
 export default withRouter(App);
