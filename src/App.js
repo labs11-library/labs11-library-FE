@@ -13,7 +13,7 @@ import InventoryList from "./components/InventoryList";
 import CheckedOutList from "./components/CheckedOutList";
 import Mapview from "./components/Mapview";
 import ChatApp from "./components/ChatApp";
-import SingleBook from "./components/SingleBook";
+// import SingleBook from "./components/SingleBook";
 import BookSearch from "./components/AddBook/BookSearch";
 import Sendgrid from "./components/SendGrid";
 import SingleInventory from "./components/SingleInventory";
@@ -58,7 +58,7 @@ class App extends Component {
         <Route exact path="/checkedout" component={CheckedOutList} />
         <Route exact path="/mapview" component={Mapview} />
         <Route exact path="/sendgrid" component={Sendgrid} />
-        <Route exact path="/book/1" component={SingleBook} />
+//         <Route exact path="/book/1" component={SingleBook} />
         <Route exact path="/add-book" component={BookSearch} />
         <Route
           path="/users/:userId/inventory/:bookId"
