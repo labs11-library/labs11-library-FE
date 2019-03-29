@@ -46,7 +46,17 @@ class Signup extends Component {
           <Link component={RouterLink} to="/login">
             Log in
           </Link>
-          <a href="http://localhost:9001/auth/google" className="button">
+          <a href="http://localhost:9001/auth/google">
+            <button class="loginBtn loginBtn--facebook">
+              Signup with Facebook
+            </button>
+          </a>
+          <a href="http://localhost:9001/auth/facebook">
+            <button class="loginBtn loginBtn--google">
+              Signup with Google
+            </button>
+          </a>
+          {/* <a href="http://localhost:9001/auth/google" className="button">
           <div>
             <span className="svgIcon t-popup-svg">
               <svg
@@ -77,7 +87,7 @@ class Signup extends Component {
                 </span>
               <span className="button-label">Sign in with Google</span>
             </div>
-          </a>
+          </a> */}
         </FormControl>
       </Paper>
     </div>
