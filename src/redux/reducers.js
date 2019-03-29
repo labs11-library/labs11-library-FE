@@ -9,6 +9,8 @@ import {
   UPDATE_PROFILE_SUCCESS,
   ADDING_BOOK,
   ADDING_BOOK_SUCCESS,
+  GETTING_USERS_INVENTORY,
+  GET_USERS_INVENTORY_SUCCESS,
   GETTING_SINGLE_INVENTORY,
   GET_SINGLE_INVENTORY_SUCCESS,
   GETTING_SINGLE_BOOK,
@@ -80,6 +82,17 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         loading: false
         // ^^^ THIS SUCKS CHANGE IT
+      };
+    case GETTING_USERS_INVENTORY:
+      return {
+        ...state,
+        loading: true
+      };
+    case GET_USERS_INVENTORY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        books: action.payload
       };
     case GETTING_SINGLE_INVENTORY:
       return {
