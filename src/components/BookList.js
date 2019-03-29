@@ -72,10 +72,10 @@ class Books extends Component {
           </Select>
         </div>
         <div>
-          {this.filteredBooks().map((book, id) => {
+          {this.filteredBooks().map((book) => {
             return (
               <BookDetails
-                key={id}
+                key={book.bookId}
                 book={book}
                 username={this.state.username}
               />
