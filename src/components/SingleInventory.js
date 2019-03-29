@@ -31,26 +31,33 @@ const Availability = styled.p`
 
 class SingleInventory extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      book: {},
-    }
+      book: {}
+    };
   }
 
   componentDidMount() {
-    const { match: { params } } = this.props;
-  
-    axios.get(`/users/${params.userId}/inventory/${params.bookId}`)
+    const {
+      match: { params }
+    } = this.props;
+
+    axios
+      .get(
+        `https://book-maps.herokuapp.com/users/${params.userId}/inventory/${
+          params.bookId
+        }`
+      )
       .then(({ data: book }) => {
-        console.log('book', book);
-  
+        console.log("book", book);
+
         this.setState({ book });
       });
   }
-  
+
   render() {
-    console.log("this.props", this.props)
-    console.log("this.state", this.state)
+    console.log("this.props", this.props);
+    console.log("this.state", this.state);
     const {
       title,
       author,
@@ -68,32 +75,32 @@ class SingleInventory extends Component {
       return duration;
     }
     if (!this.state.book) {
-      return <h1>Loading...</h1>
+      return <h1>Loading...</h1>;
     } else {
       return (
         <div>
-           <BookDetailsWrapper>
-           <BookImgWrapper>
-             <BookImg alt={title} src={image} />
-           </BookImgWrapper>
-           <div>
-             <h2>{title}</h2>
-             <p>by {author}</p>
-             <Availability available={available}>{availability}</Availability>
-             {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
-             <p>
-               Contact {lenderName} from {location}
-             </p>
-             <Link to="/chatapp">
-               <Button>Send message</Button>
-             </Link>
-           </div>
-         </BookDetailsWrapper>
+          <BookDetailsWrapper>
+            <BookImgWrapper>
+              <BookImg alt={title} src={image} />
+            </BookImgWrapper>
+            <div>
+              <h2>{title}</h2>
+              <p>by {author}</p>
+              <Availability available={available}>{availability}</Availability>
+              {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
+              <p>
+                Contact {lenderName} from {location}
+              </p>
+              <Link to="/chatapp">
+                <Button>Send message</Button>
+              </Link>
+            </div>
+          </BookDetailsWrapper>
         </div>
       );
     }
   }
-};
+}
 
 // const mapStateToProps = state => {
 //   return {
@@ -101,10 +108,8 @@ class SingleInventory extends Component {
 //   }
 // }
 
-
-export default SingleInventory
+export default SingleInventory;
 // connect(
 //   mapStateToProps,
 //   { getSingleInventory }
 //   )(SingleInventory);
-

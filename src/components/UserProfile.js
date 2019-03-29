@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { getFirstUser } from "../redux/actions";
+import { getLoggedInUser } from "../redux/actions";
 
 import UpdateUserProfile from "./UpdateUserProfile";
 import UserProfileCard from "./UserProfileCard";
@@ -10,7 +10,7 @@ class UserProfile extends Component {
     updatingInfo: false
   };
   componentDidMount() {
-    this.props.getFirstUser();
+    this.props.getLoggedInUser();
   }
   toggleUpdate = e => {
     this.setState(prevState => {
@@ -20,7 +20,7 @@ class UserProfile extends Component {
     });
   };
   render() {
-    console.log(localStorage)
+    console.log(localStorage);
     const { loggedInUser } = this.props;
     if (this.state.updatingInfo) {
       return (
@@ -51,5 +51,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getFirstUser }
+  { getLoggedInUser }
 )(UserProfile);

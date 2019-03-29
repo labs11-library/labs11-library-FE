@@ -3,17 +3,14 @@ import axios from "axios";
 export const FETCHING_USERS = "FETCHING_USERS";
 export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
 
-export const GETTING_FIRST_USER = "GETTING_FIRST_USER";
-export const GET_FIRST_USER_SUCCESS = "GET_FIRST_USER_SUCCESS";
+export const GETTING_LOGGED_IN_USER = "GETTING_LOGGED_IN_USER";
+export const GET_LOGGED_IN_USER_SUCCESS = "GET_LOGGED_IN_USER_SUCCESS";
 
 export const UPDATING_PROFILE = "UPDATING_PROFILE";
 export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
 
 export const ADDING_BOOK = "ADDING_BOOK";
 export const ADDING_BOOK_SUCCESS = "ADDING_BOOK_SUCCESS";
-
-// const baseUrl = "http://localhost:9001";
-const baseUrl = "https://book-maps.herokuapp.com";
 
 export const GETTING_SINGLE_INVENTORY = "GETTING_SINGLE_INVENTORY";
 export const GET_SINGLE_INVENTORY_SUCCESS = "GET_SINGLE_INVENTORY_SUCCESS";
@@ -23,6 +20,9 @@ export const GET_SINGLE_BOOK_SUCCESS = "GET_SINGLE_BOOK_SUCCESS";
 
 export const FETCHING_BOOKS = "FETCHING_BOOKS";
 export const FETCH_BOOKS_SUCCESS = "FETCH_BOOKS_SUCCESS";
+
+// const baseUrl = "http://localhost:9001";
+const baseUrl = "https://book-maps.herokuapp.com";
 
 export const getUsers = state => dispatch => {
   dispatch({ type: FETCHING_USERS });
@@ -50,18 +50,14 @@ export const getBooks = state => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const getFirstUser = state => dispatch => {
-  dispatch({ type: GETTING_FIRST_USER });
-  // axios.get(`${baseUrl}/users/366`).then(res => {
-  //   dispatch({ type: GET_FIRST_USER_SUCCESS, payload: res.data }).catch(err =>
-  //     console.log(err)
-  //   );
-  // });
+export const getLoggedInUser = state => dispatch => {
+  let userId = localStorage.getItem("userId");
+  dispatch({ type: GETTING_LOGGED_IN_USER });
   axios
-    .get(`${baseUrl}/users/366`)
+    .get(`${baseUrl}/users/${userId}`)
     .then(res => {
       dispatch({
-        type: GET_FIRST_USER_SUCCESS,
+        type: GET_LOGGED_IN_USER_SUCCESS,
         payload: res.data
       });
     })
@@ -71,9 +67,10 @@ export const getFirstUser = state => dispatch => {
 };
 
 export const editProfile = updatedUser => dispatch => {
+  let userId = localStorage.getItem("userId");
   dispatch({ type: UPDATING_PROFILE });
   axios
-    .put(`${baseUrl}/users/366`, updatedUser)
+    .put(`${baseUrl}/users/${userId}`, updatedUser)
     .then(res => {
       dispatch({
         type: UPDATE_PROFILE_SUCCESS,
@@ -85,9 +82,10 @@ export const editProfile = updatedUser => dispatch => {
     });
 };
 export const addNewBook = state => dispatch => {
+  let userId = localStorage.getItem("userId");
   dispatch({ type: ADDING_BOOK });
   axios
-    .post(`${baseUrl}/users/366/inventory`, state)
+    .post(`${baseUrl}/users/${userId}/inventory`, state)
     .then(res => {
       dispatch({
         type: ADDING_BOOK_SUCCESS,

@@ -39,12 +39,11 @@ class App extends Component {
       this.props.history.push("/");
     }
   }
-
   render() {
     return (
       <div>
         <NavBar />
-        <a href="http://localhost:9001/auth/logout">Logout</a>
+        <a href="https://book-maps.herokuapp.com/auth/logout">Logout</a>
         <input
           onSubmit={this.setUsername}
           onChange={this.setUsername}
