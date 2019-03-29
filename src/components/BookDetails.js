@@ -29,7 +29,7 @@ const Availability = styled.p`
 const BookDetails = props => {
   const {
     title,
-    author,
+    authors,
     image,
     lenderName,
     location,
@@ -50,7 +50,7 @@ const BookDetails = props => {
       </BookImgWrapper>
       <div>
         <h2>{title}</h2>
-        <p>by {author}</p>
+        <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
         {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
         <p>
