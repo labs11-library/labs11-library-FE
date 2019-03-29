@@ -4,7 +4,9 @@ import {
   GETTING_FIRST_USER,
   GET_FIRST_USER_SUCCESS,
   UPDATING_PROFILE,
-  UPDATE_PROFILE_SUCCESS
+  UPDATE_PROFILE_SUCCESS,
+  ADDING_BOOK,
+  ADDING_BOOK_SUCCESS
 } from "./actions";
 
 const initialState = {
@@ -49,6 +51,17 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         loggedInUser: action.payload
+      };
+    case ADDING_BOOK:
+      return {
+        ...state,
+        loading: true
+      };
+    case ADDING_BOOK_SUCCESS:
+      return {
+        ...state,
+        loading: false
+        // ^^^ THIS SUCKS CHANGE IT
       };
     default:
       return state;

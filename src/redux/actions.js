@@ -9,8 +9,11 @@ export const GET_FIRST_USER_SUCCESS = "GET_FIRST_USER_SUCCESS";
 export const UPDATING_PROFILE = "UPDATING_PROFILE";
 export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
 
-const baseUrl = "http://localhost:9001";
-// "https://book-maps.herokuapp.com";
+export const ADDING_BOOK = "ADDING_BOOK";
+export const ADDING_BOOK_SUCCESS = "ADDING_BOOK_SUCCESS";
+
+// const baseUrl = "http://localhost:9001";
+const baseUrl = "https://book-maps.herokuapp.com";
 
 export const getUsers = state => dispatch => {
   dispatch({ type: FETCHING_USERS });
@@ -53,6 +56,20 @@ export const editProfile = updatedUser => dispatch => {
       dispatch({
         type: UPDATE_PROFILE_SUCCESS,
         payload: res.data.editedUser
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+export const addNewBook = state => dispatch => {
+  dispatch({ type: ADDING_BOOK });
+  axios
+    .post(`${baseUrl}/users/366/inventory`, state)
+    .then(res => {
+      dispatch({
+        type: ADDING_BOOK_SUCCESS,
+        payload: res.data
       });
     })
     .catch(err => {

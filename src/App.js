@@ -14,7 +14,7 @@ import CheckedOutList from "./components/CheckedOutList";
 import Mapview from "./components/Mapview";
 import ChatApp from "./components/ChatApp";
 import SingleBook from "./components/SingleBook";
-
+import BookSearch from "./components/AddBook/BookSearch";
 class App extends Component {
   state = {
     username: "bob"
@@ -56,6 +56,7 @@ class App extends Component {
         <Route exact path="/checkedout" component={CheckedOutList} />
         <Route exact path="/mapview" component={Mapview} />
         <Route exact path="/book/1" component={SingleBook} />
+        <Route exact path="/add-book" component={BookSearch} />
         <Route
           exact
           path="/chatapp"
