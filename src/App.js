@@ -19,6 +19,7 @@ import SingleBook from "./components/SingleBook";
 import SingleCheckedOutBook from "./components/SingleCheckedOutBook";
 import BookSearch from "./components/AddBook/BookSearch";
 import Sendgrid from "./components/SendGrid";
+import ReviewForm from "./components/ReviewForm";
 
 class App extends Component {
   state = {
@@ -60,6 +61,7 @@ class App extends Component {
         <Route exact path="/inventory" component={InventoryList} />
         <Route exact path="/checkedout" component={CheckedOutList} />
         <Route exact path="/mapview" component={Mapview} />
+        <Route exact path="/review-form" component={ReviewForm} />
         <Route
           exact
           path="/users/:userId/checkedOut/:checkedOutId"

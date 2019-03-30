@@ -1,5 +1,5 @@
 import axios from "axios";
-import backendBaseUrl from '../url'
+import backendBaseUrl from '../../url'
 
 export const FETCHING_USER_REVIEWS = "FETCHING_USER_REVIEWS";
 export const FETCH_USER_REVIEWS_SUCCESS = "FETCH_USER_REVIEWS_SUCCESS";
