@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import * as moment from "moment";
 import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
+import { connect } from 'react-redux';
+import { getSingleCheckedOutBook } from '../redux/actions.js';
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -31,50 +32,34 @@ class SingleCheckedOutBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      book: {}
+      singleCheckedOutBook: {}
     };
   }
 
   componentDidMount() {
-    const {
-      match: { params }
-    } = this.props;
-
-    axios
-      .get(
-        `https://book-maps.herokuapp.com/users/${params.userId}/checkedOut/${
-          params.checkedOutId
-        }`
-      )
-      .then(({ data: book }) => {
-        console.log("book", book);
-
-        this.setState({ book });
-      });
+    this.props.getSingleCheckedOutBook(this.props.match.params.checkedOutId);
   }
 
   render() {
-    console.log("this.props", this.props);
-    console.log("this.state", this.state);
-    const {
-      title,
-      author,
-      image,
-      lenderName,
-      location,
-      available,
-      dueDate
-    } = this.state.book;
-    const availability = available ? "Available" : "Checked out";
-    function timeRemaining(dueDate) {
-      let now = moment(Date.now());
-      let end = moment(dueDate);
-      let duration = moment.duration(now.diff(end)).humanize();
-      return duration;
-    }
-    if (!this.state.book) {
+    if (!this.props.singleCheckedOutBook.image) {
       return <h1>Loading...</h1>;
     } else {
+      const {
+        title,
+        authors,
+        image,
+        lenderName,
+        location,
+        available,
+        dueDate
+      } = this.state.singleCheckedOutBook;
+      const availability = available ? "Available" : "Checked out";
+      function timeRemaining(dueDate) {
+        let now = moment(Date.now());
+        let end = moment(dueDate);
+        let duration = moment.duration(now.diff(end)).humanize();
+        return duration;
+      }
       return (
         <div>
           <BookDetailsWrapper>
@@ -83,7 +68,7 @@ class SingleCheckedOutBook extends Component {
             </BookImgWrapper>
             <div>
               <h2>{title}</h2>
-              <p>by {author}</p>
+              <p>by {authors}</p>
               <Availability available={available}>{availability}</Availability>
               {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
               <p>
@@ -100,4 +85,14 @@ class SingleCheckedOutBook extends Component {
   }
 }
 
-export default SingleCheckedOutBook;
+const mapStateToProps = state => {
+  return {
+    loading: state.isLoading,
+    singleCheckedOutBook: state.singleCheckedOutBook
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  { getSingleCheckedOutBook }
+  )(SingleCheckedOutBook);

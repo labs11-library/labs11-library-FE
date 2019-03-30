@@ -28,6 +28,7 @@ const Availability = styled.p`
 
 const BookDetails = props => {
   const {
+    bookId,
     title,
     authors,
     image,
@@ -59,9 +60,10 @@ const BookDetails = props => {
         <Link to="/chatapp">
           <Button>Send message</Button>
         </Link>
-        <Link to="/books/1">
+        <Button onClick={() => props.viewBook(bookId)}></Button>
+        {/* <Link to=":userId/inventory/:bookId">
           <Button>See more details</Button>
-        </Link>
+        </Link> */}
       </div>
     </BookDetailsWrapper>
   );

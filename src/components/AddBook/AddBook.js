@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { withRouter } from 'react-router-dom'
 import { addNewBook } from "../../redux/actions";
 import { connect } from "react-redux";
 
@@ -20,9 +20,10 @@ class AddBook extends Component {
       [name]: value
     });
   };
-  addBook = e => {
+  addBook = (e) => {
     e.preventDefault();
     this.props.addNewBook(this.state);
+    this.props.history.push('/inventory')
     console.log(this.props.books);
   };
   render() {
@@ -50,7 +51,9 @@ const mapStateToProps = state => ({
   loading: state.loading,
   books: state.books
 });
-export default connect(
+const AddBookRedux =  connect(
   mapStateToProps,
   { addNewBook }
 )(AddBook);
+
+export default withRouter(AddBookRedux)
