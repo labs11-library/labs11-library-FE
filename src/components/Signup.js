@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import "./signup.css";
+import backendBaseUrl from '../url'
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -45,14 +46,14 @@ class Signup extends Component {
             <Link component={RouterLink} to="/login">
               Log in
             </Link>
-            <a href="https://book-maps.herokuapp.com/auth/facebook">
-              <button class="loginBtn loginBtn--facebook">
-                Signup with Facebook
-              </button>
-            </a>
-            <a href="https://book-maps.herokuapp.com/auth/google">
+            <a href={`${backendBaseUrl}/auth/google`}>
               <button class="loginBtn loginBtn--google">
                 Signup with Google
+              </button>
+            </a>
+            <a href={`${backendBaseUrl}/auth/facebook`}>
+              <button class="loginBtn loginBtn--facebook">
+                Signup with Facebook
               </button>
             </a>
           </FormControl>

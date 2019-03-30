@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import backendBaseUrl from '../../url'
 
 import SearchedBookTile from "./SearchedBookTile";
 import AddBook from "./AddBook";
@@ -15,7 +16,7 @@ export default class BookSearch extends Component {
     },
     isAdding: false
   };
-  baseUrl = "https://book-maps.herokuapp.com/books/search";
+  baseUrl = `${backendBaseUrl}/books/search`;
   addBook = selectedBook => {
     this.setState({ isAdding: true, selectedBook: selectedBook });
   };

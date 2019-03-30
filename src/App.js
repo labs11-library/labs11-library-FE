@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import queryString from "query-string";
 import { withRouter } from "react-router";
+import backendBaseUrl from "./url";
 
 import BookList from "./components/BookList";
 import Users from "./components/Users";
@@ -43,7 +44,7 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <a href="https://book-maps.herokuapp.com/auth/logout">Logout</a>
+        <a href={`${backendBaseUrl}/auth/logout`}>Logout</a>
         <input
           onSubmit={this.setUsername}
           onChange={this.setUsername}
@@ -65,7 +66,7 @@ class App extends Component {
           render={props => <SingleCheckedOutBook {...props} />}
         />
         <Route
-          path="/:userId/inventory/:bookId"
+          path="/users/:userId/inventory/:bookId"
           render={props => <SingleInventory {...props} />}
         />
         <Route exact path="/sendgrid" component={Sendgrid} />
