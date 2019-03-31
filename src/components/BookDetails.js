@@ -60,10 +60,10 @@ const BookDetails = props => {
         <Link to="/chatapp">
           <Button>Send message</Button>
         </Link>
-        <Button onClick={() => props.viewBook(bookId)}></Button>
-        {/* <Link to=":userId/inventory/:bookId">
+        {/* <Button onClick={() => props.viewBook(bookId)}></Button> */}
+        <Link to={`/books/${bookId}`}>
           <Button>See more details</Button>
-        </Link> */}
+        </Link>
       </div>
     </BookDetailsWrapper>
   );
