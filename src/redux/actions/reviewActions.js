@@ -43,7 +43,7 @@ let userId = localStorage.getItem("userId");
 export const addNewReview = state => dispatch => {
   dispatch({ type: ADDING_REVIEW });
   axios
-    .post(`${backendBaseUrl}/reviews`, state)
+    .post(`${backendBaseUrl}/users/reviews`, state)
     .then(res => {
       dispatch({
         type: ADDING_REVIEW_SUCCESS,

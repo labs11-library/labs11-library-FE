@@ -40,7 +40,6 @@ class SingleInventory extends Component {
     this.props.getSingleInventory(this.props.match.params.bookId);
   }
   render() {
-    console.log(this.props.inventory)
     if (!this.props.inventory.image) {
       return <h1>Loading...</h1>
     } else {
