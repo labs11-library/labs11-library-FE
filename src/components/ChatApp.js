@@ -24,7 +24,7 @@ class ChatApp extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:9001/chat/token", {
+    fetch("https://book-maps.herokuapp.com/chat/token", {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       method: "POST",
       body: `identity=${encodeURIComponent(this.props.username)}`

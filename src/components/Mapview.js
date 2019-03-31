@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./mapview.css";
+import backendBaseUrl from '../url'
 
 // const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
@@ -66,8 +67,7 @@ class Mapview extends Component {
 
   // Get all users from DB ---- swap line 69 & 70 to go from local to heroku
   getUsers = () => {
-    const endPoint = "https://book-maps.herokuapp.com/users?";
-    // const endPoint = "http://localhost:9001/users?";
+    const endPoint = `${backendBaseUrl}/users?`
     const parameters = {
       firstName: "",
       location: ""

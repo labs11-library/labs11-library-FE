@@ -19,16 +19,19 @@ class Inventory extends Component {
     });
   };
   searchBooks = () => {
-    const { inventory, searchText } = this.state;
-    if (searchText.length === 0) {
-      return inventory;
-    } else if (searchText.length > 0) {
-      const searchRegex = new RegExp(searchText, "gi");
-      return inventory.filter(
-        book => book.title.match(searchRegex) || book.author.match(searchRegex)
+    if (this.state.searchText.length === 0) {
+      return this.state.inventory;
+    } else if (this.state.searchText.length > 0) {
+      const searchRegex = new RegExp(this.state.searchText, "gi");
+      return this.state.inventory.filter(
+        book => book.title.match(searchRegex) || book.authors.match(searchRegex)
       );
     }
   };
+  viewBook = (bookId) => {
+    let userId = localStorage.getItem('userId');
+    this.props.params.history.push(`${userId}/inventory/${bookId}`)
+  }
   componentWillReceiveProps(newProps) {
     if (newProps.books !== this.state.inventory) {
       this.setState({
@@ -51,7 +54,7 @@ class Inventory extends Component {
         />
         <div>
           {this.searchBooks().map(book => {
-            return <BookDetails book={book} />;
+            return <BookDetails book={book} viewBook={this.viewBook}/>;
           })}
         </div>
       </div>

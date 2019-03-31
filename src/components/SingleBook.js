@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import * as moment from "moment";
 import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
+import { connect } from 'react-redux';
+import { getSingleBook } from '../redux/actions.js';
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -31,45 +32,36 @@ class SingleBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      book: {}
+      singleBook: {}
     };
   }
 
   componentDidMount() {
-    const {
-      match: { params }
-    } = this.props;
-
-    axios
-      .get(`https://book-maps.herokuapp.com/books/${params.bookId}`)
-      .then(({ data: book }) => {
-        console.log("book", book);
-
-        this.setState({ book });
-      });
+    this.props.getSingleBook(this.props.match.params.bookId);
   }
 
   render() {
     console.log("this.state", this.state);
-    const {
-      title,
-      authors,
-      image,
-      lenderName,
-      location,
-      available,
-      dueDate
-    } = this.state.book;
-    const availability = available ? "Available" : "Checked out";
-    function timeRemaining(dueDate) {
-      let now = moment(Date.now());
-      let end = moment(dueDate);
-      let duration = moment.duration(now.diff(end)).humanize();
-      return duration;
-    }
-    if (!this.state.book) {
+    console.log("this.props", this.props);
+    if (!this.props.singleBook.image) {
       return <h1>Loading...</h1>;
     } else {
+      const {
+        title,
+        authors,
+        image,
+        lenderName,
+        location,
+        available,
+        dueDate
+      } = this.props.singleBook;
+      const availability = available ? "Available" : "Checked out";
+      function timeRemaining(dueDate) {
+        let now = moment(Date.now());
+        let end = moment(dueDate);
+        let duration = moment.duration(now.diff(end)).humanize();
+        return duration;
+      }
       return (
         <div>
           <BookDetailsWrapper>
@@ -95,4 +87,14 @@ class SingleBook extends Component {
   }
 }
 
-export default SingleBook;
+const mapStateToProps = state => {
+  return {
+    loading: state.isLoading,
+    singleBook: state.singleBook
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  { getSingleBook }
+  )(SingleBook);
