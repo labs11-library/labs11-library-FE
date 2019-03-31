@@ -37,13 +37,18 @@ class SingleCheckedOutBook extends Component {
   }
 
   componentDidMount() {
+    if (!this.state.singleCheckedOutBook) {
+      this.props.getSingleCheckedOutBook(this.props.match.params.checkedOutId);
+    } 
     this.props.getSingleCheckedOutBook(this.props.match.params.checkedOutId);
   }
 
   render() {
-    if (!this.props.singleCheckedOutBook.image) {
-      return <h1>Loading...</h1>;
-    } else {
+    console.log(this.props)
+    console.log(this.state)
+    // if (!this.props.singleCheckedOutBook.title) {
+    //   return <h1>Loading...</h1>;
+    // } else {
       const {
         title,
         authors,
@@ -52,7 +57,7 @@ class SingleCheckedOutBook extends Component {
         location,
         available,
         dueDate
-      } = this.state.singleCheckedOutBook;
+      } = this.props.singleCheckedOutBook;
       const availability = available ? "Available" : "Checked out";
       function timeRemaining(dueDate) {
         let now = moment(Date.now());
@@ -83,7 +88,7 @@ class SingleCheckedOutBook extends Component {
       );
     }
   }
-}
+// }
 
 const mapStateToProps = state => {
   return {
