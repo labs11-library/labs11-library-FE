@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Rating } from 'material-ui-rating'
+import Ratings from 'react-ratings-declarative';
 
 import { connect } from 'react-redux';
 import {addNewReview } from '../redux/actions/reviewActions';
@@ -14,11 +14,16 @@ class ReviewForm extends Component {
   }
 
   handleChange = e => {
-    const { name, value } = e.target;
     this.setState({
-      [name]: value
+      reviewText: e.target.value
     });
   };
+
+  changeRating = newRating => {
+    this.setState({
+      rating: newRating
+    });
+  }
   
   handleSubmit = e => {
     e.preventDefault();
@@ -26,15 +31,26 @@ class ReviewForm extends Component {
   }
 
   render() {
+    console.log("this.state review-form", this.state)
     return (
       <div>
           <form onSubmit={this.handleSubmit}>
-              <input placeholder="Leave a review..." type="textarea" />
-              <Rating
-                value={this.state.rating}
-                max={5}
-                onChange={this.handleChangle}
-                />
+              <textarea 
+                placeholder="Leave a review..." 
+                value={this.state.reviewText} 
+                onChange={this.handleChange}
+              />
+              <Ratings
+                rating={this.state.rating}
+                widgetRatedColors="gold"
+                changeRating={this.changeRating}
+              >
+                <Ratings.Widget widgetHoverColor="gold" />
+                <Ratings.Widget widgetHoverColor="gold" />
+                <Ratings.Widget widgetHoverColor="gold" />
+                <Ratings.Widget widgetHoverColor="gold" />
+                <Ratings.Widget widgetHoverColor="gold" />
+              </Ratings>
           </form>
       </div>
           
