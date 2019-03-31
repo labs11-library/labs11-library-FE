@@ -20,8 +20,7 @@ class AddBook extends Component {
       [name]: value
     });
   };
-  addBook = (e) => {
-    e.preventDefault();
+  addBook = () => {
     this.props.addNewBook(this.state);
     this.props.history.push('/inventory')
     console.log(this.props.books);

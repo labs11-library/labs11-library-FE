@@ -32,10 +32,10 @@ const BookDetails = props => {
     title,
     authors,
     image,
-    lenderName,
-    location,
+    lender,
     available,
-    dueDate
+    dueDate,
+    description
   } = props.book;
   const availability = available ? "Available" : "Checked out";
   function timeRemaining(dueDate) {
@@ -44,6 +44,7 @@ const BookDetails = props => {
     let duration = moment.duration(now.diff(end)).humanize();
     return duration;
   }
+  console.log(props.book)
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -54,8 +55,9 @@ const BookDetails = props => {
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
         {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
+        <div>Description: {description}</div>
         <p>
-          Contact {lenderName} from {location}
+          Contact {lender}
         </p>
         <Link to="/chatapp">
           <Button>Send message</Button>
