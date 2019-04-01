@@ -84,14 +84,19 @@ class SingleBook extends Component {
                 Contact {lenderName} from {location}
               </p>
               <Button onClick={() => this.setState({showChat: true})} >Send message</Button>
-              {/* <Ratings rating={avgRating} widgetRatedColors="gold">
-                <Ratings.Widget widgetHoverColor="gold" />
-                <Ratings.Widget widgetHoverColor="gold" />
-                <Ratings.Widget widgetHoverColor="gold" />
-                <Ratings.Widget widgetHoverColor="gold" />
-                <Ratings.Widget widgetHoverColor="gold" />
-              </Ratings>
-              <div>Goodreads rating: {avgRating}</div> */}
+              {
+                avgRating &&
+                <div>
+                  <Ratings rating={avgRating} widgetRatedColors="gold">
+                    <Ratings.Widget widgetHoverColor="gold" />
+                    <Ratings.Widget widgetHoverColor="gold" />
+                    <Ratings.Widget widgetHoverColor="gold" />
+                    <Ratings.Widget widgetHoverColor="gold" />
+                    <Ratings.Widget widgetHoverColor="gold" />
+                  </Ratings>
+                  <div>Goodreads rating: {avgRating}</div>
+                </div>
+              }
             </div>
           </BookDetailsWrapper>
         </div>
