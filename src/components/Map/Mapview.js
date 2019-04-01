@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./mapview.css";
-import backendBaseUrl from '../../url'
+import baseUrl from "../../url";
 
 // const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
@@ -34,6 +34,7 @@ class Mapview extends Component {
           haveUserLocation: true,
           zoom: 15
         });
+        this.updateLocation();
         this.renderMap();
       },
       () => {
@@ -67,7 +68,7 @@ class Mapview extends Component {
 
   // Get all users from DB ---- swap line 69 & 70 to go from local to heroku
   getUsers = () => {
-    const endPoint = `${backendBaseUrl}/users?`
+    const endPoint = `${baseUrl}/users?`;
     const parameters = {
       firstName: "",
       location: ""
@@ -89,6 +90,22 @@ class Mapview extends Component {
       });
   };
 
+  updateLocation = () => {
+    let userId = localStorage.getItem("userId");
+    console.log(this.state);
+    axios
+      .put(`${baseUrl}/users/${userId}`, {
+        latitude: this.state.latitude,
+        longitude: this.state.longitude
+      })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   initMap = () => {
     // Create A Map
     var map = new window.google.maps.Map(document.getElementById("map"), {
@@ -98,9 +115,12 @@ class Mapview extends Component {
 
     //Map over all users
     this.state.users.map(allUsers => {
-      var contentString = `A link to ${
+      var str = `<a href="https://bookmaps.netlify.com/${
+        allUsers.userId
+      }/inventory" target="_blank">HERE</a><br>`;
+      var contentString = `Click ${str} to visit ${
         allUsers.firstName
-      }'s bookshelf will be here`;
+      }'s bookshelf`;
 
       // Create Info Window for all users
       var infowindow = new window.google.maps.InfoWindow({
