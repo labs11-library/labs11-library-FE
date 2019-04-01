@@ -32,7 +32,7 @@ class Books extends Component {
     } else if (searchText.length > 0) {
       const searchRegex = new RegExp(searchText, "gi");
       return books.filter(
-        book => book.title.match(searchRegex) || book.author.match(searchRegex)
+        book => book.title.match(searchRegex) || book.authors.match(searchRegex)
       );
     }
   };

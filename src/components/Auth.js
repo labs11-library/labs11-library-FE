@@ -1,11 +1,11 @@
 import React from "react";
 import axios from "axios";
-// import backendBaseUrl from '../../url'
+import baseUrl from "../url";
 
 import Login from "./Login";
 // axios defaults and interceptors
-// axios.defaults.baseURL = `${backendBaseUrl}`;
-axios.defaults.baseURL = "http://localhost:9001/";
+axios.defaults.baseURL = `${baseUrl}`;
+// axios.defaults.baseURL = "http://localhost:9001/";
 axios.interceptors.request.use(
   function(options) {
     options.headers.authorization = localStorage.getItem("jwt");
