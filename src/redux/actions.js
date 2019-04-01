@@ -1,8 +1,6 @@
 import axios from "axios";
 import backendBaseUrl from '../url'
 
-
-
 export const FETCHING_USERS = "FETCHING_USERS";
 export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
 
