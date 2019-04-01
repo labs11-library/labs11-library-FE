@@ -92,9 +92,9 @@ class Mapview extends Component {
 
   updateLocation = () => {
     let userId = localStorage.getItem("userId");
-    console.log(userId);
+    console.log(this.state);
     axios
-      .post(`${baseUrl}/users/${userId}`, {
+      .put(`${baseUrl}/users/${userId}`, {
         latitude: this.state.latitude,
         longitude: this.state.longitude
       })
@@ -115,9 +115,12 @@ class Mapview extends Component {
 
     //Map over all users
     this.state.users.map(allUsers => {
-      var contentString = `A link to ${
+      var str = `<a href="https://bookmaps.netlify.com/${
+        allUsers.userId
+      }/inventory" target="_blank">HERE</a><br>`;
+      var contentString = `Click ${str} to visit ${
         allUsers.firstName
-      }'s bookshelf will be here`;
+      }'s bookshelf`;
 
       // Create Info Window for all users
       var infowindow = new window.google.maps.InfoWindow({
