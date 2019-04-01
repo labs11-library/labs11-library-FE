@@ -22,6 +22,14 @@ class SingleInventory extends Component {
     const userId = localStorage.getItem("userId");
     this.props.getSingleInventory(userId, this.props.match.params.bookId);
   }
+  toggleUpdate = e => {
+    e.preventDefault();
+    this.setState(prevState => {
+      return {
+        updating: !prevState.updating
+      };
+    });
+  };
   timeRemaining = dueDate => {
     let now = moment(Date.now());
     let end = moment(dueDate);
@@ -31,17 +39,28 @@ class SingleInventory extends Component {
   render() {
     if (!this.props.singleInventory) {
       return <h1>Loading...</h1>;
-    } else {
+    } else if (!this.state.updating) {
       return (
-        <div>
-          <SingleInventoryDetails
-            singleInventory={this.props.singleInventory}
-            timeRemaining={this.timeRemaining}
-          />
-          <Button>
-            {/* {this.state.updating ? "Cancel Update" : "Update Info"} */}
+        <React.Fragment>
+          <div>
+            <SingleInventoryDetails
+              singleInventory={this.props.singleInventory}
+              timeRemaining={this.timeRemaining}
+            />
+          </div>
+          <Button onClick={this.toggleUpdate}>
+            {this.state.updating ? "Cancel Update" : "Update Info"}
           </Button>
-        </div>
+        </React.Fragment>
+      );
+    } else if (this.state.updating) {
+      return (
+        <React.Fragment>
+          <UpdateInventoryForm singleInventory={this.props.singleInventory} />
+          <Button onClick={this.toggleUpdate}>
+            {this.state.updating ? "Cancel Update" : "Update Info"}
+          </Button>
+        </React.Fragment>
       );
     }
   }

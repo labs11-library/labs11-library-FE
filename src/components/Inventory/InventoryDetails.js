@@ -55,7 +55,11 @@ const BookDetails = props => {
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
         {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
-        <div>Description: {description}</div>
+        <p>
+          {description === ""
+            ? "No description provided"
+            : `Description: ${description}`}
+        </p>
         <p>Contact {lender}</p>
         <Link to="/chatapp">
           <Button>Send message</Button>

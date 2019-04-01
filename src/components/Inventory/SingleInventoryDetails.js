@@ -14,7 +14,8 @@ const SingleInventoryDetails = props => {
     lenderName,
     location,
     available,
-    dueDate
+    dueDate,
+    description
   } = props.singleInventory;
   const availability = available ? "Available" : "Checked out";
   return (
@@ -26,6 +27,11 @@ const SingleInventoryDetails = props => {
         <h2>{title}</h2>
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
+        <p>
+          {description === ""
+            ? "No description provided"
+            : `Description: ${description}`}
+        </p>
         {!available && <p>Time until due: {props.timeRemaining(dueDate)}</p>}
       </div>
       <Link to="/inventory">
