@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import BookDetails from "./BookDetails";
 
 import { connect } from "react-redux";
-import { getAllInventory } from "../redux/actions.js";
+import { getAllInventory } from "../redux/actions/inventoryActions.js";
 class Inventory extends Component {
   constructor() {
     super();
@@ -28,14 +28,14 @@ class Inventory extends Component {
       );
     }
   };
-  viewBook = (bookId) => {
-    let userId = localStorage.getItem('userId');
-    this.props.params.history.push(`${userId}/inventory/${bookId}`)
-  }
+  viewBook = bookId => {
+    let userId = localStorage.getItem("userId");
+    this.props.params.history.push(`${userId}/inventory/${bookId}`);
+  };
   componentWillReceiveProps(newProps) {
-    if (newProps.books !== this.state.inventory) {
+    if (newProps.inventory !== this.state.inventory) {
       this.setState({
-        inventory: this.props.books
+        inventory: this.props.inventory
       });
     }
   }
@@ -54,7 +54,7 @@ class Inventory extends Component {
         />
         <div>
           {this.searchBooks().map(book => {
-            return <BookDetails book={book} viewBook={this.viewBook}/>;
+            return <BookDetails book={book} viewBook={this.viewBook} />;
           })}
         </div>
       </div>
@@ -63,8 +63,8 @@ class Inventory extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.isLoading,
-  books: state.books
+  loadingInventory: state.inventoryReducer.loadingInventory,
+  inventory: state.inventoryReducer.inventory
 });
 export default connect(
   mapStateToProps,

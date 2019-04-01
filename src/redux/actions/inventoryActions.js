@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = "http://localhost:9001";
+import baseUrl from "../../url";
+// const baseUrl = "http://localhost:9001";
 // const baseUrl = "https://book-maps.herokuapp.com";
 
 export const GETTING_USERS_INVENTORY = "GETTING_USERS_INVENTORY";

@@ -4,8 +4,8 @@ import * as moment from "moment";
 import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
-import { connect } from 'react-redux';
-import { getSingleInventory } from '../redux/actions.js';
+import { connect } from "react-redux";
+import { getSingleInventory } from "../redux/actions/inventoryActions.js";
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -37,11 +37,12 @@ class SingleInventory extends Component {
   }
 
   componentDidMount() {
-    this.props.getSingleInventory(this.props.match.params.bookId);
+    const userId = localStorage.getItem("userId");
+    this.props.getSingleInventory(userId, this.props.match.params.bookId);
   }
   render() {
     if (!this.props.inventory.image) {
-      return <h1>Loading...</h1>
+      return <h1>Loading...</h1>;
     } else {
       const {
         title,
@@ -53,12 +54,12 @@ class SingleInventory extends Component {
         dueDate
       } = this.props.inventory;
       const availability = available ? "Available" : "Checked out";
-    function timeRemaining(dueDate) {
-      let now = moment(Date.now());
-      let end = moment(dueDate);
-      let duration = moment.duration(now.diff(end)).humanize();
-      return duration;
-    }
+      function timeRemaining(dueDate) {
+        let now = moment(Date.now());
+        let end = moment(dueDate);
+        let duration = moment.duration(now.diff(end)).humanize();
+        return duration;
+      }
       return (
         <div>
           <BookDetailsWrapper>
@@ -80,18 +81,18 @@ class SingleInventory extends Component {
           </BookDetailsWrapper>
         </div>
       );
-    }}
+    }
   }
-
+}
 
 const mapStateToProps = state => {
   return {
-    loading: state.isLoading,
-    inventory: state.singleInventory
-  }
-}
+    loading: state.inventoryReducer.loadingInventory,
+    inventory: state.inventoryReducer.singleInventory
+  };
+};
 
 export default connect(
   mapStateToProps,
   { getSingleInventory }
-  )(SingleInventory);
+)(SingleInventory);

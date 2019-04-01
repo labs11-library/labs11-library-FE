@@ -1,6 +1,7 @@
 import axios from "axios";
+import baseUrl from "../../url";
 // const baseUrl = "http://localhost:9001";
-const baseUrl = "https://book-maps.herokuapp.com";
+// const baseUrl = "https://book-maps.herokuapp.com";
 
 export const FETCHING_USERS = "FETCHING_USERS";
 export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";

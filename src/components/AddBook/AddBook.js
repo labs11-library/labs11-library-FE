@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { withRouter } from 'react-router-dom'
-import { addNewBook } from "../../redux/actions";
+import { withRouter } from "react-router-dom";
+import { addNewBook } from "../../redux/actions/bookActions.js";
 import { connect } from "react-redux";
 
 class AddBook extends Component {
@@ -22,7 +22,7 @@ class AddBook extends Component {
   };
   addBook = () => {
     this.props.addNewBook(this.state);
-    this.props.history.push('/inventory')
+    this.props.history.push("/inventory");
     console.log(this.props.books);
   };
   render() {
@@ -47,12 +47,12 @@ class AddBook extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.loading,
-  books: state.books
+  fetchingBooks: state.bookReducer.fetchingBooks,
+  books: state.bookReducer.books
 });
-const AddBookRedux =  connect(
+const AddBookRedux = connect(
   mapStateToProps,
   { addNewBook }
 )(AddBook);
 
-export default withRouter(AddBookRedux)
+export default withRouter(AddBookRedux);

@@ -4,13 +4,16 @@ import {
   GETTING_SINGLE_BOOK,
   GET_SINGLE_BOOK_SUCCESS,
   ADDING_BOOK,
-  ADDING_BOOK_SUCCESS
+  ADDING_BOOK_SUCCESS,
+  GETTING_SINGLE_CHECKED_OUT_BOOK,
+  GET_SINGLE_CHECKED_OUT_BOOK_SUCCESS
 } from "../actions/bookActions.js";
 
 const initialState = {
   fetchingBooks: false,
   books: [],
-  singleBook: {}
+  singleBook: {},
+  singleCheckedOutBook: {}
 };
 
 export default function bookReducer(state = initialState, action) {
@@ -47,6 +50,17 @@ export default function bookReducer(state = initialState, action) {
         ...state,
         fetchingBooks: false,
         singleBook: action.payload
+      };
+    case GETTING_SINGLE_CHECKED_OUT_BOOK:
+      return {
+        ...state,
+        loading: true
+      };
+    case GET_SINGLE_CHECKED_OUT_BOOK_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        singleCheckedOutBook: action.payload
       };
     default:
       return state;
