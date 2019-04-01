@@ -6,6 +6,7 @@ import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { connect } from 'react-redux';
 import { getSingleCheckedOutBook } from '../redux/actions.js';
+import ReviewForm from './ReviewForm';
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -37,10 +38,15 @@ class SingleCheckedOutBook extends Component {
   }
 
   componentDidMount() {
+    if (!this.state.singleCheckedOutBook) {
+      this.props.getSingleCheckedOutBook(this.props.match.params.checkedOutId);
+    } 
     this.props.getSingleCheckedOutBook(this.props.match.params.checkedOutId);
   }
 
   render() {
+    console.log(this.props)
+    console.log(this.state)
     if (!this.props.singleCheckedOutBook.image) {
       return <h1>Loading...</h1>;
     } else {
@@ -48,18 +54,21 @@ class SingleCheckedOutBook extends Component {
         title,
         authors,
         image,
-        lenderName,
-        location,
+        lender,
+        checkedOutId,
+        returned,
         available,
-        dueDate
-      } = this.state.singleCheckedOutBook;
+        checkoutDate
+      } = this.props.singleCheckedOutBook;
       const availability = available ? "Available" : "Checked out";
-      function timeRemaining(dueDate) {
-        let now = moment(Date.now());
-        let end = moment(dueDate);
-        let duration = moment.duration(now.diff(end)).humanize();
-        return duration;
-      }
+      // function timeRemaining(dueDate) {
+      //   let now = moment(Date.now());
+      //   let end = moment(Date.now());
+      //   let duration = moment.duration(now.diff(end)).humanize();
+      //   return duration;
+      // }
+      const threeWeeks = moment(checkoutDate, 'YYYY-MM-DD').add(21, 'days')
+      const dueDate = moment.utc(threeWeeks).local().format('dddd, MMMM Do')
       return (
         <div>
           <BookDetailsWrapper>
@@ -70,13 +79,16 @@ class SingleCheckedOutBook extends Component {
               <h2>{title}</h2>
               <p>by {authors}</p>
               <Availability available={available}>{availability}</Availability>
-              {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
+              {!available && <p>Date due: {dueDate}</p>} {/*{timeRemaining(dueDate)}*/}
               <p>
-                Contact {lenderName} from {location}
+                Contact {lender} from around the way
               </p>
               <Link to="/chatapp">
                 <Button>Send message</Button>
               </Link>
+              { returned === 0 &&
+                <ReviewForm reviewEvent={checkedOutId} />
+              }
             </div>
           </BookDetailsWrapper>
         </div>
