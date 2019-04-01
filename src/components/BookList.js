@@ -25,7 +25,8 @@ class Books extends Component {
     });
   };
   searchBooks = () => {
-    const { books, searchText } = this.state;
+    const { searchText } = this.state;
+    const { books } = this.props;
     if (searchText.length === 0) {
       return books;
     } else if (searchText.length > 0) {
@@ -61,7 +62,7 @@ class Books extends Component {
   render() {
     console.log("/books this.props", this.props)
     console.log("/books this.state", this.state)
-    if (!this.state.books.length) {
+    if (!this.props.books.length) {
       return <h1>Loading...</h1>
     } else {
       return (
