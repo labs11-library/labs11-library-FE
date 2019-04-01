@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./mapview.css";
-import backendBaseUrl from "../../url";
+import baseUrl from "../../url";
 
 // const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
@@ -34,8 +34,8 @@ class Mapview extends Component {
           haveUserLocation: true,
           zoom: 15
         });
-        this.renderMap();
         this.updateLocation();
+        this.renderMap();
       },
       () => {
         // Gets user location from IP address if they block the web browser request
@@ -68,7 +68,7 @@ class Mapview extends Component {
 
   // Get all users from DB ---- swap line 69 & 70 to go from local to heroku
   getUsers = () => {
-    const endPoint = `${backendBaseUrl}/users?`;
+    const endPoint = `${baseUrl}/users?`;
     const parameters = {
       firstName: "",
       location: ""
@@ -94,7 +94,7 @@ class Mapview extends Component {
     let userId = localStorage.getItem("userId");
     console.log(userId);
     axios
-      .post(`${backendBaseUrl}/users/${userId}`, {
+      .post(`${baseUrl}/users/${userId}`, {
         latitude: this.state.latitude,
         longitude: this.state.longitude
       })
