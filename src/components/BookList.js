@@ -6,7 +6,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 
 import { connect } from "react-redux";
-import { getBooks } from "../redux/actions.js";
+import { getBooks } from "../redux/actions/bookActions.js";
 
 class Books extends Component {
   constructor() {
@@ -56,14 +56,14 @@ class Books extends Component {
     }
   }
   componentDidMount() {
-      this.props.getBooks();
+    this.props.getBooks();
   }
 
   render() {
-    console.log("/books this.props", this.props)
-    console.log("/books this.state", this.state)
+    console.log("/books this.props", this.props);
+    console.log("/books this.state", this.state);
     if (!this.props.books.length) {
-      return <h1>Loading...</h1>
+      return <h1>Loading...</h1>;
     } else {
       return (
         <div>
@@ -90,7 +90,7 @@ class Books extends Component {
             </Select>
           </div>
           <div>
-            {this.filteredBooks().map((book) => {
+            {this.filteredBooks().map(book => {
               return (
                 <BookDetails
                   key={book.bookId}
@@ -107,8 +107,8 @@ class Books extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.isLoading,
-  books: state.books
+  fetchingBooks: state.bookReducer.fetchingBooks,
+  books: state.bookReducer.books
 });
 export default connect(
   mapStateToProps,

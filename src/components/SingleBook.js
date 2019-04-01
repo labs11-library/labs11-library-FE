@@ -4,9 +4,9 @@ import * as moment from "moment";
 import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
-import { connect } from 'react-redux';
-import { getSingleBook } from '../redux/actions.js';
-import Ratings from 'react-ratings-declarative';
+import { connect } from "react-redux";
+import { getSingleBook } from "../redux/actions/bookActions.js";
+import Ratings from "react-ratings-declarative";
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -81,10 +81,7 @@ class SingleBook extends Component {
               <Link to="/chatapp">
                 <Button>Send message</Button>
               </Link>
-              <Ratings
-                rating={avgRating}
-                widgetRatedColors="gold"
-              >
+              <Ratings rating={avgRating} widgetRatedColors="gold">
                 <Ratings.Widget widgetHoverColor="gold" />
                 <Ratings.Widget widgetHoverColor="gold" />
                 <Ratings.Widget widgetHoverColor="gold" />
@@ -102,12 +99,12 @@ class SingleBook extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.isLoading,
-    singleBook: state.singleBook
-  }
-}
+    loading: state.bookReducer.fetchingBooks,
+    singleBook: state.bookReducer.singleBook
+  };
+};
 
 export default connect(
   mapStateToProps,
   { getSingleBook }
-  )(SingleBook);
+)(SingleBook);

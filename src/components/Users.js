@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { getUsers } from "../redux/actions";
+import { getUsers } from "../redux/actions/userActions.js";
 
 import Auth from "./Auth";
 class Users extends Component {
@@ -24,8 +24,8 @@ class Users extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.users,
-  loading: state.loading
+  users: state.userReducer.users,
+  loading: state.userReducer.loadingUsers
 });
 
 const UsersComponent = connect(
