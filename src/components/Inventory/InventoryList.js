@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 // import books from "../data";
-import BookDetails from "./BookDetails";
+import BookDetails from "../Books/BookDetails";
 
 import { connect } from "react-redux";
-import { getAllInventory } from "../redux/actions/inventoryActions.js";
+import { getAllInventory } from "../../redux/actions/inventoryActions.js";
 class Inventory extends Component {
   constructor() {
     super();

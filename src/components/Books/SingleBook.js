@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { connect } from "react-redux";
-import { getSingleBook } from "../redux/actions/bookActions.js";
+import { getSingleBook } from "../../redux/actions/bookActions.js";
 import Ratings from "react-ratings-declarative";
 
 const BookDetailsWrapper = styled.div`

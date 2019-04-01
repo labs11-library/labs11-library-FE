@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { editProfile } from "../redux/actions/authActions.js";
+import { editProfile } from "../../redux/actions/authActions.js";
 class UpdateUserProfile extends Component {
   constructor(props) {
     super(props);
