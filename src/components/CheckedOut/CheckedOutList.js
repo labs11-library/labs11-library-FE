@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import books from "../data";
+import books from "../../data";
 import CheckedOutBookDetails from "./CheckedOutBookDetails";
 
 class CheckedOutList extends Component {

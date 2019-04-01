@@ -4,9 +4,8 @@ import * as moment from "moment";
 import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
-import { connect } from 'react-redux';
-import { getSingleBook } from '../redux/actions.js';
-import Ratings from 'react-ratings-declarative';
+import { connect } from "react-redux";
+import { getSingleInventory } from "../../redux/actions/inventoryActions.js";
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -29,22 +28,20 @@ const Availability = styled.p`
   color: ${props => (props.available ? "green" : "red")};
 `;
 
-class SingleBook extends Component {
+class SingleInventory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      singleBook: {}
+      singleInventory: {}
     };
   }
 
   componentDidMount() {
-    this.props.getSingleBook(this.props.match.params.bookId);
+    const userId = localStorage.getItem("userId");
+    this.props.getSingleInventory(userId, this.props.match.params.bookId);
   }
-
   render() {
-    console.log("this.state", this.state);
-    console.log("this.props", this.props);
-    if (!this.props.singleBook.image) {
+    if (!this.props.inventory.image) {
       return <h1>Loading...</h1>;
     } else {
       const {
@@ -53,10 +50,9 @@ class SingleBook extends Component {
         image,
         lenderName,
         location,
-        avgRating,
         available,
         dueDate
-      } = this.props.singleBook;
+      } = this.props.inventory;
       const availability = available ? "Available" : "Checked out";
       function timeRemaining(dueDate) {
         let now = moment(Date.now());
@@ -81,17 +77,6 @@ class SingleBook extends Component {
               <Link to="/chatapp">
                 <Button>Send message</Button>
               </Link>
-              <Ratings
-                rating={avgRating}
-                widgetRatedColors="gold"
-              >
-                <Ratings.Widget widgetHoverColor="gold" />
-                <Ratings.Widget widgetHoverColor="gold" />
-                <Ratings.Widget widgetHoverColor="gold" />
-                <Ratings.Widget widgetHoverColor="gold" />
-                <Ratings.Widget widgetHoverColor="gold" />
-              </Ratings>
-              <div>Goodreads rating: {avgRating}</div>
             </div>
           </BookDetailsWrapper>
         </div>
@@ -102,12 +87,12 @@ class SingleBook extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.isLoading,
-    singleBook: state.singleBook
-  }
-}
+    loading: state.inventoryReducer.loadingInventory,
+    inventory: state.inventoryReducer.singleInventory
+  };
+};
 
 export default connect(
   mapStateToProps,
-  { getSingleBook }
-  )(SingleBook);
+  { getSingleInventory }
+)(SingleInventory);

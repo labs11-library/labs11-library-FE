@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { editProfile } from "../redux/actions.js";
+import { editProfile } from "../../redux/actions/authActions.js";
 class UpdateUserProfile extends Component {
   constructor(props) {
     super(props);
@@ -62,8 +62,8 @@ class UpdateUserProfile extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.loading,
-  loggedInUser: state.loggedInUser
+  loading: state.authReducer.fetchingUser,
+  loggedInUser: state.authReducer.loggedInUser
 });
 export default connect(
   mapStateToProps,

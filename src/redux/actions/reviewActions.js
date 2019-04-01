@@ -1,5 +1,5 @@
 import axios from "axios";
-import backendBaseUrl from '../../url'
+import baseUrl from "../../url";
 
 export const FETCHING_USER_REVIEWS = "FETCHING_USER_REVIEWS";
 export const FETCH_USER_REVIEWS_SUCCESS = "FETCH_USER_REVIEWS_SUCCESS";
@@ -11,10 +11,10 @@ export const ADDING_REVIEW = "ADDING_REVIEW";
 export const ADDING_REVIEW_SUCCESS = "ADDING_REVIEW_SUCCESS";
 
 export const getUserReviews = state => dispatch => {
-let userId = localStorage.getItem("userId");
+  let userId = localStorage.getItem("userId");
   dispatch({ type: FETCHING_USER_REVIEWS });
   axios
-    .get(`${backendBaseUrl}/${userId}/reviews`)
+    .get(`${baseUrl}/${userId}/reviews`)
     .then(res => {
       dispatch({
         type: FETCH_USER_REVIEWS_SUCCESS,
@@ -25,10 +25,10 @@ let userId = localStorage.getItem("userId");
 };
 
 export const getSingleReview = reviewId => dispatch => {
-let userId = localStorage.getItem("userId");
+  let userId = localStorage.getItem("userId");
   dispatch({ type: GETTING_SINGLE_REVIEW });
   axios
-    .get(`${backendBaseUrl}/${userId}/reviews/${reviewId}`)
+    .get(`${baseUrl}/${userId}/reviews/${reviewId}`)
     .then(res => {
       dispatch({
         type: GET_SINGLE_REVIEW_SUCCESS,
@@ -43,7 +43,7 @@ let userId = localStorage.getItem("userId");
 export const addNewReview = state => dispatch => {
   dispatch({ type: ADDING_REVIEW });
   axios
-    .post(`${backendBaseUrl}/users/reviews`, state)
+    .post(`${baseUrl}/users/reviews`, state)
     .then(res => {
       dispatch({
         type: ADDING_REVIEW_SUCCESS,

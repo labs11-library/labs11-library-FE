@@ -4,8 +4,9 @@ import * as moment from "moment";
 import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
-import { connect } from 'react-redux';
-import { getSingleInventory } from '../redux/actions.js';
+import { connect } from "react-redux";
+import { getSingleBook } from "../../redux/actions/bookActions.js";
+import Ratings from "react-ratings-declarative";
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -28,20 +29,23 @@ const Availability = styled.p`
   color: ${props => (props.available ? "green" : "red")};
 `;
 
-class SingleInventory extends Component {
+class SingleBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      singleInventory: {}
+      singleBook: {}
     };
   }
 
   componentDidMount() {
-    this.props.getSingleInventory(this.props.match.params.bookId);
+    this.props.getSingleBook(this.props.match.params.bookId);
   }
+
   render() {
-    if (!this.props.inventory.image) {
-      return <h1>Loading...</h1>
+    console.log("this.state", this.state);
+    console.log("this.props", this.props);
+    if (!this.props.singleBook.image) {
+      return <h1>Loading...</h1>;
     } else {
       const {
         title,
@@ -49,16 +53,17 @@ class SingleInventory extends Component {
         image,
         lenderName,
         location,
+        avgRating,
         available,
         dueDate
-      } = this.props.inventory;
+      } = this.props.singleBook;
       const availability = available ? "Available" : "Checked out";
-    function timeRemaining(dueDate) {
-      let now = moment(Date.now());
-      let end = moment(dueDate);
-      let duration = moment.duration(now.diff(end)).humanize();
-      return duration;
-    }
+      function timeRemaining(dueDate) {
+        let now = moment(Date.now());
+        let end = moment(dueDate);
+        let duration = moment.duration(now.diff(end)).humanize();
+        return duration;
+      }
       return (
         <div>
           <BookDetailsWrapper>
@@ -76,22 +81,30 @@ class SingleInventory extends Component {
               <Link to="/chatapp">
                 <Button>Send message</Button>
               </Link>
+              <Ratings rating={avgRating} widgetRatedColors="gold">
+                <Ratings.Widget widgetHoverColor="gold" />
+                <Ratings.Widget widgetHoverColor="gold" />
+                <Ratings.Widget widgetHoverColor="gold" />
+                <Ratings.Widget widgetHoverColor="gold" />
+                <Ratings.Widget widgetHoverColor="gold" />
+              </Ratings>
+              <div>Goodreads rating: {avgRating}</div>
             </div>
           </BookDetailsWrapper>
         </div>
       );
-    }}
-  }
-
-
-const mapStateToProps = state => {
-  return {
-    loading: state.isLoading,
-    inventory: state.singleInventory
+    }
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    loading: state.bookReducer.fetchingBooks,
+    singleBook: state.bookReducer.singleBook
+  };
+};
+
 export default connect(
   mapStateToProps,
-  { getSingleInventory }
-  )(SingleInventory);
+  { getSingleBook }
+)(SingleBook);

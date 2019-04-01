@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import "./signup.css";
-import backendBaseUrl from '../url'
+import backendBaseUrl from '../../url'
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
