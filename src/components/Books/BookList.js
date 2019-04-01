@@ -6,7 +6,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 
 import { connect } from "react-redux";
-import { getBooks } from "../redux/actions/bookActions.js";
+import { getBooks } from "../../redux/actions/bookActions.js";
 
 class Books extends Component {
   constructor() {

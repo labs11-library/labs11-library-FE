@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./mapview.css";
-import backendBaseUrl from '../url'
+import backendBaseUrl from '../../url'
 
 // const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 

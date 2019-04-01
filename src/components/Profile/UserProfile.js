@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { getLoggedInUser } from "../redux/actions/authActions.js";
+import { getLoggedInUser } from "../../redux/actions/authActions.js";
 
 import UpdateUserProfile from "./UpdateUserProfile";
 import UserProfileCard from "./UserProfileCard";

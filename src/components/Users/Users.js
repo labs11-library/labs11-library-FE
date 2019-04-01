@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { getUsers } from "../redux/actions/userActions.js";
+import { getUsers } from "../../redux/actions/userActions.js";
 
-import Auth from "./Auth";
+import Auth from "../Auth/Auth";
 class Users extends Component {
   componentDidMount() {
     this.props.getUsers();

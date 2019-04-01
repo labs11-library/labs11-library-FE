@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { connect } from "react-redux";
-import { getSingleInventory } from "../redux/actions/inventoryActions.js";
+import { getSingleInventory } from "../../redux/actions/inventoryActions.js";
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;

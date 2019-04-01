@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { connect } from "react-redux";
-import { getSingleCheckedOutBook } from "../redux/actions/bookActions.js";
-import ReviewForm from "./ReviewForm";
+import { getSingleCheckedOutBook } from "../../redux/actions/bookActions.js";
+import ReviewForm from "../Reviews/ReviewForm";
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;

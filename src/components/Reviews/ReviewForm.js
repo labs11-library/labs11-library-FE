@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Ratings from "react-ratings-declarative";
 
 import { connect } from "react-redux";
-import { addNewReview } from "../redux/actions/reviewActions";
+import { addNewReview } from "../../redux/actions/reviewActions";
 
 class ReviewForm extends Component {
   constructor(props) {

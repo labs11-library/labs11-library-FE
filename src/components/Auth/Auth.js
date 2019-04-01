@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import baseUrl from "../url";
+import baseUrl from "../../url";
 
 import Login from "./Login";
 // axios defaults and interceptors

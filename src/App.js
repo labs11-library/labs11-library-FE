@@ -4,22 +4,22 @@ import queryString from "query-string";
 import { withRouter } from "react-router";
 import backendBaseUrl from "./url";
 
-import BookList from "./components/BookList";
-import Users from "./components/Users";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
-import UserProfile from "./components/UserProfile";
-import NavBar from "./components/NavBar";
-import InventoryList from "./components/InventoryList";
-import CheckedOutList from "./components/CheckedOutList";
-import Mapview from "./components/Mapview";
-import ChatApp from "./components/ChatApp";
-import SingleInventory from "./components/SingleInventory";
-import SingleBook from "./components/SingleBook";
-import SingleCheckedOutBook from "./components/SingleCheckedOutBook";
+import BookList from "./components/Books/BookList";
+import Users from "./components/Users/Users";
+import Signup from "./components/Auth/Signup";
+import Login from "./components/Auth/Login";
+import UserProfile from "./components/Profile/UserProfile";
+import NavBar from "./components/Layout/NavBar";
+import InventoryList from "./components/Inventory/InventoryList";
+import CheckedOutList from "./components/CheckedOut/CheckedOutList";
+import Mapview from "./components/Map/Mapview";
+import ChatApp from "./components/Chat/ChatApp";
+import SingleInventory from "./components/Inventory/SingleInventory";
+import SingleBook from "./components/Books/SingleBook";
+import SingleCheckedOutBook from "./components/CheckedOut/SingleCheckedOutBook";
 import BookSearch from "./components/AddBook/BookSearch";
-import Sendgrid from "./components/SendGrid";
-import ReviewForm from "./components/ReviewForm";
+import Sendgrid from "./components/Email/SendGrid";
+import ReviewForm from "./components/Reviews/ReviewForm";
 
 class App extends Component {
   state = {
