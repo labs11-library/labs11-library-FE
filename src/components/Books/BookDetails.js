@@ -59,9 +59,9 @@ const BookDetails = props => {
         <p>
           Contact {lender}
         </p>
-        <Link to="/chatapp">
+        {/* <Link to="/chatapp">
           <Button>Send message</Button>
-        </Link>
+        </Link> */}
         {/* <Button onClick={() => props.viewBook(bookId)}></Button> */}
         <Link to={`/books/${bookId}`}>
           <Button>See more details</Button>

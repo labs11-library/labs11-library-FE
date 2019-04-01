@@ -7,6 +7,8 @@ import { Button } from "@progress/kendo-react-buttons";
 import { connect } from "react-redux";
 import { getSingleBook } from "../../redux/actions/bookActions.js";
 import Ratings from "react-ratings-declarative";
+import ChatApp from "../Chat/ChatApp";
+import { getLoggedInUser } from "../../redux/actions/authActions.js";
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -33,12 +35,14 @@ class SingleBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      singleBook: {}
+      singleBook: {},
+      showChat: false
     };
   }
 
   componentDidMount() {
     this.props.getSingleBook(this.props.match.params.bookId);
+    this.props.getLoggedInUser();
   }
 
   render() {
@@ -46,7 +50,7 @@ class SingleBook extends Component {
     console.log("this.props", this.props);
     if (!this.props.singleBook.image) {
       return <h1>Loading...</h1>;
-    } else {
+    } else if ( this.props.singleBook.image && this.state.showChat === false) {
       const {
         title,
         authors,
@@ -55,7 +59,8 @@ class SingleBook extends Component {
         location,
         avgRating,
         available,
-        dueDate
+        dueDate,
+        lenderId
       } = this.props.singleBook;
       const availability = available ? "Available" : "Checked out";
       function timeRemaining(dueDate) {
@@ -78,21 +83,23 @@ class SingleBook extends Component {
               <p>
                 Contact {lenderName} from {location}
               </p>
-              <Link to="/chatapp">
-                <Button>Send message</Button>
-              </Link>
-              <Ratings rating={avgRating} widgetRatedColors="gold">
+              <Button onClick={() => this.setState({showChat: true})} >Send message</Button>
+              {/* <Ratings rating={avgRating} widgetRatedColors="gold">
                 <Ratings.Widget widgetHoverColor="gold" />
                 <Ratings.Widget widgetHoverColor="gold" />
                 <Ratings.Widget widgetHoverColor="gold" />
                 <Ratings.Widget widgetHoverColor="gold" />
                 <Ratings.Widget widgetHoverColor="gold" />
               </Ratings>
-              <div>Goodreads rating: {avgRating}</div>
+              <div>Goodreads rating: {avgRating}</div> */}
             </div>
           </BookDetailsWrapper>
         </div>
       );
+    } else {
+      return (
+        <ChatApp user={this.props.loggedInUser} otherUserId={this.props.singleBook.lenderId}/>
+      )
     }
   }
 }
@@ -100,11 +107,12 @@ class SingleBook extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.bookReducer.fetchingBooks,
-    singleBook: state.bookReducer.singleBook
+    singleBook: state.bookReducer.singleBook,
+    loggedInUser: state.authReducer.loggedInUser
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getSingleBook }
+  { getSingleBook, getLoggedInUser }
 )(SingleBook);
