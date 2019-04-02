@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import * as moment from "moment";
-import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { connect } from "react-redux";
