@@ -9,7 +9,9 @@ import {
   editInventory,
   deleteInventory
 } from "../../redux/actions/inventoryActions.js";
+import { getLoggedInUser } from "../../redux/actions/authActions.js";
 
+import ChatApp from "../Chat/ChatApp";
 import UpdateInventoryForm from "./UpdateInventoryForm.js";
 import SingleInventoryDetails from "./SingleInventoryDetails.js";
 
@@ -18,13 +20,15 @@ class SingleInventory extends Component {
     super(props);
     this.state = {
       singleInventory: {},
-      updating: false
+      updating: false,
+      showChat: false
     };
   }
 
   componentDidMount() {
     const userId = localStorage.getItem("userId");
     this.props.getSingleInventory(userId, this.props.match.params.bookId);
+    this.props.getLoggedInUser();
   }
   toggleUpdate = () => {
     this.setState(prevState => {
@@ -52,7 +56,7 @@ class SingleInventory extends Component {
   render() {
     if (!this.props.singleInventory) {
       return <h1>Loading...</h1>;
-    } else if (!this.state.updating) {
+    } else if (!this.state.updating && !this.state.showChat) {
       return (
         <React.Fragment>
           <div>
@@ -62,6 +66,9 @@ class SingleInventory extends Component {
               deleteInventory={this.deleteInventory}
             />
           </div>
+          {!this.props.singleInventory && !this.props.singleInventory.available && 
+            <Button onClick={() => this.setState({showChat: true})} style={{height: "36px"}}>Send Message</Button>
+          }
           <Button onClick={this.toggleUpdate}>
             {this.state.updating ? "Cancel Update" : "Update Info"}
           </Button>
@@ -79,6 +86,10 @@ class SingleInventory extends Component {
           </Button>
         </React.Fragment>
       );
+    } else if (this.state.showChat) {
+      return (
+        <ChatApp user={this.props.loggedInUser} otherUserId={2}/> // this.props.singleInventory.borrowerId
+      )
     }
   }
 }
@@ -86,11 +97,12 @@ class SingleInventory extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.inventoryReducer.loadingInventory,
-    singleInventory: state.inventoryReducer.singleInventory
+    singleInventory: state.inventoryReducer.singleInventory,
+    loggedInUser: state.authReducer.loggedInUser
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getSingleInventory, editInventory, deleteInventory }
+  { getSingleInventory, editInventory, deleteInventory, getLoggedInUser }
 )(SingleInventory);

@@ -59,8 +59,7 @@ class SingleBook extends Component {
         location,
         avgRating,
         available,
-        dueDate,
-        lenderId
+        dueDate
       } = this.props.singleBook;
       const availability = available ? "Available" : "Checked out";
       function timeRemaining(dueDate) {
