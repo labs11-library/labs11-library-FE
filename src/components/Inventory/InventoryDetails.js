@@ -33,7 +33,6 @@ const BookDetails = props => {
     title,
     authors,
     image,
-    lender,
     available,
     dueDate,
     description
@@ -60,12 +59,6 @@ const BookDetails = props => {
             ? "No description provided"
             : `Description: ${description}`}
         </p>
-        <p>Contact {lender}</p>
-        <Link to="/chatapp">
-          <Button>Send message</Button>
-        </Link>
-        {/* <Button onClick={() => props.viewBook(bookId)}></Button> */}
-        {/* <Link to={`/books/${bookId}`}> */}
         <Link to={`/users/${userId}/inventory/${bookId}`}>
           <Button>See more details</Button>
         </Link>

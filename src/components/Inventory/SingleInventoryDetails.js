@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 import { Button } from "@progress/kendo-react-buttons";
+
 const Availability = styled.p`
   color: ${props => (props.available ? "green" : "red")};
 `;
@@ -13,8 +14,6 @@ const SingleInventoryDetails = props => {
     title,
     authors,
     image,
-    lenderName,
-    location,
     available,
     dueDate,
     description
@@ -22,6 +21,9 @@ const SingleInventoryDetails = props => {
   const availability = available ? "Available" : "Checked out";
   return (
     <BookDetailsWrapper>
+      <Link style={{position: "absolute", left: "0"}} to="/inventory">
+        <Button>← Back</Button>
+      </Link>
       <BookImgWrapper>
         <BookImg alt={title} src={image} />
       </BookImgWrapper>
@@ -36,9 +38,6 @@ const SingleInventoryDetails = props => {
         </p>
         {!available && <p>Time until due: {props.timeRemaining(dueDate)}</p>}
       </div>
-      <Link to="/inventory">
-        <Button>Back to Inventory</Button>
-      </Link>
       <Link>
         <Button onClick={() => props.deleteInventory(userId, bookId)}>
           Remove from Inventory
