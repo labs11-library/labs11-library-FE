@@ -1,6 +1,6 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import backendBaseUrl from '../../url'
+import baseUrl from "../../url";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -44,10 +44,10 @@ const Login = () => {
           <Link component={RouterLink} to="/signup">
             Sign up
           </Link>
-          <a href={`${backendBaseUrl}/auth/google`}>
+          <a href={`${baseUrl}/auth/google`}>
             <button class="loginBtn loginBtn--google">Login with Google</button>
           </a>
-          <a href={`${backendBaseUrl}/auth/facebook`}>
+          <a href={`${baseUrl}/auth/facebook`}>
             <button class="loginBtn loginBtn--facebook">
               Login with Facebook
             </button>

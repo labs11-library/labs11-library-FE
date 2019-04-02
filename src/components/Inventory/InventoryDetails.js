@@ -27,6 +27,7 @@ const Availability = styled.p`
 `;
 
 const BookDetails = props => {
+  const userId = localStorage.getItem("userId");
   const {
     bookId,
     title,
@@ -44,7 +45,6 @@ const BookDetails = props => {
     let duration = moment.duration(now.diff(end)).humanize();
     return duration;
   }
-  console.log(props.book)
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -55,11 +55,18 @@ const BookDetails = props => {
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
         {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
-        <div>Description: {description}</div>
         <p>
-          Contact {lender}
+          {description === ""
+            ? "No description provided"
+            : `Description: ${description}`}
         </p>
-        <Link to={`/books/${bookId}`}>
+        <p>Contact {lender}</p>
+        <Link to="/chatapp">
+          <Button>Send message</Button>
+        </Link>
+        {/* <Button onClick={() => props.viewBook(bookId)}></Button> */}
+        {/* <Link to={`/books/${bookId}`}> */}
+        <Link to={`/users/${userId}/inventory/${bookId}`}>
           <Button>See more details</Button>
         </Link>
       </div>

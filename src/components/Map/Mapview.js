@@ -95,8 +95,8 @@ class Mapview extends Component {
     console.log(this.state);
     axios
       .put(`${baseUrl}/users/${userId}`, {
-        latitude: this.state.latitude,
-        longitude: this.state.longitude
+        latitude: this.state.location.lat,
+        longitude: this.state.location.lng
       })
       .then(res => {
         console.log(res);

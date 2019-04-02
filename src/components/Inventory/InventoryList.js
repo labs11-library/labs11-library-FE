@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-// import books from "../data";
-import BookDetails from "../Books/BookDetails";
 
 import { connect } from "react-redux";
 import { getAllInventory } from "../../redux/actions/inventoryActions.js";
+import InventoryDetails from "./InventoryDetails.js";
 class Inventory extends Component {
   constructor() {
     super();
@@ -54,7 +53,13 @@ class Inventory extends Component {
         />
         <div>
           {this.searchBooks().map(book => {
-            return <BookDetails book={book} viewBook={this.viewBook} />;
+            return (
+              <InventoryDetails
+                book={book}
+                viewBook={this.viewBook}
+                key={book.bookId}
+              />
+            );
           })}
         </div>
       </div>

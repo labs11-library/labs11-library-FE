@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Chat from "twilio-chat";
 import { Chat as ChatUI } from "@progress/kendo-react-conversational-ui";
-
+import { connect } from "react-redux";
+import { getLoggedInUser } from "../../redux/actions/authActions.js";
 class ChatApp extends Component {
   constructor(props) {
     super(props);
@@ -12,9 +13,9 @@ class ChatApp extends Component {
     };
 
     this.user = {
-      id: props.username,
-      username: props.username
-    };
+      id: props.user.userId,
+      username: props.user.firstName
+    }
 
     this.setupChatClient = this.setupChatClient.bind(this);
     this.messagesLoaded = this.messagesLoaded.bind(this);
@@ -24,25 +25,33 @@ class ChatApp extends Component {
   }
 
   componentDidMount() {
-    fetch("https://book-maps.herokuapp.com/chat/token", {
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      method: "POST",
-      body: `identity=${encodeURIComponent(this.props.username)}`
-    })
-      .then(res => res.json())
-      .then(data => Chat.create(data.token))
-      .then(this.setupChatClient)
-      .catch(this.handleError);
+    this.props.getLoggedInUser();
+      fetch("https://book-maps.herokuapp.com/chat/token", {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        method: "POST",
+        body: `identity=${encodeURIComponent(this.user.username)}`
+      })
+        .then(res => res.json())
+        .then(data => Chat.create(data.token))
+        .then(this.setupChatClient)
+        .catch(this.handleError);
+  }
+  
+  getChannelName = () => {
+    const userOne = this.props.user.userId > this.props.otherUserId ? this.props.user.userId : this.props.otherUserId
+    const userTwo = this.props.user.userId > this.props.otherUserId ? this.props.otherUserId : this.props.user.userId
+    console.log(`${userOne}-${userTwo}`)
+    return `${userOne}-${userTwo}`
   }
 
   setupChatClient(client) {
     this.client = client;
     this.client
-      .getChannelByUniqueName("general")
+      .getChannelByUniqueName(this.getChannelName())
       .then(channel => channel)
       .catch(error => {
         if (error.body.code === 50300) {
-          return this.client.createChannel({ uniqueName: "general" });
+          return this.client.createChannel({ uniqueName: this.getChannelName() });
         } else {
           this.handleError(error);
         }
@@ -68,6 +77,7 @@ class ChatApp extends Component {
   }
 
   twilioMessageToKendoMessage(message) {
+    console.log("twilioMessageToKendoMessage", message)
     return {
       text: message.body,
       author: { id: message.author, name: message.author },
@@ -99,7 +109,7 @@ class ChatApp extends Component {
   }
 
   render() {
-    console.log(this.state.error);
+    console.log("loggedinuser", this.props.user)
     if (this.state.error) {
       return <p>{this.state.error}</p>;
     } else if (this.state.isLoading) {
@@ -116,4 +126,11 @@ class ChatApp extends Component {
   }
 }
 
-export default ChatApp;
+const mapStateToProps = state => ({
+  loggedInUser: state.authReducer.loggedInUser
+});
+
+export default connect(
+  mapStateToProps,
+  { getLoggedInUser }
+)(ChatApp);
