@@ -20,6 +20,7 @@ import SingleCheckedOutBook from "./components/CheckedOut/SingleCheckedOutBook";
 import BookSearch from "./components/AddBook/BookSearch";
 import Sendgrid from "./components/Email/SendGrid";
 import ReviewForm from "./components/Reviews/ReviewForm";
+import MyLibrary from "./components/Profile/MyLibrary";
 
 class App extends Component {
   state = {
@@ -57,9 +58,12 @@ class App extends Component {
         <Route exact path="/users" component={Users} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/profile" component={UserProfile} />
-        <Route exact path="/inventory" component={InventoryList} />
-        <Route exact path="/checkedout" component={CheckedOutList} />
+        {/* <Route exact path="/profile" component={UserProfile} /> */}
+        <Route path="/library" component={MyLibrary} />
+        {/* <Route exact path="/profile/inventory" component={UserProfile} /> */}
+        {/* <Route exact path="/inventory" component={InventoryList} /> */}
+        {/* <Route exact path="/checkedout" component={CheckedOutList} /> */}
+        {/* <Route exact path="/profile/checkouts" component={CheckedOutList} /> */}
         <Route exact path="/mapview" component={Mapview} />
         <Route exact path="/review-form" component={ReviewForm} />
         <Route
@@ -72,7 +76,7 @@ class App extends Component {
           render={props => <SingleInventoryWrapper {...props} />}
         />
         <Route exact path="/sendgrid" component={Sendgrid} />
-        <Route exact path="/add-book" component={BookSearch} />
+        {/* <Route exact path="/add-book" component={BookSearch} /> */}
         <Route
           path="/books/:bookId"
           render={props => <SingleBook {...props} />}
