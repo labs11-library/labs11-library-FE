@@ -7,7 +7,9 @@ const Availability = styled.p`
   color: ${props => (props.available ? "green" : "red")};
 `;
 const SingleInventoryDetails = props => {
+  const userId = localStorage.getItem("userId");
   const {
+    bookId,
     title,
     authors,
     image,
@@ -36,6 +38,11 @@ const SingleInventoryDetails = props => {
       </div>
       <Link to="/inventory">
         <Button>Back to Inventory</Button>
+      </Link>
+      <Link>
+        <Button onClick={() => props.deleteInventory(userId, bookId)}>
+          Remove from Inventory
+        </Button>
       </Link>
     </BookDetailsWrapper>
   );

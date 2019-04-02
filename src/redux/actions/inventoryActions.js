@@ -12,6 +12,9 @@ export const GET_SINGLE_INVENTORY_SUCCESS = "GET_SINGLE_INVENTORY_SUCCESS";
 export const EDITING_INVENTORY = "EDITING_INVENTORY";
 export const EDIT_INVENTORY_SUCCESS = "EDIT_INVENTORY_SUCCESS";
 
+export const DELETING_INVENTORY = "DELETING_INVENTORY";
+export const DELETE_INVENTORY_SUCCESS = "DELETE_INVENTORY_SUCCESS";
+
 export const getAllInventory = () => dispatch => {
   let userId = localStorage.getItem("userId");
   dispatch({ type: GETTING_USERS_INVENTORY });
@@ -49,6 +52,21 @@ export const editInventory = (userId, bookId, state) => dispatch => {
       dispatch({
         type: GET_USERS_INVENTORY_SUCCESS,
         payload: res.data.editedBook
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+export const deleteInventory = (userId, bookId) => dispatch => {
+  dispatch({ type: DELETING_INVENTORY });
+  axios
+    .delete(`${baseUrl}/users/${userId}/inventory/${bookId}`)
+    .then(res => {
+      dispatch({
+        type: DELETE_INVENTORY_SUCCESS,
+        payload: res.data.message
       });
     })
     .catch(err => {
