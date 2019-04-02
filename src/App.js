@@ -20,6 +20,7 @@ import SingleCheckedOutBook from "./components/CheckedOut/SingleCheckedOutBook";
 import BookSearch from "./components/AddBook/BookSearch";
 import Sendgrid from "./components/Email/SendGrid";
 import ReviewForm from "./components/Reviews/ReviewForm";
+import Payment from "./components/Stripe/Payment";
 
 class App extends Component {
   state = {
@@ -62,6 +63,7 @@ class App extends Component {
         <Route exact path="/checkedout" component={CheckedOutList} />
         <Route exact path="/mapview" component={Mapview} />
         <Route exact path="/review-form" component={ReviewForm} />
+        <Route exact path="/payment" component={Payment} />
         <Route
           exact
           path="/users/:userId/checkedOut/:checkedOutId"
