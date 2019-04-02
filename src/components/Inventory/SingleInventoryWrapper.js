@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { connect } from "react-redux";
-import { getSingleInventory } from "../../redux/actions/inventoryActions.js";
+import {
+  getSingleInventory,
+  editInventory
+} from "../../redux/actions/inventoryActions.js";
 
 import UpdateInventoryForm from "./UpdateInventoryForm.js";
 import SingleInventoryDetails from "./SingleInventoryDetails.js";
@@ -22,13 +25,18 @@ class SingleInventory extends Component {
     const userId = localStorage.getItem("userId");
     this.props.getSingleInventory(userId, this.props.match.params.bookId);
   }
-  toggleUpdate = e => {
-    e.preventDefault();
+  toggleUpdate = () => {
     this.setState(prevState => {
       return {
         updating: !prevState.updating
       };
     });
+  };
+  editInventory = state => {
+    const userId = localStorage.getItem("userId");
+    const { bookId } = this.props.singleInventory;
+    this.props.editInventory(userId, bookId, state);
+    this.toggleUpdate();
   };
   timeRemaining = dueDate => {
     let now = moment(Date.now());
@@ -56,7 +64,10 @@ class SingleInventory extends Component {
     } else if (this.state.updating) {
       return (
         <React.Fragment>
-          <UpdateInventoryForm singleInventory={this.props.singleInventory} />
+          <UpdateInventoryForm
+            singleInventory={this.props.singleInventory}
+            editInventory={this.editInventory}
+          />
           <Button onClick={this.toggleUpdate}>
             {this.state.updating ? "Cancel Update" : "Update Info"}
           </Button>
@@ -75,5 +86,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getSingleInventory }
+  { getSingleInventory, editInventory }
 )(SingleInventory);
