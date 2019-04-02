@@ -6,7 +6,8 @@ import { Button } from "@progress/kendo-react-buttons";
 import { connect } from "react-redux";
 import {
   getSingleInventory,
-  editInventory
+  editInventory,
+  deleteInventory
 } from "../../redux/actions/inventoryActions.js";
 
 import UpdateInventoryForm from "./UpdateInventoryForm.js";
@@ -38,6 +39,10 @@ class SingleInventory extends Component {
     this.props.editInventory(userId, bookId, state);
     this.toggleUpdate();
   };
+  deleteInventory = (userId, bookId) => {
+    this.props.deleteInventory(userId, bookId);
+    this.props.history.push("/inventory");
+  };
   timeRemaining = dueDate => {
     let now = moment(Date.now());
     let end = moment(dueDate);
@@ -54,6 +59,7 @@ class SingleInventory extends Component {
             <SingleInventoryDetails
               singleInventory={this.props.singleInventory}
               timeRemaining={this.timeRemaining}
+              deleteInventory={this.deleteInventory}
             />
           </div>
           <Button onClick={this.toggleUpdate}>
@@ -86,5 +92,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getSingleInventory, editInventory }
+  { getSingleInventory, editInventory, deleteInventory }
 )(SingleInventory);
