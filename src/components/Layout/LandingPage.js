@@ -2,7 +2,7 @@ import React from 'react';
 
 const LandingPage = () => {
     return ( 
-        <div style={{height: "100%", display: "flex", justifyContent: "center", alignItems: "center", textTransform: "uppercase", fontWeight: "bold", fontSize: "24px"}}>
+        <div style={{height: "90vh", display: "flex", justifyContent: "center", alignItems: "center", textTransform: "uppercase", fontWeight: "bold", fontSize: "48px"}}>
             <div>Book maps{" "}
                 <span role="img" aria-label="books">
                     📚
