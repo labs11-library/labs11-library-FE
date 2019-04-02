@@ -14,7 +14,7 @@ import InventoryList from "./components/Inventory/InventoryList";
 import CheckedOutList from "./components/CheckedOut/CheckedOutList";
 import Mapview from "./components/Map/Mapview";
 import ChatApp from "./components/Chat/ChatApp";
-import SingleInventory from "./components/Inventory/SingleInventory";
+import SingleInventoryWrapper from "./components/Inventory/SingleInventoryWrapper.js";
 import SingleBook from "./components/Books/SingleBook";
 import SingleCheckedOutBook from "./components/CheckedOut/SingleCheckedOutBook";
 import BookSearch from "./components/AddBook/BookSearch";
@@ -69,7 +69,7 @@ class App extends Component {
         />
         <Route
           path="/users/:userId/inventory/:bookId"
-          render={props => <SingleInventory {...props} />}
+          render={props => <SingleInventoryWrapper {...props} />}
         />
         <Route exact path="/sendgrid" component={Sendgrid} />
         <Route exact path="/add-book" component={BookSearch} />
