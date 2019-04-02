@@ -7,8 +7,8 @@ export const GET_CHECKOUT_REQUESTS_SUCCESS = "GET_CHECKOUT_REQUESTS_SUCCESS";
 export const ADDING_CHECKOUT_REQUEST = "ADDING_CHECKOUT_REQUEST";
 export const ADD_CHECKOUT_REQUEST_SUCCESS = "ADD_CHECKOUT_REQUEST_SUCCESS";
 
-export const getCheckoutRequests = () => dispatch => {
-  const userId = localStorage.getItem("userId");
+export const getCheckoutRequests = userId => dispatch => {
+  // const userId = localStorage.getItem("userId");
   dispatch({ type: GETTING_CHECKOUT_REQUESTS });
   axios
     .get(`${baseUrl}/users/${userId}/checkoutRequest`)

@@ -23,17 +23,16 @@ const BookImg = styled.img`
 
 const RequestDetails = props => {
   const {
-    bookId,
+    checkoutRequestId,
     title,
     authors,
     image,
-    lenderId,
     description,
-    lender,
+    // lender,
     borrower
-  } = props.book;
-  const lenderBorrower = lenderId === localStorage.getItem("userId") ? "Borrower" : "Lender"
-  const lenderBorrowerName = lenderId === localStorage.getItem("userId") ? {borrower} : {lender}
+  } = props.request;
+//   const lenderBorrower = lenderId === localStorage.getItem("userId") ? "Borrower" : "Lender"
+//   const lenderBorrowerName = lenderId === localStorage.getItem("userId") ? {borrower} : {lender}
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -43,11 +42,12 @@ const RequestDetails = props => {
         <h2>{title}</h2>
         <p>by {authors}</p>
         <div>Description: {description}</div>
-        <div>{lenderBorrower}: {lenderBorrowerName}</div>
-        <Link to={`/library/requests/${bookId}`}>
+        <div>Borrower: {borrower}</div>
+        <Link to={`/library/requests/${checkoutRequestId}`}>
           <Button>Accept request</Button>
         </Link>
-        <Button>Decline request</Button>
+        {/* The button below will DELETE by checkoutRequestId  */}
+        <Button>Decline request</Button> 
       </div>
     </BookDetailsWrapper>
   );

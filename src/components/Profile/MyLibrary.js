@@ -35,7 +35,7 @@ const MyLibrary = props => {
         />
         <Route
           exact
-          path="/library/my-info"
+          path="/library/requests"
           render={props => <RequestList {...props} />}
         />
       </React.Fragment>

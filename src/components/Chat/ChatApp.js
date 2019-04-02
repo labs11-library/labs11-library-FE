@@ -36,7 +36,9 @@ class ChatApp extends Component {
         .then(this.setupChatClient)
         .catch(this.handleError);
   }
-  
+  componentWillUnmount() {
+    return this.props.exitChat();
+  }
   getChannelName = () => {
     const userOne = this.props.user.userId > this.props.otherUserId ? this.props.user.userId : this.props.otherUserId
     const userTwo = this.props.user.userId > this.props.otherUserId ? this.props.otherUserId : this.props.user.userId
