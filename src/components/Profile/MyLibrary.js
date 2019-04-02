@@ -6,6 +6,8 @@ import ProfileNavBar from "./ProfileNavBar.js";
 import CheckedOutList from "../CheckedOut/CheckedOutList.js";
 import BookSearch from "../AddBook/BookSearch.js";
 import UserProfile from "./UserProfile.js";
+import RequestList from "../Requests/RequestList.js";
+
 const MyLibrary = props => {
   return (
     <div>
@@ -30,6 +32,11 @@ const MyLibrary = props => {
           exact
           path="/library/my-info"
           render={props => <UserProfile {...props} />}
+        />
+        <Route
+          exact
+          path="/library/my-info"
+          render={props => <RequestList {...props} />}
         />
       </React.Fragment>
     </div>
