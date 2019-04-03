@@ -10,15 +10,7 @@ class Requests extends Component {
       checkoutRequests: []
     };
   }
-
-//   filteredBooks = () => {
-//     const { filter } = this.state;
-//     if (filter === "all") {
-//       return this.searchBooks();
-//     } else if (filter === "available") {
-//       return this.searchBooks().filter(book => book.available === true);
-//     }
-//   };
+  
   componentWillReceiveProps(newProps) {
     if (newProps.checkoutRequests !== this.state.checkoutRequests) {
       this.setState({
@@ -32,6 +24,10 @@ class Requests extends Component {
     // this.setState({
     //   checkoutRequests: this.props.checkoutRequests
     // })
+  }
+
+  filterRequests = () => {
+    return this.props.checkoutRequests.filter(request => request.checkoutAccepted === false)
   }
 
   render() {
@@ -68,4 +64,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getCheckoutRequests }
-)(Requests);
+)(Requests)

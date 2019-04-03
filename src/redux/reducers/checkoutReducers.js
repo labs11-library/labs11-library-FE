@@ -4,13 +4,19 @@ import {
   ADDING_CHECKOUT_REQUEST,
   ADD_CHECKOUT_REQUEST_SUCCESS,
   GETTING_SINGLE_REQUEST,
-  GET_SINGLE_REQUEST_SUCCESS
+  GET_SINGLE_REQUEST_SUCCESS,
+  ADDING_CHECKOUT,
+  ADD_CHECKOUT_SUCCESS
+  
 } from "../actions/checkoutActions.js";
 
 const initialState = {
   checkoutRequests: [],
   singleCheckoutRequest: {},
-  loadingRequests: false
+  loadingRequests: false,
+  checkouts: [],
+  singleCheckout: {},
+  loadingCheckouts: false
 };
 
 export default function checkoutReducer(state = initialState, action) {
@@ -47,6 +53,17 @@ export default function checkoutReducer(state = initialState, action) {
         ...state,
         loadingRequests: false
       };
+      ;
+    case ADDING_CHECKOUT:
+      return {
+        ...state,
+        loadingCheckouts: true
+      };
+    case ADD_CHECKOUT_SUCCESS:
+      return {
+        ...state,
+        loadingCheckouts: false
+      }
     default:
       return state;
   }
