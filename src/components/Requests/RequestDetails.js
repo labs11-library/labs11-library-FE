@@ -1,8 +1,10 @@
-import React from "react";
+import React, {Component} from "react";
 import styled from "styled-components";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import baseUrl from '../../url';
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -21,19 +23,33 @@ const BookImg = styled.img`
   height: 100%;
 `;
 
-const RequestDetails = props => {
-  const {
-    checkoutRequestId,
-    title,
-    authors,
-    image,
-    description,
-    // lender,
-    borrower
-  } = props.request;
-//   const lenderBorrower = lenderId === localStorage.getItem("userId") ? "Borrower" : "Lender"
-//   const lenderBorrowerName = lenderId === localStorage.getItem("userId") ? {borrower} : {lender}
-  return (
+class RequestDetails extends Component {
+
+
+  deleteRequest = () => {
+    const { lenderId, checkoutRequestId } = this.props.request
+    axios
+    .delete(`${baseUrl}/users/${lenderId}/checkoutrequest/${checkoutRequestId}`)
+    .then(res => {
+      window.location.reload()
+      return res.data
+    })
+    .catch(err => console.log(err))
+  }
+
+  render() { 
+    const {
+      checkoutRequestId,
+      title,
+      authors,
+      image,
+      description,
+      // lender,
+      borrower
+    } = this.props.request;
+    //   const lenderBorrower = lenderId === localStorage.getItem("userId") ? "Borrower" : "Lender"
+    //   const lenderBorrowerName = lenderId === localStorage.getItem("userId") ? {borrower} : {lender}
+    return (
     <BookDetailsWrapper>
       <BookImgWrapper>
         <BookImg alt={title} src={image} />
@@ -47,9 +63,10 @@ const RequestDetails = props => {
           <Button>Coordinate book exchange</Button>
         </Link>
         {/* The button below will DELETE by checkoutRequestId  */}
-        <Button>Decline request</Button> 
+        <Button onClick={this.deleteRequest}>Delete request</Button> 
       </div>
     </BookDetailsWrapper>
   );
-};
-export default RequestDetails;
+}
+  };
+export default RequestDetails
