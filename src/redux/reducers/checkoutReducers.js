@@ -8,7 +8,9 @@ import {
   ADDING_CHECKOUT,
   ADD_CHECKOUT_SUCCESS,
   GETTING_CHECKOUTS,
-  GET_CHECKOUTS_SUCCESS
+  GET_CHECKOUTS_SUCCESS,
+  GETTING_SINGLE_CHECKOUT,
+  GET_SINGLE_CHECKOUT_SUCCESS
 } from "../actions/checkoutActions.js";
 
 const initialState = {
@@ -72,7 +74,19 @@ export default function checkoutReducer(state = initialState, action) {
     case GET_CHECKOUTS_SUCCESS:
       return {
         ...state,
+        loadingCheckouts: false,
         checkouts: action.payload
+      };
+    case GETTING_SINGLE_CHECKOUT:
+      return {
+        ...state,
+        loadingCheckouts: true
+      };
+    case GET_SINGLE_CHECKOUT_SUCCESS:
+      return {
+        ...state,
+        loadingCheckouts: false,
+        singleCheckout: action.payload
       };
     default:
       return state;
