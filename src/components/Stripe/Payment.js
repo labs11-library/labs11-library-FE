@@ -2,24 +2,34 @@ import React from "react";
 import { connect } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import { createCustomer } from "../../redux/actions/userActions";
+import axios from "axios";
 
 class Payment extends React.Component {
-  state = {
-    token: {}
-  };
+  // state = {
+  //   token: {}
+  // };
 
-  onToken = (token, addresses) => {
+  onToken = token => {
+    this.addCustomer(token);
     // TODO: Send the token information and any other
     // relevant information to your payment process
     // server, wait for the response, and update the UI
     // accordingly. How this is done is up to you. Using
     // XHR, fetch, or a GraphQL mutation is typical.
     // this.props.createCharge();
-    // this.props.createCustomer(this.state.token);
+    // this.props.createCustomer(token);
     console.log(token);
   };
 
+  addCustomer = body => {
+    axios
+      .post(`http://localhost:9001/payment/create_customer`, body)
+      .then(res => console.log("Success"))
+      .catch(err => console.log(err));
+  };
+
   render() {
+    // const amount = this.props;
     return (
       <StripeCheckout
         // amount={this.props}
