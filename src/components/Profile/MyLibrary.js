@@ -8,6 +8,7 @@ import BookSearch from "../AddBook/BookSearch.js";
 import UserProfile from "./UserProfile.js";
 import RequestList from "../Requests/RequestList.js";
 import SingleRequest from "../Requests/SingleRequest.js";
+import SingleCheckedOutBook from "../CheckedOut/SingleCheckedOutBook.js";
 
 const MyLibrary = props => {
   return (
@@ -28,6 +29,11 @@ const MyLibrary = props => {
           exact
           path="/library/checkouts"
           render={props => <CheckedOutList {...props} />}
+        />
+        <Route
+          exact
+          path="/library/checkout/:checkoutId"
+          render={props => <SingleCheckedOutBook {...props} />}
         />
         <Route
           exact
