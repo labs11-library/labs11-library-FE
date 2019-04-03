@@ -16,6 +16,9 @@ export const ADD_CHECKOUT_SUCCESS = "ADD_CHECKOUT_SUCCESS";
 export const GETTING_CHECKOUTS = "GETTING_CHECKOUTS";
 export const GET_CHECKOUTS_SUCCESS = "GET_CHECKOUTS_SUCCESS";
 
+export const GETTING_SINGLE_CHECKOUT = "GETTING_SINGLE_CHECKOUT";
+export const GET_SINGLE_CHECKOUT_SUCCESS = "GET_SINGLE_CHECKOUT_SUCCESS";
+
 export const getCheckoutRequests = userId => dispatch => {
   dispatch({ type: GETTING_CHECKOUT_REQUESTS });
   axios
@@ -91,6 +94,21 @@ export const getCheckouts = userId => dispatch => {
     .then(res => {
       dispatch({
         type: GET_CHECKOUTS_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+export const getSingleCheckout = (userId, checkoutId) => dispatch => {
+  dispatch({ type: GETTING_SINGLE_CHECKOUT });
+  axios
+    .get(`${baseUrl}/users/${userId}/checkout/${checkoutId}`)
+    .then(res => {
+      dispatch({
+        type: GET_SINGLE_CHECKOUT_SUCCESS,
         payload: res.data
       });
     })
