@@ -26,18 +26,38 @@ export const CREATE_CUSTOMER_START = "CREATE_CUSTOMER_START";
 export const CREATE_CUSTOMER_SUCCESS = "CREATE_CUSTOMER_SUCCESS";
 export const CREATE_CUSTOMER_FAILURE = "CREATE_CUSTOMER_FAILURE";
 
-export const createCustomer = () => dispatch => {
+// export const CREATE_CHARGE_START = "CREATE_CHARGE_START";
+// export const CREATE_CHARGE_SUCCESS = "CREATE_CHARGE_SUCCESS";
+
+// export const createCharge = () => dispatch => {
+//   dispatch({ type: CREATE_CHARGE_START });
+//   axios
+//     .post(`${baseUrl}/payment/charges`)
+//     .then(res => {
+//       dispatch({
+//         type: CREATE_CHARGE_SUCCESS,
+//         payload: res.data
+//       });
+//     })
+//     .then(() => {
+//       dispatch(getLoggedInUser());
+//     })
+//     .catch(err => console.log(err));
+// };
+
+export const createCustomer = token => dispatch => {
   dispatch({ type: CREATE_CUSTOMER_START });
   axios
-    .post(`${baseUrl}/payment/create_customer`)
+    .post(`${baseUrl}/payment/create_customer`, token)
     .then(res => {
       dispatch({
-        type: CREATE_CUSTOMER_SUCCESS,
-        payload: res.data
+        type: CREATE_CUSTOMER_SUCCESS
+        // payload: res.data
+        // console.log(payload);
       });
     })
-    .then(() => {
-      dispatch(getLoggedInUser());
-    })
+    // .then(() => {
+    //   dispatch(getLoggedInUser());
+    // })
     .catch(err => console.log(err));
 };

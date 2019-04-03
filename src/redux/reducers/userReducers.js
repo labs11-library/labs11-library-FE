@@ -4,6 +4,8 @@ import {
   CREATE_CUSTOMER_START,
   CREATE_CUSTOMER_SUCCESS,
   CREATE_CUSTOMER_FAILURE
+  // CREATE_CHARGE_START,
+  // CREATE_CHARGE_SUCCESS
 } from "../actions/userActions.js";
 
 const initialState = {
@@ -42,6 +44,17 @@ export default function userReducer(state = initialState, action) {
         ...state,
         isCreatingCustomer: false
       };
+    // case CREATE_CHARGE_START:
+    //   return {
+    //     ...state,
+    //     isCreatingCharge: true
+    //   };
+    // case CREATE_CHARGE_SUCCESS:
+    //   console.log("Charge Created!");
+    //   return {
+    //     ...state,
+    //     isCreatingCharge: false
+    //   };
     default:
       return state;
   }
