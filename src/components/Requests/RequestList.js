@@ -21,9 +21,6 @@ class Requests extends Component {
   componentDidMount() {
     const userId = localStorage.getItem("userId");
     this.props.getCheckoutRequests(userId);
-    // this.setState({
-    //   checkoutRequests: this.props.checkoutRequests
-    // })
   }
 
   filterRequests = () => {
@@ -35,20 +32,18 @@ class Requests extends Component {
   filterIncomingRequests = () => {
     let userId = localStorage.getItem("userId");
     return this.props.checkoutRequests.filter(
-      request => request.lenderId === userId
+      request => request.lenderId.toString() === userId
     );
   };
 
   filterOutgoingRequests = () => {
     let userId = localStorage.getItem("userId");
     return this.props.checkoutRequests.filter(
-      request => request.lenderId !== userId
+      request => request.borrowerId.toString() === userId
     );
   };
 
   render() {
-    console.log("/books this.props", this.props);
-    console.log("/books this.state", this.state);
     if (this.props.loadingRequests) {
       return <h1>Loading...</h1>;
     } else if (this.props.checkoutRequests.length === 0) {
@@ -56,9 +51,20 @@ class Requests extends Component {
     } else if (this.props.checkoutRequests) {
       return (
         <div>
-          <h1>Pending checkouts</h1>
+          <h1>Incoming Requests</h1>
           <div>
-            {this.props.checkoutRequests.map(request => {
+            {this.filterIncomingRequests().map(request => {
+              return (
+                <RequestDetails
+                  key={request.checkoutRequestId}
+                  request={request}
+                />
+              );
+            })}
+          </div>
+          <h1>Outbound Requests</h1>
+          <div>
+            {this.filterOutgoingRequests().map(request => {
               return (
                 <RequestDetails
                   key={request.checkoutRequestId}
