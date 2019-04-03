@@ -8,7 +8,7 @@ import { getSingleBook } from "../../redux/actions/bookActions.js";
 import Ratings from "react-ratings-declarative";
 import ChatApp from "../Chat/ChatApp";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
-
+import { addCheckoutRequest } from '../../redux/actions/checkoutActions.js'
 const BookDetailsWrapper = styled.div`
   width: 60vw;
   border-bottom: 2px solid grey;
@@ -43,30 +43,55 @@ class SingleBook extends Component {
     this.props.getSingleBook(this.props.match.params.bookId);
     this.props.getLoggedInUser();
   }
-
+  // componentWillUnmount() {
+  //   this.setState({
+  //     showChat: false
+  //   })
+  // }
+  exitChat = () => {
+    this.setState({
+      showChat: false
+    })
+  }
+  requestCheckout = (bookId, lenderId) => {
+    this.props.addCheckoutRequest(bookId, lenderId);
+    console.log("I'm being invoked")
+    this.setState({
+      showChat: true
+    })
+  }
   render() {
-    console.log("this.state", this.state);
-    console.log("this.props", this.props);
+    // console.log("this.state", this.state);
+    // console.log("this.props", this.props);
+    console.log("this.state.showChat", this.state.showChat)
     if (!this.props.singleBook.image) {
       return <h1>Loading...</h1>;
     } else if ( this.props.singleBook.image && this.state.showChat === false) {
       const {
+        bookId,
+        lenderId,
         title,
         authors,
         image,
-        lenderName,
-        location,
+        lender,
         avgRating,
         available,
-        dueDate
+        // dueDate,
+        description,
+        checkoutDate
       } = this.props.singleBook;
       const availability = available ? "Available" : "Checked out";
-      function timeRemaining(dueDate) {
-        let now = moment(Date.now());
-        let end = moment(dueDate);
-        let duration = moment.duration(now.diff(end)).humanize();
-        return duration;
-      }
+      // function timeRemaining(dueDate) {
+      //   let now = moment(Date.now());
+      //   let end = moment(dueDate);
+      //   let duration = moment.duration(now.diff(end)).humanize();
+      //   return duration;
+      // }
+      const threeWeeks = moment(checkoutDate, "YYYY-MM-DD").add(21, "days");
+      const dueDate = moment
+        .utc(threeWeeks)
+        .local()
+        .format("dddd, MMMM Do");
       return (
         <div>
           <BookDetailsWrapper>
@@ -77,11 +102,19 @@ class SingleBook extends Component {
               <h2>{title}</h2>
               <p>by {authors}</p>
               <Availability available={available}>{availability}</Availability>
-              {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
+              {/* {!available && <p>Time until due: {timeRemaining(dueDate)}</p>} */}
+              {!available && checkoutDate && <p>Date due: {dueDate}</p>}{" "}
               <p>
-                Contact {lenderName} from {location}
+                {description === ""
+                  ? "No description provided"
+                  : `Description: ${description}`}
+              </p>
+              <p>
+                Contact {lender}
               </p>
               <Button onClick={() => this.setState({showChat: true})} >Send message</Button>
+              {/* <Button onClick={() => this.setState({showChat: true})} >Request checkout</Button> */}
+              <Button onClick={() => this.requestCheckout(bookId, lenderId)} >Request checkout</Button>
               {
                 avgRating &&
                 <div>
@@ -101,7 +134,10 @@ class SingleBook extends Component {
       );
     } else {
       return (
-        <ChatApp user={this.props.loggedInUser} otherUserId={this.props.singleBook.lenderId}/>
+        <div>
+          <ChatApp user={this.props.loggedInUser} otherUserId={this.props.singleBook.lenderId} exitChat={this.exitChat}/>
+          <Button onClick={() => this.setState({showChat: false})} >Go back</Button>
+        </div>
       )
     }
   }
@@ -117,5 +153,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getSingleBook, getLoggedInUser }
+  { getSingleBook, getLoggedInUser, addCheckoutRequest }
 )(SingleBook);

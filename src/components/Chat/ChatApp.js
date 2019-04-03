@@ -29,14 +29,13 @@ class ChatApp extends Component {
       fetch("https://book-maps.herokuapp.com/chat/token", {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         method: "POST",
-        body: `identity=${encodeURIComponent(this.user.username)}`
+        body: `identity=${encodeURIComponent(this.props.user.firstName)}`
       })
         .then(res => res.json())
         .then(data => Chat.create(data.token))
         .then(this.setupChatClient)
         .catch(this.handleError);
   }
-  
   getChannelName = () => {
     const userOne = this.props.user.userId > this.props.otherUserId ? this.props.user.userId : this.props.otherUserId
     const userTwo = this.props.user.userId > this.props.otherUserId ? this.props.otherUserId : this.props.user.userId
@@ -109,10 +108,11 @@ class ChatApp extends Component {
   }
 
   render() {
-    console.log("loggedinuser", this.props.user)
+    console.log("loggedinuserid", this.props.user)
+    console.log("otheruserid", this.props.otherUserId)
     if (this.state.error) {
       return <p>{this.state.error}</p>;
-    } else if (this.state.isLoading) {
+    } else if (this.state.isLoading && !this.props.user && !this.props.otherUserId) {
       return <p>Loading chat...</p>;
     }
     return (

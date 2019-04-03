@@ -1,8 +1,10 @@
-import React from "react";
+import React, {Component} from "react";
 import styled from "styled-components";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import baseUrl from '../../url';
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -21,20 +23,33 @@ const BookImg = styled.img`
   height: 100%;
 `;
 
-const RequestDetails = props => {
-  const {
-    bookId,
-    title,
-    authors,
-    image,
-    lenderId,
-    description,
-    lender,
-    borrower
-  } = props.book;
-  const lenderBorrower = lenderId === localStorage.getItem("userId") ? "Borrower" : "Lender"
-  const lenderBorrowerName = lenderId === localStorage.getItem("userId") ? {borrower} : {lender}
-  return (
+class RequestDetails extends Component {
+
+
+  deleteRequest = () => {
+    const { lenderId, checkoutRequestId } = this.props.request
+    axios
+    .delete(`${baseUrl}/users/${lenderId}/checkoutrequest/${checkoutRequestId}`)
+    .then(res => {
+      window.location.reload()
+      return res.data
+    })
+    .catch(err => console.log(err))
+  }
+
+  render() { 
+    const {
+      checkoutRequestId,
+      title,
+      authors,
+      image,
+      description,
+      // lender,
+      borrower
+    } = this.props.request;
+    //   const lenderBorrower = lenderId === localStorage.getItem("userId") ? "Borrower" : "Lender"
+    //   const lenderBorrowerName = lenderId === localStorage.getItem("userId") ? {borrower} : {lender}
+    return (
     <BookDetailsWrapper>
       <BookImgWrapper>
         <BookImg alt={title} src={image} />
@@ -43,13 +58,15 @@ const RequestDetails = props => {
         <h2>{title}</h2>
         <p>by {authors}</p>
         <div>Description: {description}</div>
-        <div>{lenderBorrower}: {lenderBorrowerName}</div>
-        <Link to={`/library/requests/${bookId}`}>
-          <Button>Accept request</Button>
+        <div>Borrower: {borrower}</div>
+        <Link to={`/library/requests/${checkoutRequestId}`}>
+          <Button>Coordinate book exchange</Button>
         </Link>
-        <Button>Decline request</Button>
+        {/* The button below will DELETE by checkoutRequestId  */}
+        <Button onClick={this.deleteRequest}>Delete request</Button> 
       </div>
     </BookDetailsWrapper>
   );
-};
-export default RequestDetails;
+}
+  };
+export default RequestDetails

@@ -7,8 +7,7 @@ class Requests extends Component {
   constructor() {
     super();
     this.state = {
-      books: [],
-      filter: "all"
+      checkoutRequests: []
     };
   }
 
@@ -28,15 +27,21 @@ class Requests extends Component {
     }
   }
   componentDidMount() {
-    this.props.getCheckoutRequests();
+    const userId = localStorage.getItem('userId')
+    this.props.getCheckoutRequests(userId);
+    // this.setState({
+    //   checkoutRequests: this.props.checkoutRequests
+    // })
   }
 
   render() {
     console.log("/books this.props", this.props);
     console.log("/books this.state", this.state);
-    if (!this.props.checkoutRequests.length) {
+    if (this.props.loadingRequests) {
       return <h1>Loading...</h1>;
-    } else {
+    } else if (this.props.checkoutRequests.length === 0) {
+      return <h1>You have no checkout requests.</h1>;
+    } else if (this.props.checkoutRequests) {
       return (
         <div>
           <h1>Pending checkouts</h1>
@@ -44,7 +49,7 @@ class Requests extends Component {
             {this.props.checkoutRequests.map(request => {
               return (
                 <RequestDetails
-                  key={request.requestId}
+                  key={request.checkoutRequestId}
                   request={request}
                 />
               );
