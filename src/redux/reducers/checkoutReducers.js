@@ -6,8 +6,9 @@ import {
   GETTING_SINGLE_REQUEST,
   GET_SINGLE_REQUEST_SUCCESS,
   ADDING_CHECKOUT,
-  ADD_CHECKOUT_SUCCESS
-  
+  ADD_CHECKOUT_SUCCESS,
+  GETTING_CHECKOUTS,
+  GET_CHECKOUTS_SUCCESS
 } from "../actions/checkoutActions.js";
 
 const initialState = {
@@ -53,7 +54,6 @@ export default function checkoutReducer(state = initialState, action) {
         ...state,
         loadingRequests: false
       };
-      ;
     case ADDING_CHECKOUT:
       return {
         ...state,
@@ -63,7 +63,17 @@ export default function checkoutReducer(state = initialState, action) {
       return {
         ...state,
         loadingCheckouts: false
-      }
+      };
+    case GETTING_CHECKOUTS:
+      return {
+        ...state,
+        loadingCheckouts: true
+      };
+    case GET_CHECKOUTS_SUCCESS:
+      return {
+        ...state,
+        checkouts: action.payload
+      };
     default:
       return state;
   }

@@ -10,7 +10,7 @@ class Requests extends Component {
       checkoutRequests: []
     };
   }
-  
+
   componentWillReceiveProps(newProps) {
     if (newProps.checkoutRequests !== this.state.checkoutRequests) {
       this.setState({
@@ -19,7 +19,7 @@ class Requests extends Component {
     }
   }
   componentDidMount() {
-    const userId = localStorage.getItem('userId')
+    const userId = localStorage.getItem("userId");
     this.props.getCheckoutRequests(userId);
     // this.setState({
     //   checkoutRequests: this.props.checkoutRequests
@@ -27,8 +27,24 @@ class Requests extends Component {
   }
 
   filterRequests = () => {
-    return this.props.checkoutRequests.filter(request => request.checkoutAccepted === false)
-  }
+    return this.props.checkoutRequests.filter(
+      request => request.checkoutAccepted === false
+    );
+  };
+
+  filterIncomingRequests = () => {
+    let userId = localStorage.getItem("userId");
+    return this.props.checkoutRequests.filter(
+      request => request.lenderId === userId
+    );
+  };
+
+  filterOutgoingRequests = () => {
+    let userId = localStorage.getItem("userId");
+    return this.props.checkoutRequests.filter(
+      request => request.lenderId !== userId
+    );
+  };
 
   render() {
     console.log("/books this.props", this.props);
@@ -64,4 +80,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getCheckoutRequests }
-)(Requests)
+)(Requests);

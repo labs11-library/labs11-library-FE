@@ -2,14 +2,27 @@ import React, { Component } from "react";
 import books from "../../data";
 import CheckedOutBookDetails from "./CheckedOutBookDetails";
 
+import { connect } from "react-redux";
+import { getCheckouts } from "../../redux/actions/checkoutActions.js";
 class CheckedOutList extends Component {
   constructor() {
     super();
     this.state = {
-      checkedOutBooks: books.filter(book => book.available === false),
+      checkouts: [],
       filter: "all",
       searchText: ""
     };
+  }
+  componentDidMount() {
+    const userId = localStorage.getItem("userId");
+    this.props.getCheckouts(userId);
+  }
+  componentWillReceiveProps(newProps) {
+    if (newProps.checkouts !== this.props.checkouts) {
+      this.setState({
+        checkouts: this.props.checkouts
+      });
+    }
   }
   handleChange = e => {
     const { name, value } = e.target;
@@ -17,23 +30,12 @@ class CheckedOutList extends Component {
       [name]: value
     });
   };
-  searchBooks = () => {
-    const { checkedOutBooks, searchText } = this.state;
-    if (searchText.length === 0) {
-      return checkedOutBooks;
-    } else if (searchText.length > 0) {
-      const searchRegex = new RegExp(searchText, "gi");
-      return checkedOutBooks.filter(
-        book => book.title.match(searchRegex) || book.author.match(searchRegex)
-      );
-    }
-  };
   handleSelect = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
-  booksByDate = () => {
-    return this.searchBooks().sort((a, b) => {
+  checkoutsByDate = () => {
+    return this.props.checkouts.sort((a, b) => {
       let aDate = new Date(a.dueDate);
       let bDate = new Date(b.dueDate);
       if (aDate < bDate) {
@@ -46,23 +48,37 @@ class CheckedOutList extends Component {
     });
   };
   render() {
-    return (
-      <div>
-        <h1>Checked Out</h1>
-        <input
-          placeholder="Search checked out books"
-          name="searchText"
-          value={this.state.searchText}
-          onChange={this.handleChange}
-        />
+    console.log("this.props.checkouts", this.props.checkouts);
+    // ^^ so nasty
+    if (!this.props.loadingCheckouts) {
+      return <h1>Loading...</h1>;
+    } else {
+      return (
         <div>
-          {this.booksByDate().map(book => {
-            return <CheckedOutBookDetails book={book} />;
-          })}
+          <h1>Checked Out</h1>
+          <input
+            placeholder="Search checked out books"
+            name="searchText"
+            value={this.state.searchText}
+            onChange={this.handleChange}
+          />
+          <div>
+            {this.props.checkouts.map(checkout => {
+              return <CheckedOutBookDetails checkout={checkout} />;
+            })}
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
-export default CheckedOutList;
+const mapStateToProps = state => ({
+  loadingCheckouts: state.checkoutReducer.loadingCheckouts,
+  checkouts: state.checkoutReducer.checkouts
+});
+
+export default connect(
+  mapStateToProps,
+  { getCheckouts }
+)(CheckedOutList);
