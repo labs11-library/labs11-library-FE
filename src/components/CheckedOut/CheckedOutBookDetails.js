@@ -31,9 +31,11 @@ const BookDetails = props => {
     title,
     authors,
     image,
-    lenderName,
-    location,
-    dueDate
+    lender,
+    checkoutId,
+    dueDate,
+    lenderId,
+    borrower
   } = props.checkout;
 
   function timeRemaining(dueDate) {
@@ -42,6 +44,15 @@ const BookDetails = props => {
     let duration = moment.duration(now.diff(end)).humanize();
     return duration;
   }
+
+  const dateDue = moment
+        .utc(dueDate)
+        .local()
+        .format("dddd, MMMM Do");
+
+  const lenderBorrowerName = lenderId.toString() === localStorage.getItem("userId") ? borrower : lender
+  console.log("borrower", borrower, title)
+  console.log("lender", lender, title)
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -50,12 +61,12 @@ const BookDetails = props => {
       <div>
         <h2>{title}</h2>
         <p>by {authors}</p>
-        <p>Due on: {dueDate}</p>
+        <p>Due on: {dateDue}</p>
         <DueDate>Time until due: {timeRemaining(dueDate)}</DueDate>
         <p>
-          Contact {lenderName} from {location}
+          Contact {lenderBorrowerName} to arrange return
         </p>
-        <Link to="/chatapp">
+        <Link to={`/library/checkout/${checkoutId}`}>
           <Button>Send message</Button>
         </Link>
       </div>
