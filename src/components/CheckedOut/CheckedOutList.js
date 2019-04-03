@@ -47,6 +47,21 @@ class CheckedOutList extends Component {
       }
     });
   };
+
+  filterIncomingCheckouts = () => {
+    let userId = localStorage.getItem("userId");
+    return this.props.checkouts.filter(
+      checkout => checkout.lenderId.toString() === userId
+    );
+  };
+
+  filterOutgoingCheckouts = () => {
+    let userId = localStorage.getItem("userId");
+    return this.props.checkouts.filter(
+      checkout => checkout.borrowerId.toString() === userId
+    );
+  };
+
   render() {
     console.log("this.props.checkouts", this.props.checkouts);
     // ^^ so nasty
@@ -55,16 +70,26 @@ class CheckedOutList extends Component {
     } else {
       return (
         <div>
-          <h1>Checked Out</h1>
-          <input
-            placeholder="Search checked out books"
-            name="searchText"
-            value={this.state.searchText}
-            onChange={this.handleChange}
-          />
+          <h1>Loaned out books</h1>
           <div>
-            {this.props.checkouts.map(checkout => {
-              return <CheckedOutBookDetails checkout={checkout} />;
+            {this.filterIncomingCheckouts().map(checkout => {
+              return (
+                <CheckedOutBookDetails
+                  key={checkout.checkoutId}
+                  checkout={checkout}
+                />
+              );
+            })}
+          </div>
+          <h1>Borrowed books</h1>
+          <div>
+            {this.filterOutgoingCheckouts().map(checkout => {
+              return (
+                <CheckedOutBookDetails
+                  key={checkout.checkoutId}
+                  checkout={checkout}
+                />
+              );
             })}
           </div>
         </div>
