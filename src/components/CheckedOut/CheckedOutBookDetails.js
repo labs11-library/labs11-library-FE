@@ -27,7 +27,14 @@ const DueDate = styled.p`
 `;
 
 const BookDetails = props => {
-  const { title, author, image, lenderName, location, dueDate } = props.book;
+  const {
+    title,
+    authors,
+    image,
+    lenderName,
+    location,
+    dueDate
+  } = props.checkout;
 
   function timeRemaining(dueDate) {
     let now = moment(Date.now());
@@ -42,7 +49,7 @@ const BookDetails = props => {
       </BookImgWrapper>
       <div>
         <h2>{title}</h2>
-        <p>by {author}</p>
+        <p>by {authors}</p>
         <p>Due on: {dueDate}</p>
         <DueDate>Time until due: {timeRemaining(dueDate)}</DueDate>
         <p>
