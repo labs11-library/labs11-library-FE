@@ -5,6 +5,8 @@ import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import baseUrl from '../../url';
+import { addCheckout } from '../../redux/actions/checkoutActions.js'
+import { connect } from "react-redux";
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -30,6 +32,18 @@ class RequestDetails extends Component {
     const { lenderId, checkoutRequestId } = this.props.request
     axios
     .delete(`${baseUrl}/users/${lenderId}/checkoutrequest/${checkoutRequestId}`)
+    .then(res => {
+      window.location.reload()
+      return res.data
+    })
+    .catch(err => console.log(err))
+  }
+
+  confirmCheckout = () => {
+    const { checkoutRequestId, bookId } = this.props.request
+    this.props.addCheckout(checkoutRequestId, bookId);
+    axios
+    .put(`${baseUrl}/books/${bookId}`, {available: false})
     .then(res => {
       window.location.reload()
       return res.data
@@ -64,9 +78,20 @@ class RequestDetails extends Component {
         </Link>
         {/* The button below will DELETE by checkoutRequestId  */}
         <Button onClick={this.deleteRequest}>Delete request</Button> 
+        <Button onClick={this.confirmCheckout}>Confirm book transfer</Button> 
       </div>
     </BookDetailsWrapper>
   );
 }
   };
-export default RequestDetails
+
+const mapStateToProps = state => {
+  return {
+    loading: state.bookReducer.loadingCheckouts
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { addCheckout }
+)(RequestDetails);
