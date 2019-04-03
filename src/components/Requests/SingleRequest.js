@@ -1,82 +1,55 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import "@progress/kendo-theme-material/dist/all.css";
-import { Button } from "@progress/kendo-react-buttons";
 import { connect } from "react-redux";
-import { getSingleBook } from "../../redux/actions/bookActions.js";
+import { getSingleCheckoutRequest } from "../../redux/actions/checkoutActions.js";
 import ChatApp from "../Chat/ChatApp";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 
-const BookDetailsWrapper = styled.div`
-  width: 60vw;
-  border-bottom: 2px solid grey;
-  display: flex;
-  justify-content: space-between;
-  margin: 20px auto;
-  height: 400px;
-`;
-
-class SingleBook extends Component {
+class SingleRequest extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      singleBook: {},
-      showChat: false
+      singleCheckoutRequest: {}
     };
   }
 
   componentDidMount() {
-    this.props.getSingleBook(this.props.match.params.bookId);
+    const userId = localStorage.getItem("userId")
+    this.props.getSingleCheckoutRequest(userId, this.props.match.params.checkoutRequestId);
     this.props.getLoggedInUser();
   }
 
   render() {
     console.log("this.state", this.state);
     console.log("this.props", this.props);
-    if (!this.props.singleBook.image) {
+    if (!this.props.singleCheckoutRequest) {
       return <h1>Loading...</h1>;
-    } else if ( this.props.singleBook.image && this.state.showChat === false) {
+    }
       const {
         title,
         authors,
-        image,
-        lenderName,
-        location,
-        avgRating,
-        available,
-        dueDate
-      } = this.props.singleBook;
+        borrower,
+        borrowerId
+      } = this.props.singleCheckoutRequest;
       return (
         <div>
-          <BookDetailsWrapper>
-            <div>
-              <h2>{title}</h2>
-              <p>by {authors}</p>
-              <p>
-                Contact {lenderName} from {location}
-              </p>
-              <Button onClick={() => this.setState({showChat: true})} >Send message</Button>
-            </div>
-          </BookDetailsWrapper>
+            <h2>Talk to {borrower} about exchanging {title} by {authors}</h2>  
+            <ChatApp user={this.props.loggedInUser} otherUserId={borrowerId}/>
         </div>
       );
-    } else {
-      return (
-        <ChatApp user={this.props.loggedInUser} otherUserId={this.props.singleBook.lenderId}/>
-      )
     }
   }
-}
+
 
 const mapStateToProps = state => {
   return {
-    loading: state.bookReducer.fetchingBooks,
-    singleBook: state.bookReducer.singleBook,
+    loadingRequests: state.checkoutReducer.fetchingSingleCheckoutRequest,
+    singleCheckoutRequest: state.checkoutReducer.singleCheckoutRequest,
     loggedInUser: state.authReducer.loggedInUser
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getSingleBook, getLoggedInUser }
-)(SingleBook);
+  { getSingleCheckoutRequest, getLoggedInUser }
+)(SingleRequest);

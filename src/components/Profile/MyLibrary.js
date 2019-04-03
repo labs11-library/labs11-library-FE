@@ -7,6 +7,7 @@ import CheckedOutList from "../CheckedOut/CheckedOutList.js";
 import BookSearch from "../AddBook/BookSearch.js";
 import UserProfile from "./UserProfile.js";
 import RequestList from "../Requests/RequestList.js";
+import SingleRequest from "../Requests/SingleRequest.js";
 
 const MyLibrary = props => {
   return (
@@ -37,6 +38,11 @@ const MyLibrary = props => {
           exact
           path="/library/requests"
           render={props => <RequestList {...props} />}
+        />
+        <Route
+          exact
+          path="/library/requests/:checkoutRequestId"
+          render={props => <SingleRequest {...props} />}
         />
       </React.Fragment>
     </div>

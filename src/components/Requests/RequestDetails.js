@@ -44,7 +44,7 @@ const RequestDetails = props => {
         <div>Description: {description}</div>
         <div>Borrower: {borrower}</div>
         <Link to={`/library/requests/${checkoutRequestId}`}>
-          <Button>Accept request</Button>
+          <Button>Coordinate book exchange</Button>
         </Link>
         {/* The button below will DELETE by checkoutRequestId  */}
         <Button>Decline request</Button> 
