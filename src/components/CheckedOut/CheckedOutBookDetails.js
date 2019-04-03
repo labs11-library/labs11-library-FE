@@ -3,6 +3,8 @@ import styled from "styled-components";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import baseUrl from '../../url';
 
 import * as moment from "moment";
 const BookDetailsWrapper = styled.div`
@@ -45,14 +47,25 @@ const BookDetails = props => {
     return duration;
   }
 
+  const userId = localStorage.getItem("userId")
+
+  function confirmReturn() {
+    axios
+    .put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {returned: true})
+    .then(res => {
+      window.location.reload()
+      return res.data
+    })
+    .catch(err => console.log(err))
+  }
+
   const dateDue = moment
         .utc(dueDate)
         .local()
         .format("dddd, MMMM Do");
 
   const lenderBorrowerName = lenderId.toString() === localStorage.getItem("userId") ? borrower : lender
-  console.log("borrower", borrower, title)
-  console.log("lender", lender, title)
+  
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -69,6 +82,7 @@ const BookDetails = props => {
         <Link to={`/library/checkout/${checkoutId}`}>
           <Button>Send message</Button>
         </Link>
+        { lenderId.toString() === localStorage.getItem("userId") && <Button onClick={confirmReturn}>Confirm return</Button> }
       </div>
     </BookDetailsWrapper>
   );
