@@ -1,22 +1,38 @@
-import React, { Component } from "react";
-import { Elements, StripeProvider } from "react-stripe-elements";
-import CheckoutForm from "./CheckoutForm";
+import React from "react";
+import { connect } from "react-redux";
+import StripeCheckout from "react-stripe-checkout";
+import { createCustomer } from "../../redux/actions/userActions";
 
-// StripeProvider initializes stripe and passes the publihsbale key
-// Elements creats an Elements group, indicating which stripe elements are related (input fields)
-// The Elements must contain the component that is wrappe dwith injectStripe(), not the other way around.
-class Payment extends Component {
+class Payment extends React.Component {
+  onToken = (token, addresses) => {
+    // TODO: Send the token information and any other
+    // relevant information to your payment process
+    // server, wait for the response, and update the UI
+    // accordingly. How this is done is up to you. Using
+    // XHR, fetch, or a GraphQL mutation is typical.
+    this.props.createCustomer();
+  };
+
   render() {
     return (
-      <StripeProvider apiKey="pk_test_paiLlNo6bPnrx0Nnb2ORgRLu00CRdEJXhe">
-        <div className="example">
-          <Elements>
-            <CheckoutForm />
-          </Elements>
-        </div>
-      </StripeProvider>
+      <StripeCheckout
+        // amount={this.props}
+        amount={100}
+        billingAddress
+        description="Bookmaps Membership"
+        // image="https://yourdomain.tld/images/logo.svg"
+        locale="auto"
+        // name="YourDomain.tld"
+        stripeKey="pk_test_paiLlNo6bPnrx0Nnb2ORgRLu00CRdEJXhe"
+        token={this.onToken}
+        zipCode
+        label="Click here to become a member!"
+      />
     );
   }
 }
 
-export default Payment;
+export default connect(
+  null,
+  { createCustomer }
+)(Payment);
