@@ -44,7 +44,7 @@ class SingleInventory extends Component {
   };
   deleteInventory = (userId, bookId) => {
     this.props.deleteInventory(userId, bookId);
-    this.props.history.push("/inventory");
+    this.props.history.push("/library/inventory");
   };
   timeRemaining = dueDate => {
     let now = moment(Date.now());

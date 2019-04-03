@@ -108,7 +108,7 @@ class ChatApp extends Component {
   }
 
   render() {
-    console.log("loggedinuserid", this.props.user)
+    console.log("loggedinuser", this.props.user)
     console.log("otheruserid", this.props.otherUserId)
     if (this.state.error) {
       return <p>{this.state.error}</p>;

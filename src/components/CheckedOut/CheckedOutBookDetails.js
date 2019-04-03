@@ -3,6 +3,8 @@ import styled from "styled-components";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import baseUrl from '../../url';
 
 import * as moment from "moment";
 const BookDetailsWrapper = styled.div`
@@ -27,7 +29,16 @@ const DueDate = styled.p`
 `;
 
 const BookDetails = props => {
-  const { title, author, image, lenderName, location, dueDate } = props.book;
+  const {
+    title,
+    authors,
+    image,
+    lender,
+    checkoutId,
+    dueDate,
+    lenderId,
+    borrower
+  } = props.checkout;
 
   function timeRemaining(dueDate) {
     let now = moment(Date.now());
@@ -35,6 +46,26 @@ const BookDetails = props => {
     let duration = moment.duration(now.diff(end)).humanize();
     return duration;
   }
+
+  const userId = localStorage.getItem("userId")
+
+  function confirmReturn() {
+    axios
+    .put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {returned: true})
+    .then(res => {
+      window.location.reload()
+      return res.data
+    })
+    .catch(err => console.log(err))
+  }
+
+  const dateDue = moment
+        .utc(dueDate)
+        .local()
+        .format("dddd, MMMM Do");
+
+  const lenderBorrowerName = lenderId.toString() === localStorage.getItem("userId") ? borrower : lender
+  
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -42,15 +73,16 @@ const BookDetails = props => {
       </BookImgWrapper>
       <div>
         <h2>{title}</h2>
-        <p>by {author}</p>
-        <p>Due on: {dueDate}</p>
+        <p>by {authors}</p>
+        <p>Due on: {dateDue}</p>
         <DueDate>Time until due: {timeRemaining(dueDate)}</DueDate>
         <p>
-          Contact {lenderName} from {location}
+          Contact {lenderBorrowerName} to arrange return
         </p>
-        <Link to="/chatapp">
+        <Link to={`/library/checkout/${checkoutId}`}>
           <Button>Send message</Button>
         </Link>
+        { lenderId.toString() === localStorage.getItem("userId") && <Button onClick={confirmReturn}>Confirm return</Button> }
       </div>
     </BookDetailsWrapper>
   );
