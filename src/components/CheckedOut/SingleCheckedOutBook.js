@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import * as moment from "moment";
-import { Link } from "react-router-dom";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { connect } from "react-redux";
 import { getSingleCheckedOutBook } from "../../redux/actions/bookActions.js";
+import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import ReviewForm from "../Reviews/ReviewForm";
+import ChatApp from "../Chat/ChatApp";
 
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -33,13 +34,14 @@ class SingleCheckedOutBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      singleCheckedOutBook: {}
+      singleCheckedOutBook: {},
+      showChat: false
     };
   }
 
   componentDidMount() {
     this.props.getSingleCheckedOutBook(this.props.match.params.checkedOutId);
-    console.log(this.props);
+    this.props.getLoggedInUser();
   }
 
   render() {
@@ -47,7 +49,7 @@ class SingleCheckedOutBook extends Component {
     console.log(this.state);
     if (!this.props.singleCheckedOutBook) {
       return <h1>Loading...</h1>;
-    } else {
+    } else if (this.props.singleCheckedOutBook && !this.state.showChat) {
       const {
         title,
         authors,
@@ -59,12 +61,6 @@ class SingleCheckedOutBook extends Component {
         checkoutDate
       } = this.props.singleCheckedOutBook;
       const availability = available ? "Available" : "Checked out";
-      // function timeRemaining(dueDate) {
-      //   let now = moment(Date.now());
-      //   let end = moment(Date.now());
-      //   let duration = moment.duration(now.diff(end)).humanize();
-      //   return duration;
-      // }
       const threeWeeks = moment(checkoutDate, "YYYY-MM-DD").add(21, "days");
       const dueDate = moment
         .utc(threeWeeks)
@@ -83,14 +79,16 @@ class SingleCheckedOutBook extends Component {
               {!available && <p>Date due: {dueDate}</p>}{" "}
               {/*{timeRemaining(dueDate)}*/}
               <p>Contact {lender} from around the way</p>
-              <Link to="/chatapp">
-                <Button>Send message</Button>
-              </Link>
+              <Button onClick={() => this.setState({showChat: true})}>Send message</Button>
               {returned === 0 && <ReviewForm reviewEvent={checkedOutId} />}
             </div>
           </BookDetailsWrapper>
         </div>
       );
+    } else if (this.state.showChat) {
+      return (
+        <ChatApp user={this.props.loggedInUser} otherUserId={this.props.singleCheckedOutBook.lenderId}/>
+      )
     }
   }
 }
@@ -98,11 +96,12 @@ class SingleCheckedOutBook extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.bookReducer.fetchingBooks,
-    singleCheckedOutBook: state.bookReducer.singleCheckedOutBook
+    singleCheckedOutBook: state.bookReducer.singleCheckedOutBook,
+    loggedInUser: state.authReducer.loggedInUser
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getSingleCheckedOutBook }
+  { getSingleCheckedOutBook, getLoggedInUser }
 )(SingleCheckedOutBook);
