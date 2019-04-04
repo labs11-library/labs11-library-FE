@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
@@ -7,23 +6,7 @@ import axios from "axios";
 import baseUrl from "../../url";
 import { addCheckout } from "../../redux/actions/checkoutActions.js";
 import { connect } from "react-redux";
-
-const BookDetailsWrapper = styled.div`
-  width: 60vw;
-  border-bottom: 2px solid grey;
-  display: flex;
-  justify-content: space-between;
-  margin: 20px auto;
-  height: 400px;
-`;
-const BookImgWrapper = styled.div`
-  width: 250px;
-  height: 375px;
-`;
-const BookImg = styled.img`
-  width: 100%;
-  height: 100%;
-`;
+import { BookDetailsWrapper, BookImgWrapper, BookImg } from '../Books/styles';
 
 class RequestDetails extends Component {
   deleteRequest = () => {
@@ -77,7 +60,7 @@ class RequestDetails extends Component {
           <div>Description: {description}</div>
           <div>Borrower: {borrower}</div>
           <p>Contact {lenderBorrowerName} to arrange a book exchange</p>
-          <Link to={`/my-library/requests/${checkoutRequestId}`}>
+          <Link to={`/notifications/${checkoutRequestId}`}>
             <Button>Send Message</Button>
           </Link>
           {/* The button below will DELETE by checkoutRequestId  */}

@@ -12,7 +12,7 @@ const NavBar = () => {
       }}
     >
       <NavLink to="/">
-        Book maps{" "}
+        {/* Book maps{" "} */}
         <span role="img" aria-label="books">
           📚
         </span>
@@ -20,8 +20,10 @@ const NavBar = () => {
           🗺
         </span>
       </NavLink>
-      <NavLink to="/books">Books</NavLink>
-      <NavLink to="/my-library/inventory">My Library</NavLink>
+      <NavLink to="/my-library">My Library</NavLink>
+      <NavLink to="/add-book">Add book</NavLink>
+      <NavLink to="/notifications">Notifications</NavLink>
+      <NavLink to="/profile">Profile</NavLink>
       <NavLink to="/signup">Signup</NavLink>
     </div>
   );

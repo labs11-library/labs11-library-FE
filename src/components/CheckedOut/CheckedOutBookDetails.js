@@ -1,32 +1,12 @@
 import React from "react";
-import styled from "styled-components";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import baseUrl from "../../url";
+import axios from 'axios';
+import baseUrl from '../../url';
+import { BookDetailsWrapper, BookImgWrapper, BookImg, DueDate } from '../Books/styles';
 
 import * as moment from "moment";
-const BookDetailsWrapper = styled.div`
-  width: 60vw;
-  border-bottom: 2px solid grey;
-  display: flex;
-  justify-content: space-between;
-  margin: 20px auto;
-  height: 400px;
-`;
-const BookImgWrapper = styled.div`
-  width: 250px;
-  height: 375px;
-`;
-const BookImg = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-
-const DueDate = styled.p`
-  color: red;
-`;
 
 const BookDetails = props => {
   const {
@@ -76,11 +56,11 @@ const BookDetails = props => {
       </BookImgWrapper>
       <div>
         <h2>{title}</h2>
-        <p>by {authors}</p>
-        <p>Due on: {dateDue}</p>
+        <div>by {authors}</div>
+        <div>Due on: {dateDue}</div>
         <DueDate>Time until due: {timeRemaining(dueDate)}</DueDate>
         <p>Contact {lenderBorrowerName} to arrange return</p>
-        <Link to={`/my-library/checkout/${checkoutId}`}>
+        <Link to={`/my-library/checkouts/${checkoutId}`}>
           <Button>Send message</Button>
         </Link>
         {lenderId.toString() === localStorage.getItem("userId") && (

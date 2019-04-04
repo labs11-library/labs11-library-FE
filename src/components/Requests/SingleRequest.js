@@ -33,7 +33,7 @@ class SingleRequest extends Component {
       } = this.props.singleCheckoutRequest;
       return (
         <div>
-            <h2>Talk to {borrower} about exchanging {title} by {authors}</h2>  
+            <h2 style={{textAlign: "center"}}>Talk to {borrower} about exchanging {title} by {authors}</h2>  
             <ChatApp user={this.props.loggedInUser} otherUserId={borrowerId}/>
         </div>
       );

@@ -1,33 +1,12 @@
 import React from "react";
-import styled from "styled-components";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
+import { BookDetailsWrapper, BookImgWrapper, BookImg, Availability } from '../Books/styles';
 
-import * as moment from "moment";
-const BookDetailsWrapper = styled.div`
-  width: 60vw;
-  border-bottom: 2px solid grey;
-  display: flex;
-  justify-content: space-between;
-  margin: 20px auto;
-  height: 400px;
-`;
-const BookImgWrapper = styled.div`
-  width: 250px;
-  height: 375px;
-`;
-const BookImg = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-
-const Availability = styled.p`
-  color: ${props => (props.available ? "green" : "red")};
-`;
+// import * as moment from "moment";
 
 const BookDetails = props => {
-  const userId = localStorage.getItem("userId");
   const {
     bookId,
     title,
@@ -67,7 +46,7 @@ const BookDetails = props => {
             ? "No description provided"
             : `Description: ${description}`}
         </p>
-        <Link to={`/users/${userId}/inventory/${bookId}`}>
+        <Link to={`/my-library/my-books/${bookId}`}>
           <Button>See more details</Button>
         </Link>
       </div>
