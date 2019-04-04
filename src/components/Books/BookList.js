@@ -13,7 +13,7 @@ class Books extends Component {
     super();
     this.state = {
       books: [],
-      filter: "all",
+      filter: "available",
       searchText: ""
     };
   }
