@@ -1,11 +1,13 @@
 import axios from "axios";
 import baseUrl from "../../url";
-import { getLoggedInUser } from "./authActions";
 // const baseUrl = "http://localhost:9001";
 // const baseUrl = "https://book-maps.herokuapp.com";
 
 export const FETCHING_USERS = "FETCHING_USERS";
 export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
+
+export const FETCHING_SINGLE_USER = "FETCHING_SINGLE_USER";
+export const FETCH_SINGLE_USER_SUCCESS = "FETCH_SINGLE_USER_SUCCESS";
 
 export const getUsers = state => dispatch => {
   dispatch({ type: FETCHING_USERS });
@@ -14,6 +16,19 @@ export const getUsers = state => dispatch => {
     .then(res => {
       dispatch({
         type: FETCH_USERS_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => console.log(err));
+};
+
+export const getSingleUser = userId => dispatch => {
+  dispatch({ type: FETCHING_SINGLE_USER });
+  axios
+    .get(`${baseUrl}/users/${userId}`)
+    .then(res => {
+      dispatch({
+        type: FETCH_SINGLE_USER_SUCCESS,
         payload: res.data
       });
     })
