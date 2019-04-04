@@ -15,11 +15,11 @@ import SingleBook from "./components/Books/SingleBook";
 import SingleCheckedOutBook from "./components/CheckedOut/SingleCheckedOutBook";
 import Sendgrid from "./components/Email/SendGrid";
 import ReviewForm from "./components/Reviews/ReviewForm";
+import Payment from "./components/Stripe/Payment";
 import MyLibrary from "./components/Profile/MyLibrary";
 import LandingPage from "./components/Layout/LandingPage";
 
 class App extends Component {
-
   setUsername = event => {
     this.setState({
       username: event.target.value
@@ -45,8 +45,8 @@ class App extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
         <Route path="/library" component={MyLibrary} />
-        <Route exact path="/mapview" component={Mapview} />
         <Route exact path="/review-form" component={ReviewForm} />
+        <Route exact path="/payment" component={Payment} />
         <Route
           exact
           path="/users/:userId/checkedOut/:checkedOutId"

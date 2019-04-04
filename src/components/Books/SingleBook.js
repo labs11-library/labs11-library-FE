@@ -9,6 +9,8 @@ import Ratings from "react-ratings-declarative";
 import ChatApp from "../Chat/ChatApp";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import { addCheckoutRequest } from '../../redux/actions/checkoutActions.js'
+import { Link } from 'react-router-dom';
+
 const BookDetailsWrapper = styled.div`
   width: 60vw;
   border-bottom: 2px solid grey;
@@ -95,6 +97,9 @@ class SingleBook extends Component {
       return (
         <div>
           <BookDetailsWrapper>
+            <Link style={{position: "absolute", left: "0"}} to="/books">
+              <Button>← Back</Button>
+            </Link>
             <BookImgWrapper>
               <BookImg alt={title} src={image} />
             </BookImgWrapper>
