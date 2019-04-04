@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
 import { MyLibraryTabsWrapper } from './styled';
 import InventoryList from "../Inventory/InventoryList.js";
 import CheckedOutList from "../CheckedOut/CheckedOutList.js";

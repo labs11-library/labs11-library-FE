@@ -1,14 +1,12 @@
 import React from "react";
-import styled from "styled-components";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
 import { BookDetailsWrapper, BookImgWrapper, BookImg, Availability } from '../Books/styles';
 
-import * as moment from "moment";
+// import * as moment from "moment";
 
 const BookDetails = props => {
-  const userId = localStorage.getItem("userId");
   const {
     bookId,
     title,

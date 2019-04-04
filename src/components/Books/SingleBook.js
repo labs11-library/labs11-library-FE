@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import * as moment from "moment";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
