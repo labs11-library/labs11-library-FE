@@ -56,7 +56,6 @@ class SingleInventory extends Component {
     if (!this.props.singleInventory) {
       return <h1>Loading...</h1>;
     } else if (!this.state.updating && !this.state.showChat) {
-      console.log("this.props.singleInventory", this.props.singleInventory);
       return (
         <React.Fragment>
           <div>

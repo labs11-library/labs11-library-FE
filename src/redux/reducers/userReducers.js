@@ -3,14 +3,15 @@ import {
   FETCH_USERS_SUCCESS,
   CREATE_CUSTOMER_START,
   CREATE_CUSTOMER_SUCCESS,
-  CREATE_CUSTOMER_FAILURE
-  // CREATE_CHARGE_START,
-  // CREATE_CHARGE_SUCCESS
+  CREATE_CUSTOMER_FAILURE,
+  FETCHING_SINGLE_USER,
+  FETCH_SINGLE_USER_SUCCESS
 } from "../actions/userActions.js";
 
 const initialState = {
   loadingUsers: false,
   users: [],
+  singleUser: {},
   isCreatingCustomer: false
 };
 
@@ -44,40 +45,18 @@ export default function userReducer(state = initialState, action) {
         ...state,
         isCreatingCustomer: false
       };
-    // case CREATE_CHARGE_START:
-    //   return {
-    //     ...state,
-    //     isCreatingCharge: true
-    //   };
-    // case CREATE_CHARGE_SUCCESS:
-    //   console.log("Charge Created!");
-    //   return {
-    //     ...state,
-    //     isCreatingCharge: false
-    //   };
+    case FETCHING_SINGLE_USER:
+      return {
+        ...state,
+        loadingUsers: true
+      };
+    case FETCH_SINGLE_USER_SUCCESS:
+      return {
+        ...state,
+        loadingUsers: false,
+        singleUser: action.payload
+      };
     default:
       return state;
   }
 }
-
-// export default function stripeReducer(state = initialState, action) {
-//   switch (action.type) {
-//     case CREATE_CUSTOMER_START:
-//       return {
-//         ...state,
-//         isCreatingCustomer: true
-//       };
-//     case CREATE_CUSTOMER_SUCCESS:
-//       console.log("Customer Created!")
-//       return {
-//         ...state,
-//         isCreatingCustomer: false
-//       };
-//     case CREATE_CUSTOMER_FAILURE:
-//       console.log("Customer Could Not Be Created")
-//       return {
-//         ...state,
-//         isCreatingCustomer: false
-//       };
-//   }
-// }
