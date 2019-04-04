@@ -27,24 +27,31 @@ const Availability = styled.p`
 `;
 
 const BookDetails = props => {
+  const userId = localStorage.getItem("userId");
   const {
     bookId,
     title,
     authors,
     image,
-    lender,
     available,
     dueDate,
     description
   } = props.book;
   const availability = available ? "Available" : "Checked out";
-  function timeRemaining(dueDate) {
-    let now = moment(Date.now());
-    let end = moment(dueDate);
-    let duration = moment.duration(now.diff(end)).humanize();
-    return duration;
-  }
-  console.log(props.book)
+  
+  // function timeRemaining() {
+  //   let now = moment(Date.now());
+  //   let end = moment(dueDate);
+  //   let duration = moment.duration(now.diff(end)).humanize();
+  //   return duration;
+  // }
+  
+  // const dateDue = moment
+  //           .utc(dueDate)
+  //           .local()
+  //           .format("dddd, MMMM Do");
+
+  console.log(dueDate)
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -54,12 +61,13 @@ const BookDetails = props => {
         <h2>{title}</h2>
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
-        {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
-        <div>Description: {description}</div>
+        {!available && <p>Due: {dueDate} </p>} {/* ({timeRemaining(dueDate)} from now) */}
         <p>
-          Contact {lender}
+          {description === ""
+            ? "No description provided"
+            : `Description: ${description}`}
         </p>
-        <Link to={`/books/${bookId}`}>
+        <Link to={`/users/${userId}/inventory/${bookId}`}>
           <Button>See more details</Button>
         </Link>
       </div>

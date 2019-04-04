@@ -13,7 +13,7 @@ class Books extends Component {
     super();
     this.state = {
       books: [],
-      filter: "all",
+      filter: "available",
       searchText: ""
     };
   }
@@ -60,9 +60,7 @@ class Books extends Component {
   }
 
   render() {
-    console.log("/books this.props", this.props);
-    console.log("/books this.state", this.state);
-    if (!this.props.books.length) {
+    if (this.props.fetchingBooks) {
       return <h1>Loading...</h1>;
     } else {
       return (
