@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import { createCustomer } from "../../redux/actions/userActions";
 import axios from "axios";
+import baseUrl from "../../url";
 
 class Payment extends React.Component {
   // state = {
@@ -23,9 +24,9 @@ class Payment extends React.Component {
 
   addCustomer = body => {
     axios
-      .post(`http://localhost:9001/payment/create_customer`, body)
+      .post(`${baseUrl}/payment/create_customer`, body)
       .then(res => console.log("Success"))
-      .catch(err => console.log(err));
+      .catch(err => console.log("Frontend error:", err));
   };
 
   render() {
