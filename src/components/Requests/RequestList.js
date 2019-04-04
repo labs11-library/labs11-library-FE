@@ -32,14 +32,14 @@ class Requests extends Component {
   filterIncomingRequests = () => {
     let userId = localStorage.getItem("userId");
     return this.props.checkoutRequests.filter(
-      request => request.lenderId.toString() === userId
+      request => request.lenderId.toString() === userId && request.checkoutAccepted === false
     );
   };
 
   filterOutgoingRequests = () => {
     let userId = localStorage.getItem("userId");
     return this.props.checkoutRequests.filter(
-      request => request.borrowerId.toString() === userId
+      request => request.borrowerId.toString() === userId && request.checkoutAccepted === false
     );
   };
 
