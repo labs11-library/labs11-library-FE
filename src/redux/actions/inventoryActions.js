@@ -15,8 +15,7 @@ export const EDIT_INVENTORY_SUCCESS = "EDIT_INVENTORY_SUCCESS";
 export const DELETING_INVENTORY = "DELETING_INVENTORY";
 export const DELETE_INVENTORY_SUCCESS = "DELETE_INVENTORY_SUCCESS";
 
-export const getAllInventory = () => dispatch => {
-  let userId = localStorage.getItem("userId");
+export const getAllInventory = userId => dispatch => {
   dispatch({ type: GETTING_USERS_INVENTORY });
   axios
     .get(`${baseUrl}/users/${userId}/inventory`)

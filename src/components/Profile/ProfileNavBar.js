@@ -3,11 +3,21 @@ import { NavLink } from "react-router-dom";
 const ProfileNavBar = () => {
   return (
     <div>
-      <NavLink style={{margin: "10px"}} to="/library/inventory">Inventory</NavLink>
-      <NavLink style={{margin: "10px"}} to="/library/add-book">Add to My Library</NavLink>
-      <NavLink style={{margin: "10px"}} to="/library/checkouts">Checkouts</NavLink>
-      <NavLink style={{margin: "10px"}} to="/library/my-info">My Info</NavLink>
-      <NavLink style={{margin: "10px"}} to="/library/requests">Checkout requests</NavLink>
+      <NavLink style={{ margin: "10px" }} to="/my-library/inventory">
+        Inventory
+      </NavLink>
+      <NavLink style={{ margin: "10px" }} to="/my-library/add-book">
+        Add to My Library
+      </NavLink>
+      <NavLink style={{ margin: "10px" }} to="/my-library/checkouts">
+        Checkouts
+      </NavLink>
+      <NavLink style={{ margin: "10px" }} to="/my-library/my-info">
+        My Info
+      </NavLink>
+      <NavLink style={{ margin: "10px" }} to="/my-library/requests">
+        Checkout requests
+      </NavLink>
     </div>
   );
 };

@@ -3,9 +3,7 @@ import styled from "styled-components";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import baseUrl from "../../url";
-
+import { withRouter } from "react-router-dom";
 import * as moment from "moment";
 const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -24,41 +22,28 @@ const BookImg = styled.img`
   height: 100%;
 `;
 
-const DueDate = styled.p`
-  color: red;
+const Availability = styled.p`
+  color: ${props => (props.available ? "green" : "red")};
 `;
 
-const BookDetails = props => {
+const LibraryDetails = props => {
+  const userId = props.match.params.userId;
   const {
+    bookId,
     title,
     authors,
     image,
-    lender,
-    checkoutId,
+    available,
     dueDate,
-    lenderId,
-    borrower
-  } = props.checkout;
+    description
+  } = props.book;
+  const availability = available ? "Available" : "Checked out";
 
-  function timeRemaining(dueDate) {
+  function timeRemaining() {
     let now = moment(Date.now());
     let end = moment(dueDate);
     let duration = moment.duration(now.diff(end)).humanize();
     return duration;
-  }
-
-  const userId = localStorage.getItem("userId");
-
-  function confirmReturn() {
-    axios
-      .put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {
-        returned: true
-      })
-      .then(res => {
-        window.location.reload();
-        return res.data;
-      })
-      .catch(err => console.log(err));
   }
 
   const dateDue = moment
@@ -66,9 +51,7 @@ const BookDetails = props => {
     .local()
     .format("dddd, MMMM Do");
 
-  const lenderBorrowerName =
-    lenderId.toString() === localStorage.getItem("userId") ? borrower : lender;
-
+  console.log("PROPS!!!!!!!!!!!!!!!!!", props);
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -77,17 +60,19 @@ const BookDetails = props => {
       <div>
         <h2>{title}</h2>
         <p>by {authors}</p>
-        <p>Due on: {dateDue}</p>
-        <DueDate>Time until due: {timeRemaining(dueDate)}</DueDate>
-        <p>Contact {lenderBorrowerName} to arrange return</p>
-        <Link to={`/my-library/checkout/${checkoutId}`}>
-          <Button>Send message</Button>
+        <Availability available={available}>{availability}</Availability>
+        {!available && <p>Due: {dueDate} </p>}{" "}
+        {/* ({timeRemaining(dueDate)} from now) */}
+        <p>
+          {description === ""
+            ? "No description provided"
+            : `Description: ${description}`}
+        </p>
+        <Link to={`/users/${userId}/library/${bookId}`}>
+          <Button>See more details</Button>
         </Link>
-        {lenderId.toString() === localStorage.getItem("userId") && (
-          <Button onClick={confirmReturn}>Confirm return</Button>
-        )}
       </div>
     </BookDetailsWrapper>
   );
 };
-export default BookDetails;
+export default withRouter(LibraryDetails);

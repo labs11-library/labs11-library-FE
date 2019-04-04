@@ -22,7 +22,7 @@ class AddBook extends Component {
   };
   addBook = () => {
     this.props.addNewBook(this.state);
-    this.props.history.push("/library/inventory");
+    this.props.history.push("/my-library/inventory");
     console.log(this.props.books);
   };
   render() {
