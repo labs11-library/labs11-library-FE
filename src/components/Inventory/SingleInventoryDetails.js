@@ -21,10 +21,7 @@ const SingleInventoryDetails = props => {
   const availability = available ? "Available" : "Checked out";
   return (
     <BookDetailsWrapper>
-      <Link
-        style={{ position: "absolute", left: "0" }}
-        to="/my-library/inventory"
-      >
+      <Link style={{position: "absolute", left: "0"}} to="/my-library">
         <Button>← Back</Button>
       </Link>
       <BookImgWrapper>

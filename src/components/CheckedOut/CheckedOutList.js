@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import books from "../../data";
 import CheckedOutBookDetails from "./CheckedOutBookDetails";
 
 import { connect } from "react-redux";

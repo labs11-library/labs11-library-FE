@@ -1,30 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import * as moment from "moment";
-const BookDetailsWrapper = styled.div`
-  width: 60vw;
-  border-bottom: 2px solid grey;
-  display: flex;
-  justify-content: space-between;
-  margin: 20px auto;
-  height: 400px;
-`;
-const BookImgWrapper = styled.div`
-  width: 250px;
-  height: 375px;
-`;
-const BookImg = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-
-const Availability = styled.p`
-  color: ${props => (props.available ? "green" : "red")};
-`;
+import { BookDetailsWrapper, BookImgWrapper, BookImg, Availability } from '../Books/styles';
 
 const LibraryDetails = props => {
   const userId = props.match.params.userId;
@@ -39,17 +19,17 @@ const LibraryDetails = props => {
   } = props.book;
   const availability = available ? "Available" : "Checked out";
 
-  function timeRemaining() {
-    let now = moment(Date.now());
-    let end = moment(dueDate);
-    let duration = moment.duration(now.diff(end)).humanize();
-    return duration;
-  }
+  // function timeRemaining() {
+  //   let now = moment(Date.now());
+  //   let end = moment(dueDate);
+  //   let duration = moment.duration(now.diff(end)).humanize();
+  //   return duration;
+  // }
 
-  const dateDue = moment
-    .utc(dueDate)
-    .local()
-    .format("dddd, MMMM Do");
+  // const dateDue = moment
+  //   .utc(dueDate)
+  //   .local()
+  //   .format("dddd, MMMM Do");
 
   console.log("PROPS!!!!!!!!!!!!!!!!!", props);
   return (

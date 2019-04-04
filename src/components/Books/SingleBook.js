@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import * as moment from "moment";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
@@ -10,27 +9,8 @@ import ChatApp from "../Chat/ChatApp";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import { addCheckoutRequest } from '../../redux/actions/checkoutActions.js'
 import { Link } from 'react-router-dom';
-
-const BookDetailsWrapper = styled.div`
-  width: 60vw;
-  border-bottom: 2px solid grey;
-  display: flex;
-  justify-content: space-between;
-  margin: 20px auto;
-  height: 400px;
-`;
-const BookImgWrapper = styled.div`
-  width: 250px;
-  height: 375px;
-`;
-const BookImg = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-
-const Availability = styled.p`
-  color: ${props => (props.available ? "green" : "red")};
-`;
+import baseUrl from "../../url";
+import { BookDetailsWrapper, BookImgWrapper, BookImg, Availability } from './styles';
 
 class SingleBook extends Component {
   constructor(props) {
@@ -55,12 +35,25 @@ class SingleBook extends Component {
       showChat: false
     })
   }
+
+  sendEmail = () => {
+    const { email } = this.state;
+    console.log("email sent", email);
+    fetch(
+      `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
+        email.sender
+      }&topic=${email.subject}&text=${email.text}`
+    ) //query string url
+    .catch(err => console.error(err));
+  };
+
   requestCheckout = (bookId, lenderId) => {
     this.props.addCheckoutRequest(bookId, lenderId);
     console.log("I'm being invoked")
     this.setState({
       showChat: true
     })
+    
   }
   render() {
     // console.log("this.state", this.state);
