@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const LandingPageWrapper = styled.div`
     text-align: center;
-    text-transform: uppercase;
     margin: 20px;
     display: flex;
 `

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import axios from 'axios';
-// import backendBaseUrl from '../url'
+import baseUrl from '../../url'
 
 class Sendgrid extends Component {
 	state = {
@@ -14,13 +14,13 @@ class Sendgrid extends Component {
 
 	sendEmail = () => {
 		const { email } = this.state;
-		console.log(email);
+		console.log("email sent", email);
 		fetch(
-			`http://localhost:9001/send-email?recipient=${email.recipient}&sender=${
+			`${baseUrl}/send-email?recipient=${email.recipient}&sender=${
 				email.sender
 			}&topic=${email.subject}&text=${email.text}`
 		) //query string url
-			.catch(err => console.error(err));
+		.catch(err => console.error(err));
 	};
 
 	render() {
