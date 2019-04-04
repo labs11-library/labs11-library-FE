@@ -61,7 +61,7 @@ class RequestDetails extends Component {
           <div>Description: {description}</div>
           <div>Borrower: {borrower}</div>
           <p>Contact {lenderBorrowerName} to arrange a book exchange</p>
-          <Link to={`/library/requests/${checkoutRequestId}`}>
+          <Link to={`/notifications/${checkoutRequestId}`}>
             <Button>Send Message</Button>
           </Link>
           {/* The button below will DELETE by checkoutRequestId  */}

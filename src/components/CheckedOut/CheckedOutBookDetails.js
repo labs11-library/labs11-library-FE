@@ -28,25 +28,28 @@ const BookDetails = props => {
     return duration;
   }
 
-  const userId = localStorage.getItem("userId")
+  const userId = localStorage.getItem("userId");
 
   function confirmReturn() {
     axios
-    .put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {returned: true})
-    .then(res => {
-      window.location.reload()
-      return res.data
-    })
-    .catch(err => console.log(err))
+      .put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {
+        returned: true
+      })
+      .then(res => {
+        window.location.reload();
+        return res.data;
+      })
+      .catch(err => console.log(err));
   }
 
   const dateDue = moment
-        .utc(dueDate)
-        .local()
-        .format("dddd, MMMM Do");
+    .utc(dueDate)
+    .local()
+    .format("dddd, MMMM Do");
 
-  const lenderBorrowerName = lenderId.toString() === localStorage.getItem("userId") ? borrower : lender
-  
+  const lenderBorrowerName =
+    lenderId.toString() === localStorage.getItem("userId") ? borrower : lender;
+
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -57,13 +60,13 @@ const BookDetails = props => {
         <div>by {authors}</div>
         <div>Due on: {dateDue}</div>
         <DueDate>Time until due: {timeRemaining(dueDate)}</DueDate>
-        <div>
-          Contact {lenderBorrowerName} to arrange return
-        </div>
-        <Link to={`/mylibrary/checkouts/${checkoutId}`}>
+        <p>Contact {lenderBorrowerName} to arrange return</p>
+        <Link to={`/my-library/checkouts/${checkoutId}`}>
           <Button>Send message</Button>
         </Link>
-        { lenderId.toString() === localStorage.getItem("userId") && <Button onClick={confirmReturn}>Confirm return</Button> }
+        {lenderId.toString() === localStorage.getItem("userId") && (
+          <Button onClick={confirmReturn}>Confirm return</Button>
+        )}
       </div>
     </BookDetailsWrapper>
   );

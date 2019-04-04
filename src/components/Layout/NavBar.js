@@ -20,7 +20,7 @@ const NavBar = () => {
           🗺
         </span>
       </NavLink>
-      <NavLink to="/mylibrary">My Library</NavLink>
+      <NavLink to="/my-library">My Library</NavLink>
       <NavLink to="/add-book">Add book</NavLink>
       <NavLink to="/notifications">Notifications</NavLink>
       <NavLink to="/profile">Profile</NavLink>

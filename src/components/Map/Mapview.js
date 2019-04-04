@@ -115,9 +115,9 @@ class Mapview extends Component {
 
     //Map over all users
     this.state.users.map(allUsers => {
-      var str = `<a href="https://bookmaps.netlify.com/${
+      var str = `<a href="https://bookmaps.netlify.com/users/${
         allUsers.userId
-      }/inventory" target="_blank">HERE</a><br>`;
+      }/library" target="_blank">HERE</a><br>`;
       var contentString = `Click ${str} to visit ${
         allUsers.firstName
       }'s bookshelf`;

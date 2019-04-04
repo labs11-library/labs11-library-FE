@@ -48,7 +48,7 @@ const BookDetails = props => {
             ? "No description provided"
             : `Description: ${description}`}
         </p>
-        <Link to={`/mylibrary/mybooks/${bookId}`}>
+        <Link to={`/my-library/my-books/${bookId}`}>
           <Button>See more details</Button>
         </Link>
       </div>

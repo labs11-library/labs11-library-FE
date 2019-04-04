@@ -44,7 +44,7 @@ class SingleInventory extends Component {
   };
   deleteInventory = (userId, bookId) => {
     this.props.deleteInventory(userId, bookId);
-    this.props.history.push("/library/inventory");
+    this.props.history.push("/my-library/inventory");
   };
   timeRemaining = dueDate => {
     let now = moment(Date.now());
@@ -56,7 +56,7 @@ class SingleInventory extends Component {
     if (!this.props.singleInventory) {
       return <h1>Loading...</h1>;
     } else if (!this.state.updating && !this.state.showChat) {
-      console.log("this.props.singleInventory", this.props.singleInventory)
+      console.log("this.props.singleInventory", this.props.singleInventory);
       return (
         <React.Fragment>
           <div>
@@ -66,9 +66,14 @@ class SingleInventory extends Component {
               deleteInventory={this.deleteInventory}
             />
           </div>
-          {!this.props.singleInventory.available && 
-            <Button onClick={() => this.setState({showChat: true})} style={{height: "36px"}}>Send Message</Button>
-          }
+          {!this.props.singleInventory.available && (
+            <Button
+              onClick={() => this.setState({ showChat: true })}
+              style={{ height: "36px" }}
+            >
+              Send Message
+            </Button>
+          )}
           <Button onClick={this.toggleUpdate}>
             {this.state.updating ? "Cancel Update" : "Update Info"}
           </Button>
@@ -88,8 +93,11 @@ class SingleInventory extends Component {
       );
     } else if (this.state.showChat) {
       return (
-        <ChatApp user={this.props.loggedInUser} otherUserId={this.props.singleInventory.borrowerId}/>
-      )
+        <ChatApp
+          user={this.props.loggedInUser}
+          otherUserId={this.props.singleInventory.borrowerId}
+        />
+      );
     }
   }
 }

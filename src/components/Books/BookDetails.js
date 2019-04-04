@@ -25,7 +25,6 @@ const BookDetails = props => {
     let duration = moment.duration(now.diff(end)).humanize();
     return duration;
   }
-  console.log(props.book)
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -37,9 +36,7 @@ const BookDetails = props => {
         <Availability available={available}>{availability}</Availability>
         {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
         <div>Description: {description}</div>
-        <p>
-          Contact {lender}
-        </p>
+        <p>Contact {lender}</p>
         <Link to={`/books/${bookId}`}>
           <Button>See more details</Button>
         </Link>
