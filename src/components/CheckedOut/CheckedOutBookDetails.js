@@ -79,7 +79,7 @@ const BookDetails = props => {
         <p>
           Contact {lenderBorrowerName} to arrange return
         </p>
-        <Link to={`/library/checkout/${checkoutId}`}>
+        <Link to={`/mylibrary/checkouts/${checkoutId}`}>
           <Button>Send message</Button>
         </Link>
         { lenderId.toString() === localStorage.getItem("userId") && <Button onClick={confirmReturn}>Confirm return</Button> }

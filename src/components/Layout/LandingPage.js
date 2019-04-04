@@ -12,10 +12,9 @@ class LandingPage extends Component {
      }
     handleChange = (event, value) => {
         this.setState({ value });
-      };
+    };
     
     render() {
-        console.log("this.state.value", this.state.value)
         return ( 
             <div>
                 <LandingPageWrapper>
