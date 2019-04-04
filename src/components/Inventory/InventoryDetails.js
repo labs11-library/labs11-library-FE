@@ -38,12 +38,20 @@ const BookDetails = props => {
     description
   } = props.book;
   const availability = available ? "Available" : "Checked out";
-  function timeRemaining(dueDate) {
-    let now = moment(Date.now());
-    let end = moment(dueDate);
-    let duration = moment.duration(now.diff(end)).humanize();
-    return duration;
-  }
+  
+  // function timeRemaining() {
+  //   let now = moment(Date.now());
+  //   let end = moment(dueDate);
+  //   let duration = moment.duration(now.diff(end)).humanize();
+  //   return duration;
+  // }
+  
+  // const dateDue = moment
+  //           .utc(dueDate)
+  //           .local()
+  //           .format("dddd, MMMM Do");
+
+  console.log(dueDate)
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -53,7 +61,7 @@ const BookDetails = props => {
         <h2>{title}</h2>
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
-        {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
+        {!available && <p>Due: {dueDate} </p>} {/* ({timeRemaining(dueDate)} from now) */}
         <p>
           {description === ""
             ? "No description provided"
