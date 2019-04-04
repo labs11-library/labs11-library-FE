@@ -24,7 +24,7 @@ class Payment extends React.Component {
 
   addCustomer = body => {
     axios
-      .post(`${baseUrl}/payment/create_customer`, body)
+      .post(`http://localhost:9001/payment/create_customer`, body)
       .then(res => console.log("Success"))
       .catch(err => console.log(err));
   };
