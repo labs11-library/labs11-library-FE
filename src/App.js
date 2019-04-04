@@ -18,6 +18,8 @@ import ReviewForm from "./components/Reviews/ReviewForm";
 import Payment from "./components/Stripe/Payment";
 import MyLibrary from "./components/Profile/MyLibrary";
 import LandingPage from "./components/Layout/LandingPage";
+import LibraryList from "./components/ViewLibraries/LibraryList";
+import SingleLibraryDetails from "./components/ViewLibraries/SingleLibraryDetails";
 
 class App extends Component {
   setUsername = event => {
@@ -44,7 +46,7 @@ class App extends Component {
         <Route exact path="/users" component={Users} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
-        <Route path="/library" component={MyLibrary} />
+        <Route path="/my-library" component={MyLibrary} />
         <Route exact path="/review-form" component={ReviewForm} />
         <Route exact path="/payment" component={Payment} />
         <Route
@@ -67,6 +69,16 @@ class App extends Component {
           render={props => (
             <ChatApp {...props} username={this.state.username} />
           )}
+        />
+        <Route
+          exact
+          path="/users/:userId/library"
+          render={props => <LibraryList {...props} />}
+        />
+        <Route
+          exact
+          path="/users/:userId/library/:bookId"
+          render={props => <SingleLibraryDetails {...props} />}
         />
       </div>
     );

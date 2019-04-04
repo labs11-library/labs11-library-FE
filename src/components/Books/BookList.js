@@ -48,13 +48,13 @@ class Books extends Component {
       return this.searchBooks().filter(book => book.available === true);
     }
   };
-  componentWillReceiveProps(newProps) {
-    if (newProps.books !== this.state.books) {
-      this.setState({
-        books: this.props.books
-      });
-    }
-  }
+  // componentWillReceiveProps(newProps) {
+  //   if (newProps.books !== this.state.books) {
+  //     this.setState({
+  //       books: this.props.books
+  //     });
+  //   }
+  // }
   componentDidMount() {
     this.props.getBooks();
   }
@@ -89,13 +89,7 @@ class Books extends Component {
           </div>
           <div>
             {this.filteredBooks().map(book => {
-              return (
-                <BookDetails
-                  key={book.bookId}
-                  book={book}
-                  username={this.state.username}
-                />
-              );
+              return <BookDetails key={book.bookId} book={book} />;
             })}
           </div>
         </div>

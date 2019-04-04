@@ -39,7 +39,8 @@ class Inventory extends Component {
     }
   }
   componentDidMount() {
-    this.props.getAllInventory();
+    const userId = localStorage.getItem("userId");
+    this.props.getAllInventory(userId);
   }
   render() {
     return (

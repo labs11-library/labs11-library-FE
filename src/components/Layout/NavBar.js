@@ -21,7 +21,7 @@ const NavBar = () => {
         </span>
       </NavLink>
       <NavLink to="/books">Books</NavLink>
-      <NavLink to="/library/inventory">My Library</NavLink>
+      <NavLink to="/my-library/inventory">My Library</NavLink>
       <NavLink to="/signup">Signup</NavLink>
     </div>
   );

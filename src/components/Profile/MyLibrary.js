@@ -17,37 +17,37 @@ const MyLibrary = props => {
         <ProfileNavBar />
         <Route
           exact
-          path="/library/inventory"
+          path="/my-library/inventory"
           render={props => <InventoryList {...props} />}
         />
         <Route
           exact
-          path="/library/add-book"
+          path="/my-library/add-book"
           render={props => <BookSearch {...props} />}
         />
         <Route
           exact
-          path="/library/checkouts"
+          path="/my-library/checkouts"
           render={props => <CheckedOutList {...props} />}
         />
         <Route
           exact
-          path="/library/checkout/:checkoutId"
+          path="/my-library/checkout/:checkoutId"
           render={props => <SingleCheckedOutBook {...props} />}
         />
         <Route
           exact
-          path="/library/my-info"
+          path="/my-library/my-info"
           render={props => <UserProfile {...props} />}
         />
         <Route
           exact
-          path="/library/requests"
+          path="/my-library/requests"
           render={props => <RequestList {...props} />}
         />
         <Route
           exact
-          path="/library/requests/:checkoutRequestId"
+          path="/my-library/requests/:checkoutRequestId"
           render={props => <SingleRequest {...props} />}
         />
       </React.Fragment>
