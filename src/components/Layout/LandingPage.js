@@ -1,9 +1,10 @@
 import React from 'react';
+import Mapview from '../Map/Mapview';
 
 const LandingPage = () => {
     return ( 
-        <div style={{height: "90vh", display: "flex", justifyContent: "center", alignItems: "center", textTransform: "uppercase", fontWeight: "bold", fontSize: "48px"}}>
-            <div>Book maps{" "}
+        <div>
+            <div style={{textAlign: "center", textTransform: "uppercase", fontWeight: "bold", fontSize: "48px", margin: "20px"}}>Book maps{" "}
                 <span role="img" aria-label="books">
                     📚
                 </span>
@@ -11,6 +12,7 @@ const LandingPage = () => {
                     🗺
                 </span>
             </div>
+            <Mapview />
         </div>
      );
 }

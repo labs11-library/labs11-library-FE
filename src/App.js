@@ -45,7 +45,6 @@ class App extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
         <Route path="/library" component={MyLibrary} />
-        <Route exact path="/mapview" component={Mapview} />
         <Route exact path="/review-form" component={ReviewForm} />
         <Route exact path="/payment" component={Payment} />
         <Route

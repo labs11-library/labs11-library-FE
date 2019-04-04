@@ -18,7 +18,7 @@ class Signup extends Component {
       <div style={{ margin: "0 auto", width: "400px" }}>
         <Paper>
           <Typography component="h1" variant="h5">
-            Log in
+            Sign up
           </Typography>
           <form>
             <FormControl margin="normal" required fullWidth>
