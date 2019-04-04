@@ -4,7 +4,12 @@ import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import * as moment from "moment";
-import { BookDetailsWrapper, BookImgWrapper, BookImg, Availability } from '../Books/styles';
+import {
+  BookDetailsWrapper,
+  BookImgWrapper,
+  BookImg,
+  Availability
+} from "../Books/styles";
 
 const LibraryDetails = props => {
   const userId = props.match.params.userId;
@@ -31,7 +36,6 @@ const LibraryDetails = props => {
   //   .local()
   //   .format("dddd, MMMM Do");
 
-  console.log("PROPS!!!!!!!!!!!!!!!!!", props);
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -48,7 +52,7 @@ const LibraryDetails = props => {
             ? "No description provided"
             : `Description: ${description}`}
         </p>
-        <Link to={`/users/${userId}/library/${bookId}`}>
+        <Link to={`/books/${bookId}`}>
           <Button>See more details</Button>
         </Link>
       </div>

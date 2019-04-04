@@ -75,41 +75,41 @@ class App extends Component {
           )}
         />
         <Route
-            exact
-            path="/notifications"
-            render={props => <RequestList {...props} />}
+          exact
+          path="/notifications"
+          render={props => <RequestList {...props} />}
         />
         <Route
-            exact
-            path="/add-book"
-            render={props => <BookSearch {...props} />}
-          />
-          <Route
-            exact
-            path="/my-library/checkouts/:checkoutId"
-            render={props => <SingleCheckedOutBook {...props} />}
-          />
-          <Route
-            exact
-            path="/profile"
-            render={props => <UserProfile {...props} />}
-          />
-          
-          <Route
-            exact
-            path="/notifications/:checkoutRequestId"
-            render={props => <SingleRequest {...props} />}
-          />
-          <Route
+          exact
+          path="/add-book"
+          render={props => <BookSearch {...props} />}
+        />
+        <Route
+          exact
+          path="/my-library/checkouts/:checkoutId"
+          render={props => <SingleCheckedOutBook {...props} />}
+        />
+        <Route
+          exact
+          path="/profile"
+          render={props => <UserProfile {...props} />}
+        />
+
+        <Route
+          exact
+          path="/notifications/:checkoutRequestId"
+          render={props => <SingleRequest {...props} />}
+        />
+        <Route
           exact
           path="/users/:userId/library"
           render={props => <LibraryList {...props} />}
         />
-        <Route
+        {/* <Route
           exact
           path="/users/:userId/library/:bookId"
           render={props => <SingleLibraryDetails {...props} />}
-        />
+        /> */}
       </div>
     );
   }

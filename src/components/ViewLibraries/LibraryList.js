@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { getAllInventory } from "../../redux/actions/inventoryActions.js";
+import { getSingleUser } from "../../redux/actions/userActions.js";
 import LibraryDetails from "./LibraryDetails";
 
 class LibraryList extends Component {
@@ -32,26 +33,28 @@ class LibraryList extends Component {
     let userId = localStorage.getItem("userId");
     this.props.params.history.push(`${userId}/library/${bookId}`);
   };
-  // componentWillReceiveProps(newProps) {
-  //   if (newProps.inventory !== this.state.inventory) {
-  //     this.setState({
-  //       inventory: this.props.inventory
-  //     });
-  //   }
-  // }
   componentDidMount() {
     const userId = this.props.match.params.userId;
     this.props.getAllInventory(userId);
+    this.props.getSingleUser(userId);
   }
   render() {
-    if (this.props.loadingInventory) {
+    if (this.props.loadingInventory || this.props.loadingUser) {
       return <h1>Loading...</h1>;
     } else if (this.props.inventory.length === 0) {
-      return <h1>There are no books in this user's library.</h1>;
+      const { firstName, lastName } = this.props.singleUser;
+      return (
+        <h1>
+          There are no books in {firstName} {lastName}'s library.
+        </h1>
+      );
     } else {
+      const { firstName, lastName } = this.props.singleUser;
       return (
         <div>
-          <h1>Inventory</h1>
+          <h1>
+            {firstName} {lastName}'s Library
+          </h1>
           <input
             placeholder="Search inventory"
             name="searchText"
@@ -77,9 +80,11 @@ class LibraryList extends Component {
 
 const mapStateToProps = state => ({
   loadingInventory: state.inventoryReducer.loadingInventory,
-  inventory: state.inventoryReducer.inventory
+  inventory: state.inventoryReducer.inventory,
+  singleUser: state.userReducer.singleUser,
+  loadingUser: state.userReducer.loadingUsers
 });
 export default connect(
   mapStateToProps,
-  { getAllInventory }
+  { getAllInventory, getSingleUser }
 )(LibraryList);
