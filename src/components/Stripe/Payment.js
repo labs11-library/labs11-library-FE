@@ -26,7 +26,7 @@ class Payment extends React.Component {
     axios
       .post(`http://localhost:9001/payment/create_customer`, body)
       .then(res => console.log("Success"))
-      .catch(err => console.log(err));
+      .catch(err => console.log("Frontend error:", err));
   };
 
   render() {
