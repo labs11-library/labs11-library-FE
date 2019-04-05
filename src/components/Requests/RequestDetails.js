@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { BookDetailsWrapper, BookImgWrapper, BookImg } from '../Books/styles';
 
 class RequestDetails extends Component {
+  
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
     axios
@@ -16,6 +17,7 @@ class RequestDetails extends Component {
         `${baseUrl}/users/${lenderId}/checkoutrequest/${checkoutRequestId}`
       )
       .then(res => {
+        this.sendEmail()
         window.location.reload();
         return res.data;
       })
@@ -32,6 +34,25 @@ class RequestDetails extends Component {
         return res.data;
       })
       .catch(err => console.log(err));
+  };
+
+  sendEmail = () => {
+    const { lenderEmail, lender, title, lenderId, borrowerEmail } = this.props.request
+    const otherUserEmail = lenderId === localStorage.getItem("userId") ? borrowerEmail : lenderEmail
+
+    const email = {
+      recipient: otherUserEmail,
+      sender: "blkfltchr@gmail.com",
+      subject: `${this.props.loggedInUser.firstName} wants to checkout ${title}`,
+      text: `Hey ${lender}, check out bookmaps.app/notifications to coordinate an exchange with ${this.props.loggedInUser.firstName}`
+    };
+    console.log("email sent", email);
+    fetch(
+      `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
+        email.sender
+      }&topic=${email.subject}&text=${email.text}`
+    ) //query string url
+      .catch(err => console.error(err));
   };
 
   render() {
