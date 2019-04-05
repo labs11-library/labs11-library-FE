@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { getSingleCheckout } from "../../redux/actions/checkoutActions.js";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import ChatApp from "../Chat/ChatApp";
+import { Button } from "@progress/kendo-react-buttons";
+import baseUrl from "../../url";
 
 class SingleCheckedOutBook extends Component {
 
@@ -21,12 +23,34 @@ class SingleCheckedOutBook extends Component {
     return duration;
   }
 
+  sendEmail = () => {
+    const { lenderEmail, lender, title, lenderId, borrowerEmail, borrower } = this.props.singleCheckout
+    const otherUserEmail = lenderId.toString() === localStorage.getItem("userId") ? borrowerEmail : lenderEmail
+    const lenderBorrowerName =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? borrower
+        : lender;
+    const email = {
+      recipient: otherUserEmail,
+      sender: "blkfltchr@gmail.com",
+      subject: `${this.props.loggedInUser.firstName} wants to coordinate a return of ${title}`,
+      text: `Hey ${lenderBorrowerName}, check out bookmaps.app/notifications to coordinate a book return with ${this.props.loggedInUser.firstName}`
+    };
+    console.log("email sent", email);
+    fetch(
+      `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
+        email.sender
+      }&topic=${email.subject}&text=${email.text}`
+    ) //query string url
+      .catch(err => console.error(err));
+  };
+
   render() {
-    console.log(this.props);
-    console.log(this.state);
-    // if (this.props.loadingUser) {
-    //   return <h1>Loading...</h1>;
-    // } 
+    console.log("this.props.loadingCheckouts", this.props.loadingCheckouts);
+    console.log("this.props.loadingUser", this.props.loadingUser);
+    if (!this.props.singleCheckout.lenderId) { // loadingCheckouts || this.props.loadingUser
+    return <h1>Loading...</h1> 
+  } else {
     const {
         title,
         authors,
@@ -41,18 +65,21 @@ class SingleCheckedOutBook extends Component {
             .utc(dueDate)
             .local()
             .format("dddd, MMMM Do");
-      const lenderBorrowerName = this.props.singleCheckout.lenderId === localStorage.getItem("userId") ? borrower : lender
-      const otherUserId = lenderId === localStorage.getItem("userId") ? borrowerId : lenderId
-      console.log("lenderId", lenderId)
+      const lenderBorrowerName =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? borrower
+        : lender;
+      const otherUserId = lenderId.toString() === localStorage.getItem("userId") ? borrowerId : lenderId
       return (
         <div>
               <h2>Talk to {lenderBorrowerName} about returning {title} by {authors}</h2>
               <p>Due: {dateDue} ({this.timeRemaining(dueDate)} from now)</p>
-              <ChatApp user={this.props.loggedInUser} otherUserId={otherUserId}/>
+              <Button onClick={this.sendEmail}>Send {lenderBorrowerName} an email notification</Button> <ChatApp user={this.props.loggedInUser} otherUserId={otherUserId}/>
         </div>
       );
-    } 
   }
+    }
+    } 
 
 const mapStateToProps = state => ({
   loadingCheckouts: state.checkoutReducer.loadingCheckouts,

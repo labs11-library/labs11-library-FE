@@ -37,18 +37,6 @@ class SingleBook extends Component {
     });
   };
 
-  setEmailState = () => {
-    const { lenderEmail, lender, title } = this.props.singleBook
-      this.setState({
-        email: {
-          recipient: lenderEmail,
-          sender: "blkfltchr@gmail.com",
-          subject: `${this.props.loggedInUser.firstName} wants to checkout ${title}`,
-          text: `Hey ${lender}, check out bookmaps.app/notifications to coordinate an exchange with ${this.props.loggedInUser.firstName}`
-        }
-      })
-  }
-
   sendEmail = () => {
     const { lenderEmail, lender, title } = this.props.singleBook
     const email = {
