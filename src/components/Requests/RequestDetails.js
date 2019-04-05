@@ -7,8 +7,12 @@ import baseUrl from "../../url";
 import { addCheckout } from "../../redux/actions/checkoutActions.js";
 import { connect } from "react-redux";
 import { BookDetailsWrapper, BookImgWrapper, BookImg } from '../Books/styles';
-
+import { getLoggedInUser } from "../../redux/actions/authActions";
 class RequestDetails extends Component {
+
+  componentDidMount() {
+    this.props.getLoggedInUser()
+  }
   
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
@@ -17,11 +21,11 @@ class RequestDetails extends Component {
         `${baseUrl}/users/${lenderId}/checkoutrequest/${checkoutRequestId}`
       )
       .then(res => {
-        this.sendEmail()
-        window.location.reload();
+        // window.location.reload();
         return res.data;
       })
       .catch(err => console.log(err));
+      this.sendEmail()
   };
 
   confirmCheckout = () => {
@@ -37,14 +41,18 @@ class RequestDetails extends Component {
   };
 
   sendEmail = () => {
-    const { lenderEmail, lender, title, lenderId, borrowerEmail } = this.props.request
-    const otherUserEmail = lenderId === localStorage.getItem("userId") ? borrowerEmail : lenderEmail
+    const { lenderEmail, lender, title, lenderId, borrowerEmail, borrower } = this.props.request
+    const otherUserEmail = lenderId.toString() === localStorage.getItem("userId") ? borrowerEmail : lenderEmail
+    const lenderBorrowerName =
+    lenderId.toString() === localStorage.getItem("userId")
+      ? borrower
+      : lender;
 
     const email = {
       recipient: otherUserEmail,
       sender: "blkfltchr@gmail.com",
-      subject: `${this.props.loggedInUser.firstName} wants to checkout ${title}`,
-      text: `Hey ${lender}, check out bookmaps.app/notifications to coordinate an exchange with ${this.props.loggedInUser.firstName}`
+      subject: `${this.props.loggedInUser.firstName} can't exchange ${title}`,
+      text: `Hey ${lenderBorrowerName}, unfortunately ${this.props.loggedInUser.firstName} is unable to exchange ${title}`
     };
     console.log("email sent", email);
     fetch(
@@ -95,11 +103,12 @@ class RequestDetails extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.bookReducer.loadingCheckouts
+    loading: state.bookReducer.loadingCheckouts,
+    loggedInUser: state.authReducer.loggedInUser
   };
 };
 
 export default connect(
   mapStateToProps,
-  { addCheckout }
+  { addCheckout, getLoggedInUser }
 )(RequestDetails);
