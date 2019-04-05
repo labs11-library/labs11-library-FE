@@ -145,10 +145,16 @@ class Mapview extends Component {
 
     // Create Marker for User
     if (this.state.haveUserLocation) {
+      var pinIcon = {
+        url: "http://maps.google.com/mapfiles/kml/paddle/blu-circle.png",
+        scaledSize: new window.google.maps.Size(45, 40)
+      };
       var marker = new window.google.maps.Marker({
         position: this.state.location,
         map: map,
-        title: "You are here"
+        title: "You are here",
+        icon: pinIcon,
+        zIndex: 999
       });
     }
   };
