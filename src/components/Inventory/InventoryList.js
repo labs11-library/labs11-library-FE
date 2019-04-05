@@ -7,7 +7,6 @@ class Inventory extends Component {
   constructor() {
     super();
     this.state = {
-      inventory: [],
       searchText: ""
     };
   }
@@ -31,23 +30,17 @@ class Inventory extends Component {
     let userId = localStorage.getItem("userId");
     this.props.params.history.push(`${userId}/inventory/${bookId}`);
   };
-  componentWillReceiveProps(newProps) {
-    if (newProps.inventory !== this.state.inventory) {
-      this.setState({
-        inventory: this.props.inventory
-      });
-    }
-  }
   componentDidMount() {
     const userId = localStorage.getItem("userId");
     this.props.getAllInventory(userId);
   }
   render() {
-    if (this.props.loadingInventory) {
-      return <h1>Loading...</h1>
+    if (this.props.addingBook || this.props.loadingInventory) {
+      return <h1>Loading...</h1>;
     } else {
       return (
         <div>
+          <h1>Inventory</h1>
           <input
             placeholder="Search inventory"
             name="searchText"
@@ -73,6 +66,7 @@ class Inventory extends Component {
 
 const mapStateToProps = state => ({
   loadingInventory: state.inventoryReducer.loadingInventory,
+  addingBook: state.bookReducer.fetchingBooks,
   inventory: state.inventoryReducer.inventory
 });
 export default connect(

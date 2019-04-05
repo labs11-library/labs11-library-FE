@@ -7,10 +7,15 @@ import { getSingleBook } from "../../redux/actions/bookActions.js";
 import Ratings from "react-ratings-declarative";
 import ChatApp from "../Chat/ChatApp";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
-import { addCheckoutRequest } from '../../redux/actions/checkoutActions.js'
-import { Link } from 'react-router-dom';
+import { addCheckoutRequest } from "../../redux/actions/checkoutActions.js";
+import { Link } from "react-router-dom";
 import baseUrl from "../../url";
-import { BookDetailsWrapper, BookImgWrapper, BookImg, Availability } from './styles';
+import {
+  BookDetailsWrapper,
+  BookImgWrapper,
+  BookImg,
+  Availability
+} from "./styles";
 
 class SingleBook extends Component {
   constructor(props) {
@@ -18,12 +23,6 @@ class SingleBook extends Component {
     this.state = {
       singleBook: {},
       showChat: false,
-      email: {
-        recipient: "",
-        sender: "",
-        subject: "",
-        text: ""
-      }
     };
   }
 
@@ -31,12 +30,12 @@ class SingleBook extends Component {
     this.props.getSingleBook(this.props.match.params.bookId);
     this.props.getLoggedInUser();
   }
-
+  
   exitChat = () => {
     this.setState({
       showChat: false
-    })
-  }
+    });
+  };
 
   setEmailState = () => {
     const { lenderEmail, lender, title } = this.props.singleBook
@@ -64,14 +63,12 @@ class SingleBook extends Component {
         email.sender
       }&topic=${email.subject}&text=${email.text}`
     ) //query string url
-    .catch(err => console.error(err));
+      .catch(err => console.error(err));
   };
 
   requestCheckout = (bookId, lenderId) => {
     this.props.addCheckoutRequest(bookId, lenderId);
-    // this.setEmailState() // we want to run this first (and fill it with props)
     this.sendEmail()
-    // setTimeout(this.sendEmail(), 5000) // we want to run this second - to send an email
     this.setState({
       showChat: true
     })
@@ -81,7 +78,7 @@ class SingleBook extends Component {
     console.log("this.state.email", this.state.email)
     if (!this.props.singleBook.image) {
       return <h1>Loading...</h1>;
-    } else if ( this.props.singleBook.image && this.state.showChat === false) {
+    } else if (!this.props.loading && this.state.showChat === false) {
       const {
         bookId,
         lenderId,
@@ -110,8 +107,11 @@ class SingleBook extends Component {
       return (
         <div>
           <BookDetailsWrapper>
-            <Link style={{position: "absolute", left: "0"}} to="/books">
-              <Button>← Back</Button>
+            <Link
+              style={{ position: "absolute", left: "0" }}
+              to={`/users/${lenderId}/library`}
+            >
+              <Button>← Visit {lender}'s Library</Button>
             </Link>
             <BookImgWrapper>
               <BookImg alt={title} src={image} />
@@ -127,14 +127,9 @@ class SingleBook extends Component {
                   ? "No description provided"
                   : `Description: ${description}`}
               </p>
-              <p>
-                Contact {lender}
-              </p>
-              <Button onClick={() => this.setState({showChat: true})} >Send message</Button>
-              {/* <Button onClick={() => this.setState({showChat: true})} >Request checkout</Button> */}
+              <p>Contact {lender}</p>
               <Button  onClick={() => this.requestCheckout(bookId, lenderId)} >Request checkout</Button>
-              {
-                avgRating &&
+              {avgRating && (
                 <div>
                   <Ratings rating={avgRating} widgetRatedColors="gold">
                     <Ratings.Widget widgetHoverColor="gold" />
@@ -145,7 +140,7 @@ class SingleBook extends Component {
                   </Ratings>
                   <div>Goodreads rating: {avgRating}</div>
                 </div>
-              }
+              )}
             </div>
           </BookDetailsWrapper>
         </div>
@@ -153,10 +148,16 @@ class SingleBook extends Component {
     } else {
       return (
         <div>
-          <ChatApp user={this.props.loggedInUser} otherUserId={this.props.singleBook.lenderId} exitChat={this.exitChat}/>
-          <Button onClick={() => this.setState({showChat: false})} >Go back</Button>
+          <ChatApp
+            user={this.props.loggedInUser}
+            otherUserId={this.props.singleBook.lenderId}
+            exitChat={this.exitChat}
+          />
+          <Button onClick={() => this.setState({ showChat: false })}>
+            Go back
+          </Button>
         </div>
-      )
+      );
     }
   }
 }

@@ -22,26 +22,34 @@ class AddBook extends Component {
   };
   addBook = () => {
     this.props.addNewBook(this.state);
-    this.props.history.push("/my-library");
   };
+  componentWillReceiveProps(newProps) {
+    if (newProps.fetchingBooks === false) {
+      this.props.history.push("/my-library");
+    }
+  }
   render() {
-    return (
-      <div>
-        <h2>Add a description of your copy.</h2>
-        <img src={this.state.image} alt="cool" />
-        <h2>{this.state.title}</h2>
-        <h3>By {this.state.authors}</h3>
-        <input
-          type="text"
-          name="description"
-          placeholder="A description of your copy"
-          value={this.state.description}
-          onChange={this.handleChange}
-        />
-        <button onClick={this.addBook}>Add book to your library!</button>
-        <button onClick={() => this.props.cancelAdd()}>Cancel</button>
-      </div>
-    );
+    if (this.props.fetchingBooks) {
+      return <h1>Adding your new book...</h1>;
+    } else {
+      return (
+        <div>
+          <h2>Add a description of your copy.</h2>
+          <img src={this.state.image} alt="cool" />
+          <h2>{this.state.title}</h2>
+          <h3>By {this.state.authors}</h3>
+          <input
+            type="text"
+            name="description"
+            placeholder="A description of your copy"
+            value={this.state.description}
+            onChange={this.handleChange}
+          />
+          <button onClick={this.addBook}>Add book to your library!</button>
+          <button onClick={() => this.props.cancelAdd()}>Cancel</button>
+        </div>
+      );
+    }
   }
 }
 
