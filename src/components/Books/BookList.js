@@ -65,7 +65,6 @@ class Books extends Component {
     } else {
       return (
         <div>
-          <h1>All books</h1>
           <input
             placeholder="Search books"
             name="searchText"

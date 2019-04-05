@@ -30,29 +30,34 @@ class SingleBook extends Component {
   componentDidMount() {
     this.props.getSingleBook(this.props.match.params.bookId);
     this.props.getLoggedInUser();
-    const { lenderEmail, lender, title } = this.props.singleBook
-    this.setState({
-      email: {
-        recipient: lenderEmail,
-        sender: "hello@bookmaps.app",
-        subject: `${this.props.loggedInUser.firstName} wants to checkout ${title}`,
-        text: `Hey ${lender}, check out bookmaps.app/notifications to coordinate an exchange with ${this.props.loggedInUser.firstName}`
-      }
-    })
   }
-  // componentWillUnmount() {
-  //   this.setState({
-  //     showChat: false
-  //   })
-  // }
+
   exitChat = () => {
     this.setState({
       showChat: false
     })
   }
 
+  setEmailState = () => {
+    const { lenderEmail, lender, title } = this.props.singleBook
+      this.setState({
+        email: {
+          recipient: lenderEmail,
+          sender: "blkfltchr@gmail.com",
+          subject: `${this.props.loggedInUser.firstName} wants to checkout ${title}`,
+          text: `Hey ${lender}, check out bookmaps.app/notifications to coordinate an exchange with ${this.props.loggedInUser.firstName}`
+        }
+      })
+  }
+
   sendEmail = () => {
-    const email = this.state;
+    const { lenderEmail, lender, title } = this.props.singleBook
+    const email = {
+      recipient: lenderEmail,
+      sender: "blkfltchr@gmail.com",
+      subject: `${this.props.loggedInUser.firstName} wants to checkout ${title}`,
+      text: `Hey ${lender}, check out bookmaps.app/notifications to coordinate an exchange with ${this.props.loggedInUser.firstName}`
+    };
     console.log("email sent", email);
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
@@ -64,16 +69,16 @@ class SingleBook extends Component {
 
   requestCheckout = (bookId, lenderId) => {
     this.props.addCheckoutRequest(bookId, lenderId);
-    console.log("I'm being invoked")
+    // this.setEmailState() // we want to run this first (and fill it with props)
+    this.sendEmail()
+    // setTimeout(this.sendEmail(), 5000) // we want to run this second - to send an email
     this.setState({
       showChat: true
     })
-    // this.sendEmail()
   }
+
   render() {
-    // console.log("this.state", this.state);
-    // console.log("this.props", this.props);
-    console.log("this.state.showChat", this.state.showChat)
+    console.log("this.state.email", this.state.email)
     if (!this.props.singleBook.image) {
       return <h1>Loading...</h1>;
     } else if ( this.props.singleBook.image && this.state.showChat === false) {
@@ -127,7 +132,7 @@ class SingleBook extends Component {
               </p>
               <Button onClick={() => this.setState({showChat: true})} >Send message</Button>
               {/* <Button onClick={() => this.setState({showChat: true})} >Request checkout</Button> */}
-              <Button onClick={() => this.requestCheckout(bookId, lenderId)} >Request checkout</Button>
+              <Button  onClick={() => this.requestCheckout(bookId, lenderId)} >Request checkout</Button>
               {
                 avgRating &&
                 <div>
@@ -158,7 +163,7 @@ class SingleBook extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.bookReducer.fetchingBooks,
+    fetchingBooks: state.bookReducer.fetchingBooks,
     singleBook: state.bookReducer.singleBook,
     loggedInUser: state.authReducer.loggedInUser
   };
