@@ -17,13 +17,28 @@ class SingleBook extends Component {
     super(props);
     this.state = {
       singleBook: {},
-      showChat: false
+      showChat: false,
+      email: {
+        recipient: "",
+        sender: "",
+        subject: "",
+        text: ""
+      }
     };
   }
 
   componentDidMount() {
     this.props.getSingleBook(this.props.match.params.bookId);
     this.props.getLoggedInUser();
+    const { lenderEmail, lender, title } = this.props.singleBook
+    this.setState({
+      email: {
+        recipient: lenderEmail,
+        sender: "hello@bookmaps.app",
+        subject: `${this.props.loggedInUser.firstName} wants to checkout ${title}`,
+        text: `Hey ${lender}, check out bookmaps.app/notifications to coordinate an exchange with ${this.props.loggedInUser.firstName}`
+      }
+    })
   }
   // componentWillUnmount() {
   //   this.setState({
@@ -37,7 +52,7 @@ class SingleBook extends Component {
   }
 
   sendEmail = () => {
-    const { email } = this.state;
+    const email = this.state;
     console.log("email sent", email);
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
@@ -53,7 +68,7 @@ class SingleBook extends Component {
     this.setState({
       showChat: true
     })
-    
+    // this.sendEmail()
   }
   render() {
     // console.log("this.state", this.state);
