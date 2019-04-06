@@ -9,7 +9,6 @@ class LibraryList extends Component {
   constructor() {
     super();
     this.state = {
-      // inventory: [],
       searchText: ""
     };
   }

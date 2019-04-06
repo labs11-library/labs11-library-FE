@@ -12,7 +12,6 @@ import {
 } from "../Books/styles";
 
 const LibraryDetails = props => {
-  // const userId = props.match.params.userId;
   const {
     bookId,
     title,

@@ -6,14 +6,13 @@ import axios from "axios";
 import baseUrl from "../../url";
 import { addCheckout } from "../../redux/actions/checkoutActions.js";
 import { connect } from "react-redux";
-import { BookDetailsWrapper, BookImgWrapper, BookImg } from '../Books/styles';
+import { BookDetailsWrapper, BookImgWrapper, BookImg } from "../Books/styles";
 import { getLoggedInUser } from "../../redux/actions/authActions";
 class RequestDetails extends Component {
-
   componentDidMount() {
-    this.props.getLoggedInUser()
+    this.props.getLoggedInUser();
   }
-  
+
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
     axios
@@ -25,34 +24,52 @@ class RequestDetails extends Component {
         return res.data;
       })
       .catch(err => console.log(err));
-      this.sendEmail()
+    this.sendEmail();
   };
 
   confirmCheckout = () => {
     const { checkoutRequestId, bookId } = this.props.request;
+    const userId = localStorage.getItem("userId");
     this.props.addCheckout(checkoutRequestId, bookId);
     axios
       .put(`${baseUrl}/books/${bookId}`, { available: false })
       .then(res => {
-        window.location.reload();
         return res.data;
       })
       .catch(err => console.log(err));
+    // axios
+    //   .put(`${baseUrl}/users/${userId}/checkoutRequest/${checkoutRequestId}`, { checkoutAccepted: true })
+    //   .then(res => {
+    //     return res.data;
+    //   })
+    // .catch(err => console.log(err));
   };
 
   sendEmail = () => {
-    const { lenderEmail, lender, title, lenderId, borrowerEmail, borrower } = this.props.request
-    const otherUserEmail = lenderId.toString() === localStorage.getItem("userId") ? borrowerEmail : lenderEmail
+    const {
+      lenderEmail,
+      lender,
+      title,
+      lenderId,
+      borrowerEmail,
+      borrower
+    } = this.props.request;
+    const otherUserEmail =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? borrowerEmail
+        : lenderEmail;
     const lenderBorrowerName =
-    lenderId.toString() === localStorage.getItem("userId")
-      ? borrower
-      : lender;
+      lenderId.toString() === localStorage.getItem("userId")
+        ? borrower
+        : lender;
 
     const email = {
       recipient: otherUserEmail,
       sender: "blkfltchr@gmail.com",
       subject: `${this.props.loggedInUser.firstName} can't exchange ${title}`,
-      text: `Hey ${lenderBorrowerName}, unfortunately ${this.props.loggedInUser.firstName} is unable to exchange ${title}`
+      text: `Hey ${lenderBorrowerName}, unfortunately ${
+        this.props.loggedInUser.firstName
+      } is unable to exchange ${title}`
     };
     console.log("email sent", email);
     fetch(
