@@ -3,6 +3,8 @@ import Chat from "twilio-chat";
 import { Chat as ChatUI } from "@progress/kendo-react-conversational-ui";
 import { connect } from "react-redux";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
+
+import Loading from "../Loading/Loading.js";
 class ChatApp extends Component {
   constructor(props) {
     super(props);
@@ -45,7 +47,6 @@ class ChatApp extends Component {
       this.props.user.userId > this.props.otherUserId
         ? this.props.otherUserId
         : this.props.user.userId;
-    console.log(`${userOne}-${userTwo}`);
     return `${userOne}-${userTwo}`;
   };
 
@@ -77,14 +78,12 @@ class ChatApp extends Component {
   }
 
   handleError(error) {
-    console.error(error);
     this.setState({
       error: "Could not load chat."
     });
   }
 
   twilioMessageToKendoMessage(message) {
-    console.log("twilioMessageToKendoMessage", message);
     return {
       text: message.body,
       author: { id: message.author, name: message.author },
@@ -116,8 +115,6 @@ class ChatApp extends Component {
   }
 
   render() {
-    console.log("loggedinuser", this.props.user);
-    console.log("otheruserid", this.props.otherUserId);
     if (this.state.error) {
       return <p>{this.state.error}</p>;
     } else if (
@@ -125,7 +122,7 @@ class ChatApp extends Component {
       !this.props.user &&
       !this.props.otherUserId
     ) {
-      return <p>Loading chat...</p>;
+      return <Loading />;
     }
     return (
       <ChatUI

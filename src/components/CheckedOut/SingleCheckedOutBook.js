@@ -9,6 +9,7 @@ import { Button } from "@progress/kendo-react-buttons";
 import baseUrl from "../../url";
 import Auth from "../Auth/Auth";
 
+import Loading from "../Loading/Loading.js";
 class SingleCheckedOutBook extends Component {
   componentDidMount() {
     const userId = localStorage.getItem("userId");
@@ -50,7 +51,6 @@ class SingleCheckedOutBook extends Component {
         this.props.loggedInUser.firstName
       }`
     };
-    console.log("email sent", email);
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
         email.sender
@@ -60,11 +60,9 @@ class SingleCheckedOutBook extends Component {
   };
 
   render() {
-    console.log("this.props.loadingCheckouts", this.props.loadingCheckouts);
-    console.log("this.props.loadingUser", this.props.loadingUser);
     if (!this.props.singleCheckout.lenderId) {
       // loadingCheckouts || this.props.loadingUser
-      return <h1>Loading...</h1>;
+      return <Loading />;
     } else {
       const {
         title,

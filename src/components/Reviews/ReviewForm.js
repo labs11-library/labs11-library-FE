@@ -39,7 +39,6 @@ class ReviewForm extends Component {
   };
 
   render() {
-    console.log("this.state review-form", this.state);
     return (
       <div>
         <form>

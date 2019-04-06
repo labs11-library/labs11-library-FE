@@ -24,6 +24,7 @@ import SingleRequest from "./components/Requests/SingleRequest.js";
 import LibraryList from "./components/ViewLibraries/LibraryList";
 import Auth from "./components/Auth/Auth";
 
+import Loading from "./components/Loading/Loading.js";
 class App extends Component {
   setUsername = event => {
     this.setState({
