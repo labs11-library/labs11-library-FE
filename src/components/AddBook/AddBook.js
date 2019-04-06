@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { addNewBook } from "../../redux/actions/bookActions.js";
 import { connect } from "react-redux";
+import Ratings from "react-ratings-declarative";
 
 class AddBook extends Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class AddBook extends Component {
       title: this.props.book.title,
       authors: this.props.book.authors,
       image: this.props.book.covers[0],
-      description: ""
+      description: "",
+      avgRating: parseFloat(this.props.book.average_rating[0])
     };
   }
   handleChange = e => {
@@ -29,6 +31,7 @@ class AddBook extends Component {
     }
   }
   render() {
+    console.log(this.state);
     if (this.props.fetchingBooks) {
       return <h1>Adding your new book...</h1>;
     } else {
@@ -38,6 +41,16 @@ class AddBook extends Component {
           <img src={this.state.image} alt="cool" />
           <h2>{this.state.title}</h2>
           <h3>By {this.state.authors}</h3>
+          <div>
+            <Ratings rating={this.state.avgRating} widgetRatedColors="gold">
+              <Ratings.Widget widgetHoverColor="gold" />
+              <Ratings.Widget widgetHoverColor="gold" />
+              <Ratings.Widget widgetHoverColor="gold" />
+              <Ratings.Widget widgetHoverColor="gold" />
+              <Ratings.Widget widgetHoverColor="gold" />
+            </Ratings>
+            <div>Goodreads rating: {this.state.avgRating}</div>
+          </div>
           <input
             type="text"
             name="description"

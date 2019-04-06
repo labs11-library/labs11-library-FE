@@ -14,7 +14,8 @@ class BookSearch extends Component {
       title: "",
       authors: "",
       image: "",
-      description: ""
+      description: "",
+      average_rating: null
     },
     isAdding: false
   };
