@@ -30,7 +30,7 @@ class RequestDetails extends Component {
   confirmCheckout = () => {
     const { checkoutRequestId, bookId } = this.props.request;
     const userId = localStorage.getItem("userId");
-    this.props.addCheckout(checkoutRequestId, bookId);
+    this.props.addCheckout(userId, checkoutRequestId);
     axios
       .put(`${baseUrl}/books/${bookId}`, { available: false })
       .then(res => {
