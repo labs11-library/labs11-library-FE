@@ -13,6 +13,7 @@ import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import ChatApp from "../Chat/ChatApp";
 import UpdateInventoryForm from "./UpdateInventoryForm.js";
 import SingleInventoryDetails from "./SingleInventoryDetails.js";
+import Auth from "../Auth/Auth";
 
 class SingleInventory extends Component {
   constructor(props) {
@@ -112,4 +113,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { getSingleInventory, editInventory, deleteInventory, getLoggedInUser }
-)(SingleInventory);
+)(Auth(SingleInventory));

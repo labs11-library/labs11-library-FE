@@ -4,7 +4,9 @@ import backendBaseUrl from "../../url";
 
 import SearchedBookTile from "./SearchedBookTile";
 import AddBook from "./AddBook";
-export default class BookSearch extends Component {
+import Auth from "../Auth/Auth";
+
+class BookSearch extends Component {
   state = {
     searchText: "",
     searchResults: [],
@@ -82,3 +84,5 @@ export default class BookSearch extends Component {
     }
   }
 }
+
+export default Auth(BookSearch);

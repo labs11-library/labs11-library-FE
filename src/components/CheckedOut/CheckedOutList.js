@@ -3,6 +3,8 @@ import CheckedOutBookDetails from "./CheckedOutBookDetails";
 
 import { connect } from "react-redux";
 import { getCheckouts } from "../../redux/actions/checkoutActions.js";
+import Auth from "../Auth/Auth";
+
 class CheckedOutList extends Component {
   constructor() {
     super();
@@ -120,4 +122,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getCheckouts }
-)(CheckedOutList);
+)(Auth(CheckedOutList));

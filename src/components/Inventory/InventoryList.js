@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getAllInventory } from "../../redux/actions/inventoryActions.js";
 import InventoryDetails from "./InventoryDetails.js";
+import Auth from "../Auth/Auth";
+
 class Inventory extends Component {
   constructor() {
     super();
@@ -72,4 +74,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getAllInventory }
-)(Inventory);
+)(Auth(Inventory));

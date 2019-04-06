@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import RequestDetails from "./RequestDetails";
 import { connect } from "react-redux";
 import { getCheckoutRequests } from "../../redux/actions/checkoutActions.js";
+import Auth from "../Auth/Auth";
 
 class Requests extends Component {
   constructor() {
@@ -90,4 +91,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getCheckoutRequests }
-)(Requests);
+)(Auth(Requests));

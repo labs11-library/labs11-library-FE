@@ -16,6 +16,7 @@ import {
   BookImg,
   Availability
 } from "./styles";
+import Auth from "../Auth/Auth";
 
 class SingleBook extends Component {
   constructor(props) {
@@ -167,4 +168,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { getSingleBook, getLoggedInUser, addCheckoutRequest }
-)(SingleBook);
+)(Auth(SingleBook));
