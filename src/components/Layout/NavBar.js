@@ -2,6 +2,10 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
+  const loggedIn = localStorage.getItem("jwt") ? true : false;
+  function logOut() {
+    localStorage.clear();
+  }
   return (
     <div
       style={{
@@ -24,7 +28,8 @@ const NavBar = () => {
       <NavLink to="/add-book">Add book</NavLink>
       <NavLink to="/notifications">Notifications</NavLink>
       <NavLink to="/profile">Profile</NavLink>
-      <NavLink to="/signup">Signup</NavLink>
+      {!loggedIn && <NavLink to="/signup">Signup</NavLink>}
+      {loggedIn && <NavLink onClick={logOut}>Logout</NavLink>}
     </div>
   );
 };

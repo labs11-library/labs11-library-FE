@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import backendBaseUrl from '../../url'
+import backendBaseUrl from "../../url";
 
 import SearchedBookTile from "./SearchedBookTile";
 import AddBook from "./AddBook";
@@ -72,8 +72,10 @@ export default class BookSearch extends Component {
             onChange={this.handleChange}
           />
           {this.firstTenBooks().map((book, id) => {
-            console.log(book)
-            return <SearchedBookTile key={id} book={book} addBook={this.addBook} />;
+            console.log(book);
+            return (
+              <SearchedBookTile key={id} book={book} addBook={this.addBook} />
+            );
           })}
         </div>
       );

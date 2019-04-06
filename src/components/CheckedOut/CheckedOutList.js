@@ -50,26 +50,24 @@ class CheckedOutList extends Component {
   filterIncomingCheckouts = () => {
     let userId = localStorage.getItem("userId");
     return this.props.checkouts.filter(
-      checkout => checkout.lenderId.toString() === userId && checkout.returned === false
+      checkout =>
+        checkout.lenderId.toString() === userId && checkout.returned === false
     );
   };
 
   filterOutgoingCheckouts = () => {
     let userId = localStorage.getItem("userId");
     return this.props.checkouts.filter(
-      checkout => checkout.borrowerId.toString() === userId && checkout.returned === false
+      checkout =>
+        checkout.borrowerId.toString() === userId && checkout.returned === false
     );
   };
 
   filterTransactionHistory = () => {
-    return this.props.checkouts.filter(
-      checkout => checkout.returned === true
-    );
+    return this.props.checkouts.filter(checkout => checkout.returned === true);
   };
 
   render() {
-    console.log("this.props.checkouts", this.props.checkouts);
-    // ^^ so nasty
     if (this.props.loadingCheckouts) {
       return <h1>Loading...</h1>;
     } else {

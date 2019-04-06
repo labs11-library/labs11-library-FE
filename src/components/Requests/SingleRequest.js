@@ -14,8 +14,11 @@ class SingleRequest extends Component {
   }
 
   componentDidMount() {
-    const userId = localStorage.getItem("userId")
-    this.props.getSingleCheckoutRequest(userId, this.props.match.params.checkoutRequestId);
+    const userId = localStorage.getItem("userId");
+    this.props.getSingleCheckoutRequest(
+      userId,
+      this.props.match.params.checkoutRequestId
+    );
     this.props.getLoggedInUser();
   }
 
@@ -25,21 +28,22 @@ class SingleRequest extends Component {
     if (!this.props.singleCheckoutRequest) {
       return <h1>Loading...</h1>;
     }
-      const {
-        title,
-        authors,
-        borrower,
-        borrowerId
-      } = this.props.singleCheckoutRequest;
-      return (
-        <div>
-            <h2 style={{textAlign: "center"}}>Talk to {borrower} about exchanging {title} by {authors}</h2>  
-            <ChatApp user={this.props.loggedInUser} otherUserId={borrowerId}/>
-        </div>
-      );
-    }
+    const {
+      title,
+      authors,
+      borrower,
+      borrowerId
+    } = this.props.singleCheckoutRequest;
+    return (
+      <div>
+        <h2 style={{ textAlign: "center" }}>
+          Talk to {borrower} about exchanging {title} by {authors}
+        </h2>
+        <ChatApp user={this.props.loggedInUser} otherUserId={borrowerId} />
+      </div>
+    );
   }
-
+}
 
 const mapStateToProps = state => {
   return {

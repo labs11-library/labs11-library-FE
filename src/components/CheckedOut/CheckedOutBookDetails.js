@@ -2,9 +2,14 @@ import React from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
-import axios from 'axios';
-import baseUrl from '../../url';
-import { BookDetailsWrapper, BookImgWrapper, BookImg, DueDate } from '../Books/styles';
+import axios from "axios";
+import baseUrl from "../../url";
+import {
+  BookDetailsWrapper,
+  BookImgWrapper,
+  BookImg,
+  DueDate
+} from "../Books/styles";
 
 import * as moment from "moment";
 
