@@ -111,7 +111,6 @@ class App extends Component {
           path="/users/:userId/library/:bookId"
           render={props => <SingleLibraryDetails {...props} />}
         /> */}
-        <Route exact path="/loading" component={Loading} />
       </div>
     );
   }
