@@ -2,7 +2,12 @@ import React from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
-import { BookDetailsWrapper, BookImgWrapper, BookImg, Availability } from '../Books/styles';
+import {
+  BookDetailsWrapper,
+  BookImgWrapper,
+  BookImg,
+  Availability
+} from "../Books/styles";
 
 // import * as moment from "moment";
 
@@ -17,14 +22,14 @@ const BookDetails = props => {
     description
   } = props.book;
   const availability = available ? "Available" : "Checked out";
-  
+
   // function timeRemaining() {
   //   let now = moment(Date.now());
   //   let end = moment(dueDate);
   //   let duration = moment.duration(now.diff(end)).humanize();
   //   return duration;
   // }
-  
+
   // const dateDue = moment
   //           .utc(dueDate)
   //           .local()
@@ -39,7 +44,8 @@ const BookDetails = props => {
         <h2>{title}</h2>
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
-        {!available && <p>Due: {dueDate} </p>} {/* ({timeRemaining(dueDate)} from now) */}
+        {!available && <p>Due: {dueDate} </p>}{" "}
+        {/* ({timeRemaining(dueDate)} from now) */}
         <p>
           {description === ""
             ? "No description provided"

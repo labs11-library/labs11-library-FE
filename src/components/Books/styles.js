@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const BookDetailsWrapper = styled.div`
   width: 60vw;
@@ -10,16 +10,16 @@ export const BookDetailsWrapper = styled.div`
   min-height: 250px;
 
   h2 {
-      font-size: 18px;
+    font-size: 18px;
   }
 
   p {
-      font-size: 14px;
+    font-size: 14px;
   }
 
   @media (max-width: 700px) {
-        width: 90vw;
-    }
+    width: 90vw;
+  }
 `;
 export const BookImgWrapper = styled.div`
   width: 120px;
@@ -35,5 +35,5 @@ export const Availability = styled.p`
 `;
 
 export const DueDate = styled.p`
-color: red;
+  color: red;
 `;

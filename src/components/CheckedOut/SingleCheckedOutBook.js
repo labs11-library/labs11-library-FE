@@ -7,25 +7,35 @@ import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import ChatApp from "../Chat/ChatApp";
 import { Button } from "@progress/kendo-react-buttons";
 import baseUrl from "../../url";
+import Auth from "../Auth/Auth";
 
 class SingleCheckedOutBook extends Component {
-
   componentDidMount() {
-    const userId = localStorage.getItem('userId')
+    const userId = localStorage.getItem("userId");
     this.props.getSingleCheckout(userId, this.props.match.params.checkoutId);
     this.props.getLoggedInUser();
   }
 
-  timeRemaining = (dueDate) => {
+  timeRemaining = dueDate => {
     let now = moment(Date.now());
     let end = moment(dueDate);
     let duration = moment.duration(now.diff(end)).humanize();
     return duration;
-  }
+  };
 
   sendEmail = () => {
-    const { lenderEmail, lender, title, lenderId, borrowerEmail, borrower } = this.props.singleCheckout
-    const otherUserEmail = lenderId.toString() === localStorage.getItem("userId") ? borrowerEmail : lenderEmail
+    const {
+      lenderEmail,
+      lender,
+      title,
+      lenderId,
+      borrowerEmail,
+      borrower
+    } = this.props.singleCheckout;
+    const otherUserEmail =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? borrowerEmail
+        : lenderEmail;
     const lenderBorrowerName =
       lenderId.toString() === localStorage.getItem("userId")
         ? borrower
@@ -33,8 +43,12 @@ class SingleCheckedOutBook extends Component {
     const email = {
       recipient: otherUserEmail,
       sender: "blkfltchr@gmail.com",
-      subject: `${this.props.loggedInUser.firstName} wants to coordinate a return of ${title}`,
-      text: `Hey ${lenderBorrowerName}, check out bookmaps.app/notifications to coordinate a book return with ${this.props.loggedInUser.firstName}`
+      subject: `${
+        this.props.loggedInUser.firstName
+      } wants to coordinate a return of ${title}`,
+      text: `Hey ${lenderBorrowerName}, check out bookmaps.app/notifications to coordinate a book return with ${
+        this.props.loggedInUser.firstName
+      }`
     };
     console.log("email sent", email);
     fetch(
@@ -48,10 +62,11 @@ class SingleCheckedOutBook extends Component {
   render() {
     console.log("this.props.loadingCheckouts", this.props.loadingCheckouts);
     console.log("this.props.loadingUser", this.props.loadingUser);
-    if (!this.props.singleCheckout.lenderId) { // loadingCheckouts || this.props.loadingUser
-    return <h1>Loading...</h1> 
-  } else {
-    const {
+    if (!this.props.singleCheckout.lenderId) {
+      // loadingCheckouts || this.props.loadingUser
+      return <h1>Loading...</h1>;
+    } else {
+      const {
         title,
         authors,
         lender,
@@ -60,26 +75,36 @@ class SingleCheckedOutBook extends Component {
         borrower,
         borrowerId
       } = this.props.singleCheckout;
-    
+
       const dateDue = moment
-            .utc(dueDate)
-            .local()
-            .format("dddd, MMMM Do");
+        .utc(dueDate)
+        .local()
+        .format("dddd, MMMM Do");
       const lenderBorrowerName =
-      lenderId.toString() === localStorage.getItem("userId")
-        ? borrower
-        : lender;
-      const otherUserId = lenderId.toString() === localStorage.getItem("userId") ? borrowerId : lenderId
+        lenderId.toString() === localStorage.getItem("userId")
+          ? borrower
+          : lender;
+      const otherUserId =
+        lenderId.toString() === localStorage.getItem("userId")
+          ? borrowerId
+          : lenderId;
       return (
         <div>
-              <h2>Talk to {lenderBorrowerName} about returning {title} by {authors}</h2>
-              <p>Due: {dateDue} ({this.timeRemaining(dueDate)} from now)</p>
-              <Button onClick={this.sendEmail}>Send {lenderBorrowerName} an email notification</Button> <ChatApp user={this.props.loggedInUser} otherUserId={otherUserId}/>
+          <h2>
+            Talk to {lenderBorrowerName} about returning {title} by {authors}
+          </h2>
+          <p>
+            Due: {dateDue} ({this.timeRemaining(dueDate)} from now)
+          </p>
+          <Button onClick={this.sendEmail}>
+            Send {lenderBorrowerName} an email notification
+          </Button>{" "}
+          <ChatApp user={this.props.loggedInUser} otherUserId={otherUserId} />
         </div>
       );
-  }
     }
-    } 
+  }
+}
 
 const mapStateToProps = state => ({
   loadingCheckouts: state.checkoutReducer.loadingCheckouts,
@@ -91,4 +116,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getSingleCheckout, getLoggedInUser }
-)(SingleCheckedOutBook);
+)(Auth(SingleCheckedOutBook));

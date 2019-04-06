@@ -2,22 +2,29 @@ import React from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
-import axios from 'axios';
-import baseUrl from '../../url';
-import { BookDetailsWrapper, BookImgWrapper, BookImg, DueDate } from '../Books/styles';
+import axios from "axios";
+import baseUrl from "../../url";
+import {
+  BookDetailsWrapper,
+  BookImgWrapper,
+  BookImg,
+  DueDate
+} from "../Books/styles";
 
 import * as moment from "moment";
 
 const BookDetails = props => {
   const {
     title,
+    bookId,
     authors,
     image,
     lender,
     checkoutId,
     dueDate,
     lenderId,
-    borrower
+    borrower,
+    returned
   } = props.checkout;
 
   function timeRemaining(dueDate) {
@@ -30,15 +37,20 @@ const BookDetails = props => {
   const userId = localStorage.getItem("userId");
 
   function confirmReturn() {
+    axios.put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {
+      returned: true
+    });
     axios
-      .put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {
-        returned: true
-      })
+      .put(`${baseUrl}/books/${bookId}`, { available: true })
       .then(res => {
-        window.location.reload();
+        return res.data;
+      })
+
+      .then(res => {
         return res.data;
       })
       .catch(err => console.log(err));
+    window.location.reload();
   }
 
   const dateDue = moment
@@ -57,8 +69,12 @@ const BookDetails = props => {
       <div>
         <h2>{title}</h2>
         <div>by {authors}</div>
-        <div>Due on: {dateDue}</div>
-        <DueDate>Time until due: {timeRemaining(dueDate)}</DueDate>
+        {!returned && (
+          <div>
+            <div>Due on: {dateDue}</div>
+            <DueDate>Time until due: {timeRemaining(dueDate)}</DueDate>
+          </div>
+        )}
         <p>Contact {lenderBorrowerName} to arrange return</p>
         <Link to={`/my-library/checkouts/${checkoutId}`}>
           <Button>Send message</Button>

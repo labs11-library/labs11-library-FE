@@ -6,7 +6,12 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { getSingleInventory } from "../../redux/actions/inventoryActions.js";
 
-import { BookDetailsWrapper, BookImgWrapper, BookImg, Availability } from '../Books/styles';
+import {
+  BookDetailsWrapper,
+  BookImgWrapper,
+  BookImg,
+  Availability
+} from "../Books/styles";
 
 import * as moment from "moment";
 class SingleLibraryDetails extends Component {
