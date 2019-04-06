@@ -7,6 +7,7 @@ import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import ChatApp from "../Chat/ChatApp";
 import { Button } from "@progress/kendo-react-buttons";
 import baseUrl from "../../url";
+import Auth from "../Auth/Auth";
 
 class SingleCheckedOutBook extends Component {
   componentDidMount() {
@@ -115,4 +116,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getSingleCheckout, getLoggedInUser }
-)(SingleCheckedOutBook);
+)(Auth(SingleCheckedOutBook));

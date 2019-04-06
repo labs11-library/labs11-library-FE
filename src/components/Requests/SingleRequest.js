@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getSingleCheckoutRequest } from "../../redux/actions/checkoutActions.js";
 import ChatApp from "../Chat/ChatApp";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
+import Auth from "../Auth/Auth";
 
 class SingleRequest extends Component {
   constructor(props) {
@@ -56,4 +57,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { getSingleCheckoutRequest, getLoggedInUser }
-)(SingleRequest);
+)(Auth(SingleRequest));
