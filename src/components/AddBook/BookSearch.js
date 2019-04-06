@@ -71,8 +71,9 @@ export default class BookSearch extends Component {
             value={this.state.searchText}
             onChange={this.handleChange}
           />
-          {this.firstTenBooks().map(book => {
-            return <SearchedBookTile book={book} addBook={this.addBook} />;
+          {this.firstTenBooks().map((book, id) => {
+            console.log(book)
+            return <SearchedBookTile key={id} book={book} addBook={this.addBook} />;
           })}
         </div>
       );

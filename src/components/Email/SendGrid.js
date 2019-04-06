@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import axios from 'axios';
 import baseUrl from '../../url'
 
 class Sendgrid extends Component {
@@ -19,7 +18,8 @@ class Sendgrid extends Component {
 			`${baseUrl}/send-email?recipient=${email.recipient}&sender=${
 				email.sender
 			}&topic=${email.subject}&text=${email.text}`
-		) //query string url
+		)
+		.then(console.log("success"))
 		.catch(err => console.error(err));
 	};
 

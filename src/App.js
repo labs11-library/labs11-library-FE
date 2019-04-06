@@ -22,7 +22,6 @@ import BookSearch from "./components/AddBook/BookSearch.js";
 import UserProfile from "./components/Profile/UserProfile";
 import SingleRequest from "./components/Requests/SingleRequest.js";
 import LibraryList from "./components/ViewLibraries/LibraryList";
-import SingleLibraryDetails from "./components/ViewLibraries/SingleLibraryDetails";
 
 class App extends Component {
   setUsername = event => {

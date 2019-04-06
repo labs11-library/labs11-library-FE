@@ -3,7 +3,7 @@ import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import * as moment from "moment";
+// import * as moment from "moment";
 import {
   BookDetailsWrapper,
   BookImgWrapper,
@@ -12,7 +12,7 @@ import {
 } from "../Books/styles";
 
 const LibraryDetails = props => {
-  const userId = props.match.params.userId;
+  // const userId = props.match.params.userId;
   const {
     bookId,
     title,

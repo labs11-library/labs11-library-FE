@@ -30,7 +30,6 @@ const BookDetails = props => {
   //           .local()
   //           .format("dddd, MMMM Do");
 
-  console.log(dueDate)
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
