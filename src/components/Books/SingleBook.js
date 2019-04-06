@@ -17,6 +17,7 @@ import {
   Availability
 } from "./styles";
 import Auth from "../Auth/Auth";
+import Payment from "../Stripe/Payment.js";
 
 class SingleBook extends Component {
   constructor(props) {
@@ -120,10 +121,25 @@ class SingleBook extends Component {
                   ? "No description provided"
                   : `Description: ${description}`}
               </p>
-              <p>Contact {lender}</p>
-              <Button onClick={() => this.requestCheckout(bookId, lenderId)}>
-                Request checkout
-              </Button>
+              {
+                this.props.loggedInUser.stripeToken === null &&
+                <div>
+                  <i>Please enter your payment information before requesting checkout</i>
+                  <Payment />
+                  <p>Contact {lender}</p>
+                  <Button disabled onClick={() => this.requestCheckout(bookId, lenderId)}>
+                    Request checkout
+                  </Button>
+                </div>
+              }
+              { this.props.loggedInUser.stripeToken &&
+                <div>
+                  <p>Contact {lender}</p>
+                  <Button onClick={() => this.requestCheckout(bookId, lenderId)}>
+                    Request checkout
+                  </Button>
+                </div>
+              }
               {avgRating && (
                 <div>
                   <Ratings rating={avgRating} widgetRatedColors="gold">
