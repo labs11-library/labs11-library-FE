@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import RequestDetails from "./RequestDetails";
 import { connect } from "react-redux";
 import { getCheckoutRequests } from "../../redux/actions/checkoutActions.js";
+import Auth from "../Auth/Auth";
 
+import Loading from "../Loading/Loading.js";
 class Requests extends Component {
   constructor() {
     super();
@@ -32,20 +34,24 @@ class Requests extends Component {
   filterIncomingRequests = () => {
     let userId = localStorage.getItem("userId");
     return this.props.checkoutRequests.filter(
-      request => request.lenderId.toString() === userId && request.checkoutAccepted === false
+      request =>
+        request.lenderId.toString() === userId &&
+        request.checkoutAccepted === false
     );
   };
 
   filterOutgoingRequests = () => {
     let userId = localStorage.getItem("userId");
     return this.props.checkoutRequests.filter(
-      request => request.borrowerId.toString() === userId && request.checkoutAccepted === false
+      request =>
+        request.borrowerId.toString() === userId &&
+        request.checkoutAccepted === false
     );
   };
 
   render() {
     if (this.props.loadingRequests) {
-      return <h1>Loading...</h1>;
+      return <Loading />;
     } else if (this.props.checkoutRequests.length === 0) {
       return <h1>You have no checkout requests.</h1>;
     } else if (this.props.checkoutRequests) {
@@ -86,4 +92,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getCheckoutRequests }
-)(Requests);
+)(Auth(Requests));

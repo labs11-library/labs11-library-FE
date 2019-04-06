@@ -16,13 +16,16 @@ import {
   BookImg,
   Availability
 } from "./styles";
+import Auth from "../Auth/Auth";
+import Payment from "../Stripe/Payment.js";
 
+import Loading from "../Loading/Loading.js";
 class SingleBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
       singleBook: {},
-      showChat: false,
+      showChat: false
     };
   }
 
@@ -30,7 +33,7 @@ class SingleBook extends Component {
     this.props.getSingleBook(this.props.match.params.bookId);
     this.props.getLoggedInUser();
   }
-  
+
   exitChat = () => {
     this.setState({
       showChat: false
@@ -38,12 +41,16 @@ class SingleBook extends Component {
   };
 
   sendEmail = () => {
-    const { lenderEmail, lender, title } = this.props.singleBook
+    const { lenderEmail, lender, title } = this.props.singleBook;
     const email = {
       recipient: lenderEmail,
       sender: "blkfltchr@gmail.com",
-      subject: `${this.props.loggedInUser.firstName} wants to checkout ${title}`,
-      text: `Hey ${lender}, check out bookmaps.app/notifications to coordinate an exchange with ${this.props.loggedInUser.firstName}`
+      subject: `${
+        this.props.loggedInUser.firstName
+      } wants to checkout ${title}`,
+      text: `Hey ${lender}, check out bookmaps.app/notifications to coordinate an exchange with ${
+        this.props.loggedInUser.firstName
+      }`
     };
     console.log("email sent", email);
     fetch(
@@ -56,16 +63,15 @@ class SingleBook extends Component {
 
   requestCheckout = (bookId, lenderId) => {
     this.props.addCheckoutRequest(bookId, lenderId);
-    this.sendEmail()
+    this.sendEmail();
     this.setState({
       showChat: true
-    })
-  }
+    });
+  };
 
   render() {
-    console.log("this.state.email", this.state.email)
     if (!this.props.singleBook.image) {
-      return <h1>Loading...</h1>;
+      return <Loading />;
     } else if (!this.props.loading && this.state.showChat === false) {
       const {
         bookId,
@@ -115,8 +121,32 @@ class SingleBook extends Component {
                   ? "No description provided"
                   : `Description: ${description}`}
               </p>
-              <p>Contact {lender}</p>
-              <Button  onClick={() => this.requestCheckout(bookId, lenderId)} >Request checkout</Button>
+              {this.props.loggedInUser.stripeToken === null && (
+                <div>
+                  <i>
+                    Please enter your payment information before requesting
+                    checkout
+                  </i>
+                  <Payment />
+                  <p>Contact {lender}</p>
+                  <Button
+                    disabled
+                    onClick={() => this.requestCheckout(bookId, lenderId)}
+                  >
+                    Request checkout
+                  </Button>
+                </div>
+              )}
+              {this.props.loggedInUser.stripeToken && (
+                <div>
+                  <p>Contact {lender}</p>
+                  <Button
+                    onClick={() => this.requestCheckout(bookId, lenderId)}
+                  >
+                    Request checkout
+                  </Button>
+                </div>
+              )}
               {avgRating && (
                 <div>
                   <Ratings rating={avgRating} widgetRatedColors="gold">
@@ -161,4 +191,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { getSingleBook, getLoggedInUser, addCheckoutRequest }
-)(SingleBook);
+)(Auth(SingleBook));

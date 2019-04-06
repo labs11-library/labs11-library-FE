@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getAllInventory } from "../../redux/actions/inventoryActions.js";
 import InventoryDetails from "./InventoryDetails.js";
+import Auth from "../Auth/Auth";
+
+import Loading from "../Loading/Loading.js";
 class Inventory extends Component {
   constructor() {
     super();
@@ -36,7 +39,7 @@ class Inventory extends Component {
   }
   render() {
     if (this.props.addingBook || this.props.loadingInventory) {
-      return <h1>Loading...</h1>;
+      return <Loading />;
     } else {
       return (
         <div>
@@ -72,4 +75,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getAllInventory }
-)(Inventory);
+)(Auth(Inventory));

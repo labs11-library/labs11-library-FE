@@ -5,6 +5,9 @@ import { getLoggedInUser } from "../../redux/actions/authActions.js";
 
 import UpdateUserProfile from "./UpdateUserProfile";
 import UserProfileCard from "./UserProfileCard";
+
+import Auth from "../Auth/Auth";
+
 class UserProfile extends Component {
   state = {
     updatingInfo: false
@@ -51,4 +54,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getLoggedInUser }
-)(UserProfile);
+)(Auth(UserProfile));

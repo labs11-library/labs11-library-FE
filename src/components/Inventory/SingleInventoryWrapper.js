@@ -13,7 +13,9 @@ import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import ChatApp from "../Chat/ChatApp";
 import UpdateInventoryForm from "./UpdateInventoryForm.js";
 import SingleInventoryDetails from "./SingleInventoryDetails.js";
+import Auth from "../Auth/Auth";
 
+import Loading from "../Loading/Loading.js";
 class SingleInventory extends Component {
   constructor(props) {
     super(props);
@@ -54,7 +56,7 @@ class SingleInventory extends Component {
   };
   render() {
     if (!this.props.singleInventory) {
-      return <h1>Loading...</h1>;
+      return <Loading />;
     } else if (!this.state.updating && !this.state.showChat) {
       return (
         <React.Fragment>
@@ -112,4 +114,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { getSingleInventory, editInventory, deleteInventory, getLoggedInUser }
-)(SingleInventory);
+)(Auth(SingleInventory));

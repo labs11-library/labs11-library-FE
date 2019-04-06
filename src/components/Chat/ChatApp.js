@@ -3,6 +3,8 @@ import Chat from "twilio-chat";
 import { Chat as ChatUI } from "@progress/kendo-react-conversational-ui";
 import { connect } from "react-redux";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
+
+import Loading from "../Loading/Loading.js";
 class ChatApp extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,7 @@ class ChatApp extends Component {
     this.user = {
       id: props.user.userId,
       username: props.user.firstName
-    }
+    };
 
     this.setupChatClient = this.setupChatClient.bind(this);
     this.messagesLoaded = this.messagesLoaded.bind(this);
@@ -26,22 +28,27 @@ class ChatApp extends Component {
 
   componentDidMount() {
     this.props.getLoggedInUser();
-      fetch("https://book-maps.herokuapp.com/chat/token", {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        method: "POST",
-        body: `identity=${encodeURIComponent(this.props.user.firstName)}`
-      })
-        .then(res => res.json())
-        .then(data => Chat.create(data.token))
-        .then(this.setupChatClient)
-        .catch(this.handleError);
+    fetch("https://book-maps.herokuapp.com/chat/token", {
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      method: "POST",
+      body: `identity=${encodeURIComponent(this.props.user.firstName)}`
+    })
+      .then(res => res.json())
+      .then(data => Chat.create(data.token))
+      .then(this.setupChatClient)
+      .catch(this.handleError);
   }
   getChannelName = () => {
-    const userOne = this.props.user.userId > this.props.otherUserId ? this.props.user.userId : this.props.otherUserId
-    const userTwo = this.props.user.userId > this.props.otherUserId ? this.props.otherUserId : this.props.user.userId
-    console.log(`${userOne}-${userTwo}`)
-    return `${userOne}-${userTwo}`
-  }
+    const userOne =
+      this.props.user.userId > this.props.otherUserId
+        ? this.props.user.userId
+        : this.props.otherUserId;
+    const userTwo =
+      this.props.user.userId > this.props.otherUserId
+        ? this.props.otherUserId
+        : this.props.user.userId;
+    return `${userOne}-${userTwo}`;
+  };
 
   setupChatClient(client) {
     this.client = client;
@@ -50,7 +57,9 @@ class ChatApp extends Component {
       .then(channel => channel)
       .catch(error => {
         if (error.body.code === 50300) {
-          return this.client.createChannel({ uniqueName: this.getChannelName() });
+          return this.client.createChannel({
+            uniqueName: this.getChannelName()
+          });
         } else {
           this.handleError(error);
         }
@@ -69,14 +78,12 @@ class ChatApp extends Component {
   }
 
   handleError(error) {
-    console.error(error);
     this.setState({
       error: "Could not load chat."
     });
   }
 
   twilioMessageToKendoMessage(message) {
-    console.log("twilioMessageToKendoMessage", message)
     return {
       text: message.body,
       author: { id: message.author, name: message.author },
@@ -108,12 +115,14 @@ class ChatApp extends Component {
   }
 
   render() {
-    console.log("loggedinuser", this.props.user)
-    console.log("otheruserid", this.props.otherUserId)
     if (this.state.error) {
       return <p>{this.state.error}</p>;
-    } else if (this.state.isLoading && !this.props.user && !this.props.otherUserId) {
-      return <p>Loading chat...</p>;
+    } else if (
+      this.state.isLoading &&
+      !this.props.user &&
+      !this.props.otherUserId
+    ) {
+      return <Loading />;
     }
     return (
       <ChatUI

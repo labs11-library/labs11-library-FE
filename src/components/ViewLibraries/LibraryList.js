@@ -5,11 +5,12 @@ import { getAllInventory } from "../../redux/actions/inventoryActions.js";
 import { getSingleUser } from "../../redux/actions/userActions.js";
 import LibraryDetails from "./LibraryDetails";
 
+import Loading from "../Loading/Loading.js";
+
 class LibraryList extends Component {
   constructor() {
     super();
     this.state = {
-      // inventory: [],
       searchText: ""
     };
   }
@@ -40,7 +41,7 @@ class LibraryList extends Component {
   }
   render() {
     if (this.props.loadingInventory || this.props.loadingUser) {
-      return <h1>Loading...</h1>;
+      return <Loading />;
     } else if (this.props.inventory.length === 0) {
       const { firstName, lastName } = this.props.singleUser;
       return (
