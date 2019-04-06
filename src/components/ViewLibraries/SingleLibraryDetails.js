@@ -6,6 +6,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { getSingleInventory } from "../../redux/actions/inventoryActions.js";
 
+import Loading from "../Loading/Loading.js";
+
 import {
   BookDetailsWrapper,
   BookImgWrapper,
@@ -41,7 +43,7 @@ class SingleLibraryDetails extends Component {
     const availability = available ? "Available" : "Checked out";
     console.log(this.props.match.params.userId);
     if (this.props.loading) {
-      return <h1>Loading...</h1>;
+      return <Loading />;
     } else {
       return (
         <BookDetailsWrapper>

@@ -6,6 +6,7 @@ import ChatApp from "../Chat/ChatApp";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import Auth from "../Auth/Auth";
 
+import Loading from "../Loading/Loading.js";
 class SingleRequest extends Component {
   constructor(props) {
     super(props);
@@ -24,10 +25,8 @@ class SingleRequest extends Component {
   }
 
   render() {
-    console.log("this.state", this.state);
-    console.log("this.props", this.props);
     if (!this.props.singleCheckoutRequest) {
-      return <h1>Loading...</h1>;
+      return <Loading />;
     }
     const {
       title,

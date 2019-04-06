@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { getCheckouts } from "../../redux/actions/checkoutActions.js";
 import Auth from "../Auth/Auth";
 
+import Loading from "../Loading/Loading.js";
 class CheckedOutList extends Component {
   constructor() {
     super();
@@ -71,7 +72,7 @@ class CheckedOutList extends Component {
 
   render() {
     if (this.props.loadingCheckouts) {
-      return <h1>Loading...</h1>;
+      return <Loading />;
     } else {
       return (
         <div>

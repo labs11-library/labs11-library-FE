@@ -19,6 +19,7 @@ import {
 import Auth from "../Auth/Auth";
 import Payment from "../Stripe/Payment.js";
 
+import Loading from "../Loading/Loading.js";
 class SingleBook extends Component {
   constructor(props) {
     super(props);
@@ -69,9 +70,8 @@ class SingleBook extends Component {
   };
 
   render() {
-    console.log("this.state.email", this.state.email);
     if (!this.props.singleBook.image) {
-      return <h1>Loading...</h1>;
+      return <Loading />;
     } else if (!this.props.loading && this.state.showChat === false) {
       const {
         bookId,
@@ -121,25 +121,32 @@ class SingleBook extends Component {
                   ? "No description provided"
                   : `Description: ${description}`}
               </p>
-              {
-                this.props.loggedInUser.stripeToken === null &&
+              {this.props.loggedInUser.stripeToken === null && (
                 <div>
-                  <i>Please enter your payment information before requesting checkout</i>
+                  <i>
+                    Please enter your payment information before requesting
+                    checkout
+                  </i>
                   <Payment />
                   <p>Contact {lender}</p>
-                  <Button disabled onClick={() => this.requestCheckout(bookId, lenderId)}>
+                  <Button
+                    disabled
+                    onClick={() => this.requestCheckout(bookId, lenderId)}
+                  >
                     Request checkout
                   </Button>
                 </div>
-              }
-              { this.props.loggedInUser.stripeToken &&
+              )}
+              {this.props.loggedInUser.stripeToken && (
                 <div>
                   <p>Contact {lender}</p>
-                  <Button onClick={() => this.requestCheckout(bookId, lenderId)}>
+                  <Button
+                    onClick={() => this.requestCheckout(bookId, lenderId)}
+                  >
                     Request checkout
                   </Button>
                 </div>
-              }
+              )}
               {avgRating && (
                 <div>
                   <Ratings rating={avgRating} widgetRatedColors="gold">

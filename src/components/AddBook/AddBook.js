@@ -4,6 +4,7 @@ import { addNewBook } from "../../redux/actions/bookActions.js";
 import { connect } from "react-redux";
 import Ratings from "react-ratings-declarative";
 
+import Loading from "../Loading/Loading.js";
 class AddBook extends Component {
   constructor(props) {
     super(props);
@@ -31,9 +32,8 @@ class AddBook extends Component {
     }
   }
   render() {
-    console.log(this.state);
     if (this.props.fetchingBooks) {
-      return <h1>Adding your new book...</h1>;
+      return <Loading />;
     } else {
       return (
         <div>
