@@ -25,6 +25,7 @@ class RequestDetails extends Component {
       })
       .catch(err => console.log(err));
     this.sendEmail();
+    window.location.reload();
   };
 
   confirmCheckout = () => {
@@ -37,6 +38,7 @@ class RequestDetails extends Component {
         return res.data;
       })
       .catch(err => console.log(err));
+      window.location.reload();
     // axios
     //   .put(`${baseUrl}/users/${userId}/checkoutRequest/${checkoutRequestId}`, { checkoutAccepted: true })
     //   .then(res => {
