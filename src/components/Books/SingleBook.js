@@ -137,7 +137,7 @@ class SingleBook extends Component {
                   </Button>
                 </div>
               )}
-              {this.props.loggedInUser.stripeToken && (
+              {this.props.loggedInUser.stripe_email && (
                 <div>
                   <p>Contact {lender}</p>
                   <Button
