@@ -6,7 +6,7 @@ import {
   ADDING_BOOK,
   ADDING_BOOK_SUCCESS,
   GETTING_SINGLE_CHECKED_OUT_BOOK,
-  GET_SINGLE_CHECKED_OUT_BOOK_SUCCESS
+  GET_SINGLE_CHECKED_OUT_BOOK_SUCCESS,
 } from "../actions/bookActions.js";
 
 const initialState = {
@@ -54,12 +54,12 @@ export default function bookReducer(state = initialState, action) {
     case GETTING_SINGLE_CHECKED_OUT_BOOK:
       return {
         ...state,
-        loading: true
+        fetchingBooks: true
       };
     case GET_SINGLE_CHECKED_OUT_BOOK_SUCCESS:
       return {
         ...state,
-        loading: false,
+        fetchingBooks: false,
         singleCheckedOutBook: action.payload
       };
     default:

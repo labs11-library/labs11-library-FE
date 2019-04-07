@@ -7,10 +7,10 @@ import Auth from "../Auth/Auth";
 
 import Loading from "../Loading/Loading.js";
 class CheckedOutList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      checkouts: [],
+      // checkouts: [],
       filter: "all",
       searchText: ""
     };
@@ -19,13 +19,13 @@ class CheckedOutList extends Component {
     const userId = localStorage.getItem("userId");
     this.props.getCheckouts(userId);
   }
-  componentWillReceiveProps(newProps) {
-    if (newProps.checkouts !== this.props.checkouts) {
-      this.setState({
-        checkouts: this.props.checkouts
-      });
-    }
-  }
+  // componentWillReceiveProps(newProps) {
+  //   if (newProps.checkouts !== this.props.checkouts) {
+  //     this.setState({
+  //       checkouts: this.props.checkouts
+  //     });
+  //   }
+  // }
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({
@@ -83,6 +83,7 @@ class CheckedOutList extends Component {
                 <CheckedOutBookDetails
                   key={checkout.checkoutId}
                   checkout={checkout}
+                  goToMyLibrary={this.props.goToMyLibrary}
                 />
               );
             })}
