@@ -3,6 +3,7 @@ import Ratings from "react-ratings-declarative";
 
 import { connect } from "react-redux";
 import { addNewReview } from "../../redux/actions/reviewActions";
+import Auth from "../Auth/Auth";
 
 class ReviewForm extends Component {
   constructor(props) {
@@ -38,7 +39,6 @@ class ReviewForm extends Component {
   };
 
   render() {
-    console.log("this.state review-form", this.state);
     return (
       <div>
         <form>
@@ -72,4 +72,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { addNewReview }
-)(ReviewForm);
+)(Auth(ReviewForm));

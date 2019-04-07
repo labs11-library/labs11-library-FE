@@ -8,6 +8,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import { connect } from "react-redux";
 import { getBooks } from "../../redux/actions/bookActions.js";
 
+import Loading from "../Loading/Loading.js";
 class Books extends Component {
   constructor() {
     super();
@@ -48,24 +49,15 @@ class Books extends Component {
       return this.searchBooks().filter(book => book.available === true);
     }
   };
-  componentWillReceiveProps(newProps) {
-    if (newProps.books !== this.state.books) {
-      this.setState({
-        books: this.props.books
-      });
-    }
-  }
   componentDidMount() {
     this.props.getBooks();
   }
-
   render() {
     if (this.props.fetchingBooks) {
-      return <h1>Loading...</h1>;
+      return <Loading />;
     } else {
       return (
         <div>
-          <h1>All books</h1>
           <input
             placeholder="Search books"
             name="searchText"
@@ -89,13 +81,7 @@ class Books extends Component {
           </div>
           <div>
             {this.filteredBooks().map(book => {
-              return (
-                <BookDetails
-                  key={book.bookId}
-                  book={book}
-                  username={this.state.username}
-                />
-              );
+              return <BookDetails key={book.bookId} book={book} />;
             })}
           </div>
         </div>

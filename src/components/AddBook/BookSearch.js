@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import backendBaseUrl from '../../url'
+import backendBaseUrl from "../../url";
 
 import SearchedBookTile from "./SearchedBookTile";
 import AddBook from "./AddBook";
-export default class BookSearch extends Component {
+import Auth from "../Auth/Auth";
+
+class BookSearch extends Component {
   state = {
     searchText: "",
     searchResults: [],
@@ -12,7 +14,8 @@ export default class BookSearch extends Component {
       title: "",
       authors: "",
       image: "",
-      description: ""
+      description: "",
+      average_rating: null
     },
     isAdding: false
   };
@@ -71,11 +74,16 @@ export default class BookSearch extends Component {
             value={this.state.searchText}
             onChange={this.handleChange}
           />
-          {this.firstTenBooks().map(book => {
-            return <SearchedBookTile book={book} addBook={this.addBook} />;
+          {this.firstTenBooks().map((book, id) => {
+            console.log(book);
+            return (
+              <SearchedBookTile key={id} book={book} addBook={this.addBook} />
+            );
           })}
         </div>
       );
     }
   }
 }
+
+export default Auth(BookSearch);

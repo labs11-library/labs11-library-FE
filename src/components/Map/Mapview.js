@@ -115,9 +115,9 @@ class Mapview extends Component {
 
     //Map over all users
     this.state.users.map(allUsers => {
-      var str = `<a href="https://bookmaps.netlify.com/${
+      var str = `<a href="https://bookmaps.netlify.com/users/${
         allUsers.userId
-      }/inventory" target="_blank">HERE</a><br>`;
+      }/library" target="_blank">HERE</a><br>`;
       var contentString = `Click ${str} to visit ${
         allUsers.firstName
       }'s bookshelf`;
@@ -145,10 +145,16 @@ class Mapview extends Component {
 
     // Create Marker for User
     if (this.state.haveUserLocation) {
+      var pinIcon = {
+        url: "http://maps.google.com/mapfiles/kml/paddle/blu-circle.png",
+        scaledSize: new window.google.maps.Size(45, 40)
+      };
       var marker = new window.google.maps.Marker({
         position: this.state.location,
         map: map,
-        title: "You are here"
+        title: "You are here",
+        icon: pinIcon,
+        zIndex: 999
       });
     }
   };

@@ -2,11 +2,12 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { getAllInventory } from "../../redux/actions/inventoryActions.js";
-import InventoryDetails from "./InventoryDetails.js";
-import Auth from "../Auth/Auth";
+import { getSingleUser } from "../../redux/actions/userActions.js";
+import LibraryDetails from "./LibraryDetails";
 
 import Loading from "../Loading/Loading.js";
-class Inventory extends Component {
+
+class LibraryList extends Component {
   constructor() {
     super();
     this.state = {
@@ -31,19 +32,30 @@ class Inventory extends Component {
   };
   viewBook = bookId => {
     let userId = localStorage.getItem("userId");
-    this.props.params.history.push(`${userId}/inventory/${bookId}`);
+    this.props.params.history.push(`${userId}/library/${bookId}`);
   };
   componentDidMount() {
-    const userId = localStorage.getItem("userId");
+    const userId = this.props.match.params.userId;
     this.props.getAllInventory(userId);
+    this.props.getSingleUser(userId);
   }
   render() {
-    if (this.props.addingBook || this.props.loadingInventory) {
+    if (this.props.loadingInventory || this.props.loadingUser) {
       return <Loading />;
+    } else if (this.props.inventory.length === 0) {
+      const { firstName, lastName } = this.props.singleUser;
+      return (
+        <h1>
+          There are no books in {firstName} {lastName}'s library.
+        </h1>
+      );
     } else {
+      const { firstName, lastName } = this.props.singleUser;
       return (
         <div>
-          <h1>Inventory</h1>
+          <h1>
+            {firstName} {lastName}'s Library
+          </h1>
           <input
             placeholder="Search inventory"
             name="searchText"
@@ -53,7 +65,7 @@ class Inventory extends Component {
           <div>
             {this.searchBooks().map(book => {
               return (
-                <InventoryDetails
+                <LibraryDetails
                   book={book}
                   viewBook={this.viewBook}
                   key={book.bookId}
@@ -69,10 +81,11 @@ class Inventory extends Component {
 
 const mapStateToProps = state => ({
   loadingInventory: state.inventoryReducer.loadingInventory,
-  addingBook: state.bookReducer.fetchingBooks,
-  inventory: state.inventoryReducer.inventory
+  inventory: state.inventoryReducer.inventory,
+  singleUser: state.userReducer.singleUser,
+  loadingUser: state.userReducer.loadingUsers
 });
 export default connect(
   mapStateToProps,
-  { getAllInventory }
-)(Auth(Inventory));
+  { getAllInventory, getSingleUser }
+)(LibraryList);

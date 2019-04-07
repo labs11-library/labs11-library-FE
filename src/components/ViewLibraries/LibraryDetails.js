@@ -2,6 +2,8 @@ import React from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+// import * as moment from "moment";
 import {
   BookDetailsWrapper,
   BookImgWrapper,
@@ -9,9 +11,7 @@ import {
   Availability
 } from "../Books/styles";
 
-// import * as moment from "moment";
-
-const BookDetails = props => {
+const LibraryDetails = props => {
   const {
     bookId,
     title,
@@ -31,9 +31,9 @@ const BookDetails = props => {
   // }
 
   // const dateDue = moment
-  //           .utc(dueDate)
-  //           .local()
-  //           .format("dddd, MMMM Do");
+  //   .utc(dueDate)
+  //   .local()
+  //   .format("dddd, MMMM Do");
 
   return (
     <BookDetailsWrapper>
@@ -51,11 +51,11 @@ const BookDetails = props => {
             ? "No description provided"
             : `Description: ${description}`}
         </p>
-        <Link to={`/my-library/my-books/${bookId}`}>
+        <Link to={`/books/${bookId}`}>
           <Button>See more details</Button>
         </Link>
       </div>
     </BookDetailsWrapper>
   );
 };
-export default BookDetails;
+export default withRouter(LibraryDetails);

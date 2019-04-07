@@ -5,7 +5,6 @@ import baseUrl from "../../url";
 import Login from "./Login";
 // axios defaults and interceptors
 axios.defaults.baseURL = `${baseUrl}`;
-// axios.defaults.baseURL = "http://localhost:9001/";
 axios.interceptors.request.use(
   function(options) {
     options.headers.authorization = localStorage.getItem("jwt");
@@ -13,7 +12,6 @@ axios.interceptors.request.use(
     return options;
   },
   function(error) {
-    // do something with the error
     return Promise.reject(error);
   }
 );
