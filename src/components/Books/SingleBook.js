@@ -121,7 +121,7 @@ class SingleBook extends Component {
                   ? "No description provided"
                   : `Description: ${description}`}
               </p>
-              {this.props.loggedInUser.stripeToken === null && (
+              {this.props.loggedInUser.stripe_email === null && (
                 <div>
                   <i>
                     Please enter your payment information before requesting
