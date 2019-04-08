@@ -145,7 +145,7 @@ class BookDetails extends Component {
                   : this.confirmBookReturn
               }
             >
-              {overdue && returned === false
+              {this.overdue() < 0 && returned === false
                 ? "Confirm Return"
                 : `Confirm Return (late fee of $${usdFee} will be charged)`}
             </Button>
