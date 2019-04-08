@@ -49,12 +49,13 @@ class BookDetails extends Component {
   };
 
   chargeLateFee = () => {
+    console.log(this.props.checkout);
     axios
-      .post(
-        `${baseUrl}/payment/charge`,
-        this.props.checkout.lateFee,
-        this.props.checkout.stripe_cust_id
-      )
+      .post(`${baseUrl}/payment/charge`, {
+        amount: this.props.checkout.lateFee,
+        customer: this.props.checkout.stripe_cust_id
+      })
+
       .then(res => console.log(res.data))
       .catch(err => console.log("Frontend error:", err));
   };
@@ -99,6 +100,7 @@ class BookDetails extends Component {
         ? borrower
         : lender;
 
+    const usdFee = lateFee / 100;
     return (
       <BookDetailsWrapper>
         <BookImgWrapper>
@@ -123,12 +125,22 @@ class BookDetails extends Component {
             <Button>Send message</Button>
           </Link>
           {lenderId.toString() === localStorage.getItem("userId") && (
-            <Button onClick={this.confirmBookReturn}>Confirm return</Button>
+            <Button
+              onClick={
+                lateFee
+                  ? this.confirmBookReturn && this.chargeLateFee
+                  : this.confirmBookReturn
+              }
+            >
+              {!lateFee
+                ? "Confirm Return"
+                : `Confirm Return (late fee of $${usdFee} will be charged)`}
+            </Button>
           )}
 
-          {lateFee && (
+          {/* {lateFee && (
             <Button onClick={this.chargeLateFee}>Charge late fee</Button>
-          )}
+          )} */}
         </div>
       </BookDetailsWrapper>
     );
