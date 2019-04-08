@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../url";
 import { addCheckout } from "../../redux/actions/checkoutActions.js";
@@ -12,6 +13,12 @@ class RequestDetails extends Component {
   componentDidMount() {
     this.props.getLoggedInUser();
   }
+
+  // componentWillReceiveProps(newProps) {
+  //   if (newProps.confirmReturn === false) {
+  //     this.props.history.push("/my-library");
+  //   }
+  // }
 
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
@@ -123,11 +130,14 @@ class RequestDetails extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.bookReducer.loadingCheckouts,
-    loggedInUser: state.authReducer.loggedInUser
+    loggedInUser: state.authReducer.loggedInUser,
+    // confirmReturn: state.checkoutReducers.confirmReturn
   };
 };
 
-export default connect(
+const RequestDetailsRedux = connect(
   mapStateToProps,
   { addCheckout, getLoggedInUser }
 )(RequestDetails);
+
+export default withRouter(RequestDetailsRedux);
