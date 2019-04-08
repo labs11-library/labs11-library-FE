@@ -13,6 +13,12 @@ class RequestDetails extends Component {
     this.props.getLoggedInUser();
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.confirmReturn === false) {
+      this.props.history.push("/my-library");
+    }
+  }
+
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
     axios
@@ -123,7 +129,8 @@ class RequestDetails extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.bookReducer.loadingCheckouts,
-    loggedInUser: state.authReducer.loggedInUser
+    loggedInUser: state.authReducer.loggedInUser,
+    confirmReturn: state.checkoutReducers.confirmReturn
   };
 };
 
