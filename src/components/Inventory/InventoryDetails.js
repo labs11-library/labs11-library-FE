@@ -1,13 +1,14 @@
 import React from "react";
 import "@progress/kendo-theme-material/dist/all.css";
-import { Button } from "@progress/kendo-react-buttons";
+import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import {
   BookDetailsWrapper,
   BookImgWrapper,
   BookImg,
+  BookTextContainer,
   Availability
-} from "../Books/styles";
+} from "../Styles/InventoryStyles.js";
 
 // import * as moment from "moment";
 
@@ -34,27 +35,34 @@ const BookDetails = props => {
   //           .utc(dueDate)
   //           .local()
   //           .format("dddd, MMMM Do");
-
+  const descriptionText =
+    description.length > 40 ? `${description.substr(0, 40)} ...` : description;
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
         <BookImg alt={title} src={image} />
       </BookImgWrapper>
-      <div>
-        <h2>{title}</h2>
+      <BookTextContainer>
+        <h2>
+          {title.substr(0, 25)}
+          {title.length > 25 && "..."}
+        </h2>
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
         {!available && <p>Due: {dueDate} </p>}{" "}
         {/* ({timeRemaining(dueDate)} from now) */}
         <p>
-          {description === ""
-            ? "No description provided"
-            : `Description: ${description}`}
+          {description === "" ? "No description provided" : descriptionText}
         </p>
-        <Link to={`/my-library/my-books/${bookId}`}>
-          <Button>See more details</Button>
+        <Link
+          style={{ textDecoration: "none" }}
+          to={`/my-library/my-books/${bookId}`}
+        >
+          <Button variant="contained" color="primary">
+            See more details
+          </Button>
         </Link>
-      </div>
+      </BookTextContainer>
     </BookDetailsWrapper>
   );
 };
