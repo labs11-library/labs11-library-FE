@@ -38,7 +38,7 @@ class RequestDetails extends Component {
         return res.data;
       })
       .catch(err => console.log(err));
-      window.location.reload();
+    window.location.reload();
     // axios
     //   .put(`${baseUrl}/users/${userId}/checkoutRequest/${checkoutRequestId}`, { checkoutAccepted: true })
     //   .then(res => {
@@ -91,8 +91,10 @@ class RequestDetails extends Component {
       description,
       lenderId,
       borrower,
+      borrowerId,
       lender
     } = this.props.request;
+    const userId = localStorage.getItem("userId");
     const lenderBorrowerName =
       lenderId.toString() === localStorage.getItem("userId")
         ? borrower
@@ -113,7 +115,13 @@ class RequestDetails extends Component {
           </Link>
           {/* The button below will DELETE by checkoutRequestId  */}
           <Button onClick={this.deleteRequest}>Delete request</Button>
-          <Button onClick={this.confirmCheckout}>Confirm book transfer</Button>
+          {userId === lenderId && (
+            <>
+              <Button onClick={this.confirmCheckout}>
+                Confirm book transfer
+              </Button>
+            </>
+          )}
         </div>
       </BookDetailsWrapper>
     );
