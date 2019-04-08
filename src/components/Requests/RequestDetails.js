@@ -14,11 +14,6 @@ class RequestDetails extends Component {
     this.props.getLoggedInUser();
   }
 
-  // componentWillReceiveProps(newProps) {
-  //   if (newProps.confirm === false) {
-  //     this.props.history.push("/my-library");
-  //   }
-  // }
 
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
@@ -44,7 +39,6 @@ class RequestDetails extends Component {
       .then(res => {
         return res.data;
       })
-      // .then( this.props.history.push("/my-library"))
       .catch(err => console.log(err));
       window.location.reload();
     // axios
@@ -54,8 +48,6 @@ class RequestDetails extends Component {
     //   })
     // .catch(err => console.log(err));
   };
-
-
 
   sendEmail = () => {
     const {
@@ -133,14 +125,14 @@ class RequestDetails extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.bookReducer.loadingCheckouts,
-    loggedInUser: state.authReducer.loggedInUser,
-    confirm: state.checkoutReducers.confirm
+    loggedInUser: state.authReducer.loggedInUser
+    
   };
 };
 
-const RequestDetailsRedux = connect(
+export default connect(
   mapStateToProps,
   { addCheckout, getLoggedInUser }
 )(RequestDetails);
 
-export default withRouter(RequestDetailsRedux);
+// export default withRouter(RequestDetailsRedux);
