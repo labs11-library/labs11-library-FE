@@ -28,6 +28,18 @@ class BookDetails extends Component {
     let duration = moment.duration(now.diff(end)).humanize();
     return duration;
   };
+
+  overdue = () => {
+    let now = moment(Date.now());
+    console.log("NOW", now);
+    let end = moment(this.props.checkout.dueDate);
+    console.log("END", end);
+    let duration = Math.floor(moment.duration(now.diff(end)).asDays());
+    // let duration = end - now;
+    console.log("DURATION", duration);
+    return duration * 100;
+  };
+
   confirmBookReturn = () => {
     const userId = localStorage.getItem("userId");
     // axios.put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {
@@ -52,7 +64,7 @@ class BookDetails extends Component {
     console.log(this.props.checkout);
     axios
       .post(`${baseUrl}/payment/charge`, {
-        amount: this.props.checkout.lateFee,
+        amount: this.overdue(),
         customer: this.props.checkout.stripe_cust_id
       })
 
@@ -82,6 +94,7 @@ class BookDetails extends Component {
       borrower,
       returned,
       checkoutDate,
+      overdue,
       lateFee
     } = this.props.checkout;
 
@@ -100,7 +113,7 @@ class BookDetails extends Component {
         ? borrower
         : lender;
 
-    const usdFee = lateFee / 100;
+    const usdFee = this.overdue() / 100;
     return (
       <BookDetailsWrapper>
         <BookImgWrapper>
@@ -132,7 +145,7 @@ class BookDetails extends Component {
                   : this.confirmBookReturn
               }
             >
-              {!lateFee
+              {overdue && returned === false
                 ? "Confirm Return"
                 : `Confirm Return (late fee of $${usdFee} will be charged)`}
             </Button>
