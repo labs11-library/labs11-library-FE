@@ -6,6 +6,15 @@ import InventoryDetails from "./InventoryDetails.js";
 import Auth from "../Auth/Auth";
 
 import Loading from "../Loading/Loading.js";
+import Paper from "@material-ui/core/Paper";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import SearchIcon from "@material-ui/icons/Search";
+import {
+  InventoryContainer,
+  Search,
+  CardContainer
+} from "../Styles/InventoryStyles.js";
 class Inventory extends Component {
   constructor() {
     super();
@@ -42,15 +51,29 @@ class Inventory extends Component {
       return <Loading />;
     } else {
       return (
-        <div>
-          <h1>Inventory</h1>
-          <input
-            placeholder="Search inventory"
-            name="searchText"
-            value={this.state.searchText}
-            onChange={this.handleChange}
-          />
-          <div>
+        <InventoryContainer>
+          <Paper
+            style={{
+              width: "400px",
+              margin: "20px auto",
+              padding: "2px 4px",
+              display: "flex",
+              alignItems: "center"
+            }}
+          >
+            <InputBase
+              placeholder="Search inventory"
+              type="text"
+              name="searchText"
+              value={this.state.searchText}
+              onChange={this.handleChange}
+              style={{ marginLeft: "8px", flex: "1" }}
+            />
+            <IconButton aria-label="Search" style={{ padding: "10px" }}>
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+          <CardContainer>
             {this.searchBooks().map(book => {
               return (
                 <InventoryDetails
@@ -60,8 +83,8 @@ class Inventory extends Component {
                 />
               );
             })}
-          </div>
-        </div>
+          </CardContainer>
+        </InventoryContainer>
       );
     }
   }
