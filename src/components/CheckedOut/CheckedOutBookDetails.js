@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link, withRouter } from "react-router-dom";
-// import axios from "axios";
-// import baseUrl from "../../url";
+import axios from "axios";
+import baseUrl from "../../url";
 import {
   BookDetailsWrapper,
   BookImgWrapper,
@@ -12,7 +12,7 @@ import {
 } from "../Books/styles";
 import { connect } from "react-redux";
 import { confirmReturn } from "../../redux/actions/checkoutActions";
-import { returnBook } from '../../redux/actions/inventoryActions.js'
+import { returnBook } from "../../redux/actions/inventoryActions.js";
 import Loading from "../Loading/Loading";
 
 import * as moment from "moment";
@@ -20,14 +20,14 @@ import * as moment from "moment";
 class BookDetails extends Component {
   constructor(props) {
     super(props);
-  } 
-   
-  timeRemaining = (dueDate) => {
+  }
+
+  timeRemaining = dueDate => {
     let now = moment(Date.now());
     let end = moment(dueDate);
     let duration = moment.duration(now.diff(end)).humanize();
     return duration;
-  }
+  };
   confirmBookReturn = () => {
     const userId = localStorage.getItem("userId");
     // axios.put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {
@@ -42,20 +42,31 @@ class BookDetails extends Component {
     //     return res.data;
     //   })
     //   .catch(err => console.log(err));
-    this.props.confirmReturn(this.props.checkout.checkoutId)
-    this.props.returnBook(this.props.checkout.bookId)
-    this.props.goToMyLibrary()
+    this.props.confirmReturn(this.props.checkout.checkoutId);
+    this.props.returnBook(this.props.checkout.bookId);
+    this.props.goToMyLibrary();
     // window.location.reload()
-  }
+  };
+
+  chargeLateFee = () => {
+    axios
+      .post(
+        `${baseUrl}/payment/charge`,
+        this.props.checkout.lateFee,
+        this.props.checkout.stripe_cust_id
+      )
+      .then(res => console.log(res.data))
+      .catch(err => console.log("Frontend error:", err));
+  };
   // componentWillReceiveProps(newProps) {
   //   if(newProps.loadingInventory === false) {
   //     window.location.reload()
   //   }
   // }
   render() {
-    console.log(this.props)
+    console.log(this.props);
     if (this.props.loadingCheckouts || this.props.loadingInventory) {
-      return <Loading />
+      return <Loading />;
     }
 
     const {
@@ -69,22 +80,25 @@ class BookDetails extends Component {
       lenderId,
       borrower,
       returned,
-      checkoutDate
+      checkoutDate,
+      lateFee
     } = this.props.checkout;
-  
+
     const dateDue = moment
       .utc(dueDate)
       .local()
       .format("dddd, MMMM Do");
 
     const dateCheckedOut = moment
-    .utc(checkoutDate)
-    .local()
-    .format("dddd, MMMM Do");
-  
+      .utc(checkoutDate)
+      .local()
+      .format("dddd, MMMM Do");
+
     const lenderBorrowerName =
-      lenderId.toString() === localStorage.getItem("userId") ? borrower : lender;
-  
+      lenderId.toString() === localStorage.getItem("userId")
+        ? borrower
+        : lender;
+
     return (
       <BookDetailsWrapper>
         <BookImgWrapper>
@@ -99,12 +113,11 @@ class BookDetails extends Component {
               <DueDate>Time until due: {this.timeRemaining(dueDate)}</DueDate>
             </div>
           )}
-          {returned &&
+          {returned && (
             <div>
               <p>Checkout date: {dateCheckedOut}</p>
             </div>
-
-          }
+          )}
           <p>Contact {lenderBorrowerName} to arrange return</p>
           <Link to={`/my-library/checkouts/${checkoutId}`}>
             <Button>Send message</Button>
@@ -112,16 +125,20 @@ class BookDetails extends Component {
           {lenderId.toString() === localStorage.getItem("userId") && (
             <Button onClick={this.confirmBookReturn}>Confirm return</Button>
           )}
+
+          {lateFee && (
+            <Button onClick={this.chargeLateFee}>Charge late fee</Button>
+          )}
         </div>
       </BookDetailsWrapper>
     );
   }
-};
+}
 
 const mapStateToProps = state => {
   return {
     loadingCheckouts: state.checkoutReducer.loadingCheckouts,
-    loadingInventory: state.inventoryReducer.loadingInventory,
+    loadingInventory: state.inventoryReducer.loadingInventory
   };
 };
 
