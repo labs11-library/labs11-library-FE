@@ -44,6 +44,7 @@ class RequestDetails extends Component {
       .then(res => {
         return res.data;
       })
+      .then( this.props.history.push("/my-library"))
       .catch(err => console.log(err));
       window.location.reload();
     // axios
