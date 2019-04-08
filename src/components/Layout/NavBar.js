@@ -1,61 +1,81 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { Component } from "react";
+import { NavLink, Link } from "react-router-dom";
+import './layout.css';
+class NavBar extends Component {
+  constructor() {
+    super()
+    this.state = {
+        menuClassName: "nav-links nav-links-none",
+    }
+}
 
-const NavBar = () => {
-  const loggedIn = localStorage.getItem("jwt") ? true : false;
-  function logOut() {
-    localStorage.clear();
+handleToggleMenu = () => {
+  if (this.state.menuClassName === "nav-links nav-links-none") {
+      this.setState({
+          menuClassName: "nav-links"
+      })
+  } else {
+      this.setState({
+          menuClassName: "nav-links nav-links-none"
+      })
   }
-  return (
-    <div>
-      {loggedIn && (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-evenly"
-          }}
-        >
-          <NavLink to="/">
-            {/* Book maps{" "} */}
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            <span role="img" aria-label="map">
-              🗺
-            </span>
-          </NavLink>
-          <NavLink to="/my-library">My Library</NavLink>
-          <NavLink to="/add-book">Add book</NavLink>
-          <NavLink to="/notifications">Notifications</NavLink>
-          <NavLink to="/profile">Profile</NavLink>
-          <NavLink onClick={logOut}>Logout</NavLink>
-        </div>
-      )}
-      {!loggedIn && (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-around"
-          }}
-        >
-          <NavLink to="/">
-            {/* Book maps{" "} */}
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            <span role="img" aria-label="map">
-              🗺
-            </span>
-          </NavLink>
-          <NavLink to="/signup">Signup</NavLink>
-        </div>
-      )}
-    </div>
-  );
+}
+
+logOut = () => {
+  localStorage.clear();
+}
+render() {
+    const loggedIn = localStorage.getItem("jwt") ? true : false;
+    return (
+      <div>
+        {loggedIn && (
+          <div className="navbar">
+            <Link to="/" className="bookmaps-logo">
+              {/* Book maps{" "} */}
+              <span role="img" aria-label="books">
+                📚
+              </span>
+              <span role="img" aria-label="map">
+                🗺
+              </span>
+            </Link>
+            <div className={this.state.menuClassName}>
+              <div><Link className="nav-link" to="/my-library"><span role="img" aria-label="books">📚</span> My Library</Link></div>
+              <div><Link className="nav-link" to="/add-book"><span role="img" aria-label="plus">➕</span> Add book</Link></div>
+              <div><Link className="nav-link" to="/notifications"><span role="img" aria-label="bell">🔔</span> Notifications</Link></div>
+              <div><Link className="nav-link" to="/profile"><span role="img" aria-label="profile">👤</span> Profile</Link></div>
+            </div>
+            <div><button className="burger" onClick={this.handleToggleMenu}>
+                    <div className="burger-div"></div>
+                    <div className="burger-div"></div>
+                    <div className="burger-div"></div>
+            </button></div>
+          </div>
+        )}
+        {!loggedIn && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-around"
+            }}
+          >
+            <NavLink to="/">
+              {/* Book maps{" "} */}
+              <span role="img" aria-label="books">
+                📚
+              </span>
+              <span role="img" aria-label="map">
+                🗺
+              </span>
+            </NavLink>
+            <NavLink to="/signup">Signup</NavLink>
+          </div>
+        )}
+      </div>
+    );
+  }
 };
 
 export default NavBar;
