@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../url";
 import { addCheckout } from "../../redux/actions/checkoutActions.js";
@@ -12,6 +13,7 @@ class RequestDetails extends Component {
   componentDidMount() {
     this.props.getLoggedInUser();
   }
+
 
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
@@ -38,7 +40,7 @@ class RequestDetails extends Component {
         return res.data;
       })
       .catch(err => console.log(err));
-      window.location.reload();
+    window.location.reload();
     // axios
     //   .put(`${baseUrl}/users/${userId}/checkoutRequest/${checkoutRequestId}`, { checkoutAccepted: true })
     //   .then(res => {
@@ -91,8 +93,10 @@ class RequestDetails extends Component {
       description,
       lenderId,
       borrower,
+      borrowerId,
       lender
     } = this.props.request;
+    const userId = localStorage.getItem("userId");
     const lenderBorrowerName =
       lenderId.toString() === localStorage.getItem("userId")
         ? borrower
@@ -113,7 +117,13 @@ class RequestDetails extends Component {
           </Link>
           {/* The button below will DELETE by checkoutRequestId  */}
           <Button onClick={this.deleteRequest}>Delete request</Button>
-          <Button onClick={this.confirmCheckout}>Confirm book transfer</Button>
+          {userId === lenderId.toString() && (
+            <>
+              <Button onClick={this.confirmCheckout}>
+                Confirm book transfer
+              </Button>
+            </>
+          )}
         </div>
       </BookDetailsWrapper>
     );
@@ -124,6 +134,7 @@ const mapStateToProps = state => {
   return {
     loading: state.bookReducer.loadingCheckouts,
     loggedInUser: state.authReducer.loggedInUser
+    
   };
 };
 
@@ -131,3 +142,5 @@ export default connect(
   mapStateToProps,
   { addCheckout, getLoggedInUser }
 )(RequestDetails);
+
+// export default withRouter(RequestDetailsRedux);
