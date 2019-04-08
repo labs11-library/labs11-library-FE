@@ -15,7 +15,7 @@ class RequestDetails extends Component {
   }
 
   // componentWillReceiveProps(newProps) {
-  //   if (newProps.confirmReturn === false) {
+  //   if (newProps.confirm === false) {
   //     this.props.history.push("/my-library");
   //   }
   // }
@@ -44,7 +44,7 @@ class RequestDetails extends Component {
       .then(res => {
         return res.data;
       })
-      .then( this.props.history.push("/my-library"))
+      // .then( this.props.history.push("/my-library"))
       .catch(err => console.log(err));
       window.location.reload();
     // axios
@@ -54,6 +54,8 @@ class RequestDetails extends Component {
     //   })
     // .catch(err => console.log(err));
   };
+
+
 
   sendEmail = () => {
     const {
@@ -132,7 +134,7 @@ const mapStateToProps = state => {
   return {
     loading: state.bookReducer.loadingCheckouts,
     loggedInUser: state.authReducer.loggedInUser,
-    // confirmReturn: state.checkoutReducers.confirmReturn
+    confirm: state.checkoutReducers.confirm
   };
 };
 

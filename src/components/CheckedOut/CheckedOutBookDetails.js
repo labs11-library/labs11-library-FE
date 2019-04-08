@@ -56,8 +56,9 @@ class BookDetails extends Component {
     //   .catch(err => console.log(err));
     this.props.confirmReturn(this.props.checkout.checkoutId);
     this.props.returnBook(this.props.checkout.bookId);
-    this.props.goToMyLibrary();
-    // window.location.reload()
+    // this.props.goToMyLibrary();
+    // this.props.history.push("/my-library");
+    window.location.reload()
   };
 
   chargeLateFee = () => {
