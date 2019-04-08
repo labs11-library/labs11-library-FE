@@ -34,7 +34,7 @@ class Payment extends React.Component {
     return (
       <StripeCheckout
         // amount={this.props}
-        amount={100}
+        // amount={100}
         billingAddress
         description="Bookmaps Membership"
         // image="https://yourdomain.tld/images/logo.svg"
