@@ -25,18 +25,20 @@ class RequestDetails extends Component {
       })
       .catch(err => console.log(err));
     this.sendEmail();
+    window.location.reload();
   };
 
   confirmCheckout = () => {
     const { checkoutRequestId, bookId } = this.props.request;
     const userId = localStorage.getItem("userId");
-    this.props.addCheckout(checkoutRequestId, bookId);
+    this.props.addCheckout(userId, checkoutRequestId);
     axios
       .put(`${baseUrl}/books/${bookId}`, { available: false })
       .then(res => {
         return res.data;
       })
       .catch(err => console.log(err));
+      window.location.reload();
     // axios
     //   .put(`${baseUrl}/users/${userId}/checkoutRequest/${checkoutRequestId}`, { checkoutAccepted: true })
     //   .then(res => {

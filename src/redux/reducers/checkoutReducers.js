@@ -10,7 +10,10 @@ import {
   GETTING_CHECKOUTS,
   GET_CHECKOUTS_SUCCESS,
   GETTING_SINGLE_CHECKOUT,
-  GET_SINGLE_CHECKOUT_SUCCESS
+  GET_SINGLE_CHECKOUT_SUCCESS,
+  DELETING_CHECKOUT,
+  DELETE_CHECKOUT_SUCCESS
+
 } from "../actions/checkoutActions.js";
 
 const initialState = {
@@ -88,6 +91,16 @@ export default function checkoutReducer(state = initialState, action) {
         loadingCheckouts: false,
         singleCheckout: action.payload
       };
+    case DELETING_CHECKOUT:
+      return {
+        ...state,
+        loadingCheckouts: true
+      }
+    case DELETE_CHECKOUT_SUCCESS:
+      return {
+        ...state,
+        loadingCheckouts: false
+      }  
     default:
       return state;
   }

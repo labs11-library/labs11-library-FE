@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../url";
 import {
@@ -10,80 +10,139 @@ import {
   BookImg,
   DueDate
 } from "../Books/styles";
+import { connect } from "react-redux";
+import { confirmReturn } from "../../redux/actions/checkoutActions";
+import { returnBook } from "../../redux/actions/inventoryActions.js";
+import Loading from "../Loading/Loading";
 
 import * as moment from "moment";
 
-const BookDetails = props => {
-  const {
-    title,
-    bookId,
-    authors,
-    image,
-    lender,
-    checkoutId,
-    dueDate,
-    lenderId,
-    borrower,
-    returned
-  } = props.checkout;
+class BookDetails extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-  function timeRemaining(dueDate) {
+  timeRemaining = dueDate => {
     let now = moment(Date.now());
     let end = moment(dueDate);
     let duration = moment.duration(now.diff(end)).humanize();
     return duration;
-  }
+  };
+  confirmBookReturn = () => {
+    const userId = localStorage.getItem("userId");
+    // axios.put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {
+    //   returned: true
+    // })
+    // .then(res => {
+    //   return res.data;
+    // })
+    // axios
+    //   .put(`${baseUrl}/books/${bookId}`, { available: true })
+    //   .then(res => {
+    //     return res.data;
+    //   })
+    //   .catch(err => console.log(err));
+    this.props.confirmReturn(this.props.checkout.checkoutId);
+    this.props.returnBook(this.props.checkout.bookId);
+    this.props.goToMyLibrary();
+    // window.location.reload()
+  };
 
-  const userId = localStorage.getItem("userId");
-
-  function confirmReturn() {
-    axios.put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {
-      returned: true
-    });
+  chargeLateFee = () => {
     axios
-      .put(`${baseUrl}/books/${bookId}`, { available: true })
-      .then(res => {
-        return res.data;
-      })
+      .post(
+        `${baseUrl}/payment/charge`,
+        this.props.checkout.lateFee,
+        this.props.checkout.stripe_cust_id
+      )
+      .then(res => console.log(res.data))
+      .catch(err => console.log("Frontend error:", err));
+  };
+  // componentWillReceiveProps(newProps) {
+  //   if(newProps.loadingInventory === false) {
+  //     window.location.reload()
+  //   }
+  // }
+  render() {
+    console.log(this.props);
+    if (this.props.loadingCheckouts || this.props.loadingInventory) {
+      return <Loading />;
+    }
 
-      .then(res => {
-        return res.data;
-      })
-      .catch(err => console.log(err));
-    window.location.reload();
+    const {
+      title,
+      bookId,
+      authors,
+      image,
+      lender,
+      checkoutId,
+      dueDate,
+      lenderId,
+      borrower,
+      returned,
+      checkoutDate,
+      lateFee
+    } = this.props.checkout;
+
+    const dateDue = moment
+      .utc(dueDate)
+      .local()
+      .format("dddd, MMMM Do");
+
+    const dateCheckedOut = moment
+      .utc(checkoutDate)
+      .local()
+      .format("dddd, MMMM Do");
+
+    const lenderBorrowerName =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? borrower
+        : lender;
+
+    return (
+      <BookDetailsWrapper>
+        <BookImgWrapper>
+          <BookImg alt={title} src={image} />
+        </BookImgWrapper>
+        <div>
+          <h2>{title}</h2>
+          <div>by {authors}</div>
+          {!returned && (
+            <div>
+              <div>Due on: {dateDue}</div>
+              <DueDate>Time until due: {this.timeRemaining(dueDate)}</DueDate>
+            </div>
+          )}
+          {returned && (
+            <div>
+              <p>Checkout date: {dateCheckedOut}</p>
+            </div>
+          )}
+          <p>Contact {lenderBorrowerName} to arrange return</p>
+          <Link to={`/my-library/checkouts/${checkoutId}`}>
+            <Button>Send message</Button>
+          </Link>
+          {lenderId.toString() === localStorage.getItem("userId") && (
+            <Button onClick={this.confirmBookReturn}>Confirm return</Button>
+          )}
+
+          {lateFee && (
+            <Button onClick={this.chargeLateFee}>Charge late fee</Button>
+          )}
+        </div>
+      </BookDetailsWrapper>
+    );
   }
+}
 
-  const dateDue = moment
-    .utc(dueDate)
-    .local()
-    .format("dddd, MMMM Do");
-
-  const lenderBorrowerName =
-    lenderId.toString() === localStorage.getItem("userId") ? borrower : lender;
-
-  return (
-    <BookDetailsWrapper>
-      <BookImgWrapper>
-        <BookImg alt={title} src={image} />
-      </BookImgWrapper>
-      <div>
-        <h2>{title}</h2>
-        <div>by {authors}</div>
-        {!returned && (
-          <div>
-            <div>Due on: {dateDue}</div>
-            <DueDate>Time until due: {timeRemaining(dueDate)}</DueDate>
-          </div>
-        )}
-        <p>Contact {lenderBorrowerName} to arrange return</p>
-        <Link to={`/my-library/checkouts/${checkoutId}`}>
-          <Button>Send message</Button>
-        </Link>
-        {lenderId.toString() === localStorage.getItem("userId") && (
-          <Button onClick={confirmReturn}>Confirm return</Button>
-        )}
-      </div>
-    </BookDetailsWrapper>
-  );
+const mapStateToProps = state => {
+  return {
+    loadingCheckouts: state.checkoutReducer.loadingCheckouts,
+    loadingInventory: state.inventoryReducer.loadingInventory
+  };
 };
-export default BookDetails;
+
+export default connect(
+  mapStateToProps,
+  { confirmReturn, returnBook }
+)(withRouter(BookDetails));
