@@ -117,7 +117,7 @@ class RequestDetails extends Component {
           </Link>
           {/* The button below will DELETE by checkoutRequestId  */}
           <Button onClick={this.deleteRequest}>Delete request</Button>
-          {userId === lenderId && (
+          {userId === lenderId.toString() && (
             <>
               <Button onClick={this.confirmCheckout}>
                 Confirm book transfer
