@@ -5,12 +5,15 @@ import { editProfile } from "../../redux/actions/authActions.js";
 class UpdateUserProfile extends Component {
   constructor(props) {
     super(props);
-    const { firstName, lastName, email, bio } = this.props.loggedInUser;
+    const { firstName, lastName, email, bio, userId } = this.props.loggedInUser;
     this.state = {
       firstName,
       lastName,
       email,
-      bio
+      bio,
+      userId,
+      latitude: null,
+      longitude: null
     };
   }
   componentWillReceiveProps(newProps) {
@@ -27,6 +30,17 @@ class UpdateUserProfile extends Component {
   editProfile = e => {
     e.preventDefault();
     this.props.editProfile(this.state);
+  };
+  changeLocation = e => {
+    e.preventDefault();
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log(position);
+      this.props.editProfile({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      });
+    });
+    console.log(this.props.loggedInUser);
   };
   render() {
     return (
@@ -56,6 +70,9 @@ class UpdateUserProfile extends Component {
           onChange={this.handleChange}
         />
         <button onClick={this.editProfile}>Save Updates</button>
+        <button onClick={this.changeLocation}>
+          Update your location to your current location!
+        </button>
       </form>
     );
   }
