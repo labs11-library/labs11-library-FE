@@ -14,11 +14,6 @@ class RequestDetails extends Component {
     this.props.getLoggedInUser();
   }
 
-  // componentWillReceiveProps(newProps) {
-  //   if (newProps.confirmReturn === false) {
-  //     this.props.history.push("/my-library");
-  //   }
-  // }
 
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
@@ -32,7 +27,7 @@ class RequestDetails extends Component {
       })
       .catch(err => console.log(err));
     this.sendEmail();
-    window.location.reload();
+    // window.location.reload();
   };
 
   confirmCheckout = () => {
@@ -44,9 +39,11 @@ class RequestDetails extends Component {
       .then(res => {
         return res.data;
       })
-      .then( this.props.history.push("/my-library"))
       .catch(err => console.log(err));
-      window.location.reload();
+
+      // window.location.reload();
+
+
     // axios
     //   .put(`${baseUrl}/users/${userId}/checkoutRequest/${checkoutRequestId}`, { checkoutAccepted: true })
     //   .then(res => {
@@ -99,8 +96,10 @@ class RequestDetails extends Component {
       description,
       lenderId,
       borrower,
+      borrowerId,
       lender
     } = this.props.request;
+    const userId = localStorage.getItem("userId");
     const lenderBorrowerName =
       lenderId.toString() === localStorage.getItem("userId")
         ? borrower
@@ -121,7 +120,13 @@ class RequestDetails extends Component {
           </Link>
           {/* The button below will DELETE by checkoutRequestId  */}
           <Button onClick={this.deleteRequest}>Delete request</Button>
-          <Button onClick={this.confirmCheckout}>Confirm book transfer</Button>
+          {userId === lenderId.toString() && (
+            <>
+              <Button onClick={this.confirmCheckout}>
+                Confirm book transfer
+              </Button>
+            </>
+          )}
         </div>
       </BookDetailsWrapper>
     );
@@ -131,14 +136,14 @@ class RequestDetails extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.bookReducer.loadingCheckouts,
-    loggedInUser: state.authReducer.loggedInUser,
-    // confirmReturn: state.checkoutReducers.confirmReturn
+    loggedInUser: state.authReducer.loggedInUser
+    
   };
 };
 
-const RequestDetailsRedux = connect(
+export default connect(
   mapStateToProps,
   { addCheckout, getLoggedInUser }
 )(RequestDetails);
 
-export default withRouter(RequestDetailsRedux);
+// export default withRouter(RequestDetailsRedux);

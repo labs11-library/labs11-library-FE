@@ -57,7 +57,8 @@ class BookDetails extends Component {
     this.props.confirmReturn(this.props.checkout.checkoutId);
     this.props.returnBook(this.props.checkout.bookId);
     this.props.goToMyLibrary();
-    // window.location.reload()
+    // this.props.history.push("/my-library");
+    // window.location.reload();
   };
 
   chargeLateFee = () => {
@@ -145,7 +146,7 @@ class BookDetails extends Component {
                   : this.confirmBookReturn
               }
             >
-              {this.overdue() < 0 && returned === false
+              {usdFee < 0 && returned === false
                 ? "Confirm Return"
                 : `Confirm Return (late fee of $${usdFee} will be charged)`}
             </Button>
