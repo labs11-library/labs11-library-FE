@@ -3,6 +3,7 @@
 .navbar {
   height: 5rem;
   box-shadow: 0 4px 2px -2px gray;
+  /* border: solid 2px gray; */
 }
 
 .navbar a {
