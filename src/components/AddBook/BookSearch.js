@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 import backendBaseUrl from "../../url";
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+import Paper from "@material-ui/core/Paper";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import SearchIcon from "@material-ui/icons/Search";
 import SearchedBookTile from "./SearchedBookTile";
 import AddBook from "./AddBook";
 import Auth from "../Auth/Auth";
@@ -75,24 +75,35 @@ class BookSearch extends Component {
       return (
         <div>
           <InventoryContainer>
-            <Paper style={{width: "400px", margin: "20px auto", padding: "2px 4px", display: "flex", alignItems: "center"}}>
-              <InputBase 
+            <Paper
+              style={{
+                width: "400px",
+                margin: "20px auto",
+                padding: "2px 4px",
+                display: "flex",
+                alignItems: "center"
+              }}
+            >
+              <InputBase
                 placeholder="Add a book"
                 type="text"
                 name="searchText"
                 value={this.state.searchText}
-                onChange={this.handleChange} 
-                style={{marginLeft: "8px", flex: "1"}}
+                onChange={this.handleChange}
+                style={{ marginLeft: "8px", flex: "1" }}
               />
-              <IconButton aria-label="Search" style={{padding: "10px"}}>
-                  <SearchIcon />
+              <IconButton aria-label="Search" style={{ padding: "10px" }}>
+                <SearchIcon />
               </IconButton>
             </Paper>
             {this.firstTenBooks().map((book, id) => {
-              console.log(book);
               return (
                 <CardContainer>
-                  <SearchedBookTile key={id} book={book} addBook={this.addBook} />
+                  <SearchedBookTile
+                    key={id}
+                    book={book}
+                    addBook={this.addBook}
+                  />
                 </CardContainer>
               );
             })}
