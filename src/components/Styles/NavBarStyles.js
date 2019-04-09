@@ -6,6 +6,13 @@ import { Link } from "react-router-dom";
 export const NavBarWrapper = styled.div`
   height: 3.5rem;
   box-shadow: 0 4px 2px -2px gray;
+  z-index: 1000000;
+  margin-bottom: 4px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
 
   a {
     color: black;

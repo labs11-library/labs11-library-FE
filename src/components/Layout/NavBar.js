@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import Avatar from '@material-ui/core/Avatar';
-import { NavBarWrapper, BookMapsLogo, NavLinks, NavLinkWrapper, Burger, BurgerDiv } from "./layout.js"
+import { NavBarWrapper, BookMapsLogo, NavLinks, NavLinkWrapper, Burger, BurgerDiv } from "../Styles/NavBarStyles.js"
 class NavBar extends Component {
   constructor() {
     super();
