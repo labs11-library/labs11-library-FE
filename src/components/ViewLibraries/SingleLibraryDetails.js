@@ -41,7 +41,6 @@ class SingleLibraryDetails extends Component {
       description
     } = this.props.singleInventory;
     const availability = available ? "Available" : "Checked out";
-    console.log(this.props.match.params.userId);
     if (this.props.loading) {
       return <Loading />;
     } else {

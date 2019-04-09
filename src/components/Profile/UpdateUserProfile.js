@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { editProfile } from "../../redux/actions/authActions.js";
 import styled from "styled-components";
 
 const FormWrapper = styled.form`
   width: 400px;
-`
+`;
 
 class UpdateUserProfile extends Component {
   constructor(props) {
@@ -47,7 +47,6 @@ class UpdateUserProfile extends Component {
         longitude: position.coords.longitude
       });
     });
-    console.log(this.props.loggedInUser);
   };
   render() {
     return (
@@ -59,7 +58,7 @@ class UpdateUserProfile extends Component {
             name="firstName"
             value={this.state.firstName}
             onChange={this.handleChange}
-            style={{padding: "5px"}}
+            style={{ padding: "5px" }}
           />
           <TextField
             type="text"
@@ -67,7 +66,7 @@ class UpdateUserProfile extends Component {
             name="lastName"
             value={this.state.lastName}
             onChange={this.handleChange}
-            style={{padding: "5px"}}
+            style={{ padding: "5px" }}
           />
         </div>
         <div>
@@ -77,7 +76,7 @@ class UpdateUserProfile extends Component {
             name="email"
             value={this.state.email}
             onChange={this.handleChange}
-            style={{padding: "5px"}}
+            style={{ padding: "5px" }}
           />
         </div>
         <div>
@@ -89,21 +88,21 @@ class UpdateUserProfile extends Component {
             fullWidth
             value={this.state.bio}
             onChange={this.handleChange}
-            style={{padding: "5px"}}
+            style={{ padding: "5px" }}
           />
         </div>
         <div>
-          <Button 
-            variant="outlined" 
+          <Button
+            variant="outlined"
             onClick={this.editProfile}
-            style={{margin: "5px"}}
+            style={{ margin: "5px" }}
           >
             Save Updates
           </Button>
-          <Button 
-            variant="outlined" 
+          <Button
+            variant="outlined"
             onClick={this.changeLocation}
-            style={{margin: "5px"}}
+            style={{ margin: "5px" }}
           >
             Update your location
           </Button>
