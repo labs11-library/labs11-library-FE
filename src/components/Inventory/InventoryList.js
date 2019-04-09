@@ -49,6 +49,8 @@ class Inventory extends Component {
   render() {
     if (this.props.addingBook || this.props.loadingInventory) {
       return <Loading />;
+    } else if (this.props.inventory.length === 0) {
+      return <h1>You have no books in your library.</h1>;
     } else {
       return (
         <InventoryContainer>
@@ -83,6 +85,7 @@ class Inventory extends Component {
                 />
               );
             })}
+            {/* {typeof this.searchBooks()} */}
           </CardContainer>
         </InventoryContainer>
       );

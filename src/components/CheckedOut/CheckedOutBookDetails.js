@@ -18,10 +18,6 @@ import Loading from "../Loading/Loading";
 import * as moment from "moment";
 
 class BookDetails extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   timeRemaining = dueDate => {
     let now = moment(Date.now());
     let end = moment(dueDate);
