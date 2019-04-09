@@ -22,6 +22,10 @@ class UserProfile extends Component {
       };
     });
   };
+  logOut = () => {
+    localStorage.clear();
+    window.location.reload();
+  }
   render() {
     const { loggedInUser } = this.props;
     if (this.state.updatingInfo) {
@@ -51,6 +55,14 @@ class UserProfile extends Component {
             style={{margin: "5px"}}
           >
           Edit Profile
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={this.logOut}
+            style={{margin: "5px"}}
+            color="secondary"
+          >
+          Log out
           </Button>
         </div>
       );

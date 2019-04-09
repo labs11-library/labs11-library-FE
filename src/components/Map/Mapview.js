@@ -232,7 +232,7 @@ class Mapview extends Component {
           id="pac-input"
           class="controls"
           type="text"
-          placeholder="Search Box"
+          placeholder="Search location"
         />
       </main>
     );
