@@ -13,7 +13,6 @@ class Sendgrid extends Component {
 
   sendEmail = () => {
     const { email } = this.state;
-    console.log("email sent", email);
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
         email.sender

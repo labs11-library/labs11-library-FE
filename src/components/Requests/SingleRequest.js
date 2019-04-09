@@ -32,13 +32,26 @@ class SingleRequest extends Component {
       title,
       authors,
       borrower,
-      borrowerId
+      borrowerId,
+      lender,
+      lenderId
     } = this.props.singleCheckoutRequest;
+    const lenderBorrowerName =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? borrower
+        : lender;
     return (
       <div>
-        <h2 style={{ textAlign: "center" }}>
-          Talk to {borrower} about exchanging {title} by {authors}
-        </h2>
+        {this.state.error ? (
+          <h2 style={{ textAlign: "center" }}>
+            {lender} hasn't accepted your previous request yet. Talk to{" "}
+            {borrower} about exchanging {title} by {authors}
+          </h2>
+        ) : (
+          <h2 style={{ textAlign: "center" }}>
+            Talk to {lenderBorrowerName} about exchanging {title} by {authors}
+          </h2>
+        )}
         <ChatApp user={this.props.loggedInUser} otherUserId={borrowerId} />
       </div>
     );
@@ -49,7 +62,8 @@ const mapStateToProps = state => {
   return {
     loadingRequests: state.checkoutReducer.fetchingSingleCheckoutRequest,
     singleCheckoutRequest: state.checkoutReducer.singleCheckoutRequest,
-    loggedInUser: state.authReducer.loggedInUser
+    loggedInUser: state.authReducer.loggedInUser,
+    error: state.checkoutReducer.error
   };
 };
 
