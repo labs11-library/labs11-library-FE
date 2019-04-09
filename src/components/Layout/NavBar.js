@@ -1,6 +1,10 @@
 import React, { Component } from "react";
-import { NavLink, Link } from "react-router-dom";
-import "./layout.css";
+import { Link } from "react-router-dom";
+import './layout.css';
+import { connect } from "react-redux";
+import { getLoggedInUser } from "../../redux/actions/authActions.js";
+import Avatar from '@material-ui/core/Avatar';
+
 class NavBar extends Component {
   constructor() {
     super();
@@ -9,84 +13,35 @@ class NavBar extends Component {
     };
   }
 
-  handleToggleMenu = () => {
-    if (this.state.menuClassName === "nav-links nav-links-none") {
-      this.setState({
-        menuClassName: "nav-links"
-      });
-    } else {
-      this.setState({
-        menuClassName: "nav-links nav-links-none"
-      });
-    }
-  };
+componentDidMount() {
+  this.props.getLoggedInUser();
+}
 
-  logOut = () => {
-    localStorage.clear();
-  };
-  render() {
+handleToggleMenu = () => {
+  if (this.state.menuClassName === "nav-links nav-links-none") {
+    this.setState({
+      menuClassName: "nav-links nav-links-none"
+    });
+  }
+};
+
+
+render() {
     const loggedIn = localStorage.getItem("jwt") ? true : false;
     return (
-      <div className="navbar-wrapper">
+      <div>
         {loggedIn && (
           <div className="navbar">
             <Link to="/" className="bookmaps-logo">
-              {/* Book maps{" "} */}
               <span role="img" aria-label="books">
                 📚
               </span>
-              <span role="img" aria-label="map">
-                🗺
-              </span>
             </Link>
-            <div className={this.state.menuClassName}>
-              <div>
-                <Link className="nav-link" to="/my-library">
-                  <span role="img" aria-label="books">
-                    📚
-                  </span>{" "}
-                  My Library
-                </Link>
-              </div>
-              <div>
-                <Link className="nav-link" to="/add-book">
-                  <span role="img" aria-label="plus">
-                    ➕
-                  </span>{" "}
-                  Add book
-                </Link>
-              </div>
-              <div>
-                <Link className="nav-link" to="/notifications">
-                  <span role="img" aria-label="bell">
-                    🔔
-                  </span>{" "}
-                  Notifications
-                </Link>
-              </div>
-              <div>
-                <Link className="nav-link" to="/profile">
-                  <span role="img" aria-label="profile">
-                    👤
-                  </span>{" "}
-                  Profile
-                </Link>
-              </div>
-              <div>
-                <Link onClick={this.logOut}>
-                  <span role="img" aria-label="wave">
-                    👋
-                  </span>{" "}
-                  Log out
-                </Link>
-              </div>
-            </div>
-            <div>
-              <button className="burger" onClick={this.handleToggleMenu}>
-                <div className="burger-div" />
-                <div className="burger-div" />
-                <div className="burger-div" />
-              </button>
+            <div className="nav-links">
+              <Link className="nav-link" to="/my-library"><span role="img" aria-label="books">📚</span> My Library</Link>
+              <Link className="nav-link" to="/add-book"><span role="img" aria-label="plus">➕</span> Add book</Link>
+              <Link className="nav-link" to="/notifications"><span role="img" aria-label="bell">🔔</span> Notifications</Link>
+              <Link className="nav-link" to="/profile"><Avatar style={{boxShadow: "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"}} src={this.props.loggedInUser.picture} /></Link>
             </div>
           </div>
         )}
@@ -125,4 +80,12 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+const mapStateToProps = state => ({
+  loggedInUser: state.authReducer.loggedInUser,
+  loading: state.authReducer.fetchingUser
+});
+
+export default connect(
+  mapStateToProps,
+  { getLoggedInUser }
+)(NavBar);
