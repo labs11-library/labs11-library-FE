@@ -3,6 +3,7 @@ import {
   GET_CHECKOUT_REQUESTS_SUCCESS,
   ADDING_CHECKOUT_REQUEST,
   ADD_CHECKOUT_REQUEST_SUCCESS,
+  ADD_CHECKOUT_REQUEST_FAILURE,
   GETTING_SINGLE_REQUEST,
   GET_SINGLE_REQUEST_SUCCESS,
   ADDING_CHECKOUT,
@@ -13,7 +14,6 @@ import {
   GET_SINGLE_CHECKOUT_SUCCESS,
   DELETING_CHECKOUT,
   DELETE_CHECKOUT_SUCCESS
-
 } from "../actions/checkoutActions.js";
 
 const initialState = {
@@ -22,7 +22,8 @@ const initialState = {
   loadingRequests: false,
   checkouts: [],
   singleCheckout: {},
-  loadingCheckouts: false
+  loadingCheckouts: false,
+  error: ""
 };
 
 export default function checkoutReducer(state = initialState, action) {
@@ -30,77 +31,97 @@ export default function checkoutReducer(state = initialState, action) {
     case GETTING_CHECKOUT_REQUESTS:
       return {
         ...state,
-        loadingRequests: true
+        loadingRequests: true,
+        error: ""
       };
     case GET_CHECKOUT_REQUESTS_SUCCESS:
       return {
         ...state,
         loadingRequests: false,
-        checkoutRequests: action.payload
+        checkoutRequests: action.payload,
+        error: ""
       };
     case GETTING_SINGLE_REQUEST:
       return {
         ...state,
-        loadingRequests: true
+        loadingRequests: true,
+        error: ""
       };
     case GET_SINGLE_REQUEST_SUCCESS:
       return {
         ...state,
         loadingRequests: false,
-        singleCheckoutRequest: action.payload
+        singleCheckoutRequest: action.payload,
+        error: ""
       };
     case ADDING_CHECKOUT_REQUEST:
       return {
         ...state,
-        loadingRequests: true
+        loadingRequests: true,
+        error: ""
       };
     case ADD_CHECKOUT_REQUEST_SUCCESS:
       return {
         ...state,
+        loadingRequests: false,
+        error: ""
+      };
+    case ADD_CHECKOUT_REQUEST_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
         loadingRequests: false
       };
     case ADDING_CHECKOUT:
       return {
         ...state,
-        loadingCheckouts: true
+        loadingCheckouts: true,
+        error: ""
       };
     case ADD_CHECKOUT_SUCCESS:
       return {
         ...state,
-        loadingCheckouts: false
+        loadingCheckouts: false,
+        error: ""
       };
     case GETTING_CHECKOUTS:
       return {
         ...state,
-        loadingCheckouts: true
+        loadingCheckouts: true,
+        error: ""
       };
     case GET_CHECKOUTS_SUCCESS:
       return {
         ...state,
         loadingCheckouts: false,
-        checkouts: action.payload
+        checkouts: action.payload,
+        error: ""
       };
     case GETTING_SINGLE_CHECKOUT:
       return {
         ...state,
-        loadingCheckouts: true
+        loadingCheckouts: true,
+        error: ""
       };
     case GET_SINGLE_CHECKOUT_SUCCESS:
       return {
         ...state,
         loadingCheckouts: false,
-        singleCheckout: action.payload
+        singleCheckout: action.payload,
+        error: ""
       };
     case DELETING_CHECKOUT:
       return {
         ...state,
-        loadingCheckouts: true
-      }
+        loadingCheckouts: true,
+        error: ""
+      };
     case DELETE_CHECKOUT_SUCCESS:
       return {
         ...state,
-        loadingCheckouts: false
-      }  
+        loadingCheckouts: false,
+        error: ""
+      };
     default:
       return state;
   }

@@ -25,7 +25,6 @@ class Mapview extends Component {
     // Gets user location from web browser
     navigator.geolocation.getCurrentPosition(
       position => {
-        console.log(position);
         this.setState({
           location: {
             lat: position.coords.latitude,
@@ -43,7 +42,6 @@ class Mapview extends Component {
         fetch("https://ipapi.co/json")
           .then(res => res.json())
           .then(location => {
-            console.log(location);
             this.setState({
               location: {
                 lat: location.latitude,
@@ -92,7 +90,6 @@ class Mapview extends Component {
 
   updateLocation = () => {
     let userId = localStorage.getItem("userId");
-    console.log(this.state);
     axios
       .put(`${baseUrl}/users/${userId}`, {
         latitude: this.state.location.lat,
@@ -232,7 +229,7 @@ class Mapview extends Component {
           id="pac-input"
           class="controls"
           type="text"
-          placeholder="Search Box"
+          placeholder="Search location"
         />
       </main>
     );

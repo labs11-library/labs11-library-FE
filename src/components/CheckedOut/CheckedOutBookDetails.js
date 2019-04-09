@@ -18,10 +18,6 @@ import Loading from "../Loading/Loading";
 import * as moment from "moment";
 
 class BookDetails extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   timeRemaining = dueDate => {
     let now = moment(Date.now());
     let end = moment(dueDate);
@@ -31,12 +27,9 @@ class BookDetails extends Component {
 
   overdue = () => {
     let now = moment(Date.now());
-    console.log("NOW", now);
     let end = moment(this.props.checkout.dueDate);
-    console.log("END", end);
     let duration = Math.floor(moment.duration(now.diff(end)).asDays());
     // let duration = end - now;
-    console.log("DURATION", duration);
     return duration * 100;
   };
 
@@ -56,13 +49,12 @@ class BookDetails extends Component {
     //   .catch(err => console.log(err));
     this.props.confirmReturn(this.props.checkout.checkoutId);
     this.props.returnBook(this.props.checkout.bookId);
-    // this.props.goToMyLibrary();
+    this.props.goToMyLibrary();
     // this.props.history.push("/my-library");
-    window.location.reload()
+    // window.location.reload();
   };
 
   chargeLateFee = () => {
-    console.log(this.props.checkout);
     axios
       .post(`${baseUrl}/payment/charge`, {
         amount: this.overdue(),
@@ -78,7 +70,6 @@ class BookDetails extends Component {
   //   }
   // }
   render() {
-    console.log(this.props);
     if (this.props.loadingCheckouts || this.props.loadingInventory) {
       return <Loading />;
     }

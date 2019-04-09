@@ -1,0 +1,94 @@
+/* Header styles */
+
+.navbar {
+  height: 3.5rem;
+  box-shadow: 0 4px 2px -2px gray;
+}
+
+.navbar a {
+  color: black;
+  text-decoration: none;
+}
+  
+.bookmaps-logo {
+  position: absolute;
+  top: 12px;
+  z-index: 100;
+}
+
+.bookmaps-logo span {
+  font-size: 2.5rem;
+  padding-left: 10px;
+}
+
+.nav-links {
+  position: absolute;
+  /* top: 18px; */
+  right: 12px;
+  font-family: Lato, Helvetica, Arial, Lucida, sans-serif;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 1.2rem;
+  height: 3.5rem;
+}
+
+.nav-link {
+  margin: 0 0.5rem;
+}
+
+/* Responsive menu styles */
+
+.burger {
+  display: none;
+  color: black;
+  border: none;
+  z-index: 150;
+}
+
+.burger-div {
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
+  border-radius: 2px;
+}
+
+/* @media screen and (max-width: 850px) {
+  .burger {
+      display: inline;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .nav-links-none {
+      display: none;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .nav-links {
+      position: relative;
+      top: 0;
+      right: 0;
+      background-color: white;
+      height: 300px;
+      flex-direction: column;
+      justify-content: space-evenly;
+      box-shadow: 0 4px 2px -2px gray;
+      z-index: 50;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .burger {
+      display: block;
+      position: absolute;
+      top: 10px;
+      right: 25px;
+  }
+} */
+
+.burger:focus {
+  outline: 0;
+}

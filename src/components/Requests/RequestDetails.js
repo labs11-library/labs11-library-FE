@@ -14,7 +14,6 @@ class RequestDetails extends Component {
     this.props.getLoggedInUser();
   }
 
-
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
     axios
@@ -27,7 +26,7 @@ class RequestDetails extends Component {
       })
       .catch(err => console.log(err));
     this.sendEmail();
-    window.location.reload();
+    // window.location.reload();
   };
 
   confirmCheckout = () => {
@@ -40,7 +39,9 @@ class RequestDetails extends Component {
         return res.data;
       })
       .catch(err => console.log(err));
-    window.location.reload();
+
+    // window.location.reload();
+
     // axios
     //   .put(`${baseUrl}/users/${userId}/checkoutRequest/${checkoutRequestId}`, { checkoutAccepted: true })
     //   .then(res => {
@@ -75,7 +76,6 @@ class RequestDetails extends Component {
         this.props.loggedInUser.firstName
       } is unable to exchange ${title}`
     };
-    console.log("email sent", email);
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
         email.sender
@@ -134,7 +134,6 @@ const mapStateToProps = state => {
   return {
     loading: state.bookReducer.loadingCheckouts,
     loggedInUser: state.authReducer.loggedInUser
-    
   };
 };
 

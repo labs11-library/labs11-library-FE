@@ -52,7 +52,6 @@ class SingleBook extends Component {
         this.props.loggedInUser.firstName
       }`
     };
-    console.log("email sent", email);
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
         email.sender

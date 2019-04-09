@@ -4,11 +4,19 @@ import BookDetails from "./BookDetails";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
+import Paper from "@material-ui/core/Paper";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import SearchIcon from "@material-ui/icons/Search";
 
 import { connect } from "react-redux";
 import { getBooks } from "../../redux/actions/bookActions.js";
 
 import Loading from "../Loading/Loading.js";
+import {
+  BookListContainer,
+  CardContainer
+} from "../Styles/LandingPageStyles.js";
 class Books extends Component {
   constructor() {
     super();
@@ -57,13 +65,28 @@ class Books extends Component {
       return <Loading />;
     } else {
       return (
-        <div>
-          <input
-            placeholder="Search books"
-            name="searchText"
-            value={this.state.searchText}
-            onChange={this.handleChange}
-          />
+        <BookListContainer>
+          <Paper
+            style={{
+              width: "400px",
+              margin: "20px auto",
+              padding: "2px 4px",
+              display: "flex",
+              alignItems: "center"
+            }}
+          >
+            <InputBase
+              placeholder="Search books"
+              type="text"
+              name="searchText"
+              value={this.state.searchText}
+              onChange={this.handleChange}
+              style={{ marginLeft: "8px", flex: "1" }}
+            />
+            <IconButton aria-label="Search" style={{ padding: "10px" }}>
+              <SearchIcon />
+            </IconButton>
+          </Paper>
           <div>
             <InputLabel style={{ padding: "10px" }}>Filter by:</InputLabel>
             <Select
@@ -79,12 +102,12 @@ class Books extends Component {
               <MenuItem value={"available"}>Available</MenuItem>
             </Select>
           </div>
-          <div>
+          <CardContainer>
             {this.filteredBooks().map(book => {
               return <BookDetails key={book.bookId} book={book} />;
             })}
-          </div>
-        </div>
+          </CardContainer>
+        </BookListContainer>
       );
     }
   }

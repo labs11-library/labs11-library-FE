@@ -1,7 +1,14 @@
 import React, { Component } from "react";
-
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { editProfile } from "../../redux/actions/authActions.js";
+import styled from "styled-components";
+
+const FormWrapper = styled.form`
+  width: 400px;
+`;
+
 class UpdateUserProfile extends Component {
   constructor(props) {
     super(props);
@@ -40,40 +47,67 @@ class UpdateUserProfile extends Component {
         longitude: position.coords.longitude
       });
     });
-    console.log(this.props.loggedInUser);
   };
   render() {
     return (
-      <form>
-        <input
-          type="text"
-          name="firstName"
-          value={this.state.firstName}
-          onChange={this.handleChange}
-        />
-        <input
-          type="text"
-          name="lastName"
-          value={this.state.lastName}
-          onChange={this.handleChange}
-        />
-        <input
-          type="text"
-          name="email"
-          value={this.state.email}
-          onChange={this.handleChange}
-        />
-        <input
-          type="text"
-          name="bio"
-          value={this.state.bio}
-          onChange={this.handleChange}
-        />
-        <button onClick={this.editProfile}>Save Updates</button>
-        <button onClick={this.changeLocation}>
-          Update your location to your current location!
-        </button>
-      </form>
+      <FormWrapper>
+        <div>
+          <TextField
+            type="text"
+            label="First name"
+            name="firstName"
+            value={this.state.firstName}
+            onChange={this.handleChange}
+            style={{ padding: "5px" }}
+          />
+          <TextField
+            type="text"
+            label="Last name"
+            name="lastName"
+            value={this.state.lastName}
+            onChange={this.handleChange}
+            style={{ padding: "5px" }}
+          />
+        </div>
+        <div>
+          <TextField
+            type="email"
+            label="Email"
+            name="email"
+            value={this.state.email}
+            onChange={this.handleChange}
+            style={{ padding: "5px" }}
+          />
+        </div>
+        <div>
+          <TextField
+            type="text-area"
+            label="Bio"
+            name="bio"
+            multiline
+            fullWidth
+            value={this.state.bio}
+            onChange={this.handleChange}
+            style={{ padding: "5px" }}
+          />
+        </div>
+        <div>
+          <Button
+            variant="outlined"
+            onClick={this.editProfile}
+            style={{ margin: "5px" }}
+          >
+            Save Updates
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={this.changeLocation}
+            style={{ margin: "5px" }}
+          >
+            Update your location
+          </Button>
+        </div>
+      </FormWrapper>
     );
   }
 }

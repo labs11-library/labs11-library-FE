@@ -25,6 +25,7 @@ import UserProfile from "./components/Profile/UserProfile";
 import SingleRequest from "./components/Requests/SingleRequest.js";
 import LibraryList from "./components/ViewLibraries/LibraryList";
 
+import { AppContainer, Html } from "./components/Styles/AppStyles.js";
 class App extends Component {
   setUsername = event => {
     this.setState({
@@ -45,70 +46,72 @@ class App extends Component {
     return (
       <React.Fragment>
         <Reset />
-        <div>
+        <Html>
           <NavBar />
-          <Route exact path="/" component={LandingPage} />
-          <Route exact path="/books" component={BookList} />
-          <Route exact path="/users" component={Users} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/my-library" component={MyLibrary} />
-          <Route exact path="/review-form" component={ReviewForm} />
-          <Route exact path="/payment" component={Payment} />
-          <Route
-            exact
-            path="/users/:userId/checkedOut/:checkedOutId"
-            render={props => <SingleCheckedOutBook {...props} />}
-          />
-          <Route
-            path="/my-library/my-books/:bookId"
-            render={props => <SingleInventoryWrapper {...props} />}
-          />
-          <Route exact path="/sendgrid" component={Sendgrid} />
-          <Route
-            exact
-            path="/books/:bookId"
-            render={props => <SingleBook {...props} />}
-          />
-          <Route
-            exact
-            path="/chatapp"
-            render={props => (
-              <ChatApp {...props} username={this.state.username} />
-            )}
-          />
-          <Route
-            exact
-            path="/notifications"
-            render={props => <RequestList {...props} />}
-          />
-          <Route
-            exact
-            path="/add-book"
-            render={props => <BookSearch {...props} />}
-          />
-          <Route
-            exact
-            path="/my-library/checkouts/:checkoutId"
-            render={props => <SingleCheckedOutBook {...props} />}
-          />
-          <Route
-            exact
-            path="/profile"
-            render={props => <UserProfile {...props} />}
-          />
+          <AppContainer>
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/books" component={BookList} />
+            <Route exact path="/users" component={Users} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/my-library" component={MyLibrary} />
+            <Route exact path="/review-form" component={ReviewForm} />
+            <Route exact path="/payment" component={Payment} />
+            <Route
+              exact
+              path="/users/:userId/checkedOut/:checkedOutId"
+              render={props => <SingleCheckedOutBook {...props} />}
+            />
+            <Route
+              path="/my-library/my-books/:bookId"
+              render={props => <SingleInventoryWrapper {...props} />}
+            />
+            <Route exact path="/sendgrid" component={Sendgrid} />
+            <Route
+              exact
+              path="/books/:bookId"
+              render={props => <SingleBook {...props} />}
+            />
+            <Route
+              exact
+              path="/chatapp"
+              render={props => (
+                <ChatApp {...props} username={this.state.username} />
+              )}
+            />
+            <Route
+              exact
+              path="/notifications"
+              render={props => <RequestList {...props} />}
+            />
+            <Route
+              exact
+              path="/add-book"
+              render={props => <BookSearch {...props} />}
+            />
+            <Route
+              exact
+              path="/my-library/checkouts/:checkoutId"
+              render={props => <SingleCheckedOutBook {...props} />}
+            />
+            <Route
+              exact
+              path="/profile"
+              render={props => <UserProfile {...props} />}
+            />
 
-          <Route
-            exact
-            path="/notifications/:checkoutRequestId"
-            render={props => <SingleRequest {...props} />}
-          />
-          <Route
-            exact
-            path="/users/:userId/library"
-            render={props => <LibraryList {...props} />}
-          />
-        </div>
+            <Route
+              exact
+              path="/notifications/:checkoutRequestId"
+              render={props => <SingleRequest {...props} />}
+            />
+            <Route
+              exact
+              path="/users/:userId/library"
+              render={props => <LibraryList {...props} />}
+            />
+          </AppContainer>
+        </Html>
       </React.Fragment>
     );
   }

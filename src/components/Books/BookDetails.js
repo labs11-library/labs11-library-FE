@@ -1,13 +1,14 @@
 import React from "react";
 import "@progress/kendo-theme-material/dist/all.css";
-import { Button } from "@progress/kendo-react-buttons";
+import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import {
   BookDetailsWrapper,
   BookImgWrapper,
   BookImg,
-  Availability
-} from "./styles";
+  Availability,
+  BookTextContainer
+} from "../Styles/LandingPageStyles.js";
 
 import * as moment from "moment";
 
@@ -34,17 +35,19 @@ const BookDetails = props => {
       <BookImgWrapper>
         <BookImg alt={title} src={image} />
       </BookImgWrapper>
-      <div>
+      <BookTextContainer>
         <h2>{title}</h2>
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
         {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
         <div>Description: {description}</div>
         <p>Contact {lender}</p>
-        <Link to={`/books/${bookId}`}>
-          <Button>See more details</Button>
+        <Link style={{ textDecoration: "none" }} to={`/books/${bookId}`}>
+          <Button variant="contained" color="primary">
+            See more details
+          </Button>
         </Link>
-      </div>
+      </BookTextContainer>
     </BookDetailsWrapper>
   );
 };
