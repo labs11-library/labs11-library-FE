@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const InventoryContainer = styled.div`
+export const BookListContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   text-align: center;
@@ -69,4 +69,48 @@ export const Availability = styled.p`
 
 export const DueDate = styled.p`
   color: red;
+`;
+
+// copied from /layout/styled.js
+
+export const LandingPageWrapper = styled.div`
+  text-align: center;
+  display: flex;
+  overflow-y: hidden;
+`;
+export const ContentContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`;
+export const MapWrapper = styled.div`
+  width: 50%;
+  position: fixed;
+  right: 0;
+  @media (max-width: 700px) {
+    margin-top: 60px;
+    width: 100%;
+    display: ${props => (props.value === 0 ? "none" : "block")};
+  }
+`;
+
+export const BooksWrapper = styled.div`
+  width: 50%;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  overflow-y: scroll;
+
+  @media (max-width: 700px) {
+    margin-top: 60px;
+    width: 100vw;
+    display: ${props => (props.value === 1 ? "none" : "block")};
+  }
+`;
+
+export const TabsWrapper = styled.div`
+  width: 100%;
+
+  @media (min-width: 700px) {
+    display: none;
+  }
 `;

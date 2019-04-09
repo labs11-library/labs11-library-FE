@@ -54,7 +54,7 @@
   border-radius: 2px;
 }
 
-@media screen and (max-width: 850px) {
+/* @media screen and (max-width: 850px) {
   .burger {
       display: inline;
   }
@@ -87,7 +87,7 @@
       top: 10px;
       right: 25px;
   }
-}
+} */
 
 .burger:focus {
   outline: 0;
