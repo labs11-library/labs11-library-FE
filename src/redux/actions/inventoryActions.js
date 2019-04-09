@@ -74,13 +74,13 @@ export const deleteInventory = (userId, bookId) => dispatch => {
 };
 
 export const returnBook = bookId => dispatch => {
-  const userId = localStorage.getItem('userId')
+  const userId = localStorage.getItem("userId");
   dispatch({ type: EDITING_INVENTORY });
   axios
     .put(`${baseUrl}/users/${userId}/inventory/${bookId}`, { available: true })
     .then(res => {
       dispatch({
-        type: GET_USERS_INVENTORY_SUCCESS,
+        type: EDIT_INVENTORY_SUCCESS,
         payload: res.data.editedBook
       });
     })
