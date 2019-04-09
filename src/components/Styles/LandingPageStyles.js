@@ -76,14 +76,16 @@ export const DueDate = styled.p`
 export const LandingPageWrapper = styled.div`
   text-align: center;
   display: flex;
+  overflow-y: hidden;
 `;
-
+export const ContentContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`;
 export const MapWrapper = styled.div`
   width: 50%;
-  /* height: 90vw; */
   position: fixed;
   right: 0;
-
   @media (max-width: 700px) {
     margin-top: 60px;
     width: 100%;
@@ -92,9 +94,11 @@ export const MapWrapper = styled.div`
 `;
 
 export const BooksWrapper = styled.div`
-  width: 50vw;
+  width: 50%;
   position: absolute;
   left: 0;
+  height: 100%;
+  overflow-y: scroll;
 
   @media (max-width: 700px) {
     margin-top: 60px;
