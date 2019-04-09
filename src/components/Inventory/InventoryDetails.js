@@ -10,8 +10,6 @@ import {
   Availability
 } from "../Styles/InventoryStyles.js";
 
-// import * as moment from "moment";
-
 const BookDetails = props => {
   const {
     bookId,
@@ -23,18 +21,6 @@ const BookDetails = props => {
     description
   } = props.book;
   const availability = available ? "Available" : "Checked out";
-
-  // function timeRemaining() {
-  //   let now = moment(Date.now());
-  //   let end = moment(dueDate);
-  //   let duration = moment.duration(now.diff(end)).humanize();
-  //   return duration;
-  // }
-
-  // const dateDue = moment
-  //           .utc(dueDate)
-  //           .local()
-  //           .format("dddd, MMMM Do");
   const descriptionText =
     description.length > 40 ? `${description.substr(0, 40)} ...` : description;
   return (
@@ -50,7 +36,6 @@ const BookDetails = props => {
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
         {!available && <p>Due: {dueDate} </p>}{" "}
-        {/* ({timeRemaining(dueDate)} from now) */}
         <p>
           {description === "" ? "No description provided" : descriptionText}
         </p>

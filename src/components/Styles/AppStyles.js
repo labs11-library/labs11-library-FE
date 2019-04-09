@@ -5,4 +5,5 @@ export const Html = styled.html`
 `;
 export const AppContainer = styled.div`
   max-width: 1200px;
+  margin: 0 auto;
 `;
