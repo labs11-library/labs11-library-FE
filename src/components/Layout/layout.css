@@ -1,16 +1,18 @@
 /* Header styles */
-
+.navbar-wrapper {
+  position: relative;
+  top: 0;
+}
 .navbar {
   height: 5rem;
   box-shadow: 0 4px 2px -2px gray;
-  /* border: solid 2px gray; */
 }
 
 .navbar a {
   color: black;
   text-decoration: none;
 }
-  
+
 .bookmaps-logo {
   position: absolute;
   top: 12px;
@@ -60,36 +62,36 @@
 
 @media screen and (max-width: 850px) {
   .burger {
-      display: inline;
+    display: inline;
   }
 }
 
 @media screen and (max-width: 850px) {
   .nav-links-none {
-      display: none;
+    display: none;
   }
 }
 
 @media screen and (max-width: 850px) {
   .nav-links {
-      position: relative;
-      top: 0;
-      right: 0;
-      background-color: white;
-      height: 400px;
-      flex-direction: column;
-      justify-content: space-evenly;
-      box-shadow: 0 4px 2px -2px gray;
-      z-index: 50;
+    position: relative;
+    top: 0;
+    right: 0;
+    background-color: white;
+    height: 400px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow: 0 4px 2px -2px gray;
+    z-index: 50;
   }
 }
 
 @media screen and (max-width: 850px) {
   .burger {
-      display: block;
-      position: absolute;
-      top: 25px;
-      right: 25px;
+    display: block;
+    position: absolute;
+    top: 25px;
+    right: 25px;
   }
 }
 

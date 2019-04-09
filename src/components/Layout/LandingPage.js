@@ -5,8 +5,9 @@ import {
   LandingPageWrapper,
   TabsWrapper,
   BooksWrapper,
-  MapWrapper
-} from "./styled.js";
+  MapWrapper,
+  ContentContainer
+} from "../Styles/LandingPageStyles.js";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -38,20 +39,14 @@ class LandingPage extends Component {
               </Tabs>
             </Paper>
           </TabsWrapper>
-          {/* <div>Book maps{" "}
-                        <span role="img" aria-label="books">
-                            📚
-                        </span>
-                        <span role="img" aria-label="map">
-                            🗺
-                        </span>
-                    </div> */}
-          <BooksWrapper value={this.state.value}>
-            <BookList />
-          </BooksWrapper>
-          <MapWrapper value={this.state.value}>
-            <Mapview />
-          </MapWrapper>
+          <ContentContainer>
+            <BooksWrapper value={this.state.value}>
+              <BookList />
+            </BooksWrapper>
+            <MapWrapper value={this.state.value}>
+              <Mapview />
+            </MapWrapper>
+          </ContentContainer>
         </LandingPageWrapper>
       </div>
     );
