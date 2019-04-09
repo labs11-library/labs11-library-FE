@@ -76,7 +76,6 @@ class RequestDetails extends Component {
         this.props.loggedInUser.firstName
       } is unable to exchange ${title}`
     };
-    console.log("email sent", email);
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
         email.sender

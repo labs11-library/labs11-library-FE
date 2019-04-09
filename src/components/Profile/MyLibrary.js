@@ -17,10 +17,9 @@ class MyLibrary extends Component {
   goToMyLibrary = () => {
     this.setState({
       value: 0
-    })
-  }
+    });
+  };
   render() {
-    console.log(this.state.value)
     return (
       <div>
         <React.Fragment>
@@ -40,7 +39,9 @@ class MyLibrary extends Component {
             </Paper>
           </MyLibraryTabsWrapper>
           {this.state.value === 0 && <InventoryList />}
-          {this.state.value === 1 && <CheckedOutList goToMyLibrary={this.goToMyLibrary} />}
+          {this.state.value === 1 && (
+            <CheckedOutList goToMyLibrary={this.goToMyLibrary} />
+          )}
         </React.Fragment>
       </div>
     );

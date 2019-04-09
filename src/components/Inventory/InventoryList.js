@@ -85,7 +85,6 @@ class Inventory extends Component {
                 />
               );
             })}
-            {typeof this.searchBooks()}
           </CardContainer>
         </InventoryContainer>
       );
