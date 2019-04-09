@@ -8,7 +8,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import SearchedBookTile from "./SearchedBookTile";
 import AddBook from "./AddBook";
 import Auth from "../Auth/Auth";
-
+import {
+  InventoryContainer,
+  CardContainer
+} from "../Styles/InventoryStyles.js";
 class BookSearch extends Component {
   state = {
     searchText: "",
@@ -71,25 +74,29 @@ class BookSearch extends Component {
     } else {
       return (
         <div>
-          <Paper style={{width: "400px", margin: "20px auto", padding: "2px 4px", display: "flex", alignItems: "center"}}>
-            <InputBase 
-              placeholder="Add a book"
-              type="text"
-              name="searchText"
-              value={this.state.searchText}
-              onChange={this.handleChange} 
-              style={{marginLeft: "8px", flex: "1"}}
-            />
-            <IconButton aria-label="Search" style={{padding: "10px"}}>
-                <SearchIcon />
-            </IconButton>
-          </Paper>
-          {this.firstTenBooks().map((book, id) => {
-            console.log(book);
-            return (
-              <SearchedBookTile key={id} book={book} addBook={this.addBook} />
-            );
-          })}
+          <InventoryContainer>
+            <Paper style={{width: "400px", margin: "20px auto", padding: "2px 4px", display: "flex", alignItems: "center"}}>
+              <InputBase 
+                placeholder="Add a book"
+                type="text"
+                name="searchText"
+                value={this.state.searchText}
+                onChange={this.handleChange} 
+                style={{marginLeft: "8px", flex: "1"}}
+              />
+              <IconButton aria-label="Search" style={{padding: "10px"}}>
+                  <SearchIcon />
+              </IconButton>
+            </Paper>
+            {this.firstTenBooks().map((book, id) => {
+              console.log(book);
+              return (
+                <CardContainer>
+                  <SearchedBookTile key={id} book={book} addBook={this.addBook} />
+                </CardContainer>
+              );
+            })}
+          </InventoryContainer>
         </div>
       );
     }
