@@ -14,7 +14,6 @@ class RequestDetails extends Component {
     this.props.getLoggedInUser();
   }
 
-
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
     axios
@@ -41,8 +40,7 @@ class RequestDetails extends Component {
       })
       .catch(err => console.log(err));
 
-      // window.location.reload();
-
+    // window.location.reload();
 
     // axios
     //   .put(`${baseUrl}/users/${userId}/checkoutRequest/${checkoutRequestId}`, { checkoutAccepted: true })
@@ -137,7 +135,6 @@ const mapStateToProps = state => {
   return {
     loading: state.bookReducer.loadingCheckouts,
     loggedInUser: state.authReducer.loggedInUser
-    
   };
 };
 
