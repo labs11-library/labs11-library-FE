@@ -130,15 +130,16 @@ class ChatApp extends Component {
     return (
       
       <div>
+      <Link to={`/my-library`}>
+        <Button>Back to Library</Button>
+      </Link>
       <ChatUI
         user={this.user}
         messages={this.state.messages}
         onMessageSend={this.sendMessage}
         width={500}
       />
-      <Link to={`/my-library`}>
-            <Button>Back to Library</Button>
-      </Link>
+    
       </div>
     );
   }
