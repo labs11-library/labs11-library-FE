@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-
 import { connect } from "react-redux";
 import { getAllInventory } from "../../redux/actions/inventoryActions.js";
 import InventoryDetails from "./InventoryDetails.js";
 import Auth from "../Auth/Auth";
-
 import Loading from "../Loading/Loading.js";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
+import $ from "jquery";
 import {
   InventoryContainer,
   Search,
@@ -23,16 +22,23 @@ class Inventory extends Component {
     };
   }
   handleChange = e => {
+    // if (e.keyCode === 191) {
+    //   return null
+    // }
     const { name, value } = e.target;
+    
     this.setState({
       [name]: value
     });
-  };
+  }
+
+
   searchBooks = () => {
     if (this.state.searchText.length === 0) {
       return this.props.inventory;
     } else if (this.state.searchText.length > 0) {
-      const searchRegex = new RegExp(this.state.searchText, "gi");
+      const newText = this.state.searchText.replace(/\\$/, "")
+      const searchRegex = new RegExp(newText, "gi");
       return this.props.inventory.filter(
         book => book.title.match(searchRegex) || book.authors.match(searchRegex)
       );
@@ -70,6 +76,7 @@ class Inventory extends Component {
               value={this.state.searchText}
               onChange={this.handleChange}
               style={{ marginLeft: "8px", flex: "1" }}
+              // onKeyPress={this.lettersOnly}
             />
             <IconButton aria-label="Search" style={{ padding: "10px" }}>
               <SearchIcon />
