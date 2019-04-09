@@ -1,27 +1,31 @@
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 /* Header styles */
 
-.navbar {
+export const NavBarWrapper = styled.div`
   height: 3.5rem;
   box-shadow: 0 4px 2px -2px gray;
-}
 
-.navbar a {
-  color: black;
-  text-decoration: none;
-}
-  
-.bookmaps-logo {
+  a {
+    color: black;
+    text-decoration: none;
+  }
+`
+
+export const BookMapsLogo = styled(Link)`
   position: absolute;
   top: 12px;
   z-index: 100;
-}
 
-.bookmaps-logo span {
-  font-size: 2.5rem;
-  padding-left: 10px;
-}
+  span {
+    font-size: 2.5rem;
+    padding-left: 10px;
+  }
+` 
 
-.nav-links {
+
+export const NavLinks = styled.div`
   position: absolute;
   /* top: 18px; */
   right: 12px;
@@ -31,30 +35,33 @@
   align-items: center;
   font-size: 1.2rem;
   height: 3.5rem;
-}
+`
 
-.nav-link {
+export const NavLinkWrapper = styled(Link)`
   margin: 0 0.5rem;
-}
+`
 
-/* Responsive menu styles */
 
-.burger {
+export const Burger = styled.button`
   display: none;
   color: black;
   border: none;
   z-index: 150;
-}
 
-.burger-div {
+  :focus {
+    outline: 0;
+  }
+`
+
+export const BurgerDiv = styled.div`
   width: 35px;
   height: 5px;
   background-color: black;
   margin: 6px 0;
   border-radius: 2px;
-}
+`
 
-/* @media screen and (max-width: 850px) {
+{/* @media screen and (max-width: 850px) {
   .burger {
       display: inline;
   }
@@ -87,8 +94,4 @@
       top: 10px;
       right: 25px;
   }
-} */
-
-.burger:focus {
-  outline: 0;
-}
+} */}
