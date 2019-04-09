@@ -3,6 +3,8 @@ import Chat from "twilio-chat";
 import { Chat as ChatUI } from "@progress/kendo-react-conversational-ui";
 import { connect } from "react-redux";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
+import { Button } from "@progress/kendo-react-buttons";
+import { Link } from "react-router-dom";
 
 import Loading from "../Loading/Loading.js";
 class ChatApp extends Component {
@@ -124,13 +126,20 @@ class ChatApp extends Component {
     ) {
       return <Loading />;
     }
+   
     return (
+      
+      <div>
       <ChatUI
         user={this.user}
         messages={this.state.messages}
         onMessageSend={this.sendMessage}
         width={500}
       />
+      <Link to={`/my-library`}>
+            <Button>Back to Library</Button>
+      </Link>
+      </div>
     );
   }
 }
