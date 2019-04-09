@@ -3,7 +3,8 @@ import { withRouter } from "react-router-dom";
 import { addNewBook } from "../../redux/actions/bookActions.js";
 import { connect } from "react-redux";
 import Ratings from "react-ratings-declarative";
-
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import Loading from "../Loading/Loading.js";
 class AddBook extends Component {
   constructor(props) {
@@ -51,15 +52,34 @@ class AddBook extends Component {
             </Ratings>
             <div>Goodreads rating: {this.state.avgRating}</div>
           </div>
-          <input
-            type="text"
-            name="description"
-            placeholder="A description of your copy"
-            value={this.state.description}
-            onChange={this.handleChange}
-          />
-          <button onClick={this.addBook}>Add book to your library!</button>
-          <button onClick={() => this.props.cancelAdd()}>Cancel</button>
+          <div>
+            <TextField
+              label="Add a description"
+              name="description"
+              multiline
+              fullWidth
+              value={this.state.description}
+              onChange={this.handleChange}
+              style={{padding: "5px"}}
+            />
+          </div>
+          <div>
+            <Button 
+              variant="outlined" 
+              onClick={this.addBook}
+              style={{margin: "5px"}}
+            >
+              Add book to your library!
+            </Button>
+            <Button 
+              variant="outlined" 
+              onClick={() => this.props.cancelAdd()}
+              style={{margin: "5px"}}
+              color="secondary"
+            >
+              Cancel
+            </Button>
+          </div>
         </div>
       );
     }
