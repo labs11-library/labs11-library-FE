@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const BookListContainer = styled.div`
   max-width: 1000px;
-  margin: 3.5rem auto 0 auto;
   text-align: center;
   z-index: 0;
   h1 {
@@ -83,10 +82,12 @@ export const ContentContainer = styled.div`
   width: 100%
   display: flex;
   flex-direction: row;
+  margin: 3.5rem auto;
 `;
 export const MapWrapper = styled.div`
   width: 50%;
-  margin-top: 3.5rem;
+  position: fixed;
+  right: 0;
   @media (max-width: 700px) {
     margin-top: 60px;
     width: 100%;
