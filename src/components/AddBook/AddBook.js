@@ -68,8 +68,9 @@ class AddBook extends Component {
               variant="outlined" 
               onClick={this.addBook}
               style={{margin: "5px"}}
+              color="primary"
             >
-              Add book to your library!
+              Add book to your library
             </Button>
             <Button 
               variant="outlined" 
