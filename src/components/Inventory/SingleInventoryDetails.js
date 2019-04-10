@@ -8,9 +8,8 @@ const Availability = styled.p`
   color: ${props => (props.available ? "green" : "red")};
 `;
 const SingleInventoryDetails = props => {
-  console.log(props.loading)
   if (props.loading && !props.singleInventory.title) {
-    return <Loading />
+    return <Loading />;
   }
   const {
     title,
@@ -22,7 +21,10 @@ const SingleInventoryDetails = props => {
   const availability = available ? "Available" : "Checked out";
   return (
     <div>
-      <Link style={{ position: "absolute", left: "10px", textDecoration: "none" }} to="/my-library">
+      <Link
+        style={{ position: "absolute", left: "10px", textDecoration: "none" }}
+        to="/my-library"
+      >
         <Button variant="outlined">← Back</Button>
       </Link>
       <BookDetailsWrapper>
@@ -71,4 +73,4 @@ const BookContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-`
+`;
