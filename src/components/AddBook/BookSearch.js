@@ -93,6 +93,7 @@ class BookSearch extends Component {
                 value={this.state.searchText}
                 onChange={this.handleChange}
                 style={{ margin: "0 auto", flex: "1" }}
+
               />
               <IconButton aria-label="Search" style={{ padding: "10px" }}>
                 <ArrowForwardIcon />

@@ -20,6 +20,10 @@ export const GET_CHECKOUTS_SUCCESS = "GET_CHECKOUTS_SUCCESS";
 export const GETTING_SINGLE_CHECKOUT = "GETTING_SINGLE_CHECKOUT";
 export const GET_SINGLE_CHECKOUT_SUCCESS = "GET_SINGLE_CHECKOUT_SUCCESS";
 
+export const DELETING_CHECKOUT_REQUEST = "DELETING_CHECKOUT_REQUEST";
+export const DELETE_CHECKOUT_REQUEST_SUCCESS =
+  "DELETE_CHECKOUT_REQUEST_SUCCESS";
+
 export const DELETING_CHECKOUT = "DELETING_CHECKOUT";
 export const DELETE_CHECKOUT_SUCCESS = "DELETE_CHECKOUT_SUCCESS";
 
@@ -73,7 +77,20 @@ export const addCheckoutRequest = (bookId, lenderId) => dispatch => {
       dispatch({ type: ADD_CHECKOUT_REQUEST_FAILURE, payload: err })
     );
 };
-
+export const deleteCheckoutRequest = (
+  lenderId,
+  checkoutRequestId
+) => dispatch => {
+  dispatch({ type: DELETING_CHECKOUT_REQUEST });
+  axios
+    .delete(`${baseUrl}/users/${lenderId}/checkoutrequest/${checkoutRequestId}`)
+    .then(res => {
+      dispatch({
+        type: DELETE_CHECKOUT_REQUEST_SUCCESS
+      });
+    })
+    .catch(err => console.log(err));
+};
 export const addCheckout = (userId, checkoutRequestId) => dispatch => {
   dispatch({ type: ADDING_CHECKOUT });
   axios

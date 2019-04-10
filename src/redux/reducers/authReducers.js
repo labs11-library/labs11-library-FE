@@ -5,6 +5,8 @@ import {
   UPDATE_PROFILE_SUCCESS
 } from "../actions/authActions.js";
 
+import { toast } from "react-toastify";
+
 const initialState = {
   loggedInUser: {},
   fetchingUser: false
@@ -29,6 +31,7 @@ export default function authReducer(state = initialState, action) {
         fetchingUser: true
       };
     case UPDATE_PROFILE_SUCCESS:
+      toast.info("Profile successfully updated.");
       return {
         ...state,
         fetchingUser: false,

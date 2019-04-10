@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
-// import { Button } from "@progress/kendo-react-buttons";
 import { NavLink } from "react-router-dom";
-import { withRouter } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../url";
-import { addCheckout } from "../../redux/actions/checkoutActions.js";
+import {
+  addCheckout,
+  deleteCheckoutRequest
+} from "../../redux/actions/checkoutActions.js";
 import { connect } from "react-redux";
 import {
   BookDetailsWrapper,
@@ -25,20 +26,10 @@ class RequestDetails extends Component {
   componentDidMount() {
     this.props.getLoggedInUser();
   }
-
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
-    axios
-      .delete(
-        `${baseUrl}/users/${lenderId}/checkoutrequest/${checkoutRequestId}`
-      )
-      .then(res => {
-        // window.location.reload();
-        return res.data;
-      })
-      .catch(err => console.log(err));
+    this.props.deleteCheckoutRequest(lenderId, checkoutRequestId);
     this.sendEmail();
-    // window.location.reload();
   };
 
   confirmCheckout = () => {
@@ -51,15 +42,6 @@ class RequestDetails extends Component {
         return res.data;
       })
       .catch(err => console.log(err));
-
-    // window.location.reload();
-
-    // axios
-    //   .put(`${baseUrl}/users/${userId}/checkoutRequest/${checkoutRequestId}`, { checkoutAccepted: true })
-    //   .then(res => {
-    //     return res.data;
-    //   })
-    // .catch(err => console.log(err));
   };
 
   sendEmail = () => {
@@ -94,6 +76,7 @@ class RequestDetails extends Component {
       }&topic=${email.subject}&text=${email.text}`
     ) //query string url
       .catch(err => console.error(err));
+    this.forceUpdate();
   };
 
   render() {
@@ -207,7 +190,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { addCheckout, getLoggedInUser }
+  { addCheckout, getLoggedInUser, deleteCheckoutRequest }
 )(RequestDetails);
-
-// export default withRouter(RequestDetailsRedux);

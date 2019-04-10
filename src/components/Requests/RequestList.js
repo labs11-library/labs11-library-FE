@@ -12,20 +12,16 @@ class Requests extends Component {
   constructor() {
     super();
     this.state = {
-      checkoutRequests: [],
       value: 0
     };
   }
-
   handleChange = (event, value) => {
     this.setState({ value });
   };
-
   componentWillReceiveProps(newProps) {
-    if (newProps.checkoutRequests !== this.state.checkoutRequests) {
-      this.setState({
-        checkoutRequests: this.props.checkoutRequests
-      });
+    if (newProps.deletingCheckout === true) {
+      const userId = localStorage.getItem("userId");
+      this.props.getCheckoutRequests(userId);
     }
   }
   componentDidMount() {
@@ -58,10 +54,8 @@ class Requests extends Component {
   };
 
   render() {
-    if (this.props.loadingRequests) {
+    if (this.props.loadingRequests || this.props.deletingCheckout) {
       return <Loading />;
-    } else if (this.props.checkoutRequests.length === 0) {
-      return <h1>You have no checkout requests.</h1>;
     } else if (this.props.checkoutRequests) {
       return (
         <>
@@ -81,27 +75,35 @@ class Requests extends Component {
           {this.state.value === 0 ? (
             <div>
               <div>
-                {this.filterIncomingRequests().map(request => {
-                  return (
-                    <RequestDetails
-                      key={request.checkoutRequestId}
-                      request={request}
-                    />
-                  );
-                })}
+                {this.filterIncomingRequests().length === 0 && (
+                  <h1>You have no incoming checkout requests.</h1>
+                )}
+                {this.filterIncomingRequests().length > 0 &&
+                  this.filterIncomingRequests().map(request => {
+                    return (
+                      <RequestDetails
+                        key={request.checkoutRequestId}
+                        request={request}
+                      />
+                    );
+                  })}
               </div>
             </div>
           ) : (
             <div>
               <div>
-                {this.filterOutgoingRequests().map(request => {
-                  return (
-                    <RequestDetails
-                      key={request.checkoutRequestId}
-                      request={request}
-                    />
-                  );
-                })}
+                {this.filterOutgoingRequests().length === 0 && (
+                  <h1>You have no pending outbound checkout requests.</h1>
+                )}
+                {this.filterOutgoingRequests().length > 0 &&
+                  this.filterOutgoingRequests().map(request => {
+                    return (
+                      <RequestDetails
+                        key={request.checkoutRequestId}
+                        request={request}
+                      />
+                    );
+                  })}
               </div>
             </div>
           )}
@@ -113,7 +115,8 @@ class Requests extends Component {
 
 const mapStateToProps = state => ({
   loadingRequests: state.checkoutReducer.loadingRequests,
-  checkoutRequests: state.checkoutReducer.checkoutRequests
+  checkoutRequests: state.checkoutReducer.checkoutRequests,
+  deletingCheckout: state.checkoutReducer.deletingCheckout
 });
 export default connect(
   mapStateToProps,
