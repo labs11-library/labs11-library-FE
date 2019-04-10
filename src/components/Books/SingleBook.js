@@ -24,7 +24,6 @@ class SingleBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      singleBook: {},
       showChat: false
     };
   }
@@ -33,7 +32,11 @@ class SingleBook extends Component {
     this.props.getSingleBook(this.props.match.params.bookId);
     this.props.getLoggedInUser();
   }
-
+  componentWillReceiveProps(newProps) {
+    if (newProps.creatingStripe === true) {
+      this.props.getLoggedInUser();
+    }
+  }
   exitChat = () => {
     this.setState({
       showChat: false
@@ -69,7 +72,7 @@ class SingleBook extends Component {
   };
 
   render() {
-    if (!this.props.singleBook.image) {
+    if (this.props.fetchingBooks || this.props.creatingStripe) {
       return <Loading />;
     } else if (!this.props.loading && this.state.showChat === false) {
       const {
@@ -188,7 +191,9 @@ const mapStateToProps = state => {
   return {
     fetchingBooks: state.bookReducer.fetchingBooks,
     singleBook: state.bookReducer.singleBook,
-    loggedInUser: state.authReducer.loggedInUser
+    loggedInUser: state.authReducer.loggedInUser,
+    fetchingUser: state.authReducer.fetchingUser,
+    creatingStripe: state.authReducer.creatingStripe
   };
 };
 
