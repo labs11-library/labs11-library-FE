@@ -10,7 +10,6 @@ class CheckedOutList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // checkouts: [],
       filter: "all",
       searchText: ""
     };
@@ -19,13 +18,6 @@ class CheckedOutList extends Component {
     const userId = localStorage.getItem("userId");
     this.props.getCheckouts(userId);
   }
-  // componentWillReceiveProps(newProps) {
-  //   if (newProps.checkouts !== this.props.checkouts) {
-  //     this.setState({
-  //       checkouts: this.props.checkouts
-  //     });
-  //   }
-  // }
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({
