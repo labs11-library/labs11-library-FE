@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as moment from "moment";
 import "@progress/kendo-theme-material/dist/all.css";
-import { Button } from "@progress/kendo-react-buttons";
+import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import {
   getSingleInventory,
@@ -60,36 +60,42 @@ class SingleInventory extends Component {
     } else if (!this.state.updating && !this.state.showChat) {
       return (
         <React.Fragment>
-          <div>
+          <div style={{width: "500px", margin: "20px auto"}}>
             <SingleInventoryDetails
               singleInventory={this.props.singleInventory}
               timeRemaining={this.timeRemaining}
               deleteInventory={this.deleteInventory}
+              loading={this.props.loading}
             />
-          </div>
-          {!this.props.singleInventory.available && (
-            <Button
-              onClick={() => this.setState({ showChat: true })}
-              style={{ height: "36px" }}
-            >
-              Send Message
+            {/* {!this.props.singleInventory.available && (
+              <Button
+                onClick={() => this.setState({ showChat: true })}
+                style={{ height: "36px" }}
+              >
+                Send Message
+              </Button>
+            )} */}
+            <Button variant="outlined" color="primary" style={{margin: "10px 10px 0 0"}} onClick={this.toggleUpdate}>
+              {this.state.updating ? "Cancel Changes" : "Update Info"}
             </Button>
-          )}
-          <Button onClick={this.toggleUpdate}>
-            {this.state.updating ? "Cancel Update" : "Update Info"}
-          </Button>
+            <Button onClick={() => this.deleteInventory(this.props.singleInventory.userId, this.props.singleInventory.bookId)} style={{margin: "10px 10px 0 0"}} color="secondary">
+              Delete from inventory
+            </Button>
+          </div>
         </React.Fragment>
       );
     } else if (this.state.updating) {
       return (
         <React.Fragment>
-          <UpdateInventoryForm
-            singleInventory={this.props.singleInventory}
-            editInventory={this.editInventory}
-          />
-          <Button onClick={this.toggleUpdate}>
-            {this.state.updating ? "Cancel Update" : "Update Info"}
-          </Button>
+          <div style={{width: "500px", margin: "20px auto"}}>
+            <UpdateInventoryForm
+              singleInventory={this.props.singleInventory}
+              editInventory={this.editInventory}
+            />
+            <Button onClick={this.toggleUpdate}>
+              {this.state.updating ? "Cancel Changes" : "Edit Details"}
+            </Button>
+          </div>
         </React.Fragment>
       );
     } else if (this.state.showChat) {

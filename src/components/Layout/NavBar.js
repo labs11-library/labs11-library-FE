@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import './layout.css';
 import { connect } from "react-redux";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import Avatar from '@material-ui/core/Avatar';
-
+import { NavBarWrapper, BookMapsLogo, NavLinks, NavLinkWrapper, Burger, BurgerDiv } from "../Styles/NavBarStyles.js"
 class NavBar extends Component {
   constructor() {
     super();
@@ -31,23 +29,23 @@ render() {
     return (
       <div>
         {loggedIn && (
-          <div className="navbar">
-            <Link to="/" className="bookmaps-logo">
+          <NavBarWrapper>
+            <BookMapsLogo>
               <span role="img" aria-label="books">
                 📚
               </span>
-            </Link>
-            <div className="nav-links">
-              <Link className="nav-link" to="/my-library"><span role="img" aria-label="books">📚</span> My Library</Link>
-              <Link className="nav-link" to="/add-book"><span role="img" aria-label="plus">➕</span> Add book</Link>
-              <Link className="nav-link" to="/notifications"><span role="img" aria-label="bell">🔔</span> Notifications</Link>
-              <Link className="nav-link" to="/profile"><Avatar style={{boxShadow: "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"}} src={this.props.loggedInUser.picture} /></Link>
-            </div>
-          </div>
+            </BookMapsLogo>
+            <NavLinks>
+              <NavLinkWrapper to="/my-library"><span role="img" aria-label="books">📚</span> My Library</NavLinkWrapper>
+              <NavLinkWrapper to="/add-book"><span role="img" aria-label="plus">➕</span> Add book</NavLinkWrapper>
+              <NavLinkWrapper to="/notifications"><span role="img" aria-label="bell">🔔</span> Notifications</NavLinkWrapper>
+              <NavLinkWrapper to="/profile"><Avatar style={{boxShadow: "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"}} src={this.props.loggedInUser.picture} /></NavLinkWrapper>
+            </NavLinks>
+          </NavBarWrapper>
         )}
         {!loggedIn && (
           <div className="navbar">
-            <Link to="/" className="bookmaps-logo">
+            <BookMapsLogo>
               {/* Book maps{" "} */}
               <span role="img" aria-label="books">
                 📚
@@ -55,23 +53,23 @@ render() {
               <span role="img" aria-label="map">
                 🗺
               </span>
-            </Link>
+            </BookMapsLogo>
             <div className={this.state.menuClassName}>
               <div>
-                <Link className="nav-link" to="/signup">
+                <NavLinkWrapper to="/signup">
                   <span role="img" aria-label="wave">
                     👋
                   </span>{" "}
                   Sign up
-                </Link>
+                </NavLinkWrapper>
               </div>
             </div>
             <div>
-              <button className="burger" onClick={this.handleToggleMenu}>
-                <div className="burger-div" />
-                <div className="burger-div" />
-                <div className="burger-div" />
-              </button>
+              <Burger onClick={this.handleToggleMenu}>
+                <BurgerDiv className="burger-div" />
+                <BurgerDiv className="burger-div" />
+                <BurgerDiv className="burger-div" />
+              </Burger>
             </div>
           </div>
         )}
