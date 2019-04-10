@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
-import { Button } from "@progress/kendo-react-buttons";
-import { Link } from "react-router-dom";
+// import { Button } from "@progress/kendo-react-buttons";
+import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../url";
@@ -10,9 +10,20 @@ import {
   deleteCheckoutRequest
 } from "../../redux/actions/checkoutActions.js";
 import { connect } from "react-redux";
-import { BookDetailsWrapper, BookImgWrapper, BookImg } from "../Books/styles";
+import {
+  BookDetailsWrapper,
+  BookImgWrapper,
+  BookImg,
+  ButtonContainer,
+  RequestInfo
+} from "../Styles/NotificationStyles";
+import Button from "@material-ui/core/Button";
+
 import { getLoggedInUser } from "../../redux/actions/authActions";
 class RequestDetails extends Component {
+  state = {
+    value: 0
+  };
   componentDidMount() {
     this.props.getLoggedInUser();
   }
@@ -91,25 +102,66 @@ class RequestDetails extends Component {
         <BookImgWrapper>
           <BookImg alt={title} src={image} />
         </BookImgWrapper>
-        <div>
-          <h2>{title}</h2>
+        <RequestInfo>
+          <h2>
+            {title.substr(0, 28)}
+            {title.length > 28 && "..."}
+          </h2>
           <p>by {authors}</p>
-          <div>Description: {description}</div>
-          <div>Borrower: {borrower}</div>
+          <p>Description: {description}</p>
+          <p>Borrower: {borrower}</p>
           <p>Contact {lenderBorrowerName} to arrange a book exchange</p>
-          <Link to={`/notifications/${checkoutRequestId}`}>
-            <Button>Send Message</Button>
-          </Link>
+        </RequestInfo>
+        <ButtonContainer>
+          <Button
+            style={{
+              width: "100%",
+              maxWidth: "180px",
+              margin: "2px auto 4px",
+              padding: "6px 14px"
+            }}
+            variant="contained"
+            color="primary"
+          >
+            <NavLink
+              style={{ textDecoration: "none", color: "white" }}
+              to={`/notifications/${checkoutRequestId}`}
+            >
+              Send Message
+            </NavLink>
+          </Button>
           {/* The button below will DELETE by checkoutRequestId  */}
-          <Button onClick={this.deleteRequest}>Delete request</Button>
+          <Button
+            style={{
+              width: "100%",
+              maxWidth: "180px",
+              margin: "15px auto 0px",
+              padding: "6px 14px"
+            }}
+            variant="contained"
+            color="primary"
+            onClick={this.deleteRequest}
+          >
+            Delete request
+          </Button>
           {userId === lenderId.toString() && (
             <>
-              <Button onClick={this.confirmCheckout}>
+              <Button
+                style={{
+                  width: "100%",
+                  maxWidth: "180px",
+                  margin: "18px auto 0px",
+                  padding: "6px 14px"
+                }}
+                variant="contained"
+                color="primary"
+                onClick={this.confirmCheckout}
+              >
                 Confirm book transfer
               </Button>
             </>
           )}
-        </div>
+        </ButtonContainer>
       </BookDetailsWrapper>
     );
   }
