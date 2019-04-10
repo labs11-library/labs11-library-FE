@@ -52,7 +52,9 @@ class Books extends Component {
   filteredBooks = () => {
     const { filter } = this.state;
     if (filter === "all") {
-      return this.searchBooks();
+      return this.searchBooks().filter(
+        book => book.lenderId.toString() !== localStorage.getItem("userId")
+      );
     } else if (filter === "available") {
       return this.searchBooks().filter(
         book =>
