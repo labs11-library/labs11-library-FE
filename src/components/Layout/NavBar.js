@@ -50,7 +50,7 @@ class NavBar extends Component {
               </NavLinkWrapper>
               <NavLinkWrapper to="/add-book">
                 <span role="img" aria-label="plus">
-                  ➕
+                  📖
                 </span>{" "}
                 Add book
               </NavLinkWrapper>

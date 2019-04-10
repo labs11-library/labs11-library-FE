@@ -20,7 +20,7 @@ class Signup extends Component {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <form>
+          {/* <form>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
               <Input id="email" name="email" autoComplete="email" autoFocus />
@@ -41,11 +41,8 @@ class Signup extends Component {
             <Button type="submit" fullWidth variant="contained" color="primary">
               Sign up
             </Button>
-          </form>
+          </form> */}
           <FormControl margin="normal" required fullWidth>
-            <Link component={RouterLink} to="/login">
-              Log in
-            </Link>
             <a href={`${backendBaseUrl}/auth/google`}>
               <button class="loginBtn loginBtn--google">
                 Signup with Google
@@ -56,6 +53,9 @@ class Signup extends Component {
                 Signup with Facebook
               </button>
             </a>
+            <Link component={RouterLink} to="/login">
+              Already have an account? Click here to login.
+            </Link>
           </FormControl>
         </Paper>
       </div>
