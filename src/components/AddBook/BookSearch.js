@@ -77,9 +77,10 @@ class BookSearch extends Component {
         <div>
           <InventoryContainer>
             <Paper
-              style={{
+
                 width: "80%",
                 maxWidth: "400px",
+
                 margin: "20px auto",
                 padding: "2px 4px",
                 display: "flex",
@@ -93,6 +94,7 @@ class BookSearch extends Component {
                 value={this.state.searchText}
                 onChange={this.handleChange}
                 style={{ margin: "0 auto", flex: "1" }}
+
               />
               <IconButton aria-label="Search" style={{ padding: "10px" }}>
                 <ArrowForwardIcon />

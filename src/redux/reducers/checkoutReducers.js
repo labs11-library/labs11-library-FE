@@ -4,6 +4,8 @@ import {
   ADDING_CHECKOUT_REQUEST,
   ADD_CHECKOUT_REQUEST_SUCCESS,
   ADD_CHECKOUT_REQUEST_FAILURE,
+  DELETING_CHECKOUT_REQUEST,
+  DELETE_CHECKOUT_REQUEST_SUCCESS,
   GETTING_SINGLE_REQUEST,
   GET_SINGLE_REQUEST_SUCCESS,
   ADDING_CHECKOUT,
@@ -15,6 +17,8 @@ import {
   DELETING_CHECKOUT,
   DELETE_CHECKOUT_SUCCESS
 } from "../actions/checkoutActions.js";
+
+import { toast } from "react-toastify";
 
 const initialState = {
   checkoutRequests: [],
@@ -70,6 +74,17 @@ export default function checkoutReducer(state = initialState, action) {
       return {
         ...state,
         error: action.payload,
+        loadingRequests: false
+      };
+    case DELETING_CHECKOUT_REQUEST:
+      return {
+        ...state,
+        loadingRequests: true
+      };
+    case DELETE_CHECKOUT_REQUEST_SUCCESS:
+      toast.info("You have deleted this checkout request.");
+      return {
+        ...state,
         loadingRequests: false
       };
     case ADDING_CHECKOUT:
