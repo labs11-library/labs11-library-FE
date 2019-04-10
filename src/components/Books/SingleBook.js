@@ -170,9 +170,10 @@ class SingleBook extends Component {
             otherUserId={this.props.singleBook.lenderId}
             exitChat={this.exitChat}
           />
+         {/*
           <Button onClick={() => this.setState({ showChat: false })}>
             Go back
-          </Button>
+          </Button> */}
         </div>
       );
     }
