@@ -90,8 +90,8 @@ class BookDetails extends Component {
 
     const lenderBorrowerName =
       lenderId.toString() === localStorage.getItem("userId")
-        ? lender
-        : borrower;
+        ? borrower
+        : lender;
 
     const lenderBorrower =
       lenderId.toString() === localStorage.getItem("userId")
@@ -132,9 +132,7 @@ class BookDetails extends Component {
           {!returned ? (
             <p>Contact {lenderBorrowerName} to arrange return</p>
           ) : (
-            <p>
-              {lenderBorrower}: {lenderBorrowerName}
-            </p>
+            <p>Borrower: {lenderBorrowerName}</p>
           )}
           <Link to={`/my-library/checkouts/${checkoutId}`}>
             <Button>Send message</Button>
