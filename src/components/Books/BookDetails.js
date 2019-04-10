@@ -36,14 +36,13 @@ const BookDetails = props => {
         <BookImg alt={title} src={image} />
       </BookImgWrapper>
       <BookTextContainer>
-        <h2>{title}</h2>
+        <h2>{title.substr(0, 28)}
+          {title.length > 28 && "..."}</h2>
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
         {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
-        <div>Description: {description}</div>
-        <p>Contact {lender}</p>
         <Link style={{ textDecoration: "none" }} to={`/books/${bookId}`}>
-          <Button variant="contained" color="primary">
+          <Button style={{padding: "10px 20px"}} variant="contained" color="primary">
             See more details
           </Button>
         </Link>

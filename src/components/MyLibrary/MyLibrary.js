@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MyLibraryTabsWrapper } from "./styled";
+import { MyLibraryTabsWrapper } from "../Styles/MyLibraryStyles.js";
 import InventoryList from "../Inventory/InventoryList.js";
 import CheckedOutList from "../CheckedOut/CheckedOutList.js";
 import Paper from "@material-ui/core/Paper";

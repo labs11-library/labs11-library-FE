@@ -83,8 +83,8 @@ class BookSearch extends Component {
                 padding: "2px 4px",
                 display: "flex",
                 alignItems: "center",
-                position: "relative",
-                top: "3.5vw"
+                position: "relative"
+                // top: "3.5vw"
               }}
             >
               <InputBase

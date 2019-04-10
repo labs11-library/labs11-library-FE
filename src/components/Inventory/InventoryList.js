@@ -11,7 +11,6 @@ import SearchIcon from "@material-ui/icons/Search";
 import $ from "jquery";
 import {
   InventoryContainer,
-  Search,
   CardContainer
 } from "../Styles/InventoryStyles.js";
 class Inventory extends Component {
@@ -61,7 +60,7 @@ class Inventory extends Component {
         <InventoryContainer>
           <Paper
             style={{
-              width: "400px",
+              width: "80%",
               margin: "20px auto",
               padding: "2px 4px",
               display: "flex",
