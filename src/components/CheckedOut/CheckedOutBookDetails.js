@@ -9,7 +9,7 @@ import {
   BookImgWrapper,
   BookImg,
   DueDate
-} from "../Books/styles";
+} from "../Styles/NotificationStyles";
 import { connect } from "react-redux";
 import { confirmReturn } from "../../redux/actions/checkoutActions";
 import { returnBook } from "../../redux/actions/inventoryActions.js";
