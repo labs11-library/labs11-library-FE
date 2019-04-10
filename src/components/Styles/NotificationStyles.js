@@ -18,6 +18,7 @@ export const BookDetailsWrapper = styled.div`
   p {
     font-size: 14px;
     margin: 12px 0px 6px;
+    width: 90%;
   }
 
   @media (max-width: 700px) {
@@ -56,4 +57,11 @@ export const RequestInfo = styled.div`
   justify-content: space-evenly;
   align-items: flex-start;
   height: 100%;
+`;
+
+export const RequestDescription = styled.div`
+  max-width: 266px;
+  width: 100%;
+  font-size: 14px;
+  word-wrap: break-word;
 `;

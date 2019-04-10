@@ -12,7 +12,8 @@ import {
   BookImgWrapper,
   BookImg,
   ButtonContainer,
-  RequestInfo
+  RequestInfo,
+  RequestDescription
 } from "../Styles/NotificationStyles";
 import Button from "@material-ui/core/Button";
 
@@ -108,10 +109,18 @@ class RequestDetails extends Component {
       lender
     } = this.props.request;
     const userId = localStorage.getItem("userId");
+    const descriptionText =
+      description.length > 55
+        ? `${description.substr(0, 55)} ...`
+        : description;
     const lenderBorrowerName =
       lenderId.toString() === localStorage.getItem("userId")
         ? borrower
         : lender;
+    const lenderBorrower =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? "Borrower"
+        : "Lender";
     return (
       <BookDetailsWrapper>
         <BookImgWrapper>
@@ -123,49 +132,23 @@ class RequestDetails extends Component {
             {title.length > 28 && "..."}
           </h2>
           <p>by {authors}</p>
-          <p>Description: {description}</p>
-          <p>Borrower: {borrower}</p>
-          <p>Contact {lenderBorrowerName} to arrange a book exchange</p>
+          <RequestDescription>
+            {description === ""
+              ? "No description provided"
+              : "Description: " + descriptionText}
+          </RequestDescription>
+          <p>
+            {lenderBorrower}: {lenderBorrowerName}
+          </p>
         </RequestInfo>
         <ButtonContainer>
-          <Button
-            style={{
-              width: "100%",
-              maxWidth: "180px",
-              margin: "2px auto 4px",
-              padding: "6px 14px"
-            }}
-            variant="contained"
-            color="primary"
-          >
-            <NavLink
-              style={{ textDecoration: "none", color: "white" }}
-              to={`/notifications/${checkoutRequestId}`}
-            >
-              Send Message
-            </NavLink>
-          </Button>
-          {/* The button below will DELETE by checkoutRequestId  */}
-          <Button
-            style={{
-              width: "100%",
-              maxWidth: "180px",
-              margin: "15px auto 0px",
-              padding: "6px 14px"
-            }}
-            variant="contained"
-            color="primary"
-            onClick={this.deleteRequest}
-          >
-            Delete request
-          </Button>
           {userId === lenderId.toString() && (
             <>
               <Button
                 style={{
                   width: "100%",
                   maxWidth: "180px",
-                  margin: "18px auto 0px",
+                  margin: "10px auto",
                   padding: "6px 14px"
                 }}
                 variant="contained"
@@ -176,6 +159,39 @@ class RequestDetails extends Component {
               </Button>
             </>
           )}
+          <Button
+            style={{
+              width: "100%",
+              minWidth: "140px",
+              maxWidth: "180px",
+              margin: "10px auto 10px",
+              padding: "6px 14px"
+            }}
+            variant="outlined"
+            color="primary"
+          >
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to={`/notifications/${checkoutRequestId}`}
+            >
+              Send Message
+            </NavLink>
+          </Button>
+          {/* The button below will DELETE by checkoutRequestId  */}
+          <Button
+            style={{
+              width: "100%",
+              maxWidth: "180px",
+              minWidth: "140px",
+              margin: "0px auto 10px",
+              padding: "6px 14px"
+            }}
+            variant="outlined"
+            color="secondary"
+            onClick={this.deleteRequest}
+          >
+            Delete request
+          </Button>
         </ButtonContainer>
       </BookDetailsWrapper>
     );
