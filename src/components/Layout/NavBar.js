@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
-import Avatar from '@material-ui/core/Avatar';
-import { NavBarWrapper, BookMapsLogo, NavLinks, NavLinkWrapper, Burger, BurgerDiv } from "../Styles/NavBarStyles.js"
+import Avatar from "@material-ui/core/Avatar";
+import {
+  NavBarWrapper,
+  BookMapsLogo,
+  NavLinks,
+  NavLinkWrapper,
+  Burger,
+  BurgerDiv
+} from "../Styles/NavBarStyles.js";
 class NavBar extends Component {
   constructor() {
     super();
@@ -11,35 +18,57 @@ class NavBar extends Component {
     };
   }
 
-componentDidMount() {
-  this.props.getLoggedInUser();
-}
-
-handleToggleMenu = () => {
-  if (this.state.menuClassName === "nav-links nav-links-none") {
-    this.setState({
-      menuClassName: "nav-links nav-links-none"
-    });
+  componentDidMount() {
+    this.props.getLoggedInUser();
   }
-};
 
+  handleToggleMenu = () => {
+    if (this.state.menuClassName === "nav-links nav-links-none") {
+      this.setState({
+        menuClassName: "nav-links nav-links-none"
+      });
+    }
+  };
 
-render() {
+  render() {
     const loggedIn = localStorage.getItem("jwt") ? true : false;
     return (
       <div>
         {loggedIn && (
           <NavBarWrapper>
-            <BookMapsLogo>
+            <BookMapsLogo to="/">
               <span role="img" aria-label="books">
                 📚
               </span>
             </BookMapsLogo>
             <NavLinks>
-              <NavLinkWrapper to="/my-library"><span role="img" aria-label="books">📚</span> My Library</NavLinkWrapper>
-              <NavLinkWrapper to="/add-book"><span role="img" aria-label="plus">➕</span> Add book</NavLinkWrapper>
-              <NavLinkWrapper to="/notifications"><span role="img" aria-label="bell">🔔</span> Notifications</NavLinkWrapper>
-              <NavLinkWrapper to="/profile"><Avatar style={{boxShadow: "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"}} src={this.props.loggedInUser.picture} /></NavLinkWrapper>
+              <NavLinkWrapper to="/my-library">
+                <span role="img" aria-label="books">
+                  📚
+                </span>{" "}
+                My Library
+              </NavLinkWrapper>
+              <NavLinkWrapper to="/add-book">
+                <span role="img" aria-label="plus">
+                  ➕
+                </span>{" "}
+                Add book
+              </NavLinkWrapper>
+              <NavLinkWrapper to="/notifications">
+                <span role="img" aria-label="bell">
+                  🔔
+                </span>{" "}
+                Notifications
+              </NavLinkWrapper>
+              <NavLinkWrapper to="/profile">
+                <Avatar
+                  style={{
+                    boxShadow:
+                      "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"
+                  }}
+                  src={this.props.loggedInUser.picture}
+                />
+              </NavLinkWrapper>
             </NavLinks>
           </NavBarWrapper>
         )}
