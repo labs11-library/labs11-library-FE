@@ -12,20 +12,16 @@ class Requests extends Component {
   constructor() {
     super();
     this.state = {
-      checkoutRequests: [],
       value: 0
     };
   }
-
   handleChange = (event, value) => {
     this.setState({ value });
   };
-
   componentWillReceiveProps(newProps) {
-    if (newProps.checkoutRequests !== this.state.checkoutRequests) {
-      this.setState({
-        checkoutRequests: this.props.checkoutRequests
-      });
+    if (newProps.deletingCheckout === true) {
+      const userId = localStorage.getItem("userId");
+      this.props.getCheckoutRequests(userId);
     }
   }
   componentDidMount() {
@@ -58,7 +54,7 @@ class Requests extends Component {
   };
 
   render() {
-    if (this.props.loadingRequests) {
+    if (this.props.loadingRequests || this.props.deletingCheckout) {
       return <Loading />;
     } else if (this.props.checkoutRequests.length === 0) {
       return <h1>You have no checkout requests.</h1>;
@@ -113,7 +109,8 @@ class Requests extends Component {
 
 const mapStateToProps = state => ({
   loadingRequests: state.checkoutReducer.loadingRequests,
-  checkoutRequests: state.checkoutReducer.checkoutRequests
+  checkoutRequests: state.checkoutReducer.checkoutRequests,
+  deletingCheckout: state.checkoutReducer.deletingCheckout
 });
 export default connect(
   mapStateToProps,

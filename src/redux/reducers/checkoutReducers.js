@@ -27,6 +27,7 @@ const initialState = {
   checkouts: [],
   singleCheckout: {},
   loadingCheckouts: false,
+  deletingCheckout: false,
   error: ""
 };
 
@@ -79,13 +80,13 @@ export default function checkoutReducer(state = initialState, action) {
     case DELETING_CHECKOUT_REQUEST:
       return {
         ...state,
-        loadingRequests: true
+        deletingCheckout: true
       };
     case DELETE_CHECKOUT_REQUEST_SUCCESS:
-      toast.info("You have deleted this checkout request.");
+      toast.info("Checkout request successfully deleted.");
       return {
         ...state,
-        loadingRequests: false
+        deletingCheckout: false
       };
     case ADDING_CHECKOUT:
       return {

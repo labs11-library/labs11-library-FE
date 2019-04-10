@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
-// import { Button } from "@progress/kendo-react-buttons";
+import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { withRouter } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../url";
 import {
@@ -27,7 +26,6 @@ class RequestDetails extends Component {
   componentDidMount() {
     this.props.getLoggedInUser();
   }
-
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
     this.props.deleteCheckoutRequest(lenderId, checkoutRequestId);
@@ -78,6 +76,7 @@ class RequestDetails extends Component {
       }&topic=${email.subject}&text=${email.text}`
     ) //query string url
       .catch(err => console.error(err));
+    this.forceUpdate();
   };
 
   render() {
@@ -178,5 +177,3 @@ export default connect(
   mapStateToProps,
   { addCheckout, getLoggedInUser, deleteCheckoutRequest }
 )(RequestDetails);
-
-// export default withRouter(RequestDetailsRedux);

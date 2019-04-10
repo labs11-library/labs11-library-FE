@@ -77,10 +77,9 @@ class BookSearch extends Component {
         <div>
           <InventoryContainer>
             <Paper
-
+              style={{
                 width: "80%",
                 maxWidth: "400px",
-
                 margin: "20px auto",
                 padding: "2px 4px",
                 display: "flex",
