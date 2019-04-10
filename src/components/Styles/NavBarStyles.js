@@ -17,7 +17,7 @@ export const NavBarWrapper = styled.div`
     color: black;
     text-decoration: none;
   }
-`
+`;
 
 export const BookMapsLogo = styled(Link)`
   position: absolute;
@@ -28,8 +28,7 @@ export const BookMapsLogo = styled(Link)`
     font-size: 2.5rem;
     padding-left: 10px;
   }
-` 
-
+`;
 
 export const NavLinks = styled.div`
   position: absolute;
@@ -41,12 +40,11 @@ export const NavLinks = styled.div`
   align-items: center;
   font-size: 1.2rem;
   height: 3.5rem;
-`
+`;
 
 export const NavLinkWrapper = styled(Link)`
   margin: 0 0.5rem;
-`
-
+`;
 
 export const Burger = styled.button`
   display: none;
@@ -57,7 +55,7 @@ export const Burger = styled.button`
   :focus {
     outline: 0;
   }
-`
+`;
 
 export const BurgerDiv = styled.div`
   width: 35px;
@@ -65,9 +63,10 @@ export const BurgerDiv = styled.div`
   background-color: black;
   margin: 6px 0;
   border-radius: 2px;
-`
+`;
 
-{/* @media screen and (max-width: 850px) {
+{
+  /* @media screen and (max-width: 850px) {
   .burger {
       display: inline;
   }
@@ -100,4 +99,5 @@ export const BurgerDiv = styled.div`
       top: 10px;
       right: 25px;
   }
-} */}
+} */
+}
