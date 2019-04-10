@@ -25,7 +25,6 @@ class UpdateInventoryForm extends Component {
       authors,
       image,
       available,
-      description,
       availability
     } = this.props.singleInventory;
     return (
@@ -58,36 +57,29 @@ class UpdateInventoryForm extends Component {
 
 export default UpdateInventoryForm;
 
-{/* <div>
-      
-        <Button onClick={() => this.props.editInventory(this.state)}>
-          Save Updates
-        </Button>
-      </div> */}
+const BookDetailsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 180px;
 
-      const BookDetailsWrapper = styled.div`
-      display: flex;
-      justify-content: space-between;
-      height: 180px;
-    
-      h2 {
-        font-size: 1.5rem;
-      }
-    
-      p {
-        font-size: 1rem;
-      }
-    `;
-    const BookImgWrapper = styled.div`
-      width: 120px;
-      height: 180px;
-    `;
-    const BookImg = styled.img`
-      width: 100%;
-      height: 100%;
-    `;
-    const BookContentWrapper = styled.div`
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-    `
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+`;
+const BookImgWrapper = styled.div`
+  width: 120px;
+  height: 180px;
+`;
+const BookImg = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+const BookContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+`
