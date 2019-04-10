@@ -9,18 +9,11 @@ export const BookListContainer = styled.div`
   }
 `;
 
-export const Search = styled.input`
-  text-align: center;
-  padding: 5px 3px;
-  width: 250px;
-  margin-bottom: 10px;
-`;
-
 export const CardContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   @media (max-width: 750px) {
     flex-direction: column;
   }
@@ -28,10 +21,9 @@ export const CardContainer = styled.div`
 // copied from /books/styles.js ==========================================================
 
 export const BookDetailsWrapper = styled.div`
-  width: 46%;
+  width: 85%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  width: 46%;
   display: flex;
   margin-bottom: 20px;
   @media (max-width: 750px) {
@@ -41,8 +33,10 @@ export const BookDetailsWrapper = styled.div`
   }
 `;
 export const BookImgWrapper = styled.div`
-  width: 120px;
-  height: 180px;
+  max-width: 120px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
   margin-right: 20px;
 `;
 export const BookImg = styled.img`
@@ -51,13 +45,16 @@ export const BookImg = styled.img`
 `;
 export const BookTextContainer = styled.div`
   text-align: left;
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   h2,
   p {
     margin-bottom: 7px;
   }
   h2 {
     font-size: 1.5rem;
+    padding-right: 6px;
   }
   p {
     font-size: 1rem;
@@ -77,17 +74,23 @@ export const LandingPageWrapper = styled.div`
   text-align: center;
   display: flex;
   overflow-y: hidden;
+  @media (max-width: 750px) {
+    flex-direction: column;
+  }
 `;
 export const ContentContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+  @media (max-width: 750px) {
+    justify-content: center;
+  }
 `;
 export const MapWrapper = styled.div`
   width: 50%;
   position: fixed;
   right: 0;
-  @media (max-width: 700px) {
+  @media (max-width: 750px) {
     margin-top: 60px;
     width: 100%;
     display: ${props => (props.value === 0 ? "none" : "block")};
@@ -99,9 +102,9 @@ export const BooksWrapper = styled.div`
   height: 100%;
   margin-top: -1.1rem;
 
-  @media (max-width: 700px) {
-    margin-top: 60px;
-    width: 100vw;
+  @media (max-width: 750px) {
+    margin-top: 60px auto 0;
+    width: 92%;
     display: ${props => (props.value === 1 ? "none" : "block")};
   }
 `;
@@ -109,7 +112,13 @@ export const BooksWrapper = styled.div`
 export const TabsWrapper = styled.div`
   width: 100%;
 
-  @media (min-width: 700px) {
+  @media (max-width: 750px) {
+    width: 90%;
+    margin: 0 auto 24px;
+    padding: 6px 0;
+  }
+
+  @media (min-width: 750px) {
     display: none;
   }
 `;
