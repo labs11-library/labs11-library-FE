@@ -49,7 +49,7 @@ export const editInventory = (userId, bookId, state) => dispatch => {
     .put(`${baseUrl}/users/${userId}/inventory/${bookId}`, state)
     .then(res => {
       dispatch({
-        type: GET_USERS_INVENTORY_SUCCESS,
+        type: EDIT_INVENTORY_SUCCESS,
         payload: res.data.editedBook
       });
     })

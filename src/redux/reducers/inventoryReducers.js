@@ -47,6 +47,7 @@ export default function inventoryReducer(state = initialState, action) {
         loadingInventory: true
       };
     case EDIT_INVENTORY_SUCCESS:
+      toast.info("Book successfully updated.");
       return {
         ...state,
         loadingInventory: false,
