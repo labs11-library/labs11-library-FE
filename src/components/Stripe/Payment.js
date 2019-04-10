@@ -43,7 +43,7 @@ class Payment extends React.Component {
         stripeKey="pk_test_paiLlNo6bPnrx0Nnb2ORgRLu00CRdEJXhe"
         token={this.onToken}
         zipCode
-        label="Click here to become a member!"
+        label="Update Payment Information"
       />
     );
   }

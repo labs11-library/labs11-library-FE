@@ -54,7 +54,11 @@ class Books extends Component {
     if (filter === "all") {
       return this.searchBooks();
     } else if (filter === "available") {
-      return this.searchBooks().filter(book => book.available === true);
+      return this.searchBooks().filter(
+        book =>
+          book.available === true &&
+          book.lenderId.toString() !== localStorage.getItem("userId")
+      );
     }
   };
   componentDidMount() {
