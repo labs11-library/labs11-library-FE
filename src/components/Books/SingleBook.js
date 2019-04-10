@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as moment from "moment";
 import "@progress/kendo-theme-material/dist/all.css";
-import { Button } from "@progress/kendo-react-buttons";
+import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { getSingleBook } from "../../redux/actions/bookActions.js";
 import Ratings from "react-ratings-declarative";
@@ -130,7 +130,9 @@ class SingleBook extends Component {
                   <p>Contact {lender}</p>
                   <Button
                     disabled
+                    variant="outlined"
                     onClick={() => this.requestCheckout(bookId, lenderId)}
+                    color="primary"
                   >
                     Request checkout
                   </Button>
@@ -140,7 +142,9 @@ class SingleBook extends Component {
                 <div>
                   <p>Contact {lender}</p>
                   <Button
+                    variant="outlined"
                     onClick={() => this.requestCheckout(bookId, lenderId)}
+                    color="primary"
                   >
                     Request checkout
                   </Button>
@@ -170,7 +174,7 @@ class SingleBook extends Component {
             otherUserId={this.props.singleBook.lenderId}
             exitChat={this.exitChat}
           />
-         {/*
+          {/*
           <Button onClick={() => this.setState({ showChat: false })}>
             Go back
           </Button> */}
