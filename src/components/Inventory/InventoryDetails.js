@@ -1,33 +1,16 @@
 import React from "react";
-import styled from "styled-components";
 import "@progress/kendo-theme-material/dist/all.css";
-import { Button } from "@progress/kendo-react-buttons";
+import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-
-import * as moment from "moment";
-const BookDetailsWrapper = styled.div`
-  width: 60vw;
-  border-bottom: 2px solid grey;
-  display: flex;
-  justify-content: space-between;
-  margin: 20px auto;
-  height: 400px;
-`;
-const BookImgWrapper = styled.div`
-  width: 250px;
-  height: 375px;
-`;
-const BookImg = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-
-const Availability = styled.p`
-  color: ${props => (props.available ? "green" : "red")};
-`;
+import {
+  BookDetailsWrapper,
+  BookImgWrapper,
+  BookImg,
+  BookTextContainer,
+  Availability
+} from "../Styles/InventoryStyles.js";
 
 const BookDetails = props => {
-  const userId = localStorage.getItem("userId");
   const {
     bookId,
     title,
@@ -38,39 +21,33 @@ const BookDetails = props => {
     description
   } = props.book;
   const availability = available ? "Available" : "Checked out";
-  
-  // function timeRemaining() {
-  //   let now = moment(Date.now());
-  //   let end = moment(dueDate);
-  //   let duration = moment.duration(now.diff(end)).humanize();
-  //   return duration;
-  // }
-  
-  // const dateDue = moment
-  //           .utc(dueDate)
-  //           .local()
-  //           .format("dddd, MMMM Do");
-
-  console.log(dueDate)
+  const descriptionText =
+    description.length > 40 ? `${description.substr(0, 40)} ...` : description;
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
         <BookImg alt={title} src={image} />
       </BookImgWrapper>
-      <div>
-        <h2>{title}</h2>
+      <BookTextContainer>
+        <h2>
+          {title.substr(0, 25)}
+          {title.length > 25 && "..."}
+        </h2>
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
-        {!available && <p>Due: {dueDate} </p>} {/* ({timeRemaining(dueDate)} from now) */}
+        {!available && <p>Due: {dueDate} </p>}{" "}
         <p>
-          {description === ""
-            ? "No description provided"
-            : `Description: ${description}`}
+          {description === "" ? "No description provided" : descriptionText}
         </p>
-        <Link to={`/users/${userId}/inventory/${bookId}`}>
-          <Button>See more details</Button>
+        <Link
+          style={{ textDecoration: "none" }}
+          to={`/my-library/my-books/${bookId}`}
+        >
+          <Button variant="contained" color="primary">
+            See more details
+          </Button>
         </Link>
-      </div>
+      </BookTextContainer>
     </BookDetailsWrapper>
   );
 };

@@ -9,6 +9,7 @@ export const GET_SINGLE_REQUEST_SUCCESS = "GET_SINGLE_REQUEST_SUCCESS";
 
 export const ADDING_CHECKOUT_REQUEST = "ADDING_CHECKOUT_REQUEST";
 export const ADD_CHECKOUT_REQUEST_SUCCESS = "ADD_CHECKOUT_REQUEST_SUCCESS";
+export const ADD_CHECKOUT_REQUEST_FAILURE = "ADD_CHECKOUT_REQUEST_FAILURE";
 
 export const ADDING_CHECKOUT = "ADDING_CHECKOUT";
 export const ADD_CHECKOUT_SUCCESS = "ADD_CHECKOUT_SUCCESS";
@@ -18,6 +19,9 @@ export const GET_CHECKOUTS_SUCCESS = "GET_CHECKOUTS_SUCCESS";
 
 export const GETTING_SINGLE_CHECKOUT = "GETTING_SINGLE_CHECKOUT";
 export const GET_SINGLE_CHECKOUT_SUCCESS = "GET_SINGLE_CHECKOUT_SUCCESS";
+
+export const DELETING_CHECKOUT = "DELETING_CHECKOUT";
+export const DELETE_CHECKOUT_SUCCESS = "DELETE_CHECKOUT_SUCCESS";
 
 export const getCheckoutRequests = userId => dispatch => {
   dispatch({ type: GETTING_CHECKOUT_REQUESTS });
@@ -65,13 +69,12 @@ export const addCheckoutRequest = (bookId, lenderId) => dispatch => {
         type: ADD_CHECKOUT_REQUEST_SUCCESS
       });
     })
-    .catch(err => {
-      console.log(err);
-    });
+    .catch(err =>
+      dispatch({ type: ADD_CHECKOUT_REQUEST_FAILURE, payload: err })
+    );
 };
 
-export const addCheckout = checkoutRequestId => dispatch => {
-  const userId = localStorage.getItem("userId");
+export const addCheckout = (userId, checkoutRequestId) => dispatch => {
   dispatch({ type: ADDING_CHECKOUT });
   axios
     .post(`${baseUrl}/users/${userId}/checkout`, {
@@ -115,4 +118,19 @@ export const getSingleCheckout = (userId, checkoutId) => dispatch => {
     .catch(err => {
       console.log(err);
     });
+};
+
+export const confirmReturn = checkoutId => dispatch => {
+  const userId = localStorage.getItem("userId");
+  dispatch({ type: DELETING_CHECKOUT });
+  axios
+    .put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {
+      returned: true
+    })
+    .then(res => {
+      dispatch({
+        type: DELETE_CHECKOUT_SUCCESS
+      });
+    })
+    .catch(err => console.log(err));
 };

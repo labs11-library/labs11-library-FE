@@ -1,67 +1,74 @@
 import React from "react";
 import styled from "styled-components";
-
+import Loading from "../Loading/Loading";
 import { Link } from "react-router-dom";
-import { Button } from "@progress/kendo-react-buttons";
+import Button from "@material-ui/core/Button";
 
 const Availability = styled.p`
   color: ${props => (props.available ? "green" : "red")};
 `;
 const SingleInventoryDetails = props => {
-  const userId = localStorage.getItem("userId");
+  console.log(props.loading)
+  if (props.loading && !props.singleInventory.title) {
+    return <Loading />
+  }
   const {
-    bookId,
     title,
     authors,
     image,
     available,
-    dueDate,
     description
   } = props.singleInventory;
   const availability = available ? "Available" : "Checked out";
   return (
-    <BookDetailsWrapper>
-      <Link style={{position: "absolute", left: "0"}} to="/library/inventory">
-        <Button>← Back</Button>
+    <div>
+      <Link style={{ position: "absolute", left: "10px", textDecoration: "none" }} to="/my-library">
+        <Button variant="outlined">← Back</Button>
       </Link>
-      <BookImgWrapper>
-        <BookImg alt={title} src={image} />
-      </BookImgWrapper>
-      <div>
-        <h2>{title}</h2>
-        <p>by {authors}</p>
-        <Availability available={available}>{availability}</Availability>
-        <p>
-          {description === ""
-            ? "No description provided"
-            : `Description: ${description}`}
-        </p>
-        {!available && <p>Time until due: {props.timeRemaining(dueDate)}</p>}
-      </div>
-      <Link>
-        <Button onClick={() => props.deleteInventory(userId, bookId)}>
-          Remove from Inventory
-        </Button>
-      </Link>
-    </BookDetailsWrapper>
+      <BookDetailsWrapper>
+        <BookImgWrapper>
+          <BookImg alt={title} src={image} />
+        </BookImgWrapper>
+        <BookContentWrapper>
+          <h2>{title}</h2> {/* {title.substr(0, 20)} */}
+          <p>by {authors}</p>
+          <Availability available={available}>{availability}</Availability>
+          <p>
+            {description === ""
+              ? "No description provided"
+              : `Description: ${description}`}
+          </p>
+        </BookContentWrapper>
+      </BookDetailsWrapper>
+    </div>
   );
 };
 
 export default SingleInventoryDetails;
 
 const BookDetailsWrapper = styled.div`
-  width: 60vw;
-  border-bottom: 2px solid grey;
   display: flex;
   justify-content: space-between;
-  margin: 20px auto;
-  height: 400px;
+  height: 180px;
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
 `;
 const BookImgWrapper = styled.div`
-  width: 250px;
-  height: 375px;
+  width: 120px;
+  height: 180px;
 `;
 const BookImg = styled.img`
   width: 100%;
   height: 100%;
 `;
+const BookContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+`

@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import books from "../../data";
 import CheckedOutBookDetails from "./CheckedOutBookDetails";
 
 import { connect } from "react-redux";
 import { getCheckouts } from "../../redux/actions/checkoutActions.js";
+import Auth from "../Auth/Auth";
+
+import Loading from "../Loading/Loading.js";
 class CheckedOutList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      checkouts: [],
+      // checkouts: [],
       filter: "all",
       searchText: ""
     };
@@ -17,13 +19,13 @@ class CheckedOutList extends Component {
     const userId = localStorage.getItem("userId");
     this.props.getCheckouts(userId);
   }
-  componentWillReceiveProps(newProps) {
-    if (newProps.checkouts !== this.props.checkouts) {
-      this.setState({
-        checkouts: this.props.checkouts
-      });
-    }
-  }
+  // componentWillReceiveProps(newProps) {
+  //   if (newProps.checkouts !== this.props.checkouts) {
+  //     this.setState({
+  //       checkouts: this.props.checkouts
+  //     });
+  //   }
+  // }
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({
@@ -51,28 +53,26 @@ class CheckedOutList extends Component {
   filterIncomingCheckouts = () => {
     let userId = localStorage.getItem("userId");
     return this.props.checkouts.filter(
-      checkout => checkout.lenderId.toString() === userId && checkout.returned === false
+      checkout =>
+        checkout.lenderId.toString() === userId && checkout.returned === false
     );
   };
 
   filterOutgoingCheckouts = () => {
     let userId = localStorage.getItem("userId");
     return this.props.checkouts.filter(
-      checkout => checkout.borrowerId.toString() === userId && checkout.returned === false
+      checkout =>
+        checkout.borrowerId.toString() === userId && checkout.returned === false
     );
   };
 
   filterTransactionHistory = () => {
-    return this.props.checkouts.filter(
-      checkout => checkout.returned === true
-    );
+    return this.props.checkouts.filter(checkout => checkout.returned === true);
   };
 
   render() {
-    console.log("this.props.checkouts", this.props.checkouts);
-    // ^^ so nasty
     if (this.props.loadingCheckouts) {
-      return <h1>Loading...</h1>;
+      return <Loading />;
     } else {
       return (
         <div>
@@ -83,6 +83,7 @@ class CheckedOutList extends Component {
                 <CheckedOutBookDetails
                   key={checkout.checkoutId}
                   checkout={checkout}
+                  goToMyLibrary={this.props.goToMyLibrary}
                 />
               );
             })}
@@ -123,4 +124,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getCheckouts }
-)(CheckedOutList);
+)(Auth(CheckedOutList));

@@ -2,9 +2,12 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
-
+import Button from '@material-ui/core/Button';
 import UpdateUserProfile from "./UpdateUserProfile";
 import UserProfileCard from "./UserProfileCard";
+
+import Auth from "../Auth/Auth";
+
 class UserProfile extends Component {
   state = {
     updatingInfo: false
@@ -19,25 +22,48 @@ class UserProfile extends Component {
       };
     });
   };
+  logOut = () => {
+    localStorage.clear();
+    window.location.reload();
+  }
   render() {
     const { loggedInUser } = this.props;
     if (this.state.updatingInfo) {
       return (
-        <div>
-          <h1>Update profile</h1>
+        <div style={{margin: "10px"}}>
           <UpdateUserProfile
             loggedInUser={loggedInUser}
             toggleUpdate={this.toggleUpdate}
           />
-          <button onClick={this.toggleUpdate}>Cancel Update</button>
+          <Button 
+            variant="outlined"
+            onClick={this.toggleUpdate}
+            color="secondary"
+            style={{margin: "5px"}}
+          >
+          Cancel
+          </Button>
         </div>
       );
     } else {
       return (
-        <div>
-          <h1>Profile</h1>
+        <div style={{margin: "10px"}}>
           <UserProfileCard loggedInUser={loggedInUser} />
-          <button onClick={this.toggleUpdate}>Update Info</button>
+          <Button 
+            variant="outlined"
+            onClick={this.toggleUpdate}
+            style={{margin: "5px"}}
+          >
+          Edit Profile
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={this.logOut}
+            style={{margin: "5px"}}
+            color="secondary"
+          >
+          Log out
+          </Button>
         </div>
       );
     }
@@ -51,4 +77,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getLoggedInUser }
-)(UserProfile);
+)(Auth(UserProfile));

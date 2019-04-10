@@ -25,7 +25,6 @@ class Mapview extends Component {
     // Gets user location from web browser
     navigator.geolocation.getCurrentPosition(
       position => {
-        console.log(position);
         this.setState({
           location: {
             lat: position.coords.latitude,
@@ -43,7 +42,6 @@ class Mapview extends Component {
         fetch("https://ipapi.co/json")
           .then(res => res.json())
           .then(location => {
-            console.log(location);
             this.setState({
               location: {
                 lat: location.latitude,
@@ -61,7 +59,7 @@ class Mapview extends Component {
   // Render map
   renderMap = () => {
     loadScript(
-      `https://maps.googleapis.com/maps/api/js?key=AIzaSyDIJcFHjpKOntKFaZR6mBW6YnPY8130Kt4&callback=initMap`
+      `https://maps.googleapis.com/maps/api/js?key=AIzaSyDIJcFHjpKOntKFaZR6mBW6YnPY8130Kt4&libraries=places&callback=initMap`
     );
     window.initMap = this.initMap;
   };
@@ -92,7 +90,6 @@ class Mapview extends Component {
 
   updateLocation = () => {
     let userId = localStorage.getItem("userId");
-    console.log(this.state);
     axios
       .put(`${baseUrl}/users/${userId}`, {
         latitude: this.state.location.lat,
@@ -110,14 +107,80 @@ class Mapview extends Component {
     // Create A Map
     var map = new window.google.maps.Map(document.getElementById("map"), {
       center: this.state.location,
-      zoom: this.state.zoom
+      zoom: this.state.zoom,
+      mapTypeControl: false
     });
+
+    //------------------------- SEARCH BAR STUFF -------------------------//
+
+    var input = document.getElementById("pac-input");
+    var searchBox = new window.google.maps.places.SearchBox(input);
+    map.controls[window.google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    var places = searchBox.getPlaces();
+
+    map.addListener("bounds_changed", function() {
+      searchBox.setBounds(map.getBounds());
+    });
+
+    var markers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener("places_changed", function() {
+      var places = searchBox.getPlaces();
+
+      if (places.length == 0) {
+        return;
+      }
+
+      // Clear out the old markers.
+      markers.forEach(function(marker) {
+        marker.setMap(null);
+      });
+      markers = [];
+
+      // For each place, get the icon, name and location.
+      var bounds = new window.google.maps.LatLngBounds();
+      places.forEach(function(place) {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
+          return;
+        }
+        // var icon = {
+        //   url: place.icon,
+        //   size: new window.google.maps.Size(71, 71),
+        //   origin: new window.google.maps.Point(0, 0),
+        //   anchor: new window.google.maps.Point(17, 34),
+        //   scaledSize: new window.google.maps.Size(25, 25)
+        // };
+
+        // // Create a marker for each place.
+        // markers.push(
+        //   new window.google.maps.Marker({
+        //     map: map,
+        //     icon: icon,
+        //     title: place.name,
+        //     position: place.geometry.location
+        //   })
+        // );
+
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
+      map.fitBounds(bounds);
+    });
+
+    // ----------------------------SEARCH BAR STUFF -------------------------//
 
     //Map over all users
     this.state.users.map(allUsers => {
-      var str = `<a href="https://bookmaps.netlify.com/${
+      var str = `<a href="https://bookmaps.netlify.com/users/${
         allUsers.userId
-      }/inventory" target="_blank">HERE</a><br>`;
+      }/library" target="_blank">HERE</a><br>`;
       var contentString = `Click ${str} to visit ${
         allUsers.firstName
       }'s bookshelf`;
@@ -145,10 +208,16 @@ class Mapview extends Component {
 
     // Create Marker for User
     if (this.state.haveUserLocation) {
+      var pinIcon = {
+        url: "http://maps.google.com/mapfiles/kml/paddle/blu-circle.png",
+        scaledSize: new window.google.maps.Size(45, 40)
+      };
       var marker = new window.google.maps.Marker({
         position: this.state.location,
         map: map,
-        title: "You are here"
+        title: "You are here",
+        icon: pinIcon,
+        zIndex: 999
       });
     }
   };
@@ -157,6 +226,12 @@ class Mapview extends Component {
     return (
       <main>
         <div id="map" />
+        <input
+          id="pac-input"
+          class="controls"
+          type="text"
+          placeholder="Search location"
+        />
       </main>
     );
   }
