@@ -66,6 +66,7 @@ export default function checkoutReducer(state = initialState, action) {
         error: ""
       };
     case ADD_CHECKOUT_REQUEST_SUCCESS:
+      toast.info("Checkout request sent.");
       return {
         ...state,
         loadingRequests: false,
@@ -95,6 +96,7 @@ export default function checkoutReducer(state = initialState, action) {
         error: ""
       };
     case ADD_CHECKOUT_SUCCESS:
+      toast.info("Checkout confirmed.");
       return {
         ...state,
         loadingCheckouts: false,
@@ -133,6 +135,7 @@ export default function checkoutReducer(state = initialState, action) {
         error: ""
       };
     case DELETE_CHECKOUT_SUCCESS:
+      toast.info("Book return confirmed.");
       return {
         ...state,
         loadingCheckouts: false,

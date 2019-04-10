@@ -35,23 +35,9 @@ class BookDetails extends Component {
 
   confirmBookReturn = () => {
     const userId = localStorage.getItem("userId");
-    // axios.put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {
-    //   returned: true
-    // })
-    // .then(res => {
-    //   return res.data;
-    // })
-    // axios
-    //   .put(`${baseUrl}/books/${bookId}`, { available: true })
-    //   .then(res => {
-    //     return res.data;
-    //   })
-    //   .catch(err => console.log(err));
     this.props.confirmReturn(this.props.checkout.checkoutId);
     this.props.returnBook(this.props.checkout.bookId);
     this.props.goToMyLibrary();
-    // this.props.history.push("/my-library");
-    // window.location.reload();
   };
 
   chargeLateFee = () => {
@@ -64,11 +50,6 @@ class BookDetails extends Component {
       .then(res => console.log(res.data))
       .catch(err => console.log("Frontend error:", err));
   };
-  // componentWillReceiveProps(newProps) {
-  //   if(newProps.loadingInventory === false) {
-  //     window.location.reload()
-  //   }
-  // }
   render() {
     if (this.props.loadingCheckouts || this.props.loadingInventory) {
       return <Loading />;
