@@ -56,8 +56,6 @@ class Requests extends Component {
   render() {
     if (this.props.loadingRequests || this.props.deletingCheckout) {
       return <Loading />;
-    } else if (this.props.checkoutRequests.length === 0) {
-      return <h1>You have no checkout requests.</h1>;
     } else if (this.props.checkoutRequests) {
       return (
         <>
@@ -77,27 +75,35 @@ class Requests extends Component {
           {this.state.value === 0 ? (
             <div>
               <div>
-                {this.filterIncomingRequests().map(request => {
-                  return (
-                    <RequestDetails
-                      key={request.checkoutRequestId}
-                      request={request}
-                    />
-                  );
-                })}
+                {this.filterIncomingRequests().length === 0 && (
+                  <h1>You have no incoming checkout requests.</h1>
+                )}
+                {this.filterIncomingRequests().length > 0 &&
+                  this.filterIncomingRequests().map(request => {
+                    return (
+                      <RequestDetails
+                        key={request.checkoutRequestId}
+                        request={request}
+                      />
+                    );
+                  })}
               </div>
             </div>
           ) : (
             <div>
               <div>
-                {this.filterOutgoingRequests().map(request => {
-                  return (
-                    <RequestDetails
-                      key={request.checkoutRequestId}
-                      request={request}
-                    />
-                  );
-                })}
+                {this.filterOutgoingRequests().length === 0 && (
+                  <h1>You have no pending outbound checkout requests.</h1>
+                )}
+                {this.filterOutgoingRequests().length > 0 &&
+                  this.filterOutgoingRequests().map(request => {
+                    return (
+                      <RequestDetails
+                        key={request.checkoutRequestId}
+                        request={request}
+                      />
+                    );
+                  })}
               </div>
             </div>
           )}
