@@ -107,7 +107,8 @@ class Mapview extends Component {
     // Create A Map
     var map = new window.google.maps.Map(document.getElementById("map"), {
       center: this.state.location,
-      zoom: this.state.zoom
+      zoom: this.state.zoom,
+      mapTypeControl: false
     });
 
     //------------------------- SEARCH BAR STUFF -------------------------//

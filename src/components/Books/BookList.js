@@ -52,9 +52,15 @@ class Books extends Component {
   filteredBooks = () => {
     const { filter } = this.state;
     if (filter === "all") {
-      return this.searchBooks();
+      return this.searchBooks().filter(
+        book => book.lenderId.toString() !== localStorage.getItem("userId")
+      );
     } else if (filter === "available") {
-      return this.searchBooks().filter(book => book.available === true);
+      return this.searchBooks().filter(
+        book =>
+          book.available === true &&
+          book.lenderId.toString() !== localStorage.getItem("userId")
+      );
     }
   };
   componentDidMount() {
@@ -68,8 +74,8 @@ class Books extends Component {
         <BookListContainer>
           <Paper
             style={{
-              width: "400px",
               margin: "20px auto",
+              width: "85%",
               padding: "2px 4px",
               display: "flex",
               alignItems: "center"
@@ -90,7 +96,7 @@ class Books extends Component {
           <div>
             <InputLabel style={{ padding: "10px" }}>Filter by:</InputLabel>
             <Select
-              style={{ minWidth: "100px" }}
+              style={{ minWidth: "100px", marginBottom: "10px" }}
               label={this.state.filter}
               value={this.state.filter}
               inputProps={{
