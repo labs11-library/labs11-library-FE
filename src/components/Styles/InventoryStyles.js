@@ -7,6 +7,9 @@ export const InventoryContainer = styled.div`
   h1 {
     font-size: 2rem;
   }
+  @media (max-width: 750px) {
+    width: 92%
+  }
 `;
 
 export const Search = styled.input`
@@ -14,6 +17,7 @@ export const Search = styled.input`
   padding: 5px 3px;
   width: 250px;
   margin-bottom: 10px;
+
 `;
 
 export const CardContainer = styled.div`

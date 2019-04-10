@@ -17,7 +17,7 @@ import SingleCheckedOutBook from "./components/CheckedOut/SingleCheckedOutBook";
 import Sendgrid from "./components/Email/SendGrid";
 import ReviewForm from "./components/Reviews/ReviewForm";
 import Payment from "./components/Stripe/Payment";
-import MyLibrary from "./components/Profile/MyLibrary";
+import MyLibrary from "./components/MyLibrary/MyLibrary";
 import LandingPage from "./components/Layout/LandingPage";
 import RequestList from "./components/Requests/RequestList";
 import BookSearch from "./components/AddBook/BookSearch.js";
