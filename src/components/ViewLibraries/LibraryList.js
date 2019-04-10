@@ -4,8 +4,16 @@ import { connect } from "react-redux";
 import { getAllInventory } from "../../redux/actions/inventoryActions.js";
 import { getSingleUser } from "../../redux/actions/userActions.js";
 import LibraryDetails from "./LibraryDetails";
-
+import InventoryDetails from "../Inventory/InventoryDetails.js";
+import Paper from "@material-ui/core/Paper";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import SearchIcon from "@material-ui/icons/Search";
 import Loading from "../Loading/Loading.js";
+import {
+  InventoryContainer,
+  CardContainer
+} from "../Styles/InventoryStyles.js";
 
 class LibraryList extends Component {
   constructor() {
@@ -52,17 +60,52 @@ class LibraryList extends Component {
     } else {
       const { firstName, lastName } = this.props.singleUser;
       return (
-        <div>
-          <h1>
-            {firstName} {lastName}'s Library
-          </h1>
-          <input
-            placeholder="Search inventory"
-            name="searchText"
-            value={this.state.searchText}
-            onChange={this.handleChange}
-          />
-          <div>
+        // <div>
+        //   <h1>
+        //     {firstName} {lastName}'s Library
+        //   </h1>
+        //   <input
+        //     placeholder="Search inventory"
+        //     name="searchText"
+        //     value={this.state.searchText}
+        //     onChange={this.handleChange}
+        //   />
+        //   <div>
+        //     {this.searchBooks().map(book => {
+        //       return (
+        //         <LibraryDetails
+        //           book={book}
+        //           viewBook={this.viewBook}
+        //           key={book.bookId}
+        //         />
+        //       );
+        //     })}
+        //   </div>
+        // </div>
+        <InventoryContainer>
+          <Paper
+            style={{
+              width: "80%",
+              margin: "20px auto",
+              padding: "2px 4px",
+              display: "flex",
+              alignItems: "center"
+            }}
+          >
+            <InputBase
+              placeholder={`Search ${firstName}'s Library`}
+              type="text"
+              name="searchText"
+              value={this.state.searchText}
+              onChange={this.handleChange}
+              style={{ marginLeft: "8px", flex: "1" }}
+              // onKeyPress={this.lettersOnly}
+            />
+            <IconButton aria-label="Search" style={{ padding: "10px" }}>
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+          <CardContainer>
             {this.searchBooks().map(book => {
               return (
                 <LibraryDetails
@@ -72,8 +115,8 @@ class LibraryList extends Component {
                 />
               );
             })}
-          </div>
-        </div>
+          </CardContainer>
+        </InventoryContainer>
       );
     }
   }

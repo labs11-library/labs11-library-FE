@@ -39,9 +39,11 @@ class Books extends Component {
     if (searchText.length === 0) {
       return books;
     } else if (searchText.length > 0) {
-      const searchRegex = new RegExp(searchText, "gi");
+      const newText = this.state.searchText.replace(/\\$/, "")
+      const searchRegex = new RegExp(newText, "gi");
+      // const searchRegex = new RegExp(searchText, "gi");
       return books.filter(
-        book => book.title.match(searchRegex) || book.authors.match(searchRegex)
+        book => book.title.match(searchRegex) || book.authors.match(searchRegex) || book.lender.match(searchRegex)
       );
     }
   };

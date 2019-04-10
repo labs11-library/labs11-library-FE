@@ -21,22 +21,19 @@ class Inventory extends Component {
     };
   }
   handleChange = e => {
-    // if (e.keyCode === 191) {
-    //   return null
-    // }
+
     const { name, value } = e.target;
-    
+
     this.setState({
       [name]: value
     });
-  }
-
+  };
 
   searchBooks = () => {
     if (this.state.searchText.length === 0) {
       return this.props.inventory;
     } else if (this.state.searchText.length > 0) {
-      const newText = this.state.searchText.replace(/\\$/, "")
+      const newText = this.state.searchText.replace(/\\$/, "");
       const searchRegex = new RegExp(newText, "gi");
       return this.props.inventory.filter(
         book => book.title.match(searchRegex) || book.authors.match(searchRegex)
