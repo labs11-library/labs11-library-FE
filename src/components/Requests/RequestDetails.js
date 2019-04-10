@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../url";
-import { addCheckout } from "../../redux/actions/checkoutActions.js";
+import {
+  addCheckout,
+  deleteCheckoutRequest
+} from "../../redux/actions/checkoutActions.js";
 import { connect } from "react-redux";
 import { BookDetailsWrapper, BookImgWrapper, BookImg } from "../Books/styles";
 import { getLoggedInUser } from "../../redux/actions/authActions";
@@ -16,17 +19,8 @@ class RequestDetails extends Component {
 
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
-    axios
-      .delete(
-        `${baseUrl}/users/${lenderId}/checkoutrequest/${checkoutRequestId}`
-      )
-      .then(res => {
-        // window.location.reload();
-        return res.data;
-      })
-      .catch(err => console.log(err));
+    this.props.deleteCheckoutRequest(lenderId, checkoutRequestId);
     this.sendEmail();
-    // window.location.reload();
   };
 
   confirmCheckout = () => {
@@ -39,15 +33,6 @@ class RequestDetails extends Component {
         return res.data;
       })
       .catch(err => console.log(err));
-
-    // window.location.reload();
-
-    // axios
-    //   .put(`${baseUrl}/users/${userId}/checkoutRequest/${checkoutRequestId}`, { checkoutAccepted: true })
-    //   .then(res => {
-    //     return res.data;
-    //   })
-    // .catch(err => console.log(err));
   };
 
   sendEmail = () => {
@@ -139,7 +124,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { addCheckout, getLoggedInUser }
+  { addCheckout, getLoggedInUser, deleteCheckoutRequest }
 )(RequestDetails);
 
 // export default withRouter(RequestDetailsRedux);
