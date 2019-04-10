@@ -36,7 +36,7 @@ class Payment extends React.Component {
         // amount={this.props}
         // amount={100}
         billingAddress
-        description="Bookmaps Membership"
+        description="Please enter the email you signed in with."
         // image="https://yourdomain.tld/images/logo.svg"
         locale="auto"
         // name="YourDomain.tld"
