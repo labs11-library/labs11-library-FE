@@ -21,9 +21,7 @@ class Inventory extends Component {
     };
   }
   handleChange = e => {
-    // if (e.keyCode === 191) {
-    //   return null
-    // }
+
     const { name, value } = e.target;
     
     this.setState({
