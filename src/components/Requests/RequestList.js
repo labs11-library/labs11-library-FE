@@ -56,7 +56,7 @@ class Requests extends Component {
       return <h1>You have no checkout requests.</h1>;
     } else if (this.props.checkoutRequests) {
       return (
-        <div>
+        <div style={{ margin: "5vw auto auto auto" }}>
           <h1>Incoming Requests</h1>
           <div>
             {this.filterIncomingRequests().map(request => {
