@@ -30,7 +30,7 @@ render() {
       <div>
         {loggedIn && (
           <NavBarWrapper>
-            <BookMapsLogo>
+            <BookMapsLogo to="/">
               <span role="img" aria-label="books">
                 📚
               </span>

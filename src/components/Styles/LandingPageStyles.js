@@ -79,10 +79,9 @@ export const LandingPageWrapper = styled.div`
   overflow-y: hidden;
 `;
 export const ContentContainer = styled.div`
-  width: 100%
+  width: 100%;
   display: flex;
   flex-direction: row;
-  margin: 3.5rem auto;
 `;
 export const MapWrapper = styled.div`
   width: 50%;
@@ -98,6 +97,7 @@ export const MapWrapper = styled.div`
 export const BooksWrapper = styled.div`
   width: 50%;
   height: 100%;
+  margin-top: -1.1rem;
 
   @media (max-width: 700px) {
     margin-top: 60px;
