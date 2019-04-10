@@ -74,8 +74,8 @@ class Books extends Component {
         <BookListContainer>
           <Paper
             style={{
-              width: "400px",
               margin: "20px auto",
+              width: "85%",
               padding: "2px 4px",
               display: "flex",
               alignItems: "center"
@@ -96,7 +96,7 @@ class Books extends Component {
           <div>
             <InputLabel style={{ padding: "10px" }}>Filter by:</InputLabel>
             <Select
-              style={{ minWidth: "100px" }}
+              style={{ minWidth: "100px", marginBottom: "10px" }}
               label={this.state.filter}
               value={this.state.filter}
               inputProps={{
