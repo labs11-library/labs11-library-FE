@@ -78,22 +78,12 @@ class BookSearch extends Component {
           <InventoryContainer>
             <Paper
               style={{
-<<<<<<< HEAD
-                width: "400px",
-                margin: "20px auto 50px auto",
-                padding: "2px 4px",
-                display: "flex",
-                alignItems: "center",
-                position: "relative"
-                // top: "3.5vw"
-=======
                 width: "80%",
                 maxWidth: "400px",
                 margin: "20px auto",
                 padding: "2px 4px",
                 display: "flex",
                 alignItems: "center"
->>>>>>> 0a0b660d67655ed4bf017302071713733713c935
               }}
             >
               <InputBase
@@ -102,12 +92,7 @@ class BookSearch extends Component {
                 name="searchText"
                 value={this.state.searchText}
                 onChange={this.handleChange}
-<<<<<<< HEAD
-                style={{ marginLeft: "8px", flex: "1" }}
-=======
                 style={{ margin: "0 auto", flex: "1" }}
-
->>>>>>> 0a0b660d67655ed4bf017302071713733713c935
               />
               <IconButton aria-label="Search" style={{ padding: "10px" }}>
                 <ArrowForwardIcon />
@@ -119,13 +104,7 @@ class BookSearch extends Component {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-<<<<<<< HEAD
-                marginBottom: "20px",
-                position: "relative",
-                top: "0.5vw"
-=======
                 marginBottom: "20px"
->>>>>>> 0a0b660d67655ed4bf017302071713733713c935
               }}
             >
               <span>Powered by</span>

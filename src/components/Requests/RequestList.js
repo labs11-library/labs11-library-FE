@@ -58,32 +58,6 @@ class Requests extends Component {
       return <Loading />;
     } else if (this.props.checkoutRequests) {
       return (
-<<<<<<< HEAD
-        <div style={{ margin: "5vw auto auto auto" }}>
-          <h1>Incoming Requests</h1>
-          <div>
-            {this.filterIncomingRequests().map(request => {
-              return (
-                <RequestDetails
-                  key={request.checkoutRequestId}
-                  request={request}
-                />
-              );
-            })}
-          </div>
-          <h1>Outbound Requests</h1>
-          <div>
-            {this.filterOutgoingRequests().map(request => {
-              return (
-                <RequestDetails
-                  key={request.checkoutRequestId}
-                  request={request}
-                />
-              );
-            })}
-          </div>
-        </div>
-=======
         <>
           <Paper style={{ width: "90%", margin: "0 auto 48px" }}>
             <Tabs
@@ -134,7 +108,6 @@ class Requests extends Component {
             </div>
           )}
         </>
->>>>>>> 0a0b660d67655ed4bf017302071713733713c935
       );
     }
   }
