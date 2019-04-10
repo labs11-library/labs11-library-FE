@@ -6,8 +6,10 @@ import {
   ADDING_BOOK,
   ADDING_BOOK_SUCCESS,
   GETTING_SINGLE_CHECKED_OUT_BOOK,
-  GET_SINGLE_CHECKED_OUT_BOOK_SUCCESS,
+  GET_SINGLE_CHECKED_OUT_BOOK_SUCCESS
 } from "../actions/bookActions.js";
+
+import { toast } from "react-toastify";
 
 const initialState = {
   fetchingBooks: false,
@@ -35,6 +37,7 @@ export default function bookReducer(state = initialState, action) {
         fetchingBooks: true
       };
     case ADDING_BOOK_SUCCESS:
+      toast.info("Book successfully added.");
       return {
         ...state,
         fetchingBooks: false

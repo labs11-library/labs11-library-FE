@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
-import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../url";
