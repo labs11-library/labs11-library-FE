@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
-import { Button } from "@progress/kendo-react-buttons";
+import Button from "@material-ui/core/Button";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../url";
@@ -41,7 +41,6 @@ class BookDetails extends Component {
   };
 
   confirmBookReturn = () => {
-    const userId = localStorage.getItem("userId");
     this.props.confirmReturn(this.props.checkout.checkoutId);
     this.props.returnBook(this.props.checkout.bookId);
     this.props.goToMyLibrary();
@@ -64,7 +63,6 @@ class BookDetails extends Component {
 
     const {
       title,
-      bookId,
       authors,
       image,
       lender,
@@ -74,7 +72,6 @@ class BookDetails extends Component {
       borrower,
       returned,
       checkoutDate,
-      overdue,
       lateFee
     } = this.props.checkout;
 
@@ -108,8 +105,6 @@ class BookDetails extends Component {
             100} will be charged)`
         : null;
 
-    const usdFee = this.overdue() / 100;
-
     return (
       <BookDetailsWrapper>
         <BookImgWrapper>
@@ -134,8 +129,8 @@ class BookDetails extends Component {
           ) : (
             <p>Borrower: {lenderBorrowerName}</p>
           )}
-          <Link to={`/my-library/checkouts/${checkoutId}`}>
-            <Button>Send message</Button>
+          <Link style={{textDecoration: "none"}}to={`/my-library/checkouts/${checkoutId}`}>
+            <Button color="primary" variant="contained">Send message</Button>
           </Link>
           {buttonText !== null && (
             <Button

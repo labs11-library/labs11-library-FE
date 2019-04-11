@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { getAllInventory } from "../../redux/actions/inventoryActions.js";
 import { getSingleUser } from "../../redux/actions/userActions.js";
 import LibraryDetails from "./LibraryDetails";
-import InventoryDetails from "../Inventory/InventoryDetails.js";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
@@ -58,7 +57,7 @@ class LibraryList extends Component {
         </h1>
       );
     } else {
-      const { firstName, lastName } = this.props.singleUser;
+      const { firstName } = this.props.singleUser;
       return (
         // <div>
         //   <h1>

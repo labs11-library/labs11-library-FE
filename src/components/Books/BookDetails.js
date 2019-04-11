@@ -18,10 +18,8 @@ const BookDetails = props => {
     title,
     authors,
     image,
-    lender,
     available,
     dueDate,
-    description
   } = props.book;
   const availability = available ? "Available" : "Checked out";
 
