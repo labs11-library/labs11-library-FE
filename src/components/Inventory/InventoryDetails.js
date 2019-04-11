@@ -17,12 +17,9 @@ const BookDetails = props => {
     authors,
     image,
     available,
-    dueDate,
-    description
+    dueDate
   } = props.book;
   const availability = available ? "Available" : "Checked out";
-  const descriptionText =
-    description.length > 40 ? `${description.substr(0, 40)} ...` : description;
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -36,9 +33,6 @@ const BookDetails = props => {
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
         {!available && <p>Due: {dueDate} </p>}{" "}
-        <p>
-          {description === "" ? "No description provided" : descriptionText}
-        </p>
         <Link
           style={{ textDecoration: "none" }}
           to={`/my-library/my-books/${bookId}`}

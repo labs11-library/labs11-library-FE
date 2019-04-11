@@ -32,21 +32,25 @@ export const CardContainer = styled.div`
 // copied from /books/styles.js ==========================================================
 
 export const BookDetailsWrapper = styled.div`
-  width: 46%;
+  width: 45%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  width: 46%;
   display: flex;
-  margin-bottom: 20px;
-  @media (max-width: 750px) {
-    width: 96%;
-    margin: auto;
-    margin-bottom: 20px;
+  margin: 20px;
+  @media (max-width: 800px) {
+    width: 80%;
+    margin: 10px auto;
+  }
+  @media (max-width: 500px) {
+    width: 90%;
+    margin: 10px auto;
   }
 `;
 export const BookImgWrapper = styled.div`
-  width: 120px;
-  height: 180px;
+  min-width: 120px;
+  max-width: 120px;
+  min-height: 180px;
+  max-height: 180px;
   margin-right: 20px;
 `;
 export const BookImg = styled.img`
@@ -55,7 +59,10 @@ export const BookImg = styled.img`
 `;
 export const BookTextContainer = styled.div`
   text-align: left;
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-right: 5px;
   h2,
   p {
     margin-bottom: 7px;

@@ -10,12 +10,14 @@ import {
 import { connect } from "react-redux";
 import {
   BookDetailsWrapper,
+  ButtonContainer,
+  BookDetailsContainer
+} from "../Styles/NotificationStyles";
+import {
   BookImgWrapper,
   BookImg,
-  ButtonContainer,
-  RequestInfo,
-  RequestDescription
-} from "../Styles/NotificationStyles";
+  BookTextContainer
+} from "../Styles/InventoryStyles";
 import Button from "@material-ui/core/Button";
 
 import { getLoggedInUser } from "../../redux/actions/authActions";
@@ -87,16 +89,12 @@ class RequestDetails extends Component {
       title,
       authors,
       image,
-      description,
       lenderId,
       borrower,
-      lender
+      lender,
+      description
     } = this.props.request;
     const userId = localStorage.getItem("userId");
-    const descriptionText =
-      description.length > 55
-        ? `${description.substr(0, 55)} ...`
-        : description;
     const lenderBorrowerName =
       lenderId.toString() === localStorage.getItem("userId")
         ? borrower
@@ -105,71 +103,57 @@ class RequestDetails extends Component {
       lenderId.toString() === localStorage.getItem("userId")
         ? "Borrower"
         : "Lender";
+    const descriptionText =
+        description.length > 55
+          ? `${description.substr(0, 55)} ...`
+          : description;
     return (
       <BookDetailsWrapper>
-        <BookImgWrapper>
-          <BookImg alt={title} src={image} />
-        </BookImgWrapper>
-        <RequestInfo>
-          <h2>
-            {title.substr(0, 28)}
-            {title.length > 28 && "..."}
-          </h2>
-          <p>by {authors}</p>
-          <RequestDescription>
-            {description === ""
+        <BookDetailsContainer>
+          <BookImgWrapper>
+            <BookImg alt={title} src={image} />
+          </BookImgWrapper>
+          <BookTextContainer>
+            <h2>
+              {title.substr(0, 25)}
+              {title.length > 25 && "..."}
+            </h2>
+            <p>by {authors}</p>
+            <p>{description === ""
               ? "No description provided"
-              : "Description: " + descriptionText}
-          </RequestDescription>
-          <p>
-            {lenderBorrower}: {lenderBorrowerName}
-          </p>
-        </RequestInfo>
+              : "Description: " + descriptionText}</p>
+            <p>
+              {lenderBorrower}: {lenderBorrowerName}
+            </p>
+          </BookTextContainer>
+        </BookDetailsContainer>
         <ButtonContainer>
-          {userId === lenderId.toString() && (
-            <>
-              <Button
-                style={{
-                  width: "100%",
-                  maxWidth: "180px",
-                  margin: "10px auto",
-                  padding: "6px 14px"
-                }}
-                variant="contained"
-                color="primary"
-                onClick={this.confirmCheckout}
-              >
-                Confirm book transfer
-              </Button>
-            </>
-          )}
           <NavLink
-            style={{ textDecoration: "none" }}
-            to={`/notifications/${checkoutRequestId}`}
-          >
-            <Button
-              style={{
-                width: "100%",
-                minWidth: "140px",
-                maxWidth: "180px",
-                margin: "10px auto 10px",
-                padding: "6px 14px"
-              }}
-              variant="contained"
-              color="primary"
+              style={{ textDecoration: "none" }}
+              to={`/notifications/${checkoutRequestId}`}
+              >
+          <Button
+            style={{ margin: "10px 5px" }}
+            variant="contained"
+            color="primary"
             >
               Send Message
             </Button>
           </NavLink>
-          {/* The button below will DELETE by checkoutRequestId  */}
+          {userId === lenderId.toString() && (
+            <>
+              <Button
+                style={{ margin: "10px 5px" }}
+                variant="outlined"
+                color="primary"
+                onClick={this.confirmCheckout}
+              >
+                Confirm transfer
+              </Button>
+            </>
+          )}
           <Button
-            style={{
-              width: "100%",
-              maxWidth: "180px",
-              minWidth: "140px",
-              margin: "0px auto 10px",
-              padding: "6px 14px"
-            }}
+            style={{ margin: "10px 5px" }}
             variant="outlined"
             color="secondary"
             onClick={this.deleteRequest}
