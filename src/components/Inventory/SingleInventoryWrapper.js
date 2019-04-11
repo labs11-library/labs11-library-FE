@@ -55,30 +55,37 @@ class SingleInventory extends Component {
     return duration;
   };
   render() {
-    if (!this.props.singleInventory) {
+    if (this.props.loading) {
       return <Loading />;
     } else if (!this.state.updating && !this.state.showChat) {
       return (
         <React.Fragment>
-          <div style={{width: "500px", margin: "20px auto"}}>
+          <div style={{ width: "500px", margin: "20px auto" }}>
             <SingleInventoryDetails
               singleInventory={this.props.singleInventory}
               timeRemaining={this.timeRemaining}
               deleteInventory={this.deleteInventory}
               loading={this.props.loading}
             />
-            {/* {!this.props.singleInventory.available && (
-              <Button
-                onClick={() => this.setState({ showChat: true })}
-                style={{ height: "36px" }}
-              >
-                Send Message
-              </Button>
-            )} */}
-            <Button variant="outlined" color="primary" style={{margin: "10px 10px 0 0"}} onClick={this.toggleUpdate}>
-              {this.state.updating ? "Cancel Changes" : "Update Info"}
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ margin: "10px 10px 0 0" }}
+              onClick={this.toggleUpdate}
+            >
+              {this.state.updating ? "Cancel Changes" : "Edit/Add Description"}
             </Button>
-            <Button onClick={() => this.deleteInventory(this.props.singleInventory.userId, this.props.singleInventory.bookId)} style={{margin: "10px 10px 0 0"}} color="secondary">
+            <Button
+              variant="outlined"
+              onClick={() =>
+                this.deleteInventory(
+                  this.props.singleInventory.userId,
+                  this.props.singleInventory.bookId
+                )
+              }
+              style={{ margin: "10px 10px 0 0" }}
+              color="secondary"
+            >
               Delete from inventory
             </Button>
           </div>
@@ -87,13 +94,13 @@ class SingleInventory extends Component {
     } else if (this.state.updating) {
       return (
         <React.Fragment>
-          <div style={{width: "500px", margin: "20px auto"}}>
+          <div style={{ width: "500px", margin: "20px auto" }}>
             <UpdateInventoryForm
               singleInventory={this.props.singleInventory}
               editInventory={this.editInventory}
             />
-            <Button onClick={this.toggleUpdate}>
-              {this.state.updating ? "Cancel Changes" : "Edit Details"}
+            <Button style={{float: "right", width: "163px"}} color="secondary" variant="outlined" onClick={this.toggleUpdate}>
+              Cancel Changes
             </Button>
           </div>
         </React.Fragment>

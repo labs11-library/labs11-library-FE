@@ -25,7 +25,7 @@ class SingleRequest extends Component {
   }
 
   render() {
-    if (!this.props.singleCheckoutRequest) {
+    if (this.props.loadingRequests || this.props.singleCheckoutRequest.lenderId === undefined) {
       return <Loading />;
     }
     const {
@@ -39,7 +39,7 @@ class SingleRequest extends Component {
     const lenderBorrowerName =
       lenderId.toString() === localStorage.getItem("userId")
         ? borrower
-        : lender;
+    : lender;
     return (
       <div>
         {this.state.error ? (

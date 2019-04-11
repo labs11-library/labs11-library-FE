@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
-import { Button } from "@progress/kendo-react-buttons";
+import Button from "@material-ui/core/Button";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../url";
@@ -9,7 +9,7 @@ import {
   BookImgWrapper,
   BookImg,
   DueDate
-} from "../Books/styles";
+} from "../Styles/NotificationStyles";
 import { connect } from "react-redux";
 import { confirmReturn } from "../../redux/actions/checkoutActions";
 import { returnBook } from "../../redux/actions/inventoryActions.js";
@@ -21,37 +21,29 @@ class BookDetails extends Component {
   timeRemaining = dueDate => {
     let now = moment(Date.now());
     let end = moment(dueDate);
-    let duration = moment.duration(now.diff(end)).humanize();
-    return duration;
+    if (end.isBefore(moment(now))) {
+      let duration = `overdue by ${moment.duration(now.diff(end)).humanize()}`;
+      return duration;
+    } else {
+      let duration = moment.duration(now.diff(end)).humanize();
+      return duration;
+    }
   };
 
   overdue = () => {
     let now = moment(Date.now());
     let end = moment(this.props.checkout.dueDate);
-    let duration = Math.floor(moment.duration(now.diff(end)).asDays());
-    // let duration = end - now;
-    return duration * 100;
+    if (end.isBefore(moment(now))) {
+      let duration = Math.floor(moment.duration(now.diff(end)).asDays());
+      console.log("DURATION", duration);
+      return duration * 100;
+    }
   };
 
   confirmBookReturn = () => {
-    const userId = localStorage.getItem("userId");
-    // axios.put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {
-    //   returned: true
-    // })
-    // .then(res => {
-    //   return res.data;
-    // })
-    // axios
-    //   .put(`${baseUrl}/books/${bookId}`, { available: true })
-    //   .then(res => {
-    //     return res.data;
-    //   })
-    //   .catch(err => console.log(err));
     this.props.confirmReturn(this.props.checkout.checkoutId);
     this.props.returnBook(this.props.checkout.bookId);
     this.props.goToMyLibrary();
-    // this.props.history.push("/my-library");
-    // window.location.reload();
   };
 
   chargeLateFee = () => {
@@ -64,11 +56,6 @@ class BookDetails extends Component {
       .then(res => console.log(res.data))
       .catch(err => console.log("Frontend error:", err));
   };
-  // componentWillReceiveProps(newProps) {
-  //   if(newProps.loadingInventory === false) {
-  //     window.location.reload()
-  //   }
-  // }
   render() {
     if (this.props.loadingCheckouts || this.props.loadingInventory) {
       return <Loading />;
@@ -76,7 +63,6 @@ class BookDetails extends Component {
 
     const {
       title,
-      bookId,
       authors,
       image,
       lender,
@@ -86,7 +72,6 @@ class BookDetails extends Component {
       borrower,
       returned,
       checkoutDate,
-      overdue,
       lateFee
     } = this.props.checkout;
 
@@ -105,7 +90,21 @@ class BookDetails extends Component {
         ? borrower
         : lender;
 
-    const usdFee = this.overdue() / 100;
+    const lenderBorrower =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? "Lender"
+        : "Borrower";
+
+    const buttonText =
+      this.overdue() < 0 && returned === false && lenderBorrower === "Lender"
+        ? "Confirm Return"
+        : this.overdue() > 0 &&
+          returned === false &&
+          lenderBorrower === "Lender"
+        ? `Confirm Return (late fee of $${this.overdue() /
+            100} will be charged)`
+        : null;
+
     return (
       <BookDetailsWrapper>
         <BookImgWrapper>
@@ -125,11 +124,15 @@ class BookDetails extends Component {
               <p>Checkout date: {dateCheckedOut}</p>
             </div>
           )}
-          <p>Contact {lenderBorrowerName} to arrange return</p>
-          <Link to={`/my-library/checkouts/${checkoutId}`}>
-            <Button>Send message</Button>
+          {!returned ? (
+            <p>Contact {lenderBorrowerName} to arrange return</p>
+          ) : (
+            <p>Borrower: {lenderBorrowerName}</p>
+          )}
+          <Link style={{textDecoration: "none"}}to={`/my-library/checkouts/${checkoutId}`}>
+            <Button color="primary" variant="contained">Send message</Button>
           </Link>
-          {lenderId.toString() === localStorage.getItem("userId") && (
+          {buttonText !== null && (
             <Button
               onClick={
                 lateFee
@@ -137,9 +140,7 @@ class BookDetails extends Component {
                   : this.confirmBookReturn
               }
             >
-              {usdFee < 0 && returned === false
-                ? "Confirm Return"
-                : `Confirm Return (late fee of $${usdFee} will be charged)`}
+              {buttonText}
             </Button>
           )}
 

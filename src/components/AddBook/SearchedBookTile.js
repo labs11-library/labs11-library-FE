@@ -1,6 +1,11 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { BookDetailsWrapper, BookImgWrapper, BookImg, BookTextContainer } from "../Styles/InventoryStyles.js"
+import {
+  BookDetailsWrapper,
+  BookImgWrapper,
+  BookImg,
+  BookTextContainer
+} from "../Styles/SearchStyles";
 
 const SearchedBookTile = props => {
   if (!props.book) {
@@ -9,16 +14,29 @@ const SearchedBookTile = props => {
     return (
       <BookDetailsWrapper>
         <BookImgWrapper>
-          <BookImg src={props.book.covers[0]} alt={`Cover of ${props.book.title}`} />
+          <BookImg
+            src={props.book.covers[0]}
+            alt={`Cover of ${props.book.title}`}
+          />
         </BookImgWrapper>
         <BookTextContainer>
-          <h2>{props.book.title}</h2>
+          <h2>
+            {props.book.title.substr(0, 24)}
+            {props.book.title.length > 24 && "..."}
+          </h2>
           <p>by {props.book.authors}</p>
           <Button
-            variant="outlined"
+            style={{
+              width: "100%",
+              maxWidth: "180px",
+              margin: "2px 0 4px",
+              padding: "6px 14px"
+            }}
             onClick={() => {
               props.addBook(props.book);
             }}
+            variant="contained"
+            color="primary"
           >
             Add book to your library!
           </Button>

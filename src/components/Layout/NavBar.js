@@ -6,10 +6,11 @@ import {
   NavBarWrapper,
   BookMapsLogo,
   NavLinks,
+  NavLinksShow,
   NavLinkWrapper,
-  Burger,
-  BurgerDiv
 } from "../Styles/NavBarStyles.js";
+import BurgerMenu from "./BurgerMenu"
+
 class NavBar extends Component {
   constructor() {
     super();
@@ -22,14 +23,6 @@ class NavBar extends Component {
     this.props.getLoggedInUser();
   }
 
-  handleToggleMenu = () => {
-    if (this.state.menuClassName === "nav-links nav-links-none") {
-      this.setState({
-        menuClassName: "nav-links nav-links-none"
-      });
-    }
-  };
-
   render() {
     const loggedIn = localStorage.getItem("jwt") ? true : false;
     return (
@@ -41,6 +34,7 @@ class NavBar extends Component {
                 📚
               </span>
             </BookMapsLogo>
+            <BurgerMenu />
             <NavLinks>
               <NavLinkWrapper to="/my-library">
                 <span role="img" aria-label="books">
@@ -50,7 +44,7 @@ class NavBar extends Component {
               </NavLinkWrapper>
               <NavLinkWrapper to="/add-book">
                 <span role="img" aria-label="plus">
-                  ➕
+                  📖
                 </span>{" "}
                 Add book
               </NavLinkWrapper>
@@ -73,34 +67,22 @@ class NavBar extends Component {
           </NavBarWrapper>
         )}
         {!loggedIn && (
-          <div className="navbar">
-            <BookMapsLogo>
+          <NavBarWrapper>
+            <BookMapsLogo to="/">
               {/* Book maps{" "} */}
               <span role="img" aria-label="books">
                 📚
               </span>
-              <span role="img" aria-label="map">
-                🗺
-              </span>
             </BookMapsLogo>
-            <div className={this.state.menuClassName}>
-              <div>
-                <NavLinkWrapper to="/signup">
-                  <span role="img" aria-label="wave">
-                    👋
-                  </span>{" "}
-                  Sign up
-                </NavLinkWrapper>
-              </div>
-            </div>
-            <div>
-              <Burger onClick={this.handleToggleMenu}>
-                <BurgerDiv className="burger-div" />
-                <BurgerDiv className="burger-div" />
-                <BurgerDiv className="burger-div" />
-              </Burger>
-            </div>
-          </div>
+            <NavLinksShow>
+              <NavLinkWrapper to="/signup">
+                <span role="img" aria-label="wave">
+                  👋
+                </span>{" "}
+                Sign up
+              </NavLinkWrapper>
+            </NavLinksShow>
+          </NavBarWrapper>
         )}
       </div>
     );

@@ -1,32 +1,35 @@
 import React, { Component } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
-import { Button } from "@progress/kendo-react-buttons";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../url";
-import { addCheckout } from "../../redux/actions/checkoutActions.js";
+import {
+  addCheckout,
+  deleteCheckoutRequest
+} from "../../redux/actions/checkoutActions.js";
 import { connect } from "react-redux";
-import { BookDetailsWrapper, BookImgWrapper, BookImg } from "../Books/styles";
+import {
+  BookDetailsWrapper,
+  BookImgWrapper,
+  BookImg,
+  ButtonContainer,
+  RequestInfo,
+  RequestDescription
+} from "../Styles/NotificationStyles";
+import Button from "@material-ui/core/Button";
+
 import { getLoggedInUser } from "../../redux/actions/authActions";
 class RequestDetails extends Component {
+  state = {
+    value: 0
+  };
   componentDidMount() {
     this.props.getLoggedInUser();
   }
-
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
-    axios
-      .delete(
-        `${baseUrl}/users/${lenderId}/checkoutrequest/${checkoutRequestId}`
-      )
-      .then(res => {
-        // window.location.reload();
-        return res.data;
-      })
-      .catch(err => console.log(err));
+    this.props.deleteCheckoutRequest(lenderId, checkoutRequestId);
     this.sendEmail();
-    // window.location.reload();
   };
 
   confirmCheckout = () => {
@@ -39,15 +42,6 @@ class RequestDetails extends Component {
         return res.data;
       })
       .catch(err => console.log(err));
-
-    // window.location.reload();
-
-    // axios
-    //   .put(`${baseUrl}/users/${userId}/checkoutRequest/${checkoutRequestId}`, { checkoutAccepted: true })
-    //   .then(res => {
-    //     return res.data;
-    //   })
-    // .catch(err => console.log(err));
   };
 
   sendEmail = () => {
@@ -82,6 +76,7 @@ class RequestDetails extends Component {
       }&topic=${email.subject}&text=${email.text}`
     ) //query string url
       .catch(err => console.error(err));
+    this.forceUpdate();
   };
 
   render() {
@@ -93,38 +88,93 @@ class RequestDetails extends Component {
       description,
       lenderId,
       borrower,
-      borrowerId,
       lender
     } = this.props.request;
     const userId = localStorage.getItem("userId");
+    const descriptionText =
+      description.length > 55
+        ? `${description.substr(0, 55)} ...`
+        : description;
     const lenderBorrowerName =
       lenderId.toString() === localStorage.getItem("userId")
         ? borrower
         : lender;
+    const lenderBorrower =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? "Borrower"
+        : "Lender";
     return (
       <BookDetailsWrapper>
         <BookImgWrapper>
           <BookImg alt={title} src={image} />
         </BookImgWrapper>
-        <div>
-          <h2>{title}</h2>
+        <RequestInfo>
+          <h2>
+            {title.substr(0, 28)}
+            {title.length > 28 && "..."}
+          </h2>
           <p>by {authors}</p>
-          <div>Description: {description}</div>
-          <div>Borrower: {borrower}</div>
-          <p>Contact {lenderBorrowerName} to arrange a book exchange</p>
-          <Link to={`/notifications/${checkoutRequestId}`}>
-            <Button>Send Message</Button>
-          </Link>
-          {/* The button below will DELETE by checkoutRequestId  */}
-          <Button onClick={this.deleteRequest}>Delete request</Button>
+          <RequestDescription>
+            {description === ""
+              ? "No description provided"
+              : "Description: " + descriptionText}
+          </RequestDescription>
+          <p>
+            {lenderBorrower}: {lenderBorrowerName}
+          </p>
+        </RequestInfo>
+        <ButtonContainer>
           {userId === lenderId.toString() && (
             <>
-              <Button onClick={this.confirmCheckout}>
+              <Button
+                style={{
+                  width: "100%",
+                  maxWidth: "180px",
+                  margin: "10px auto",
+                  padding: "6px 14px"
+                }}
+                variant="contained"
+                color="primary"
+                onClick={this.confirmCheckout}
+              >
                 Confirm book transfer
               </Button>
             </>
           )}
-        </div>
+          <NavLink
+              style={{ textDecoration: "none" }}
+              to={`/notifications/${checkoutRequestId}`}
+            >
+          <Button
+            style={{
+              width: "100%",
+              minWidth: "140px",
+              maxWidth: "180px",
+              margin: "10px auto 10px",
+              padding: "6px 14px"
+            }}
+            variant="contained"
+            color="primary"
+          >
+              Send Message
+            </Button>
+          </NavLink>
+          {/* The button below will DELETE by checkoutRequestId  */}
+          <Button
+            style={{
+              width: "100%",
+              maxWidth: "180px",
+              minWidth: "140px",
+              margin: "0px auto 10px",
+              padding: "6px 14px"
+            }}
+            variant="outlined"
+            color="secondary"
+            onClick={this.deleteRequest}
+          >
+            Delete request
+          </Button>
+        </ButtonContainer>
       </BookDetailsWrapper>
     );
   }
@@ -139,7 +189,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { addCheckout, getLoggedInUser }
+  { addCheckout, getLoggedInUser, deleteCheckoutRequest }
 )(RequestDetails);
-
-// export default withRouter(RequestDetailsRedux);

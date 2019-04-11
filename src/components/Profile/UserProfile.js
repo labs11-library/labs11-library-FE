@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 import UpdateUserProfile from "./UpdateUserProfile";
 import UserProfileCard from "./UserProfileCard";
 
@@ -25,44 +25,45 @@ class UserProfile extends Component {
   logOut = () => {
     localStorage.clear();
     window.location.reload();
-  }
+  };
   render() {
     const { loggedInUser } = this.props;
     if (this.state.updatingInfo) {
       return (
-        <div style={{margin: "10px"}}>
+        <div style={{ margin: "5vw auto auto auto" }}>
           <UpdateUserProfile
             loggedInUser={loggedInUser}
             toggleUpdate={this.toggleUpdate}
           />
-          <Button 
+          <Button
             variant="outlined"
             onClick={this.toggleUpdate}
             color="secondary"
-            style={{margin: "5px"}}
+            style={{ margin: "5px" }}
           >
-          Cancel
+            Cancel
           </Button>
         </div>
       );
     } else {
       return (
-        <div style={{margin: "10px"}}>
+        <div style={{ margin: "10px" }}>
           <UserProfileCard loggedInUser={loggedInUser} />
-          <Button 
-            variant="outlined"
+          <Button
+            variant="contained"
             onClick={this.toggleUpdate}
-            style={{margin: "5px"}}
+            style={{ margin: "5px" }}
+            color="primary"
           >
-          Edit Profile
+            Edit Profile
           </Button>
           <Button
             variant="outlined"
             onClick={this.logOut}
-            style={{margin: "5px"}}
+            style={{ margin: "5px" }}
             color="secondary"
           >
-          Log out
+            Log out
           </Button>
         </div>
       );

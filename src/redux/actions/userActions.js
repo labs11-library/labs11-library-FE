@@ -1,7 +1,5 @@
 import axios from "axios";
 import baseUrl from "../../url";
-// const baseUrl = "http://localhost:9001";
-// const baseUrl = "https://book-maps.herokuapp.com";
 
 export const FETCHING_USERS = "FETCHING_USERS";
 export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
@@ -40,25 +38,6 @@ export const getSingleUser = userId => dispatch => {
 export const CREATE_CUSTOMER_START = "CREATE_CUSTOMER_START";
 export const CREATE_CUSTOMER_SUCCESS = "CREATE_CUSTOMER_SUCCESS";
 export const CREATE_CUSTOMER_FAILURE = "CREATE_CUSTOMER_FAILURE";
-
-// export const CREATE_CHARGE_START = "CREATE_CHARGE_START";
-// export const CREATE_CHARGE_SUCCESS = "CREATE_CHARGE_SUCCESS";
-
-// export const createCharge = () => dispatch => {
-//   dispatch({ type: CREATE_CHARGE_START });
-//   axios
-//     .post(`${baseUrl}/payment/charges`)
-//     .then(res => {
-//       dispatch({
-//         type: CREATE_CHARGE_SUCCESS,
-//         payload: res.data
-//       });
-//     })
-//     .then(() => {
-//       dispatch(getLoggedInUser());
-//     })
-//     .catch(err => console.log(err));
-// };
 
 export const createCustomer = token => dispatch => {
   dispatch({ type: CREATE_CUSTOMER_START });

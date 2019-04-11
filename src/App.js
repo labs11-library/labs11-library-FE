@@ -26,6 +26,9 @@ import SingleRequest from "./components/Requests/SingleRequest.js";
 import LibraryList from "./components/ViewLibraries/LibraryList";
 
 import { AppContainer, Html } from "./components/Styles/AppStyles.js";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 class App extends Component {
   setUsername = event => {
     this.setState({
@@ -111,6 +114,11 @@ class App extends Component {
               render={props => <LibraryList {...props} />}
             />
           </AppContainer>
+          <ToastContainer
+            position="bottom-right"
+            style={{ zIndex: "999999999999", fontSize: "1.2rem" }}
+            autoClose={3500}
+          />
         </Html>
       </React.Fragment>
     );
