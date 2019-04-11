@@ -11,18 +11,20 @@ const Login = () => {
     <div style={{ margin: "0 auto", width: "400px" }}>
       <Paper>
         <Typography component="h1" variant="h5">
-          Log in
+            <div style={{margin:"0 0 0 40%"}}>
+              Log in
+            </div>
         </Typography>
         <FormControl margin="normal" required fullWidth>
-          <a href={`${baseUrl}/auth/google`}>
+          <a href={`${baseUrl}/auth/google`} style={{margin:"0 0 0 23%"}}>
             <button class="loginBtn loginBtn--google">Login with Google</button>
           </a>
-          <a href={`${baseUrl}/auth/facebook`}>
+          <a href={`${baseUrl}/auth/facebook`} style={{margin:"0 0 0 21%"}}>
             <button class="loginBtn loginBtn--facebook">
               Login with Facebook
             </button>
           </a>
-          <Link component={RouterLink} to="/signup">
+          <Link component={RouterLink} to="/signup" style={{margin:"0 0 0 20%"}}>
             Don't have an account yet? Create an account here.
           </Link>
         </FormControl>
