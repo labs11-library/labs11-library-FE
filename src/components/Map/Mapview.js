@@ -29,7 +29,7 @@ class Mapview extends Component {
             lng: position.coords.longitude
           },
           haveUserLocation: true,
-          zoom: 15
+          zoom: 13
         });
         this.updateLocation();
         this.renderMap();
@@ -177,7 +177,7 @@ class Mapview extends Component {
     this.state.users.map(allUsers => {
       var str = `<a href="https://bookmaps.netlify.com/users/${
         allUsers.userId
-      }/library" target="_blank">HERE</a><br>`;
+      }/library">HERE</a><br>`;
       var contentString = `Click ${str} to visit ${
         allUsers.firstName
       }'s bookshelf`;

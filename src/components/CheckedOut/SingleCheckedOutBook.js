@@ -31,7 +31,8 @@ class SingleCheckedOutBook extends Component {
       title,
       lenderId,
       borrowerEmail,
-      borrower
+      borrower,
+      checkoutId
     } = this.props.singleCheckout;
     const otherUserEmail =
       lenderId.toString() === localStorage.getItem("userId")
@@ -41,22 +42,26 @@ class SingleCheckedOutBook extends Component {
       lenderId.toString() === localStorage.getItem("userId")
         ? borrower
         : lender;
+    const borrowerLenderName =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? lender
+        : borrower;
     const email = {
       recipient: otherUserEmail,
       sender: "blkfltchr@gmail.com",
       subject: `${
-        this.props.loggedInUser.firstName
+        borrowerLenderName
       } wants to coordinate a return of ${title}`,
-      text: `Hey ${lenderBorrowerName}, check out bookmaps.app/notifications to coordinate a book return with ${
-        this.props.loggedInUser.firstName
-      }`
+      html: `Hey ${lenderBorrowerName}, check out <a href="https://bookmaps.netlify.com/my-library/checkouts/${checkoutId}">this message thread</a> to coordinate a book return with ${borrowerLenderName}`
     };
+    
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
         email.sender
-      }&topic=${email.subject}&text=${email.text}`
+      }&topic=${email.subject}&html=${email.html}`
     ) //query string url
       .catch(err => console.error(err));
+      console.log("email sent", email)
   };
 
   render() {
