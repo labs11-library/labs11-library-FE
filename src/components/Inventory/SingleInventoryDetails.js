@@ -17,9 +17,12 @@ const SingleInventoryDetails = props => {
     authors,
     image,
     available,
-    description
+    description,
+    dueDate,
+    checkoutDate
   } = props.singleInventory;
   const availability = available ? "Available" : "Checked out";
+  const threeWeeks = moment(checkoutDate, "YYYY-MM-DD").add(21, "days");
   return (
     <div>
       <Link
@@ -36,6 +39,15 @@ const SingleInventoryDetails = props => {
           <h2>{title}</h2> {/* {title.substr(0, 20)} */}
           <p>by {authors}</p>
           <Availability available={available}>{availability}</Availability>
+          {!available && (
+            <p>
+              Date due:{" "}
+              {moment(dueDate)
+                .utc(threeWeeks)
+                .local()
+                .format("dddd, MMMM Do")}
+            </p>
+          )}{" "}
           <p>
             {description === ""
               ? "No description provided"
