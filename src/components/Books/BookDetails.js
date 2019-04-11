@@ -18,17 +18,21 @@ const BookDetails = props => {
     title,
     authors,
     image,
-    lender,
     available,
     dueDate,
-    description
   } = props.book;
   const availability = available ? "Available" : "Checked out";
+
   function timeRemaining(dueDate) {
     let now = moment(Date.now());
     let end = moment(dueDate);
-    let duration = moment.duration(now.diff(end)).humanize();
-    return duration;
+    if (end.isBefore(moment(now))) {
+      let duration = `overdue by $Ò{moment.duration(now.diff(end)).humanize()}`;
+      return duration;
+    } else {
+      let duration = moment.duration(now.diff(end)).humanize();
+      return duration;
+    }
   }
   return (
     <BookDetailsWrapper>
@@ -36,13 +40,19 @@ const BookDetails = props => {
         <BookImg alt={title} src={image} />
       </BookImgWrapper>
       <BookTextContainer>
-        <h2>{title.substr(0, 28)}
-          {title.length > 28 && "..."}</h2>
+        <h2>
+          {title.substr(0, 28)}
+          {title.length > 28 && "..."}
+        </h2>
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
         {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
         <Link style={{ textDecoration: "none" }} to={`/books/${bookId}`}>
-          <Button style={{padding: "10px 20px"}} variant="contained" color="primary">
+          <Button
+            style={{ padding: "10px 20px" }}
+            variant="contained"
+            color="primary"
+          >
             See more details
           </Button>
         </Link>

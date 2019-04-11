@@ -103,7 +103,7 @@ class AddBook extends Component {
           </div>
           <div>
             <Button 
-              variant="outlined" 
+              variant="contained" 
               onClick={this.addBook}
               style={{margin: "5px"}}
               color="primary"
