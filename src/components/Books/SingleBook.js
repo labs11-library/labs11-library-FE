@@ -92,7 +92,7 @@ class SingleBook extends Component {
       //   return duration;
       // }
       const threeWeeks = moment(checkoutDate, "YYYY-MM-DD").add(21, "days");
-      const dueDate = moment
+      const dueDate = moment(dueDate)
         .utc(threeWeeks)
         .local()
         .format("dddd, MMMM Do");
@@ -113,7 +113,15 @@ class SingleBook extends Component {
               <p>by {authors}</p>
               <Availability available={available}>{availability}</Availability>
               {/* {!available && <p>Time until due: {timeRemaining(dueDate)}</p>} */}
-              {!available && checkoutDate && <p>Date due: {dueDate}</p>}{" "}
+              {!available && checkoutDate && (
+                <p>
+                  Date due:{" "}
+                  {moment(dueDate)
+                    .utc(threeWeeks)
+                    .local()
+                    .format("dddd, MMMM Do")}
+                </p>
+              )}{" "}
               <p>
                 {description === ""
                   ? "No description provided"
