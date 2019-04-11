@@ -7,7 +7,8 @@ class Sendgrid extends Component {
       recipient: "",
       sender: "",
       subject: "",
-      text: ""
+      text: "",
+      html: ""
     }
   };
 
@@ -16,7 +17,7 @@ class Sendgrid extends Component {
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
         email.sender
-      }&topic=${email.subject}&text=${email.text}`
+      }&topic=${email.subject}&text=${email.text}&html=${email.html}`
     )
       .then(console.log("success"))
       .catch(err => console.error(err));

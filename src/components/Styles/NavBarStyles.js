@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 
-/* Header styles */
-
 export const NavBarWrapper = styled.div`
   height: 3.5rem;
   box-shadow: 0 4px 2px -2px gray;
@@ -12,32 +10,26 @@ export const NavBarWrapper = styled.div`
   left: 0;
   width: 100%;
   background-color: white;
-
   a {
     color: black;
     text-decoration: none;
   }
 `;
-
+export const NavContentWrapper = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 export const BookMapsLogo = styled(Link)`
-  position: absolute;
-  top: 12px;
-  z-index: 100;
-
   span {
     font-size: 2.5rem;
     padding-left: 10px;
   }
-
-  @media screen and (max-width: 750px) {
-    display: none;
-  }
 `;
 
 export const NavLinks = styled.div`
-  position: absolute;
-  /* top: 18px; */
-  right: 12px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -50,11 +42,7 @@ export const NavLinks = styled.div`
 `;
 
 export const NavLinksShow = styled.div`
-  position: absolute;
-  /* top: 18px; */
-  right: 12px;
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
   font-size: 1.2rem;
   height: 3.5rem;
@@ -71,5 +59,5 @@ export const BurgerDiv = styled.div`
 `;
 
 export const NoFocus = styled(NavLink)`
-  outline: none
-`
+  outline: none;
+`;
