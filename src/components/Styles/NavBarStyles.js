@@ -31,14 +31,13 @@ export const BookMapsLogo = styled(Link)`
 
   @media screen and (max-width: 750px) {
     display: none;
-}
+  }
 `;
 
 export const NavLinks = styled.div`
   position: absolute;
   /* top: 18px; */
   right: 12px;
-  font-family: Lato, Helvetica, Arial, Lucida, sans-serif;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -48,6 +47,17 @@ export const NavLinks = styled.div`
   @media screen and (max-width: 750px) {
     display: none;
   }
+`;
+
+export const NavLinksShow = styled.div`
+  position: absolute;
+  /* top: 18px; */
+  right: 12px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 1.2rem;
+  height: 3.5rem;
 `;
 
 export const NavLinkWrapper = styled(Link)`

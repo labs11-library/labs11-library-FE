@@ -6,7 +6,8 @@ import {
   NavBarWrapper,
   BookMapsLogo,
   NavLinks,
-  NavLinkWrapper
+  NavLinksShow,
+  NavLinkWrapper,
 } from "../Styles/NavBarStyles.js";
 import BurgerMenu from "./BurgerMenu"
 
@@ -66,27 +67,22 @@ class NavBar extends Component {
           </NavBarWrapper>
         )}
         {!loggedIn && (
-          <div className="navbar">
-            <BookMapsLogo>
+          <NavBarWrapper>
+            <BookMapsLogo to="/">
               {/* Book maps{" "} */}
               <span role="img" aria-label="books">
                 📚
               </span>
-              <span role="img" aria-label="map">
-                🗺
-              </span>
             </BookMapsLogo>
-            <div className={this.state.menuClassName}>
-              <div>
-                <NavLinkWrapper to="/signup">
-                  <span role="img" aria-label="wave">
-                    👋
-                  </span>{" "}
-                  Sign up
-                </NavLinkWrapper>
-              </div>
-            </div>
-          </div>
+            <NavLinksShow>
+              <NavLinkWrapper to="/signup">
+                <span role="img" aria-label="wave">
+                  👋
+                </span>{" "}
+                Sign up
+              </NavLinkWrapper>
+            </NavLinksShow>
+          </NavBarWrapper>
         )}
       </div>
     );
