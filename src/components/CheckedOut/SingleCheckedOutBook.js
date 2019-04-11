@@ -49,9 +49,7 @@ class SingleCheckedOutBook extends Component {
     const email = {
       recipient: otherUserEmail,
       sender: "blkfltchr@gmail.com",
-      subject: `${
-        borrowerLenderName
-      } wants to coordinate a return of ${title}`,
+      subject: `${borrowerLenderName} wants to coordinate a return of ${title}`,
       html: `Hey ${lenderBorrowerName}, check out <a href="https://bookmaps.netlify.com/my-library/checkouts/${checkoutId}">this message thread</a> to coordinate a book return with ${borrowerLenderName}`
     };
     
