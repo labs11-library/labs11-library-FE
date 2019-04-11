@@ -4,12 +4,13 @@ import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import Avatar from "@material-ui/core/Avatar";
 import {
   NavBarWrapper,
+  NavContentWrapper,
   BookMapsLogo,
   NavLinks,
   NavLinksShow,
-  NavLinkWrapper,
+  NavLinkWrapper
 } from "../Styles/NavBarStyles.js";
-import BurgerMenu from "./BurgerMenu"
+import BurgerMenu from "./BurgerMenu";
 
 class NavBar extends Component {
   constructor() {
@@ -29,59 +30,62 @@ class NavBar extends Component {
       <div>
         {loggedIn && (
           <NavBarWrapper>
-            <BookMapsLogo to="/">
-              <span role="img" aria-label="books">
-                📚
-              </span>
-            </BookMapsLogo>
-            <BurgerMenu />
-            <NavLinks>
-              <NavLinkWrapper to="/my-library">
+            <NavContentWrapper>
+              <BookMapsLogo to="/">
                 <span role="img" aria-label="books">
                   📚
-                </span>{" "}
-                My Library
-              </NavLinkWrapper>
-              <NavLinkWrapper to="/add-book">
-                <span role="img" aria-label="plus">
-                  📖
-                </span>{" "}
-                Add book
-              </NavLinkWrapper>
-              <NavLinkWrapper to="/notifications">
-                <span role="img" aria-label="bell">
-                  🔔
-                </span>{" "}
-                Notifications
-              </NavLinkWrapper>
-              <NavLinkWrapper to="/profile">
-                <Avatar
-                  style={{
-                    boxShadow:
-                      "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"
-                  }}
-                  src={this.props.loggedInUser.picture}
-                />
-              </NavLinkWrapper>
-            </NavLinks>
+                </span>
+              </BookMapsLogo>
+              <BurgerMenu />
+              <NavLinks>
+                <NavLinkWrapper to="/my-library">
+                  <span role="img" aria-label="books">
+                    📚
+                  </span>{" "}
+                  My Library
+                </NavLinkWrapper>
+                <NavLinkWrapper to="/add-book">
+                  <span role="img" aria-label="plus">
+                    📖
+                  </span>{" "}
+                  Add book
+                </NavLinkWrapper>
+                <NavLinkWrapper to="/notifications">
+                  <span role="img" aria-label="bell">
+                    🔔
+                  </span>{" "}
+                  Notifications
+                </NavLinkWrapper>
+                <NavLinkWrapper to="/profile">
+                  <Avatar
+                    style={{
+                      boxShadow:
+                        "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"
+                    }}
+                    src={this.props.loggedInUser.picture}
+                  />
+                </NavLinkWrapper>
+              </NavLinks>
+            </NavContentWrapper>
           </NavBarWrapper>
         )}
         {!loggedIn && (
           <NavBarWrapper>
-            <BookMapsLogo to="/">
-              {/* Book maps{" "} */}
-              <span role="img" aria-label="books">
-                📚
-              </span>
-            </BookMapsLogo>
-            <NavLinksShow>
-              <NavLinkWrapper to="/signup">
-                <span role="img" aria-label="wave">
-                  👋
-                </span>{" "}
-                Sign up
-              </NavLinkWrapper>
-            </NavLinksShow>
+            <NavContentWrapper>
+              <BookMapsLogo to="/">
+                <span role="img" aria-label="books">
+                  📚
+                </span>
+              </BookMapsLogo>
+              <NavLinksShow>
+                <NavLinkWrapper to="/signup">
+                  <span role="img" aria-label="wave">
+                    👋
+                  </span>{" "}
+                  Sign up
+                </NavLinkWrapper>
+              </NavLinksShow>
+            </NavContentWrapper>
           </NavBarWrapper>
         )}
       </div>
