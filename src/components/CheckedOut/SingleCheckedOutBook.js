@@ -10,6 +10,7 @@ import baseUrl from "../../url";
 import Auth from "../Auth/Auth";
 
 import Loading from "../Loading/Loading.js";
+import { toast } from "react-toastify";
 class SingleCheckedOutBook extends Component {
   componentDidMount() {
     const userId = localStorage.getItem("userId");
@@ -52,14 +53,13 @@ class SingleCheckedOutBook extends Component {
       subject: `${borrowerLenderName} wants to coordinate a return of ${title}`,
       html: `Hey ${lenderBorrowerName}, check out <a href="https://bookmaps.netlify.com/my-library/checkouts/${checkoutId}">this message thread</a> to coordinate a book return with ${borrowerLenderName}`
     };
-    
+
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
         email.sender
       }&topic=${email.subject}&html=${email.html}`
-    ) //query string url
-      .catch(err => console.error(err));
-      console.log("email sent", email)
+    ).catch(err => console.error(err));
+    toast.info("Email notification sent!");
   };
 
   render() {
