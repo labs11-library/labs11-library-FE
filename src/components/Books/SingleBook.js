@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as moment from "moment";
 import "@progress/kendo-theme-material/dist/all.css";
-import Button from "@material-ui/core/Button";
+import { Button } from "@progress/kendo-react-buttons";
 import { connect } from "react-redux";
 import { getSingleBook } from "../../redux/actions/bookActions.js";
 import Ratings from "react-ratings-declarative";
@@ -84,7 +84,7 @@ class SingleBook extends Component {
         lender,
         avgRating,
         available,
-        // dueDate,
+        dueDate,
         description,
         checkoutDate
       } = this.props.singleBook;
@@ -96,10 +96,10 @@ class SingleBook extends Component {
       //   return duration;
       // }
       const threeWeeks = moment(checkoutDate, "YYYY-MM-DD").add(21, "days");
-      const dueDate = moment
-        .utc(threeWeeks)
-        .local()
-        .format("dddd, MMMM Do");
+      // const dueDate = moment
+      //   .utc(threeWeeks)
+      //   .local()
+      //   .format("dddd, MMMM Do");
       return (
         <div>
           <BookDetailsWrapper>
@@ -117,7 +117,15 @@ class SingleBook extends Component {
               <p>by {authors}</p>
               <Availability available={available}>{availability}</Availability>
               {/* {!available && <p>Time until due: {timeRemaining(dueDate)}</p>} */}
-              {!available && checkoutDate && <p>Date due: {dueDate}</p>}{" "}
+              {!available && (
+                <p>
+                  Date due:{" "}
+                  {moment(dueDate)
+                    .utc(threeWeeks)
+                    .local()
+                    .format("dddd, MMMM Do")}
+                </p>
+              )}{" "}
               <p>
                 {description === ""
                   ? "No description provided"
@@ -133,9 +141,7 @@ class SingleBook extends Component {
                   <p>Contact {lender}</p>
                   <Button
                     disabled
-                    variant="outlined"
                     onClick={() => this.requestCheckout(bookId, lenderId)}
-                    color="primary"
                   >
                     Request checkout
                   </Button>
@@ -145,9 +151,7 @@ class SingleBook extends Component {
                 <div>
                   <p>Contact {lender}</p>
                   <Button
-                    variant="outlined"
                     onClick={() => this.requestCheckout(bookId, lenderId)}
-                    color="primary"
                   >
                     Request checkout
                   </Button>
@@ -186,7 +190,6 @@ class SingleBook extends Component {
     }
   }
 }
-
 const mapStateToProps = state => {
   return {
     fetchingBooks: state.bookReducer.fetchingBooks,
@@ -196,7 +199,6 @@ const mapStateToProps = state => {
     creatingStripe: state.authReducer.creatingStripe
   };
 };
-
 export default connect(
   mapStateToProps,
   { getSingleBook, getLoggedInUser, addCheckoutRequest }

@@ -8,15 +8,12 @@ export const BookDetailsWrapper = styled.div`
   margin: 20px auto;
   padding-bottom: 10px;
   min-height: 250px;
-
   h2 {
     font-size: 18px;
   }
-
   p {
     font-size: 14px;
   }
-
   @media (max-width: 700px) {
     width: 90vw;
   }

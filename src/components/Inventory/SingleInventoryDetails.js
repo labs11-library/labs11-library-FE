@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Loading from "../Loading/Loading";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import * as moment from "moment";
 
 const Availability = styled.p`
   color: ${props => (props.available ? "green" : "red")};
