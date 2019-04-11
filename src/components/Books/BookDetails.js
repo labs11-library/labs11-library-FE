@@ -10,23 +10,9 @@ import {
   BookTextContainer
 } from "../Styles/LandingPageStyles.js";
 
-import * as moment from "moment";
-
 const BookDetails = props => {
   const { bookId, title, authors, image, available, dueDate } = props.book;
   const availability = available ? "Available" : "Checked out";
-
-  function timeRemaining(dueDate) {
-    let now = moment(Date.now());
-    let end = moment(dueDate);
-    if (end.isBefore(moment(now))) {
-      let duration = `overdue by ${moment.duration(now.diff(end)).humanize()}`;
-      return duration;
-    } else {
-      let duration = moment.duration(now.diff(end)).humanize();
-      return duration;
-    }
-  }
   console.log(props.checkouts);
   return (
     <BookDetailsWrapper>
@@ -40,7 +26,7 @@ const BookDetails = props => {
         </h2>
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
-        {dueDate && <p>Time until due: {dueDate}</p>}
+        {dueDate && <p>Date due: {dueDate}</p>}
         <Link style={{ textDecoration: "none" }} to={`/books/${bookId}`}>
           <Button
             style={{ padding: "10px 20px" }}
