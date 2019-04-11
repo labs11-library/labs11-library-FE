@@ -29,7 +29,7 @@ class Mapview extends Component {
             lng: position.coords.longitude
           },
           haveUserLocation: true,
-          zoom: 15
+          zoom: 13
         });
         this.updateLocation();
         this.renderMap();

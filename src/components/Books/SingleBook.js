@@ -108,17 +108,14 @@ class SingleBook extends Component {
       //   .format("dddd, MMMM Do");
       return (
         <div>
-          <Link
-            style={{ position: "absolute", left: "0" }}
-            to={`/users/${lenderId}/library`}
-          >
-            <Button>← Back to Bookmaps</Button>
+          <Link style={{ position: "absolute", left: "0" }} to={"/"}>
+            <Button variant="outlined">← Back to Bookmaps</Button>
           </Link>
           <Link
             style={{ position: "absolute", right: "0" }}
             to={`/users/${lenderId}/library`}
           >
-            <Button>Visit {lender}'s Library →</Button>
+            <Button variant="outlined">Visit {lender}'s Library →</Button>
           </Link>
           <BookDetailsWrapper>
             <BookCardWrapper>
@@ -142,19 +139,29 @@ class SingleBook extends Component {
                         .format("dddd, MMMM Do")}
                     </p>
                   )}{" "}
-                  <p>
-                    {description === ""
-                      ? "No description provided"
-                      : `Description: ${description}`}
-                  </p>
                   {avgRating && (
                     <div>
                       <Ratings rating={avgRating} widgetRatedColors="gold">
-                        <Ratings.Widget widgetHoverColor="gold" />
-                        <Ratings.Widget widgetHoverColor="gold" />
-                        <Ratings.Widget widgetHoverColor="gold" />
-                        <Ratings.Widget widgetHoverColor="gold" />
-                        <Ratings.Widget widgetHoverColor="gold" />
+                        <Ratings.Widget
+                          widgetHoverColor="gold"
+                          widgetDimension="30px"
+                        />
+                        <Ratings.Widget
+                          widgetHoverColor="gold"
+                          widgetDimension="30px"
+                        />
+                        <Ratings.Widget
+                          widgetHoverColor="gold"
+                          widgetDimension="30px"
+                        />
+                        <Ratings.Widget
+                          widgetHoverColor="gold"
+                          widgetDimension="30px"
+                        />
+                        <Ratings.Widget
+                          widgetHoverColor="gold"
+                          widgetDimension="30px"
+                        />
                       </Ratings>
                       <div>Goodreads rating: {avgRating}</div>
                     </div>
@@ -162,6 +169,11 @@ class SingleBook extends Component {
                 </BookInfoWrapper>
               </BookWrapper>
               <BookButtonsWrapper>
+                <p>
+                  {description === ""
+                    ? "No description provided"
+                    : `Description: ${description}`}
+                </p>
                 {this.props.loggedInUser.stripe_email === null && (
                   <div>
                     <p>Contact {lender}</p>
