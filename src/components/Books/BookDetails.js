@@ -12,6 +12,12 @@ import {
 
 const BookDetails = props => {
   const { bookId, title, authors, image, available, dueDate } = props.book;
+
+  const dateDue = moment
+    .utc(dueDate)
+    .local()
+    .format("dddd, MMMM Do");
+
   const availability = available ? "Available" : "Checked out";
   console.log(props.checkouts);
   return (
@@ -26,7 +32,9 @@ const BookDetails = props => {
         </h2>
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
-        {dueDate && <p>Date due: {dueDate}</p>}
+
+        {dueDate && <p>Time until due: {dateDue}</p>}
+
         <Link style={{ textDecoration: "none" }} to={`/books/${bookId}`}>
           <Button
             style={{ padding: "10px 20px" }}
