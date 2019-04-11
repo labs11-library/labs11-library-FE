@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Loading from "../Loading/Loading";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import * as moment from "moment";
 
 const Availability = styled.p`
   color: ${props => (props.available ? "green" : "red")};
@@ -16,9 +17,12 @@ const SingleInventoryDetails = props => {
     authors,
     image,
     available,
-    description
+    description,
+    dueDate,
+    checkoutDate
   } = props.singleInventory;
   const availability = available ? "Available" : "Checked out";
+  const threeWeeks = moment(checkoutDate, "YYYY-MM-DD").add(21, "days");
   return (
     <div>
       <Link
@@ -35,6 +39,15 @@ const SingleInventoryDetails = props => {
           <h2>{title}</h2> {/* {title.substr(0, 20)} */}
           <p>by {authors}</p>
           <Availability available={available}>{availability}</Availability>
+          {!available && (
+            <p>
+              Date due:{" "}
+              {moment(dueDate)
+                .utc(threeWeeks)
+                .local()
+                .format("dddd, MMMM Do")}
+            </p>
+          )}{" "}
           <p>
             {description === ""
               ? "No description provided"
