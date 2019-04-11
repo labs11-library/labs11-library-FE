@@ -11,7 +11,6 @@ import SearchIcon from "@material-ui/icons/Search";
 
 import { connect } from "react-redux";
 import { getBooks } from "../../redux/actions/bookActions.js";
-import { getCheckouts } from "../../redux/actions/checkoutActions";
 
 import Loading from "../Loading/Loading.js";
 import {
@@ -30,8 +29,6 @@ class Books extends Component {
 
   componentDidMount() {
     this.props.getBooks();
-    const userId = localStorage.getItem("userId");
-    this.props.getCheckouts(userId);
   }
 
   handleChange = e => {
@@ -43,15 +40,14 @@ class Books extends Component {
   searchBooks = () => {
     const { searchText } = this.state;
     const { books } = this.props;
-    const { checkouts } = this.props;
-    const allBooks = [...books, ...checkouts];
+
     if (searchText.length === 0) {
-      return allBooks;
+      return books;
     } else if (searchText.length > 0) {
       const newText = this.state.searchText.replace(/\\$/, "");
       const searchRegex = new RegExp(newText, "gi");
       // const searchRegex = new RegExp(searchText, "gi");
-      return allBooks.filter(
+      return books.filter(
         book =>
           book.title.match(searchRegex) ||
           book.authors.match(searchRegex) ||
@@ -73,8 +69,12 @@ class Books extends Component {
       return this.searchBooks().filter(
         book =>
           book.available === true &&
-          book.dueDate === null &&
+          book.dueDate !== null &&
           book.lenderId.toString() !== localStorage.getItem("userId")
+      );
+    } else if (filter === "mybooks") {
+      return this.searchBooks().filter(
+        book => book.lenderId.toString() === localStorage.getItem("userId")
       );
     }
   };
@@ -119,6 +119,7 @@ class Books extends Component {
             >
               <MenuItem value={"all"}>All</MenuItem>
               <MenuItem value={"available"}>Available</MenuItem>
+              <MenuItem value={"mybooks"}>My Books</MenuItem>
             </Select>
           </div>
           <CardContainer>
@@ -134,10 +135,9 @@ class Books extends Component {
 
 const mapStateToProps = state => ({
   fetchingBooks: state.bookReducer.fetchingBooks,
-  books: state.bookReducer.books,
-  checkouts: state.checkoutReducer.checkouts
+  books: state.bookReducer.books
 });
 export default connect(
   mapStateToProps,
-  { getBooks, getCheckouts }
+  { getBooks }
 )(Books);
