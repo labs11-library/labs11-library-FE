@@ -62,9 +62,13 @@ export const BookButtonsWrapper = styled.div`
 export const MapWrapper = styled.div`
   width: 100%;
   height: 360px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   // position: fixed;
   // right: 0;
 `;
+// export const Ratings = styled.div`
+//   display: hidden;
+// `;
 export const BookImg = styled.img`
   width: 100%;
   height: 100%;

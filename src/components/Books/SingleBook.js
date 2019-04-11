@@ -178,6 +178,8 @@ class SingleBook extends Component {
                   <div>
                     <p>Contact {lender}</p>
                     <Button
+                      variant="contained"
+                      color="primary"
                       disabled
                       onClick={() => this.requestCheckout(bookId, lenderId)}
                     >
@@ -196,6 +198,8 @@ class SingleBook extends Component {
                   <div>
                     <p>Contact {lender}</p>
                     <Button
+                      variant="contained"
+                      color="primary"
                       onClick={() => this.requestCheckout(bookId, lenderId)}
                     >
                       Request checkout
