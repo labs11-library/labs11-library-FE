@@ -3,8 +3,6 @@ import axios from "axios";
 import "./mapview.css";
 import baseUrl from "../../url";
 
-// const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
-
 class Mapview extends Component {
   constructor() {
     super();
@@ -81,7 +79,6 @@ class Mapview extends Component {
           },
           this.renderMap()
         );
-        // console.log(this.state.users);
       })
       .catch(err => {
         console.log("Error" + err);
@@ -117,7 +114,7 @@ class Mapview extends Component {
     var searchBox = new window.google.maps.places.SearchBox(input);
     map.controls[window.google.maps.ControlPosition.TOP_LEFT].push(input);
 
-    var places = searchBox.getPlaces();
+    // var places = searchBox.getPlaces();
 
     map.addListener("bounds_changed", function() {
       searchBox.setBounds(map.getBounds());
@@ -129,7 +126,7 @@ class Mapview extends Component {
     searchBox.addListener("places_changed", function() {
       var places = searchBox.getPlaces();
 
-      if (places.length == 0) {
+      if (places.length === 0) {
         return;
       }
 
@@ -205,21 +202,6 @@ class Mapview extends Component {
         infowindow.open(map, marker);
       });
     });
-
-    // Create Marker for User
-    if (this.state.haveUserLocation) {
-      var pinIcon = {
-        url: "http://maps.google.com/mapfiles/kml/paddle/blu-circle.png",
-        scaledSize: new window.google.maps.Size(45, 40)
-      };
-      var marker = new window.google.maps.Marker({
-        position: this.state.location,
-        map: map,
-        title: "You are here",
-        icon: pinIcon,
-        zIndex: 999
-      });
-    }
   };
 
   render() {

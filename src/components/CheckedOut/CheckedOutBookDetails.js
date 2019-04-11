@@ -41,7 +41,6 @@ class BookDetails extends Component {
   };
 
   confirmBookReturn = () => {
-    const userId = localStorage.getItem("userId");
     this.props.confirmReturn(this.props.checkout.checkoutId);
     this.props.returnBook(this.props.checkout.bookId);
     this.props.goToMyLibrary();
@@ -64,7 +63,6 @@ class BookDetails extends Component {
 
     const {
       title,
-      bookId,
       authors,
       image,
       lender,
@@ -74,7 +72,6 @@ class BookDetails extends Component {
       borrower,
       returned,
       checkoutDate,
-      overdue,
       lateFee
     } = this.props.checkout;
 
@@ -107,8 +104,6 @@ class BookDetails extends Component {
         ? `Confirm Return (late fee of $${this.overdue() /
             100} will be charged)`
         : null;
-
-    const usdFee = this.overdue() / 100;
 
     return (
       <BookDetailsWrapper>

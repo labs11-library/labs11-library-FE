@@ -88,7 +88,6 @@ class RequestDetails extends Component {
       description,
       lenderId,
       borrower,
-      borrowerId,
       lender
     } = this.props.request;
     const userId = localStorage.getItem("userId");
