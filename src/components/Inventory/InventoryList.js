@@ -8,7 +8,6 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-// import BookDetails from "../Books/BookDetails.js";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -20,6 +19,8 @@ class Inventory extends Component {
   constructor() {
     super();
     this.state = {
+      books: [],
+      filter: "available",
       searchText: ""
     };
   }
@@ -36,6 +37,7 @@ class Inventory extends Component {
   };
 
   searchBooks = () => {
+    console.log("hello searched")
     if (this.state.searchText.length === 0) {
       return this.props.inventory;
     } else if (this.state.searchText.length > 0) {
@@ -47,16 +49,25 @@ class Inventory extends Component {
     }
   };
   filteredBooks = () => {
+    console.log("hello")
     const { filter } = this.state;
+   
     if (filter === "all") {
-      return this.searchBooks().filter(
-        book => book.lenderId.toString() !== localStorage.getItem("userId")
-      );
+     
+      return this.searchBooks().filter( function(book) {
+        console.log(book.userId.toString(), "book.userId");
+        console.log(localStorage.getItem("userId"), "localstorage");
+        console.log(book.available)
+        return book.userId.toString() === localStorage.getItem("userId")
+      // }
+      //   book => book.userId.toString() !== localStorage.getItem("userId")
+      });
+      
     } else if (filter === "available") {
       return this.searchBooks().filter(
         book =>
           book.available === true &&
-          book.lenderId.toString() !== localStorage.getItem("userId")
+          book.userId.toString() === localStorage.getItem("userId")
       );
     }
   };
@@ -115,7 +126,9 @@ class Inventory extends Component {
           </div>
           <CardContainer>
             {this.filteredBooks().map(book => {
-              return <InventoryDetails key={book.bookId} book={book} />;
+              return ( 
+                <InventoryDetails book={book} viewBook={this.viewBook} key={book.bookId} />
+              );
             })}
           </CardContainer>
           {/* <CardContainer>

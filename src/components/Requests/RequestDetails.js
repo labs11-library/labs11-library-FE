@@ -19,6 +19,7 @@ import {
 import Button from "@material-ui/core/Button";
 
 import { getLoggedInUser } from "../../redux/actions/authActions";
+import { toast } from "react-toastify";
 class RequestDetails extends Component {
   state = {
     value: 0
@@ -61,21 +62,22 @@ class RequestDetails extends Component {
       lenderId.toString() === localStorage.getItem("userId")
         ? borrower
         : lender;
-
+    const borrowerLenderName =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? lender
+        : borrower;
     const email = {
       recipient: otherUserEmail,
       sender: "blkfltchr@gmail.com",
-      subject: `${this.props.loggedInUser.firstName} can't exchange ${title}`,
-      text: `Hey ${lenderBorrowerName}, unfortunately ${
-        this.props.loggedInUser.firstName
-      } is unable to exchange ${title}`
+      subject: `${borrowerLenderName} can't exchange ${title}`,
+      html: `Hey ${lenderBorrowerName}, unfortunately ${borrowerLenderName} is unable to exchange ${title}. Find your next book on <a href="https://bookmaps.netlify.com/">Book Maps</a>!`
     };
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
         email.sender
-      }&topic=${email.subject}&text=${email.text}`
-    ) //query string url
-      .catch(err => console.error(err));
+      }&topic=${email.subject}&html=${email.html}`
+    ).catch(err => console.error(err));
+    toast.info("Email notification sent!");
     this.forceUpdate();
   };
 
@@ -142,20 +144,20 @@ class RequestDetails extends Component {
             </>
           )}
           <NavLink
-              style={{ textDecoration: "none" }}
-              to={`/notifications/${checkoutRequestId}`}
-            >
-          <Button
-            style={{
-              width: "100%",
-              minWidth: "140px",
-              maxWidth: "180px",
-              margin: "10px auto 10px",
-              padding: "6px 14px"
-            }}
-            variant="contained"
-            color="primary"
+            style={{ textDecoration: "none" }}
+            to={`/notifications/${checkoutRequestId}`}
           >
+            <Button
+              style={{
+                width: "100%",
+                minWidth: "140px",
+                maxWidth: "180px",
+                margin: "10px auto 10px",
+                padding: "6px 14px"
+              }}
+              variant="contained"
+              color="primary"
+            >
               Send Message
             </Button>
           </NavLink>
