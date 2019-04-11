@@ -50,9 +50,10 @@ class UserProfile extends Component {
         <div style={{ margin: "10px" }}>
           <UserProfileCard loggedInUser={loggedInUser} />
           <Button
-            variant="outlined"
+            variant="contained"
             onClick={this.toggleUpdate}
             style={{ margin: "5px" }}
+            color="primary"
           >
             Edit Profile
           </Button>
