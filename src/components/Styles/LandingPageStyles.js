@@ -80,6 +80,8 @@ export const LandingPageWrapper = styled.div`
 `;
 export const ContentContainer = styled.div`
   width: 100%;
+  height: calc(100vh - 3.5rem);
+  position: relative;
   display: flex;
   flex-direction: row;
   @media (max-width: 750px) {
@@ -88,7 +90,7 @@ export const ContentContainer = styled.div`
 `;
 export const MapWrapper = styled.div`
   width: 50%;
-  position: fixed;
+  position: absolute;
   right: 0;
   @media (max-width: 750px) {
     margin-top: 60px;
