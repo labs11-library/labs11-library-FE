@@ -9,6 +9,9 @@ export const GET_LOGGED_IN_USER_SUCCESS = "GET_LOGGED_IN_USER_SUCCESS";
 export const UPDATING_PROFILE = "UPDATING_PROFILE";
 export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
 
+export const CREATING_STRIPE_CUSTOMER = "CREATING_STRIPE_CUSTOMER";
+export const CREATE_STRIPE_CUSTOMER_SUCCESS = "CREATE_STRIPE_CUSTOMER_SUCCESS";
+
 export const getLoggedInUser = state => dispatch => {
   let userId = localStorage.getItem("userId");
   dispatch({ type: GETTING_LOGGED_IN_USER });
@@ -39,4 +42,15 @@ export const editProfile = updatedUser => dispatch => {
     .catch(err => {
       console.log(err);
     });
+};
+
+export const createStripeCustomer = body => dispatch => {
+  dispatch({ type: CREATING_STRIPE_CUSTOMER });
+  axios
+    .post(`${baseUrl}/payment/create_customer`, body)
+    .then(res => {
+      dispatch({ type: CREATE_STRIPE_CUSTOMER_SUCCESS });
+      console.log(res.data);
+    })
+    .catch(err => console.log("Frontend error:", err));
 };

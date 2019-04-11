@@ -73,6 +73,12 @@ export default function checkoutReducer(state = initialState, action) {
         error: ""
       };
     case ADD_CHECKOUT_REQUEST_FAILURE:
+      toast.error(
+        "You already have a pending request for this book. Contact the owner to coordinate an exchange.",
+        {
+          autoClose: false
+        }
+      );
       return {
         ...state,
         error: action.payload,
