@@ -8,6 +8,10 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
+// import BookDetails from "../Books/BookDetails.js";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
 import {
   InventoryContainer,
   CardContainer
@@ -20,12 +24,15 @@ class Inventory extends Component {
     };
   }
   handleChange = e => {
-
     const { name, value } = e.target;
-
     this.setState({
       [name]: value
     });
+  };
+
+  handleSelect = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
   };
 
   searchBooks = () => {
@@ -36,6 +43,20 @@ class Inventory extends Component {
       const searchRegex = new RegExp(newText, "gi");
       return this.props.inventory.filter(
         book => book.title.match(searchRegex) || book.authors.match(searchRegex)
+      );
+    }
+  };
+  filteredBooks = () => {
+    const { filter } = this.state;
+    if (filter === "all") {
+      return this.searchBooks().filter(
+        book => book.lenderId.toString() !== localStorage.getItem("userId")
+      );
+    } else if (filter === "available") {
+      return this.searchBooks().filter(
+        book =>
+          book.available === true &&
+          book.lenderId.toString() !== localStorage.getItem("userId")
       );
     }
   };
@@ -77,7 +98,27 @@ class Inventory extends Component {
               <SearchIcon />
             </IconButton>
           </Paper>
+          <div>
+            <InputLabel style={{ padding: "10px" }}>Filter by:</InputLabel>
+            <Select
+              style={{ minWidth: "100px", marginBottom: "10px" }}
+              label={this.state.filter}
+              value={this.state.filter}
+              inputProps={{
+                name: "filter"
+              }}
+              onChange={this.handleSelect}
+            >
+              <MenuItem value={"all"}>All</MenuItem>
+              <MenuItem value={"available"}>Available</MenuItem>
+            </Select>
+          </div>
           <CardContainer>
+            {this.filteredBooks().map(book => {
+              return <InventoryDetails key={book.bookId} book={book} />;
+            })}
+          </CardContainer>
+          {/* <CardContainer>
             {this.searchBooks().map(book => {
               return (
                 <InventoryDetails
@@ -87,7 +128,7 @@ class Inventory extends Component {
                 />
               );
             })}
-          </CardContainer>
+          </CardContainer> */}
         </InventoryContainer>
       );
     }
