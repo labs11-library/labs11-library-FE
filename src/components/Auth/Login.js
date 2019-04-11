@@ -18,32 +18,8 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           Log in
         </Typography>
-        <form>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input
-              name="password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-          </FormControl>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button type="submit" fullWidth variant="contained" color="primary">
-            Log in
-          </Button>
-        </form>
+        
         <FormControl margin="normal" required fullWidth>
-          <Link component={RouterLink} to="/signup">
-            Sign up
-          </Link>
           <a href={`${baseUrl}/auth/google`}>
             <button class="loginBtn loginBtn--google">Login with Google</button>
           </a>
@@ -52,6 +28,9 @@ const Login = () => {
               Login with Facebook
             </button>
           </a>
+          <Link component={RouterLink} to="/signup">
+            Don't have an account yet? Create an account here.
+          </Link>
         </FormControl>
       </Paper>
     </div>
