@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const NoRequests = styled.h2`
+  text-align: center;
+  font-size: 1.5rem;
+  max-width: 90%;
+  margin: 20px auto;
+`;
+
 export const BookDetailsWrapper = styled.div`
   width: 60vw;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);

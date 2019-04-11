@@ -8,7 +8,7 @@ export const InventoryContainer = styled.div`
     font-size: 2rem;
   }
   @media (max-width: 750px) {
-    width: 92%
+    width: 92%;
   }
 `;
 
@@ -17,7 +17,6 @@ export const Search = styled.input`
   padding: 5px 3px;
   width: 250px;
   margin-bottom: 10px;
-
 `;
 
 export const CardContainer = styled.div`
@@ -28,6 +27,13 @@ export const CardContainer = styled.div`
   @media (max-width: 750px) {
     flex-direction: column;
   }
+`;
+
+export const NoBooks = styled.h2`
+  text-align: center;
+  font-size: 1.5rem;
+  max-width: 90%;
+  margin: 20px auto;
 `;
 // copied from /books/styles.js ==========================================================
 
