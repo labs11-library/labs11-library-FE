@@ -48,17 +48,13 @@ class SingleBook extends Component {
     const email = {
       recipient: lenderEmail,
       sender: "blkfltchr@gmail.com",
-      subject: `${
-        this.props.loggedInUser.firstName
-      } wants to checkout ${title}`,
-      text: `Hey ${lender}, check out bookmaps.app/notifications to coordinate an exchange with ${
-        this.props.loggedInUser.firstName
-      }`
+      subject: `${this.props.loggedInUser.firstName} wants to checkout ${title}`,
+      html: `Hey ${lender}, check out <a href="https://bookmaps.netlify.com/notifications">your notifications</a> on Book Maps to coordinate an exchange with ${this.props.loggedInUser.firstName}!`
     };
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
         email.sender
-      }&topic=${email.subject}&text=${email.text}`
+      }&topic=${email.subject}&html=${email.html}`
     ) //query string url
       .catch(err => console.error(err));
   };
