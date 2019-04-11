@@ -69,7 +69,6 @@ class Books extends Component {
       return this.searchBooks().filter(
         book =>
           book.available === true &&
-          book.dueDate !== null &&
           book.lenderId.toString() !== localStorage.getItem("userId")
       );
     } else if (filter === "mybooks") {
