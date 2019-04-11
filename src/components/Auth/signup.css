@@ -12,6 +12,7 @@
     border-radius: 0.2em;
     font-size: 16px;
     color: #FFF;
+    
   }
   .loginBtn:before {
     content: "";
@@ -61,3 +62,8 @@
   .loginBtn--google:focus {
     background: #E74B37;
   }
+
+.paperMaster {
+  margin: "0 auto";
+   width: "400px";
+}
