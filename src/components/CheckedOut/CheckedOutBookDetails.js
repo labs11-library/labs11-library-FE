@@ -5,11 +5,18 @@ import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../url";
 import {
-  BookDetailsWrapper,
-  BookImgWrapper,
-  BookImg,
   DueDate
 } from "../Styles/NotificationStyles";
+import {
+  BookDetailsWrapper,
+  ButtonContainer,
+  BookDetailsContainer
+} from "../Styles/NotificationStyles";
+import {
+  BookImgWrapper,
+  BookImg,
+  BookTextContainer
+} from "../Styles/InventoryStyles";
 import { connect } from "react-redux";
 import { confirmReturn } from "../../redux/actions/checkoutActions";
 import { returnBook } from "../../redux/actions/inventoryActions.js";
@@ -71,17 +78,11 @@ class BookDetails extends Component {
       lenderId,
       borrower,
       returned,
-      checkoutDate,
       lateFee
     } = this.props.checkout;
 
     const dateDue = moment
       .utc(dueDate)
-      .local()
-      .format("dddd, MMMM Do");
-
-    const dateCheckedOut = moment
-      .utc(checkoutDate)
       .local()
       .format("dddd, MMMM Do");
 
@@ -92,62 +93,59 @@ class BookDetails extends Component {
 
     const lenderBorrower =
       lenderId.toString() === localStorage.getItem("userId")
-        ? "Lender"
-        : "Borrower";
+        ? "Borrower"
+        : "Lender";
 
     const buttonText =
-      this.overdue() < 0 && returned === false && lenderBorrower === "Lender"
+      this.overdue() < 0 && returned === false && lenderBorrower === "Borrower"
         ? "Confirm Return"
         : this.overdue() > 0 &&
           returned === false &&
-          lenderBorrower === "Lender"
-        ? `Confirm Return (late fee of $${this.overdue() /
-            100} will be charged)`
+          lenderBorrower === "Borrower"
+        ? `Confirm Return (and charge $${this.overdue() /
+            100} late fee)`
         : null;
-
     return (
       <BookDetailsWrapper>
-        <BookImgWrapper>
-          <BookImg alt={title} src={image} />
-        </BookImgWrapper>
-        <div>
-          <h2>{title}</h2>
-          <div>by {authors}</div>
-          {!returned && (
-            <div>
-              <div>Due on: {dateDue}</div>
-              <DueDate>Time until due: {this.timeRemaining(dueDate)}</DueDate>
-            </div>
-          )}
-          {returned && (
-            <div>
-              <p>Checkout date: {dateCheckedOut}</p>
-            </div>
-          )}
-          {!returned ? (
-            <p>Contact {lenderBorrowerName} to arrange return</p>
-          ) : (
-            <p>Borrower: {lenderBorrowerName}</p>
-          )}
-          <Link style={{textDecoration: "none"}}to={`/my-library/checkouts/${checkoutId}`}>
-            <Button color="primary" variant="contained">Send message</Button>
-          </Link>
-          {buttonText !== null && (
-            <Button
-              onClick={
-                lateFee
-                  ? this.confirmBookReturn && this.chargeLateFee
-                  : this.confirmBookReturn
-              }
-            >
-              {buttonText}
-            </Button>
-          )}
-
+        <BookDetailsContainer>
+          <BookImgWrapper>
+            <BookImg alt={title} src={image} />
+          </BookImgWrapper>
+          <BookTextContainer>
+            <h2>{title}</h2>
+            <p>by {authors}</p>
+            {!returned && (
+              <>
+                <p>Due on: {dateDue}</p>
+                <DueDate>Time until due: {this.timeRemaining(dueDate)}</DueDate>
+                <p>{lenderBorrower}: {lenderBorrowerName}</p>
+              </>
+            )}
+            </BookTextContainer>
+          </BookDetailsContainer>
+          <ButtonContainer>
+            <Link style={{textDecoration: "none"}}to={`/my-library/checkouts/${checkoutId}`}>
+              <Button style={{ margin: "10px 5px" }} color="primary" variant="contained">Send message</Button>
+            </Link>
+            {/* <Button style={{ margin: "10px 5px" }} color="primary" variant="outlined">Send email reminder</Button> */}
+            {buttonText !== null && (
+              <Button
+                color="secondary"
+                variant="contained"
+                style={{ margin: "10px 5px", maxWidth: "200px" }}
+                onClick={
+                  lateFee
+                    ? this.confirmBookReturn && this.chargeLateFee
+                    : this.confirmBookReturn
+                }
+              >
+                {buttonText}
+              </Button>
+            )}
           {/* {lateFee && (
             <Button onClick={this.chargeLateFee}>Charge late fee</Button>
           )} */}
-        </div>
+          </ButtonContainer>
       </BookDetailsWrapper>
     );
   }

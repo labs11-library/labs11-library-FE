@@ -1,15 +1,13 @@
 import styled from "styled-components";
 
 export const BookDetailsWrapper = styled.div`
-  width: 60vw;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  flex-direction: column;
   margin: 20px auto;
-  padding-bottom: 10px;
-  min-height: 250px;
+  padding: 10px auto;
+  width: 480px;
 
   h2 {
     font-size: 18px;
@@ -20,16 +18,16 @@ export const BookDetailsWrapper = styled.div`
     margin: 12px 0px 6px;
     width: 90%;
   }
-
-  @media (max-width: 700px) {
-    width: 90vw;
+  @media (max-width: 500px) {
+    width: 90%;
+    margin: 10px auto;
   }
 `;
 export const BookImgWrapper = styled.div`
+  min-width: 120px;
   max-width: 120px;
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+  min-height: 180px;
+  max-height: 180px;
   margin-right: 20px;
 `;
 export const BookImg = styled.img`
@@ -47,8 +45,9 @@ export const DueDate = styled.p`
 
 export const ButtonContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
 `;
 
 export const RequestInfo = styled.div`
@@ -65,3 +64,7 @@ export const RequestDescription = styled.div`
   font-size: 14px;
   word-wrap: break-word;
 `;
+
+export const BookDetailsContainer = styled.div`
+  display: flex;
+`
