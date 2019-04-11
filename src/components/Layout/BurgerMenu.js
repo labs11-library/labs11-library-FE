@@ -4,7 +4,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuIcon from "@material-ui/icons/Menu";
 import { NavLink } from "react-router-dom";
-import { NoFocus } from "../Styles/NavBarStyles"
+import { NoFocus, BurgerDiv } from "../Styles/NavBarStyles"
 
 class BurgerMenu extends React.Component {
   state = {
@@ -24,7 +24,7 @@ class BurgerMenu extends React.Component {
     const open = Boolean(anchorEl);
 
     return (
-      <div>
+      <BurgerDiv>
         <IconButton
           aria-label="Menu"
           aria-owns={open ? "long-menu" : undefined}
@@ -52,7 +52,7 @@ class BurgerMenu extends React.Component {
           <NavLink style={{textDecoration: "none"}} to="/notifications"><MenuItem onClick={this.handleClose}>Notifications</MenuItem></NavLink>
           <NavLink style={{textDecoration: "none"}} to="/profile"><MenuItem onClick={this.handleClose}>Profile</MenuItem></NavLink>
         </Menu>
-      </div>
+      </BurgerDiv>
     );
   }
 }

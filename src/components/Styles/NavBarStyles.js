@@ -55,10 +55,6 @@ export const NavLinkWrapper = styled(Link)`
 `;
 
 export const BurgerDiv = styled.div`
-  :focus {
-    outline: 0;
-  }
-
   @media screen and (min-width: 750px) {
     display: none;
   }
