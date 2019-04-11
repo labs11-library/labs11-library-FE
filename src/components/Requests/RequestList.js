@@ -8,6 +8,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
 import Loading from "../Loading/Loading.js";
+import { NoRequests } from "../Styles/NotificationStyles.js";
 class Requests extends Component {
   constructor() {
     super();
@@ -76,7 +77,9 @@ class Requests extends Component {
             <div>
               <div>
                 {this.filterIncomingRequests().length === 0 && (
-                  <h1>You have no incoming checkout requests.</h1>
+                  <NoRequests>
+                    You have no incoming checkout requests.
+                  </NoRequests>
                 )}
                 {this.filterIncomingRequests().length > 0 &&
                   this.filterIncomingRequests().map(request => {
@@ -93,7 +96,9 @@ class Requests extends Component {
             <div>
               <div>
                 {this.filterOutgoingRequests().length === 0 && (
-                  <h1>You have no pending outbound checkout requests.</h1>
+                  <NoRequests>
+                    You have no outbound checkout requests.
+                  </NoRequests>
                 )}
                 {this.filterOutgoingRequests().length > 0 &&
                   this.filterOutgoingRequests().map(request => {

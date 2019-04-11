@@ -3,9 +3,11 @@ import CheckedOutBookDetails from "./CheckedOutBookDetails";
 
 import { connect } from "react-redux";
 import { getCheckouts } from "../../redux/actions/checkoutActions.js";
+
 import Auth from "../Auth/Auth";
 
 import Loading from "../Loading/Loading.js";
+import { CheckoutHeader } from "../Styles/CheckoutStyles.js";
 class CheckedOutList extends Component {
   constructor(props) {
     super(props);
@@ -68,7 +70,7 @@ class CheckedOutList extends Component {
     } else {
       return (
         <div>
-          <h1>Loaned out books</h1>
+          <CheckoutHeader>Loaned out books</CheckoutHeader>
           <div>
             {this.filterIncomingCheckouts().map(checkout => {
               return (
@@ -80,7 +82,7 @@ class CheckedOutList extends Component {
               );
             })}
           </div>
-          <h1>Borrowed books</h1>
+          <CheckoutHeader>Borrowed books</CheckoutHeader>
           <div>
             {this.filterOutgoingCheckouts().map(checkout => {
               return (
@@ -91,7 +93,7 @@ class CheckedOutList extends Component {
               );
             })}
           </div>
-          <h1>Transaction History</h1>
+          <CheckoutHeader>Transaction History</CheckoutHeader>
           <div>
             {this.filterTransactionHistory().map(checkout => {
               return (

@@ -25,23 +25,9 @@ const LibraryDetails = props => {
     authors,
     image,
     available,
-    dueDate,
-    description
+    dueDate
   } = props.book;
   const availability = available ? "Available" : "Checked out";
-  const descriptionText =
-    description.length > 40 ? `${description.substr(0, 40)} ...` : description;
-  // function timeRemaining() {
-  //   let now = moment(Date.now());
-  //   let end = moment(dueDate);
-  //   let duration = moment.duration(now.diff(end)).humanize();
-  //   return duration;
-  // }
-
-  // const dateDue = moment
-  //   .utc(dueDate)
-  //   .local()
-  //   .format("dddd, MMMM Do");
 
   return (
     <BookDetailsWrapper>
@@ -56,9 +42,6 @@ const LibraryDetails = props => {
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
         {!available && <p>Due: {dueDate} </p>}{" "}
-        <p>
-          {description === "" ? "No description provided" : descriptionText}
-        </p>
         <Link style={{ textDecoration: "none" }} to={`/books/${bookId}`}>
           <Button variant="contained" color="primary">
             See more details
