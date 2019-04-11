@@ -6,10 +6,10 @@ import {
   NavBarWrapper,
   BookMapsLogo,
   NavLinks,
-  NavLinkWrapper,
-  Burger,
-  BurgerDiv
+  NavLinkWrapper
 } from "../Styles/NavBarStyles.js";
+import BurgerMenu from "./BurgerMenu"
+
 class NavBar extends Component {
   constructor() {
     super();
@@ -22,14 +22,6 @@ class NavBar extends Component {
     this.props.getLoggedInUser();
   }
 
-  handleToggleMenu = () => {
-    if (this.state.menuClassName === "nav-links nav-links-none") {
-      this.setState({
-        menuClassName: "nav-links nav-links-none"
-      });
-    }
-  };
-
   render() {
     const loggedIn = localStorage.getItem("jwt") ? true : false;
     return (
@@ -41,6 +33,7 @@ class NavBar extends Component {
                 📚
               </span>
             </BookMapsLogo>
+            <BurgerMenu />
             <NavLinks>
               <NavLinkWrapper to="/my-library">
                 <span role="img" aria-label="books">
@@ -92,13 +85,6 @@ class NavBar extends Component {
                   Sign up
                 </NavLinkWrapper>
               </div>
-            </div>
-            <div>
-              <Burger onClick={this.handleToggleMenu}>
-                <BurgerDiv className="burger-div" />
-                <BurgerDiv className="burger-div" />
-                <BurgerDiv className="burger-div" />
-              </Burger>
             </div>
           </div>
         )}
