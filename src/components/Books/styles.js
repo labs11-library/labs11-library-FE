@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const BookDetailsWrapper = styled.div`
+  // border: 1px solid red;
   width: 60vw;
-  border-bottom: 2px solid grey;
+  // border-bottom: 2px solid grey;
   display: flex;
   justify-content: space-evenly;
   margin: 20px auto;
@@ -18,9 +19,44 @@ export const BookDetailsWrapper = styled.div`
     width: 90vw;
   }
 `;
+export const BookWrapper = styled.div`
+  // border: 1px solid black;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  display: flex;
+  width: 35vw;
+`;
+export const BookCardWrapper = styled.div`
+  // border: 1px solid cyan
+  display: flex;
+  flex-direction: column;
+`;
 export const BookImgWrapper = styled.div`
+  // border: 1px dashed purple;
   width: 120px;
   height: 180px;
+  min-width: 120px;
+  min-height: 180px;
+`;
+export const BookInfoWrapper = styled.div`
+  // border: 1px solid pink;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+`;
+export const BookButtonsWrapper = styled.div`
+  // border: 1px solid green;
+  // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 0 0;
+  // height: 180px;
+`;
+export const MapWrapper = styled.div`
+  width: 100%;
+  height: 360px;
+  // position: fixed;
+  // right: 0;
 `;
 export const BookImg = styled.img`
   width: 100%;

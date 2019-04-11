@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as moment from "moment";
 import "@progress/kendo-theme-material/dist/all.css";
-import { Button } from "@progress/kendo-react-buttons";
+import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { getSingleBook } from "../../redux/actions/bookActions.js";
 import Ratings from "react-ratings-declarative";
@@ -14,10 +14,16 @@ import {
   BookDetailsWrapper,
   BookImgWrapper,
   BookImg,
-  Availability
+  Availability,
+  BookButtonsWrapper,
+  BookInfoWrapper,
+  MapWrapper,
+  BookCardWrapper,
+  BookWrapper
 } from "./styles";
 import Auth from "../Auth/Auth";
 import Payment from "../Stripe/Payment.js";
+import SingleBookMapview from "./SingleBookMapview";
 
 import Loading from "../Loading/Loading.js";
 class SingleBook extends Component {
@@ -102,74 +108,93 @@ class SingleBook extends Component {
       //   .format("dddd, MMMM Do");
       return (
         <div>
+          <Link
+            style={{ position: "absolute", left: "0" }}
+            to={`/users/${lenderId}/library`}
+          >
+            <Button>← Back to Bookmaps</Button>
+          </Link>
+          <Link
+            style={{ position: "absolute", right: "0" }}
+            to={`/users/${lenderId}/library`}
+          >
+            <Button>Visit {lender}'s Library →</Button>
+          </Link>
           <BookDetailsWrapper>
-            <Link
-              style={{ position: "absolute", left: "0" }}
-              to={`/users/${lenderId}/library`}
-            >
-              <Button>← Visit {lender}'s Library</Button>
-            </Link>
-            <BookImgWrapper>
-              <BookImg alt={title} src={image} />
-            </BookImgWrapper>
-            <div>
-              <h2>{title}</h2>
-              <p>by {authors}</p>
-              <Availability available={available}>{availability}</Availability>
-              {/* {!available && <p>Time until due: {timeRemaining(dueDate)}</p>} */}
-              {!available && (
-                <p>
-                  Date due:{" "}
-                  {moment(dueDate)
-                    .utc(threeWeeks)
-                    .local()
-                    .format("dddd, MMMM Do")}
-                </p>
-              )}{" "}
-              <p>
-                {description === ""
-                  ? "No description provided"
-                  : `Description: ${description}`}
-              </p>
-              {this.props.loggedInUser.stripe_email === null && (
-                <div>
-                  <i>
-                    Please enter your payment information before requesting
-                    checkout
-                  </i>
-                  <Payment />
-                  <p>Contact {lender}</p>
-                  <Button
-                    disabled
-                    onClick={() => this.requestCheckout(bookId, lenderId)}
-                  >
-                    Request checkout
-                  </Button>
-                </div>
-              )}
-              {this.props.loggedInUser.stripe_email && (
-                <div>
-                  <p>Contact {lender}</p>
-                  <Button
-                    onClick={() => this.requestCheckout(bookId, lenderId)}
-                  >
-                    Request checkout
-                  </Button>
-                </div>
-              )}
-              {avgRating && (
-                <div>
-                  <Ratings rating={avgRating} widgetRatedColors="gold">
-                    <Ratings.Widget widgetHoverColor="gold" />
-                    <Ratings.Widget widgetHoverColor="gold" />
-                    <Ratings.Widget widgetHoverColor="gold" />
-                    <Ratings.Widget widgetHoverColor="gold" />
-                    <Ratings.Widget widgetHoverColor="gold" />
-                  </Ratings>
-                  <div>Goodreads rating: {avgRating}</div>
-                </div>
-              )}
-            </div>
+            <BookCardWrapper>
+              <BookWrapper>
+                <BookImgWrapper>
+                  <BookImg alt={title} src={image} />
+                </BookImgWrapper>
+                <BookInfoWrapper>
+                  <h2>{title}</h2>
+                  <p>by {authors}</p>
+                  <Availability available={available}>
+                    {availability}
+                  </Availability>
+                  {/* {!available && <p>Time until due: {timeRemaining(dueDate)}</p>} */}
+                  {!available && (
+                    <p>
+                      Date due:{" "}
+                      {moment(dueDate)
+                        .utc(threeWeeks)
+                        .local()
+                        .format("dddd, MMMM Do")}
+                    </p>
+                  )}{" "}
+                  <p>
+                    {description === ""
+                      ? "No description provided"
+                      : `Description: ${description}`}
+                  </p>
+                  {avgRating && (
+                    <div>
+                      <Ratings rating={avgRating} widgetRatedColors="gold">
+                        <Ratings.Widget widgetHoverColor="gold" />
+                        <Ratings.Widget widgetHoverColor="gold" />
+                        <Ratings.Widget widgetHoverColor="gold" />
+                        <Ratings.Widget widgetHoverColor="gold" />
+                        <Ratings.Widget widgetHoverColor="gold" />
+                      </Ratings>
+                      <div>Goodreads rating: {avgRating}</div>
+                    </div>
+                  )}
+                </BookInfoWrapper>
+              </BookWrapper>
+              <BookButtonsWrapper>
+                {this.props.loggedInUser.stripe_email === null && (
+                  <div>
+                    <p>Contact {lender}</p>
+                    <Button
+                      disabled
+                      onClick={() => this.requestCheckout(bookId, lenderId)}
+                    >
+                      Request checkout
+                    </Button>
+                    <div>
+                      <i>
+                        Please enter your payment information before requesting
+                        checkout
+                      </i>
+                    </div>
+                    <Payment />
+                  </div>
+                )}
+                {this.props.loggedInUser.stripe_email && (
+                  <div>
+                    <p>Contact {lender}</p>
+                    <Button
+                      onClick={() => this.requestCheckout(bookId, lenderId)}
+                    >
+                      Request checkout
+                    </Button>
+                  </div>
+                )}
+              </BookButtonsWrapper>
+            </BookCardWrapper>
+            <MapWrapper value={this.state.value}>
+              <SingleBookMapview />
+            </MapWrapper>
           </BookDetailsWrapper>
         </div>
       );
