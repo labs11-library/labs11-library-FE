@@ -21,6 +21,7 @@ import {
 import Button from "@material-ui/core/Button";
 
 import { getLoggedInUser } from "../../redux/actions/authActions";
+import { toast } from "react-toastify";
 class RequestDetails extends Component {
   state = {
     value: 0
@@ -77,8 +78,8 @@ class RequestDetails extends Component {
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
         email.sender
       }&topic=${email.subject}&html=${email.html}`
-    ) //query string url
-      .catch(err => console.error(err));
+    ).catch(err => console.error(err));
+    toast.info("Email notification sent!");
     this.forceUpdate();
   };
 

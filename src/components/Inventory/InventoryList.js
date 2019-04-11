@@ -8,6 +8,9 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
 import {
   InventoryContainer,
   CardContainer
@@ -16,19 +19,25 @@ class Inventory extends Component {
   constructor() {
     super();
     this.state = {
+      books: [],
+      filter: "available",
       searchText: ""
     };
   }
   handleChange = e => {
-
     const { name, value } = e.target;
-
     this.setState({
       [name]: value
     });
   };
 
+  handleSelect = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
   searchBooks = () => {
+    console.log("hello searched")
     if (this.state.searchText.length === 0) {
       return this.props.inventory;
     } else if (this.state.searchText.length > 0) {
@@ -36,6 +45,29 @@ class Inventory extends Component {
       const searchRegex = new RegExp(newText, "gi");
       return this.props.inventory.filter(
         book => book.title.match(searchRegex) || book.authors.match(searchRegex)
+      );
+    }
+  };
+  filteredBooks = () => {
+    console.log("hello")
+    const { filter } = this.state;
+   
+    if (filter === "all") {
+     
+      return this.searchBooks().filter( function(book) {
+        console.log(book.userId.toString(), "book.userId");
+        console.log(localStorage.getItem("userId"), "localstorage");
+        console.log(book.available)
+        return book.userId.toString() === localStorage.getItem("userId")
+      // }
+      //   book => book.userId.toString() !== localStorage.getItem("userId")
+      });
+      
+    } else if (filter === "available") {
+      return this.searchBooks().filter(
+        book =>
+          book.available === true &&
+          book.userId.toString() === localStorage.getItem("userId")
       );
     }
   };
@@ -77,7 +109,29 @@ class Inventory extends Component {
               <SearchIcon />
             </IconButton>
           </Paper>
+          <div>
+            <InputLabel style={{ padding: "10px" }}>Filter by:</InputLabel>
+            <Select
+              style={{ minWidth: "100px", marginBottom: "10px" }}
+              label={this.state.filter}
+              value={this.state.filter}
+              inputProps={{
+                name: "filter"
+              }}
+              onChange={this.handleSelect}
+            >
+              <MenuItem value={"all"}>All</MenuItem>
+              <MenuItem value={"available"}>Available</MenuItem>
+            </Select>
+          </div>
           <CardContainer>
+            {this.filteredBooks().map(book => {
+              return ( 
+                <InventoryDetails book={book} viewBook={this.viewBook} key={book.bookId} />
+              );
+            })}
+          </CardContainer>
+          {/* <CardContainer>
             {this.searchBooks().map(book => {
               return (
                 <InventoryDetails
@@ -87,7 +141,7 @@ class Inventory extends Component {
                 />
               );
             })}
-          </CardContainer>
+          </CardContainer> */}
         </InventoryContainer>
       );
     }
