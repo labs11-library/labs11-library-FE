@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getAllInventory } from "../../redux/actions/inventoryActions.js";
 import InventoryDetails from "./InventoryDetails.js";
@@ -14,7 +15,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import {
   InventoryContainer,
-  CardContainer
+  CardContainer,
+  NoBooks
 } from "../Styles/InventoryStyles.js";
 class Inventory extends Component {
   constructor() {
@@ -82,7 +84,12 @@ class Inventory extends Component {
     if (this.props.addingBook || this.props.loadingInventory) {
       return <Loading />;
     } else if (this.props.inventory.length === 0) {
-      return <h1>You have no books in your library.</h1>;
+      return (
+        <NoBooks>
+          You have no books listed in your library.{" "}
+          <Link to="/add-book">Click here</Link> to add books to your library.
+        </NoBooks>
+      );
     } else {
       return (
         <InventoryContainer>

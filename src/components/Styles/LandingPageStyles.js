@@ -73,7 +73,6 @@ export const DueDate = styled.p`
 export const LandingPageWrapper = styled.div`
   text-align: center;
   display: flex;
-  overflow-y: hidden;
   @media (max-width: 750px) {
     flex-direction: column;
   }
@@ -90,8 +89,9 @@ export const ContentContainer = styled.div`
 `;
 export const MapWrapper = styled.div`
   width: 50%;
-  position: absolute;
+  position: fixed;
   right: 0;
+  top: 3.6rem;
   @media (max-width: 750px) {
     margin-top: 60px;
     width: 100%;
