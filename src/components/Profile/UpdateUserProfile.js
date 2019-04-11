@@ -93,9 +93,10 @@ class UpdateUserProfile extends Component {
         </div>
         <div>
           <Button
-            variant="outlined"
+            variant="contained"
             onClick={this.editProfile}
             style={{ margin: "5px" }}
+            color="primary"
           >
             Save Updates
           </Button>
@@ -103,6 +104,7 @@ class UpdateUserProfile extends Component {
             variant="outlined"
             onClick={this.changeLocation}
             style={{ margin: "5px" }}
+            color="primary"
           >
             Update your location
           </Button>

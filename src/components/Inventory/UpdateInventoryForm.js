@@ -47,7 +47,7 @@ class UpdateInventoryForm extends Component {
               onChange={this.handleChange}
               placeholder="Edit the description of your book"
             />
-            <Button onClick={() => this.props.editInventory(this.state)}>Save changes</Button>
+            <Button color="primary" variant="contained" onClick={() => this.props.editInventory(this.state)}>Save changes</Button>
           </BookContentWrapper>
         </BookDetailsWrapper>
       </div>

@@ -210,7 +210,7 @@ class Mapview extends Component {
         <div id="map" />
         <input
           id="pac-input"
-          class="controls"
+          className="controls"
           type="text"
           placeholder="Search location"
         />

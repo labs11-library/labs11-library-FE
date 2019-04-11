@@ -141,6 +141,10 @@ class RequestDetails extends Component {
               </Button>
             </>
           )}
+          <NavLink
+              style={{ textDecoration: "none" }}
+              to={`/notifications/${checkoutRequestId}`}
+            >
           <Button
             style={{
               width: "100%",
@@ -149,16 +153,12 @@ class RequestDetails extends Component {
               margin: "10px auto 10px",
               padding: "6px 14px"
             }}
-            variant="outlined"
+            variant="contained"
             color="primary"
           >
-            <NavLink
-              style={{ textDecoration: "none" }}
-              to={`/notifications/${checkoutRequestId}`}
-            >
               Send Message
-            </NavLink>
-          </Button>
+            </Button>
+          </NavLink>
           {/* The button below will DELETE by checkoutRequestId  */}
           <Button
             style={{
