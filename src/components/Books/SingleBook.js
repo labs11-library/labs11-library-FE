@@ -102,11 +102,13 @@ class SingleBook extends Component {
       //   let duration = moment.duration(now.diff(end)).humanize();
       //   return duration;
       // }
-      const threeWeeks = moment(checkoutDate, "YYYY-MM-DD").add(21, "days");
-      // const dueDate = moment
-      //   .utc(threeWeeks)
-      //   .local()
-      //   .format("dddd, MMMM Do");
+      // const threeWeeks = moment(checkoutDate, "YYYY-MM-DD").add(21, "days");
+
+      const dateDue = moment
+        .utc(dueDate)
+        .local()
+        .format("dddd, MMMM Do");
+
       return (
         <div>
           <Link style={{ position: "absolute", left: "0" }} to={"/"}>
@@ -134,10 +136,7 @@ class SingleBook extends Component {
                   {!available && (
                     <p>
                       Date due:
-                      {moment(dueDate)
-                        .utc()
-                        .local()
-                        .format("dddd, MMMM Do")}
+                      {dateDue}
                     </p>
                   )}
                   {avgRating && (
