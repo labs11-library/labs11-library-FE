@@ -14,7 +14,7 @@ class Payment extends React.Component {
     return (
       <StripeCheckout
         billingAddress
-        description="Bookmaps Membership"
+        description="Please enter the same email you singed in with"
         locale="auto"
         stripeKey="pk_test_paiLlNo6bPnrx0Nnb2ORgRLu00CRdEJXhe"
         token={this.onToken}
