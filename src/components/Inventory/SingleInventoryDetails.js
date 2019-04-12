@@ -75,8 +75,11 @@ const BookDetailsWrapper = styled.div`
   }
 `;
 const BookImgWrapper = styled.div`
-  width: 120px;
-  height: 180px;
+  min-width: 120px;
+  max-width: 120px;
+  min-height: 180px;
+  max-height: 180px;
+  margin-right: 10px;
 `;
 const BookImg = styled.img`
   width: 100%;
