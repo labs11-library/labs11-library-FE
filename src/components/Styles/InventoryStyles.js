@@ -62,6 +62,7 @@ export const BookImgWrapper = styled.div`
 export const BookImg = styled.img`
   width: 100%;
   height: 100%;
+  border-radius:7px 0 0 7px ;
 `;
 export const BookTextContainer = styled.div`
   text-align: left;
