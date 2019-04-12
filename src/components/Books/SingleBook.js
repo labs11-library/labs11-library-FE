@@ -135,7 +135,7 @@ class SingleBook extends Component {
                     <p>
                       Date due:
                       {moment(dueDate)
-                        .utc(threeWeeks)
+                        .utc()
                         .local()
                         .format("dddd, MMMM Do")}
                     </p>
