@@ -126,7 +126,6 @@ class ChatApp extends Component {
     }
    
     return (
-      
       <>
         <ChatUI
           user={this.user}
