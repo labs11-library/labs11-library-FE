@@ -1,30 +1,11 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
-import styled from "styled-components";
-
-const ProfileWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 400px;
-  padding: 10px;
-  margin-top: 5vw;
-
-  h1,
-  p {
-    padding: 5px;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  p {
-    font-size: 1rem;
-  }
-`;
+import { ProfileWrapper } from "../Styles/UserProfileCardStyles";
 
 const UserProfileCard = props => {
   const { firstName, lastName, email, bio, picture } = props.loggedInUser;
+
+  console.log(props.checkouts);
   return (
     <ProfileWrapper>
       <div>

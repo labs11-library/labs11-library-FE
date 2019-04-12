@@ -34,17 +34,23 @@ export const BookDetailsWrapper = styled.div`
     margin-bottom: 20px;
   }
 `;
+
 export const BookImgWrapper = styled.div`
-  max-width: 120px;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  margin-right: 20px;
+min-width: 120px;
+max-width: 120px;
+min-height: 180px;
+max-height: 180px;
+margin-right: 20px;
+  // max-width: 120px;
+  // width: 100%;
+  // height: auto;
+  // object-fit: cover;
+  // margin-right: 20px;
 `;
 export const BookImg = styled.img`
   width: 100%;
   height: 100%;
-  border-radius:7px;
+  border-radius:7px 0 0 7px ;
 `;
 export const BookTextContainer = styled.div`
   text-align: left;
