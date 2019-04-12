@@ -94,7 +94,7 @@ class SingleCheckedOutBook extends Component {
       return (
         <>
           <BackButtonWrapper>
-            <Link to="/my-library">
+            <Link to="/my-library" style={{textDecoration: "none"}}>
               <Button 
                   color="primary" 
                   variant="outlined" 
@@ -103,7 +103,7 @@ class SingleCheckedOutBook extends Component {
           </BackButtonWrapper>
           <ChatWrapper>
             <ChatButtonWrapper>
-              <Link to="/my-library">
+              <Link to="/my-library" style={{textDecoration: "none"}}>
                 <Button 
                     color="primary" 
                     variant="outlined" 
