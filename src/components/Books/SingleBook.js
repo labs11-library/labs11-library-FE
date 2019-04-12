@@ -142,7 +142,7 @@ class SingleBook extends Component {
                   centered
                   variant="fullWidth"
                 >
-                  <Tab label="List" />
+                  <Tab label="Info" />
                   <Tab label="Map" />
                 </Tabs>
               </Paper>
