@@ -20,7 +20,6 @@ const BookDetails = props => {
     .format("dddd, MMMM Do");
 
   const availability = available ? "Available" : "Checked out";
-  console.log(props.checkouts);
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
