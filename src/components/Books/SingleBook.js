@@ -236,7 +236,7 @@ class SingleBook extends Component {
                 onClick={() => {this.setState({showChat: false})}}
               >← Back</Button>
             </ChatButtonWrapper>
-            <h2>Coordinate the exchange of {title} with {lenderBorrowerName}</h2>
+            <h2>Talk to {lenderBorrowerName} about exchanging {title.substr(0, 25)}{title.length > 25 && "..."}</h2>
             <ChatApp
               user={this.props.loggedInUser}
               otherUserId={lenderId}

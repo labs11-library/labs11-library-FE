@@ -5,7 +5,9 @@ import { getSingleCheckoutRequest } from "../../redux/actions/checkoutActions.js
 import ChatApp from "../Chat/ChatApp";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import Auth from "../Auth/Auth";
-
+import { Link } from "react-router-dom";
+import { ChatWrapper, BackButtonWrapper, ChatButtonWrapper } from "../Styles/ChatStyles";
+import Button from "@material-ui/core/Button";
 import Loading from "../Loading/Loading.js";
 class SingleRequest extends Component {
   constructor(props) {
@@ -41,19 +43,36 @@ class SingleRequest extends Component {
         ? borrower
     : lender;
     return (
-      <div>
-        {this.state.error ? (
-          <h2 style={{ textAlign: "center" }}>
-            {lender} hasn't accepted your previous request yet. Talk to{" "}
-            {borrower} about exchanging {title} by {authors}
-          </h2>
-        ) : (
-          <h2 style={{ textAlign: "center" }}>
-            Talk to {lenderBorrowerName} about exchanging {title} by {authors}
-          </h2>
-        )}
-        <ChatApp user={this.props.loggedInUser} otherUserId={borrowerId} />
-      </div>
+      <>
+        <BackButtonWrapper>
+          <Link to="/notifications" style={{textDecoration: "none"}}>
+            <Button 
+                color="primary" 
+                variant="outlined" 
+              >← Back</Button>
+          </Link>
+        </BackButtonWrapper>
+        <ChatWrapper>
+          <ChatButtonWrapper>
+            <Link to="/notifications" style={{textDecoration: "none"}}>
+              <Button 
+                  color="primary" 
+                  variant="outlined" 
+                >← Back</Button>
+            </Link>
+          </ChatButtonWrapper>
+            {this.state.error ? (
+              <h2>
+                {lender} hasn't accepted your previous request yet. Talk to{" "}{borrower} about exchanging {title.substr(0, 25)}{title.length > 25 && "..."}
+              </h2>
+            ) : (
+              <h2>
+                Talk to {lenderBorrowerName} about exchanging {title.substr(0, 25)}{title.length > 25 && "..."}
+              </h2>
+            )}
+          <ChatApp user={this.props.loggedInUser} otherUserId={borrowerId} />
+        </ChatWrapper>
+      </>
     );
   }
 }
