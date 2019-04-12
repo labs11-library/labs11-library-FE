@@ -18,7 +18,7 @@ import {
   BookTextContainer
 } from "../Styles/InventoryStyles";
 import { connect } from "react-redux";
-import { confirmReturn } from "../../redux/actions/checkoutActions";
+import { confirmReturn, setLateFee } from "../../redux/actions/checkoutActions";
 import { returnBook } from "../../redux/actions/inventoryActions.js";
 import Loading from "../Loading/Loading";
 
@@ -42,17 +42,20 @@ class BookDetails extends Component {
     let end = moment(this.props.checkout.dueDate);
     if (end.isBefore(moment(now))) {
       let duration = Math.floor(moment.duration(now.diff(end)).asDays());
-      console.log("DURATION", duration);
       return duration * 100;
     }
   };
 
   confirmBookReturn = () => {
+    console.log("I;ve been invoked")
     this.props.confirmReturn(this.props.checkout.checkoutId);
     this.props.returnBook(this.props.checkout.bookId);
     this.props.goToMyLibrary();
   };
-
+  confirmAndCharge = () => {
+    this.confirmBookReturn();
+    this.chargeLateFee();
+  }
   chargeLateFee = () => {
     axios
       .post(`${baseUrl}/payment/charge`, {
@@ -62,6 +65,8 @@ class BookDetails extends Component {
 
       .then(res => console.log(res.data))
       .catch(err => console.log("Frontend error:", err));
+      console.log(this.props.checkout.checkoutId, this.overdue())
+    this.props.setLateFee(this.props.checkout.checkoutId, this.overdue())
   };
   render() {
     if (this.props.loadingCheckouts || this.props.loadingInventory) {
@@ -77,8 +82,7 @@ class BookDetails extends Component {
       dueDate,
       lenderId,
       borrower,
-      returned,
-      lateFee
+      returned
     } = this.props.checkout;
 
     const dateDue = moment
@@ -97,7 +101,7 @@ class BookDetails extends Component {
         : "Lender";
 
     const buttonText =
-      returned === false && lenderBorrower === "Borrower"
+    this.overdue() === null && returned === false && lenderBorrower === "Borrower"
         ? "Confirm Return"
         : this.overdue() > 0 &&
           returned === false &&
@@ -136,8 +140,8 @@ class BookDetails extends Component {
                 variant="contained"
                 style={{ margin: "10px 5px", maxWidth: "200px" }}
                 onClick={
-                  lateFee
-                    ? this.confirmBookReturn && this.chargeLateFee
+                  this.overdue() === null
+                    ? this.confirmAndCharge
                     : this.confirmBookReturn
                 }
               >
@@ -162,5 +166,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { confirmReturn, returnBook }
+  { confirmReturn, returnBook, setLateFee }
 )(withRouter(BookDetails));

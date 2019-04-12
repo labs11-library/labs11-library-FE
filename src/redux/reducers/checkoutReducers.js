@@ -15,7 +15,9 @@ import {
   GETTING_SINGLE_CHECKOUT,
   GET_SINGLE_CHECKOUT_SUCCESS,
   DELETING_CHECKOUT,
-  DELETE_CHECKOUT_SUCCESS
+  DELETE_CHECKOUT_SUCCESS,
+  SETTING_LATE_FEE,
+  SET_LATE_FEE_SUCCESS
 } from "../actions/checkoutActions.js";
 
 import { toast } from "react-toastify";
@@ -147,6 +149,16 @@ export default function checkoutReducer(state = initialState, action) {
         loadingCheckouts: false,
         error: ""
       };
+    case SETTING_LATE_FEE:
+      return {
+        ...state,
+        loadingCheckouts: true
+      }
+    case SET_LATE_FEE_SUCCESS:
+      return {
+        ...state,
+        loadingCheckouts: false
+      }
     default:
       return state;
   }
