@@ -20,7 +20,10 @@ class Requests extends Component {
     this.setState({ value });
   };
   componentWillReceiveProps(newProps) {
-    if (newProps.deletingCheckout === true) {
+    if (
+      newProps.deletingCheckout === true ||
+      this.props.loadingCheckouts === true
+    ) {
       const userId = localStorage.getItem("userId");
       this.props.getCheckoutRequests(userId);
     }
@@ -55,7 +58,11 @@ class Requests extends Component {
   };
 
   render() {
-    if (this.props.loadingRequests || this.props.deletingCheckout) {
+    if (
+      this.props.loadingRequests ||
+      this.props.deletingCheckout ||
+      this.props.loadingCheckouts
+    ) {
       return <Loading />;
     } else if (this.props.checkoutRequests) {
       return (
@@ -121,7 +128,8 @@ class Requests extends Component {
 const mapStateToProps = state => ({
   loadingRequests: state.checkoutReducer.loadingRequests,
   checkoutRequests: state.checkoutReducer.checkoutRequests,
-  deletingCheckout: state.checkoutReducer.deletingCheckout
+  deletingCheckout: state.checkoutReducer.deletingCheckout,
+  loadingCheckouts: state.checkoutReducer.loadingCheckouts
 });
 export default connect(
   mapStateToProps,
