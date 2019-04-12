@@ -34,7 +34,7 @@ const BookDetails = props => {
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
 
-        {dueDate && <p>Time until due: {dateDue}</p>}
+        {dueDate && <p>Due date: {dateDue}</p>}
 
         <Link style={{ textDecoration: "none" }} to={`/books/${bookId}`}>
           <Button
