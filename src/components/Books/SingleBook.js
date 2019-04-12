@@ -67,7 +67,7 @@ class SingleBook extends Component {
         email.sender
       }&topic=${email.subject}&html=${email.html}`
     ).catch(err => console.error(err));
-    toast.info("Email notification sent!");
+    toast.info(`Email notification sent to ${lender}.`);
   };
 
   requestCheckout = (bookId, lenderId) => {

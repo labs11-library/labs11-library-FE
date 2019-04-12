@@ -20,15 +20,10 @@ import {
 } from "../Styles/InventoryStyles";
 import Button from "@material-ui/core/Button";
 
-import { getLoggedInUser } from "../../redux/actions/authActions";
-import { toast } from "react-toastify";
 class RequestDetails extends Component {
   state = {
     value: 0
   };
-  componentDidMount() {
-    this.props.getLoggedInUser();
-  }
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
     this.props.deleteCheckoutRequest(lenderId, checkoutRequestId);
@@ -68,18 +63,22 @@ class RequestDetails extends Component {
       lenderId.toString() === localStorage.getItem("userId")
         ? lender
         : borrower;
+    const anymoreText =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? null
+        : " anymore";
+    localStorage.getItem("userId");
     const email = {
       recipient: otherUserEmail,
       sender: "blkfltchr@gmail.com",
-      subject: `${borrowerLenderName} can't exchange ${title}`,
-      html: `Hey ${lenderBorrowerName}, unfortunately ${borrowerLenderName} is unable to exchange ${title}. Find your next book on <a href="https://bookmaps.netlify.com/">Book Maps</a>!`
+      subject: `${borrowerLenderName} doesn't want to exchange ${title}${anymoreText}`,
+      html: `Hey ${lenderBorrowerName}, unfortunately ${borrowerLenderName} does not want to exchange ${title}${anymoreText}. Find your next book on <a href="https://bookmaps.netlify.com/">Book Maps</a>!`
     };
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
         email.sender
       }&topic=${email.subject}&html=${email.html}`
     ).catch(err => console.error(err));
-    toast.info("Email notification sent!");
     this.forceUpdate();
   };
 
@@ -104,9 +103,9 @@ class RequestDetails extends Component {
         ? "Borrower"
         : "Lender";
     const descriptionText =
-        description.length > 55
-          ? `${description.substr(0, 55)} ...`
-          : description;
+      description.length > 55
+        ? `${description.substr(0, 55)} ...`
+        : description;
     return (
       <BookDetailsWrapper>
         <BookDetailsContainer>
@@ -119,9 +118,11 @@ class RequestDetails extends Component {
               {title.length > 25 && "..."}
             </h2>
             <p>by {authors}</p>
-            <p>{description === ""
-              ? "No description provided"
-              : "Description: " + descriptionText}</p>
+            <p>
+              {description === ""
+                ? "No description provided"
+                : "Description: " + descriptionText}
+            </p>
             <p>
               {lenderBorrower}: {lenderBorrowerName}
             </p>
@@ -129,13 +130,13 @@ class RequestDetails extends Component {
         </BookDetailsContainer>
         <ButtonContainer>
           <NavLink
-              style={{ textDecoration: "none" }}
-              to={`/notifications/${checkoutRequestId}`}
-              >
-          <Button
-            style={{ margin: "10px 5px" }}
-            variant="contained"
-            color="primary"
+            style={{ textDecoration: "none" }}
+            to={`/notifications/${checkoutRequestId}`}
+          >
+            <Button
+              style={{ margin: "10px 5px" }}
+              variant="contained"
+              color="primary"
             >
               Send Message
             </Button>
@@ -168,12 +169,11 @@ class RequestDetails extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.bookReducer.loadingCheckouts,
-    loggedInUser: state.authReducer.loggedInUser
+    loading: state.bookReducer.loadingCheckouts
   };
 };
 
 export default connect(
   mapStateToProps,
-  { addCheckout, getLoggedInUser, deleteCheckoutRequest }
+  { addCheckout, deleteCheckoutRequest }
 )(RequestDetails);
