@@ -97,7 +97,7 @@ class BookDetails extends Component {
         : "Lender";
 
     const buttonText =
-      this.overdue() < 0 && returned === false && lenderBorrower === "Borrower"
+      returned === false && lenderBorrower === "Borrower"
         ? "Confirm Return"
         : this.overdue() > 0 &&
           returned === false &&
@@ -105,6 +105,7 @@ class BookDetails extends Component {
         ? `Confirm Return (and charge $${this.overdue() /
             100} late fee)`
         : null;
+    console.log(title, buttonText)
     return (
       <BookDetailsWrapper>
         <BookDetailsContainer>

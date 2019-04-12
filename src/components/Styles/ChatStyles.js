@@ -8,7 +8,7 @@ export const ChatWrapper = styled.div`
 
     width: 50%
     margin: 0.5rem auto;
-    height: 70vh;
+    height: 60vh;
 
     @media (max-width: 800px) {
         width: 60%
@@ -27,6 +27,7 @@ export const ChatWrapper = styled.div`
 
     p {
         font-size: 1rem;
+        margin: 10px auto;
     }
 `
 
