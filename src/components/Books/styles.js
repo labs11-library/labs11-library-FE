@@ -39,11 +39,12 @@ export const BookCardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 5px;
+  margin-left: 5px;
   padding: 10px;
 
   @media (max-width: 750px) {
     margin-top: 10px;
-    width: 80vw;
+    width: 87vw;
     display: ${props => (props.value === 1 ? "none" : "block")};
   }
 `;
