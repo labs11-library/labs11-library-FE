@@ -112,7 +112,8 @@ class BookDetails extends Component {
             <BookImg alt={title} src={image} />
           </BookImgWrapper>
           <BookTextContainer>
-            <h2>{title}</h2>
+            <h2>{title.substr(0, 28)}
+                {title.length > 28 && "..."}</h2>
             <p>by {authors}</p>
             {!returned && (
               <>

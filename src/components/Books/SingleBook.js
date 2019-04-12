@@ -24,7 +24,7 @@ import {
 import Auth from "../Auth/Auth";
 import Payment from "../Stripe/Payment.js";
 import SingleBookMapview from "./SingleBookMapview";
-
+import { ChatWrapper, BackButtonWrapper, ChatButtonWrapper } from "../Styles/ChatStyles";
 import Loading from "../Loading/Loading.js";
 import { toast } from "react-toastify";
 class SingleBook extends Component {
@@ -92,8 +92,7 @@ class SingleBook extends Component {
         avgRating,
         available,
         dueDate,
-        description,
-        checkoutDate
+        description
       } = this.props.singleBook;
       const availability = available ? "Available" : "Checked out";
       // function timeRemaining(dueDate) {
@@ -215,18 +214,36 @@ class SingleBook extends Component {
         </div>
       );
     } else {
+      const { lenderId, borrower, lender, title } = this.props.singleBook
+      const lenderBorrowerName =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? borrower
+        : lender;
       return (
-        <div>
-          <ChatApp
-            user={this.props.loggedInUser}
-            otherUserId={this.props.singleBook.lenderId}
-            exitChat={this.exitChat}
-          />
-          {/*
-          <Button onClick={() => this.setState({ showChat: false })}>
-            Go back
-          </Button> */}
-        </div>
+        <>
+          <BackButtonWrapper>
+            <Button 
+              color="primary" 
+              variant="outlined" 
+              onClick={() => {this.setState({showChat: false})}}
+            >← Back</Button>
+          </BackButtonWrapper>
+          <ChatWrapper>
+            <ChatButtonWrapper>
+              <Button 
+                color="primary" 
+                variant="outlined" 
+                onClick={() => {this.setState({showChat: false})}}
+              >← Back</Button>
+            </ChatButtonWrapper>
+            <h2>Coordinate the exchange of {title} with {lenderBorrowerName}</h2>
+            <ChatApp
+              user={this.props.loggedInUser}
+              otherUserId={lenderId}
+              exitChat={this.exitChat}
+            />
+          </ChatWrapper>
+        </>
       );
     }
   }
