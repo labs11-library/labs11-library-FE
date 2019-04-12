@@ -10,6 +10,9 @@ import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import { addCheckoutRequest } from "../../redux/actions/checkoutActions.js";
 import { Link } from "react-router-dom";
 import baseUrl from "../../url";
+import Paper from "@material-ui/core/Paper";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 import {
   BookDetailsWrapper,
   BookImgWrapper,
@@ -19,19 +22,26 @@ import {
   BookInfoWrapper,
   MapWrapper,
   BookCardWrapper,
-  BookWrapper
+  BookWrapper,
+  TabsWrapper,
+  LinkContainer
 } from "./styles";
 import Auth from "../Auth/Auth";
 import Payment from "../Stripe/Payment.js";
 import SingleBookMapview from "./SingleBookMapview";
-import { ChatWrapper, BackButtonWrapper, ChatButtonWrapper } from "../Styles/ChatStyles";
+import {
+  ChatWrapper,
+  BackButtonWrapper,
+  ChatButtonWrapper
+} from "../Styles/ChatStyles";
 import Loading from "../Loading/Loading.js";
 import { toast } from "react-toastify";
 class SingleBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showChat: false
+      showChat: false,
+      value: 0
     };
   }
 
@@ -44,6 +54,9 @@ class SingleBook extends Component {
       this.props.getLoggedInUser();
     }
   }
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
   exitChat = () => {
     this.setState({
       showChat: false
@@ -110,17 +123,31 @@ class SingleBook extends Component {
 
       return (
         <div>
-          <Link style={{ position: "absolute", left: "0" }} to={"/"}>
-            <Button variant="outlined">← Back to Bookmaps</Button>
-          </Link>
-          <Link
-            style={{ position: "absolute", right: "0" }}
-            to={`/users/${lenderId}/library`}
-          >
-            <Button variant="outlined">Visit {lender}'s Library →</Button>
-          </Link>
+          <LinkContainer>
+            <Link to={"/"}>
+              <Button variant="outlined">← Back to Bookmaps</Button>
+            </Link>
+            <Link to={`/users/${lenderId}/library`}>
+              <Button variant="outlined">Visit {lender}'s Library →</Button>
+            </Link>
+          </LinkContainer>
           <BookDetailsWrapper>
-            <BookCardWrapper>
+            <TabsWrapper style={{ marginTop: "-30px" }}>
+              <Paper>
+                <Tabs
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  centered
+                  variant="fullWidth"
+                >
+                  <Tab label="List" />
+                  <Tab label="Map" />
+                </Tabs>
+              </Paper>
+            </TabsWrapper>
+            <BookCardWrapper value={this.state.value}>
               <BookWrapper>
                 <BookImgWrapper>
                   <BookImg alt={title} src={image} />
@@ -208,35 +235,45 @@ class SingleBook extends Component {
               </BookButtonsWrapper>
             </BookCardWrapper>
             <MapWrapper value={this.state.value}>
-              <SingleBookMapview />
+              <SingleBookMapview owner={lenderId} />
             </MapWrapper>
           </BookDetailsWrapper>
         </div>
       );
     } else {
-      const { lenderId, borrower, lender, title } = this.props.singleBook
+      const { lenderId, borrower, lender, title } = this.props.singleBook;
       const lenderBorrowerName =
-      lenderId.toString() === localStorage.getItem("userId")
-        ? borrower
-        : lender;
+        lenderId.toString() === localStorage.getItem("userId")
+          ? borrower
+          : lender;
       return (
         <>
           <BackButtonWrapper>
-            <Button 
-              color="primary" 
-              variant="outlined" 
-              onClick={() => {this.setState({showChat: false})}}
-            >← Back</Button>
+            <Button
+              color="primary"
+              variant="outlined"
+              onClick={() => {
+                this.setState({ showChat: false });
+              }}
+            >
+              ← Back
+            </Button>
           </BackButtonWrapper>
           <ChatWrapper>
             <ChatButtonWrapper>
-              <Button 
-                color="primary" 
-                variant="outlined" 
-                onClick={() => {this.setState({showChat: false})}}
-              >← Back</Button>
+              <Button
+                color="primary"
+                variant="outlined"
+                onClick={() => {
+                  this.setState({ showChat: false });
+                }}
+              >
+                ← Back
+              </Button>
             </ChatButtonWrapper>
-            <h2>Coordinate the exchange of {title} with {lenderBorrowerName}</h2>
+            <h2>
+              Coordinate the exchange of {title} with {lenderBorrowerName}
+            </h2>
             <ChatApp
               user={this.props.loggedInUser}
               otherUserId={lenderId}

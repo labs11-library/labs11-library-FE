@@ -16,8 +16,11 @@ export const BookDetailsWrapper = styled.div`
   p {
     font-size: 14px;
   }
-  @media (max-width: 700px) {
+  @media (max-width: 750px) {
+    display: flex;
+    flex-direction: column;
     width: 90vw;
+    align-items: center;
   }
 `;
 export const BookWrapper = styled.div`
@@ -25,6 +28,10 @@ export const BookWrapper = styled.div`
   // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   display: flex;
   width: 35vw;
+
+  @media (max-width: 750px) {
+    width: 80vw;
+  }
 `;
 export const BookCardWrapper = styled.div`
   // border: 1px solid cyan
@@ -33,6 +40,12 @@ export const BookCardWrapper = styled.div`
   flex-direction: column;
   margin-right: 5px;
   padding: 10px;
+
+  @media (max-width: 750px) {
+    margin-top: 10px;
+    width: 80vw;
+    display: ${props => (props.value === 1 ? "none" : "block")};
+  }
 `;
 export const BookImgWrapper = styled.div`
   // border: 1px dashed purple;
@@ -58,6 +71,10 @@ export const BookButtonsWrapper = styled.div`
   width: 35vw;
   height: 180px;
   // padding: 10px;
+
+  @media (max-width: 750px) {
+    width: 70vw;
+  }
 `;
 export const MapWrapper = styled.div`
   width: 100%;
@@ -65,6 +82,10 @@ export const MapWrapper = styled.div`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   // position: fixed;
   // right: 0;
+  @media (max-width: 750px) {
+    display: ${props => (props.value === 0 ? "none" : "block")};
+    margin-top: 10px;
+  }
 `;
 // export const Ratings = styled.div`
 //   display: hidden;
@@ -80,4 +101,18 @@ export const Availability = styled.p`
 
 export const DueDate = styled.p`
   color: red;
+`;
+
+export const TabsWrapper = styled.div`
+  // border: 1px solid orange;
+  width: 100%;
+
+  @media (min-width: 750px) {
+    display: none;
+  }
+`;
+
+export const LinkContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
