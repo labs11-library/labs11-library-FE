@@ -97,7 +97,7 @@ class BookDetails extends Component {
         : "Lender";
 
     const buttonText =
-      returned === false && lenderBorrower === "Borrower"
+    this.overdue() === null && returned === false && lenderBorrower === "Borrower"
         ? "Confirm Return"
         : this.overdue() > 0 &&
           returned === false &&
