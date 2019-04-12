@@ -124,11 +124,18 @@ class SingleBook extends Component {
       return (
         <div>
           <LinkContainer>
-            <Link to={"/"}>
-              <Button variant="outlined">← Back to Bookmaps</Button>
+            <Link to={"/"} style={{ textDecoration: "none" }}>
+              <Button variant="outlined" color="primary">
+                ← Back to Bookmaps
+              </Button>
             </Link>
-            <Link to={`/users/${lenderId}/library`}>
-              <Button variant="outlined">Visit {lender}'s Library →</Button>
+            <Link
+              to={`/users/${lenderId}/library`}
+              style={{ textDecoration: "none" }}
+            >
+              <Button variant="outlined" color="primary">
+                Visit {lender}'s Library →
+              </Button>
             </Link>
           </LinkContainer>
           <BookDetailsWrapper>
@@ -271,7 +278,11 @@ class SingleBook extends Component {
                 ← Back
               </Button>
             </ChatButtonWrapper>
-            <h2>Talk to {lenderBorrowerName} about exchanging {title.substr(0, 25)}{title.length > 25 && "..."}</h2>
+            <h2>
+              Talk to {lenderBorrowerName} about exchanging{" "}
+              {title.substr(0, 25)}
+              {title.length > 25 && "..."}
+            </h2>
             <ChatApp
               user={this.props.loggedInUser}
               otherUserId={lenderId}
