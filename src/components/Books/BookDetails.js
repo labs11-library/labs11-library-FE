@@ -20,7 +20,6 @@ const BookDetails = props => {
     .format("dddd, MMMM Do");
 
   const availability = available ? "Available" : "Checked out";
-  console.log(props.checkouts);
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -34,7 +33,7 @@ const BookDetails = props => {
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
 
-        {dueDate && <p>Time until due: {dateDue}</p>}
+        {dueDate && <p>Due date: {dateDue}</p>}
 
         <Link style={{ textDecoration: "none" }} to={`/books/${bookId}`}>
           <Button
