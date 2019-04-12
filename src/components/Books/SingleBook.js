@@ -133,13 +133,13 @@ class SingleBook extends Component {
                   {/* {!available && <p>Time until due: {timeRemaining(dueDate)}</p>} */}
                   {!available && (
                     <p>
-                      Date due:{" "}
+                      Date due:
                       {moment(dueDate)
                         .utc(threeWeeks)
                         .local()
                         .format("dddd, MMMM Do")}
                     </p>
-                  )}{" "}
+                  )}
                   {avgRating && (
                     <div>
                       <Ratings rating={avgRating} widgetRatedColors="gold">
