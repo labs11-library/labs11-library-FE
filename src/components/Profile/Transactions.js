@@ -31,6 +31,10 @@ class Transactions extends Component {
                   <p>Due Date: {checkout.dueDate}</p>
                   <p>Date returned: {checkout.returnedDate}</p>
                   <p>Overdue: {checkout.overdue ? "Yes" : "No"}</p>
+                  <p>
+                    Late Fee:
+                    {checkout.lateFee ? `$${checkout.lateFee}` : "None"}
+                  </p>
                 </TransDetailsWrapper>
               )
           )
