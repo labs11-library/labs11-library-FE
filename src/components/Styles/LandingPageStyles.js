@@ -14,6 +14,7 @@ export const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  
   @media (max-width: 750px) {
     flex-direction: column;
   }
@@ -26,6 +27,7 @@ export const BookDetailsWrapper = styled.div`
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
   margin-bottom: 20px;
+  background-color:#ecf6d7;
   @media (max-width: 750px) {
     width: 96%;
     margin: auto;
