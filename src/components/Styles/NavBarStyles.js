@@ -9,12 +9,12 @@ export const NavBarWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  // background: #4f9a4b;
+  background: white;
   // background-image: linear-gradient(to right, #5386ca, #aadaff);
-  background-image: linear-gradient(to left, #4f9a4b, #c0ecae);
+  // background-image: linear-gradient(to left, #4f9a4b, #c0ecae);
 
   a {
-    color: white;
+    color: #325c6c;
     text-decoration: none;
   }
 `;
