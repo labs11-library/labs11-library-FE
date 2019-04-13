@@ -13,6 +13,7 @@ import baseUrl from "../../url";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Avatar from "@material-ui/core/Avatar";
 import {
   BookDetailsWrapper,
   BookImgWrapper,
@@ -24,7 +25,8 @@ import {
   BookCardWrapper,
   BookWrapper,
   TabsWrapper,
-  LinkContainer
+  LinkContainer,
+  AvatarWrapper
 } from "./styles";
 import Auth from "../Auth/Auth";
 import Payment from "../Stripe/Payment.js";
@@ -105,7 +107,8 @@ class SingleBook extends Component {
         avgRating,
         available,
         dueDate,
-        description
+        description,
+        lenderPicture
       } = this.props.singleBook;
       const availability = available ? "Available" : "Checked out";
       // function timeRemaining(dueDate) {
@@ -127,14 +130,6 @@ class SingleBook extends Component {
             <Link to={"/"} style={{ textDecoration: "none" }}>
               <Button variant="outlined" color="primary">
                 ← Back to Bookmaps
-              </Button>
-            </Link>
-            <Link
-              to={`/users/${lenderId}/library`}
-              style={{ textDecoration: "none" }}
-            >
-              <Button variant="outlined" color="primary">
-                Visit {lender}'s Library →
               </Button>
             </Link>
           </LinkContainer>
@@ -228,8 +223,7 @@ class SingleBook extends Component {
                   </div>
                 )}
                 {this.props.loggedInUser.stripe_email && (
-                  <div>
-                    <p>Contact {lender}</p>
+                  <AvatarWrapper>
                     <Button
                       variant="contained"
                       color="primary"
@@ -237,7 +231,19 @@ class SingleBook extends Component {
                     >
                       Request checkout
                     </Button>
-                  </div>
+                    <div>
+                      <Avatar src={lenderPicture} alt={`${lender} avatar`} />
+                      <div style={{display: "flex", flexDirection: "column", paddingLeft: "5px"}}>
+                        {/* <p>{lender}</p> */}
+                        <Link
+                          to={`/users/${lenderId}/library`}
+                          style={{ textDecoration: "none", color: "blue", fontSize: "14px"}}
+                        >
+                            Visit {lender}'s<br/>Library →
+                        </Link>
+                      </div>
+                    </div>
+                  </AvatarWrapper>
                 )}
               </BookButtonsWrapper>
             </BookCardWrapper>

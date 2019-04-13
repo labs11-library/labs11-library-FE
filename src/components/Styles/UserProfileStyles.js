@@ -19,4 +19,8 @@ export const ProfileWrapper = styled.div`
   p {
     font-size: 1rem;
   }
+
+  @media (max-width: 1050px) {
+    flex-direction: column;
+  }
 `;
