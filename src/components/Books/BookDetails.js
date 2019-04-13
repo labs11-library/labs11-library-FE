@@ -70,7 +70,7 @@ const BookDetails = props => {
                 to={`/users/${lenderId}/library`}
                 style={{
                   textDecoration: "none",
-                  color: "#4f9a4b",
+                  color: "#325C6C",
                   fontSize: "14px"
                 }}
               >

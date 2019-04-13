@@ -22,12 +22,12 @@ export const CardContainer = styled.div`
 
 export const BookDetailsWrapper = styled.div`
   width: 85%;
-  border-radius:7px;
+  border-radius: 7px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
   margin-bottom: 20px;
-  background-color:white;
+  background-color: white;
   @media (max-width: 750px) {
     width: 96%;
     margin: auto;
@@ -36,11 +36,11 @@ export const BookDetailsWrapper = styled.div`
 `;
 
 export const BookImgWrapper = styled.div`
-min-width: 120px;
-max-width: 120px;
-min-height: 180px;
-max-height: 180px;
-margin-right: 20px;
+  min-width: 120px;
+  max-width: 120px;
+  min-height: 180px;
+  max-height: 180px;
+  margin-right: 20px;
   // max-width: 120px;
   // width: 100%;
   // height: auto;
@@ -50,7 +50,7 @@ margin-right: 20px;
 export const BookImg = styled.img`
   width: 100%;
   height: 100%;
-  border-radius:7px 0 0 7px ;
+  border-radius: 7px 0 0 7px;
 `;
 export const BookTextContainer = styled.div`
   text-align: left;
@@ -72,7 +72,7 @@ export const BookTextContainer = styled.div`
   }
 `;
 export const Availability = styled.p`
-  color: ${props => (props.available ? "green" : "red")};
+  color: ${props => (props.available ? "#6A9A9E" : "red")};
 `;
 
 export const DueDate = styled.p`
