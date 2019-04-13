@@ -233,13 +233,25 @@ class SingleBook extends Component {
                     </Button>
                     <div>
                       <Avatar src={lenderPicture} alt={`${lender} avatar`} />
-                      <div style={{display: "flex", flexDirection: "column", paddingLeft: "5px"}}>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          paddingLeft: "5px"
+                        }}
+                      >
                         {/* <p>{lender}</p> */}
                         <Link
                           to={`/users/${lenderId}/library`}
-                          style={{ textDecoration: "none", color: "blue", fontSize: "14px"}}
+                          style={{
+                            textDecoration: "none",
+                            color: "#4f9a4b",
+                            fontSize: "14px"
+                          }}
                         >
-                            Visit {lender}'s<br/>Library →
+                          Visit {lender}'s
+                          <br />
+                          Library →
                         </Link>
                       </div>
                     </div>
