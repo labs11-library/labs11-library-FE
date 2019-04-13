@@ -57,6 +57,8 @@ export const BookTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  padding-right: 10px;
+  width: 100%;
   h2,
   p {
     margin-bottom: 7px;
@@ -86,6 +88,13 @@ export const LandingPageWrapper = styled.div`
     flex-direction: column;
   }
 `;
+
+export const AvatarContainer = styled.div`
+  @media (max-width: 1050px) and (min-width: 750px) {
+    display: none !important;
+  }
+`;
+
 export const ContentContainer = styled.div`
   width: 100%;
   height: calc(100vh - 3.5rem);
