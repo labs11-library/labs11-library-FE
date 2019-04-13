@@ -10,11 +10,7 @@ export const NavBarWrapper = styled.div`
   left: 0;
   width: 100%;
 
-  background-image:
-    linear-gradient(
-      to right, 
-      #88b875, #b3d48f
-    );
+  background-image: linear-gradient(to right, #88b875, #b3d48f);
 
   a {
     color: black;
