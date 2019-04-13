@@ -56,7 +56,7 @@ class UserProfile extends Component {
             <Button
               variant="contained"
               onClick={this.toggleUpdate}
-              style={{ margin: "5px" }}
+              style={{ margin: "5px", width: "100%", maxWidth: "200px" }}
               color="primary"
             >
               Edit Profile
@@ -64,7 +64,7 @@ class UserProfile extends Component {
             <Button
               variant="outlined"
               onClick={this.logOut}
-              style={{ margin: "5px" }}
+              style={{ margin: "5px", width: "100%", maxWidth: "200px" }}
               color="secondary"
             >
               Log out

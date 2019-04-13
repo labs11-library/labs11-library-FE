@@ -2,11 +2,10 @@ import styled from "styled-components";
 
 export const TransactionWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  max-width: 600px;
+  justify-content: center;
   width: 100%;
   padding: 10px;
-  margin: 5vw 25% 0;
+  margin: 5vw 10% 0;
   flex-direction: column;
 
   h2,
@@ -21,22 +20,5 @@ export const TransactionWrapper = styled.div`
 
   p {
     font-size: 1rem;
-  }
-`;
-
-export const TransDetailsWrapper = styled.div`
-  display: flex;
-  width: 100%;
-
-  margin-bottom: 20px;
-
-  p {
-    width: 100%;
-    text-wrap: none;
-  }
-  @media (max-width: 750px) {
-    width: 96%;
-    margin: auto;
-    margin-bottom: 20px;
   }
 `;
