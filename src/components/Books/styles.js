@@ -41,6 +41,7 @@ export const BookCardWrapper = styled.div`
   margin-right: 5px;
   margin-left: 5px;
   padding: 10px;
+  background: white;
 
   @media (max-width: 850px) {
     margin-top: 10px;
@@ -108,7 +109,7 @@ export const BookImg = styled.img`
 `;
 
 export const Availability = styled.p`
-  color: ${props => (props.available ? "#325C6C" : "red")};
+  color: ${props => (props.available ? "#6A9A9E" : "red")};
 `;
 
 export const DueDate = styled.p`
