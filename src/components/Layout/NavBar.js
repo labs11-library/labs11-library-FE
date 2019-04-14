@@ -10,11 +10,8 @@ import {
   NavLinks,
   NavLinksShow,
   NavLinkWrapper,
-<<<<<<< HEAD
-  Button
-=======
+  Button,
   MenuLinks
->>>>>>> 06f63cc1d7a0ef33824d95f4c491252caeead8c4
 } from "../Styles/NavBarStyles.js";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
