@@ -79,9 +79,9 @@ class Transactions extends Component {
                 <CustomTableCell style={{ padding: "1rem" }} align="left">
                   Returned Date
                 </CustomTableCell>
-                {/* <CustomTableCell style={{ padding: "1rem" }} align="left">
+                <CustomTableCell style={{ padding: "1rem" }} align="left">
                   Overdue?
-                </CustomTableCell> */}
+                </CustomTableCell>
                 <CustomTableCell style={{ padding: "1rem" }} align="left">
                   Late Fee
                 </CustomTableCell>
@@ -110,9 +110,9 @@ class Transactions extends Component {
                         <CustomTableCell>
                           {this.formatDate(checkout.returnedDate)}
                         </CustomTableCell>
-                        {/* <CustomTableCell>
+                        <CustomTableCell>
                           {checkout.overdue ? "Yes" : "No"}
-                        </CustomTableCell> */}
+                        </CustomTableCell>
                         <CustomTableCell>
                           {checkout.lateFee ? `$${checkout.lateFee}` : "None"}
                         </CustomTableCell>
