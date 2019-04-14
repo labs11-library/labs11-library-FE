@@ -21,6 +21,44 @@ export const NavBarWrapper = styled.div`
     text-decoration: none;
   }
 `;
+
+export const Button = styled.button` {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  padding: 12px 24px;
+  border: 1px solid #34bf2c;
+  border-radius: 8px;
+  background: #57ad53;
+  background: -webkit-gradient(linear, left top, left bottom, from(#57ad53), to(#25a84e));
+  background: -moz-linear-gradient(top, #57ad53, #25a84e);
+  background: linear-gradient(to bottom, #57ad53, #25a84e);
+  -webkit-box-shadow: #ff5959 0px 0px 0px 0px;
+  -moz-box-shadow: #ff5959 0px 0px 0px 0px;
+  box-shadow: #ff5959 0px 0px 0px 0px;
+  text-shadow: #591717 1px 1px 1px;
+  font: normal normal bold 20px trebuchet ms;
+  color: #a7ebcc;
+  text-decoration: none;
+}
+&:hover${Button},
+&:focus${Button} {
+  border: 1px solid #44f839;
+  background: #68d064;
+  background: -webkit-gradient(linear, left top, left bottom, from(#68d064), to(#2cca5e));
+  background: -moz-linear-gradient(top, #68d064, #2cca5e);
+  background: linear-gradient(to bottom, #68d064, #2cca5e);
+  color: #a7ebcc;
+  text-decoration: none;
+}
+&:active${Button} {
+  background: #346832;
+  background: -webkit-gradient(linear, left top, left bottom, from(#346832), to(#25a84e));
+  background: -moz-linear-gradient(top, #346832, #25a84e);
+  background: linear-gradient(to bottom, #346832, #25a84e);
+}
+`
+
 export const NavContentWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;

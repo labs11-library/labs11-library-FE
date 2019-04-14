@@ -8,7 +8,8 @@ import {
   BookMapsLogo,
   NavLinks,
   NavLinksShow,
-  NavLinkWrapper
+  NavLinkWrapper,
+  Button
 } from "../Styles/NavBarStyles.js";
 import BurgerMenu from "./BurgerMenu";
 
@@ -32,29 +33,39 @@ class NavBar extends Component {
           <NavBarWrapper>
             <NavContentWrapper>
               <BookMapsLogo to="/">
-                <span role="img" aria-label="books">
+                {/* <span role="img" aria-label="books">
                   📚
-                </span>
+                </span> */}
+                <Button>
+                  Home
+                </Button>
               </BookMapsLogo>
               <BurgerMenu />
               <NavLinks>
                 <NavLinkWrapper to="/my-library">
-                  <span role="img" aria-label="books">
+                  {/* <span role="img" aria-label="books">
                     📚
-                  </span>{" "}
-                  My Library
+                  </span>{" "} */}
+                  <Button>
+                    My Library
+                  </Button>
+                  
                 </NavLinkWrapper>
                 <NavLinkWrapper to="/add-book">
-                  <span role="img" aria-label="plus">
+                  {/* <span role="img" aria-label="plus">
                     📖
-                  </span>{" "}
-                  Add book
+                  </span>{" "} */}
+                   <Button>
+                     Add book 
+                  </Button>
                 </NavLinkWrapper>
                 <NavLinkWrapper to="/notifications">
-                  <span role="img" aria-label="bell">
+                  {/* <span role="img" aria-label="bell">
                     🔔
-                  </span>{" "}
-                  Notifications
+                  </span>{" "} */}
+                  <Button>
+                    Notifications
+                  </Button>
                 </NavLinkWrapper>
                 <NavLinkWrapper to="/profile">
                   <Avatar
