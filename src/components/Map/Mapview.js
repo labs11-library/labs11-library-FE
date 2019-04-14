@@ -116,6 +116,24 @@ class Mapview extends Component {
           featureType: "poi",
           elementType: "geometry",
           stylers: [{ color: "#C5DDDD" }]
+        },
+        {
+          featureType: "poi",
+          elementType: "labels.icon",
+          stylers: [
+            {
+              color: "#294282"
+            }
+          ]
+        },
+        {
+          featureType: "poi",
+          elementType: "labels.text.fill",
+          stylers: [
+            {
+              color: "#294282"
+            }
+          ]
         }
         // {
         //   featureType: "road.highway",
