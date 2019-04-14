@@ -86,7 +86,7 @@ export const AvatarWrapper = styled.div`
     display: flex;
     justify-content: space-evenly;
   }
-`
+`;
 
 export const MapWrapper = styled.div`
   width: 100%;
@@ -108,7 +108,7 @@ export const BookImg = styled.img`
 `;
 
 export const Availability = styled.p`
-  color: ${props => (props.available ? "green" : "red")};
+  color: ${props => (props.available ? "#325C6C" : "red")};
 `;
 
 export const DueDate = styled.p`

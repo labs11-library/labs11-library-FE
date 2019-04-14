@@ -17,7 +17,7 @@ import Auth from "../Auth/Auth";
 
 const CustomTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: "#579F52",
+    backgroundColor: "#325C6C",
     color: theme.palette.common.white
   },
   body: {

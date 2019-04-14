@@ -26,10 +26,15 @@ import SingleRequest from "./components/Requests/SingleRequest.js";
 import LibraryList from "./components/ViewLibraries/LibraryList";
 import TransactionsComponent from "./components/Profile/Transactions";
 
-import { AppContainer, Html } from "./components/Styles/AppStyles.js";
+import {
+  AppContainer,
+  Html,
+  GlobalStyle
+} from "./components/Styles/AppStyles.js";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 class App extends Component {
   setUsername = event => {
     this.setState({
@@ -49,6 +54,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
+        <GlobalStyle />
         <Reset />
         <Html>
           <NavBar />
