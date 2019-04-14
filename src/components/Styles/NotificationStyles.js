@@ -10,6 +10,7 @@ export const NoRequests = styled.h2`
 export const BookDetailsWrapper = styled.div`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background: white;
   display: flex;
   flex-direction: column;
   margin: 20px auto;
@@ -74,4 +75,4 @@ export const RequestDescription = styled.div`
 
 export const BookDetailsContainer = styled.div`
   display: flex;
-`
+`;

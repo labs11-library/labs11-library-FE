@@ -39,9 +39,10 @@ export const NoBooks = styled.h2`
 
 export const BookDetailsWrapper = styled.div`
   width: 45%;
-  border-radius:7px;
+  border-radius: 7px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background: white;
   display: flex;
   margin: 20px;
   @media (max-width: 800px) {
@@ -63,7 +64,7 @@ export const BookImgWrapper = styled.div`
 export const BookImg = styled.img`
   width: 100%;
   height: 100%;
-  border-radius:7px 0 0 7px ;
+  border-radius: 7px 0 0 7px;
 `;
 export const BookTextContainer = styled.div`
   text-align: left;
