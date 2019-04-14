@@ -26,9 +26,13 @@ export const NavContentWrapper = styled.div`
   align-items: center;
 `;
 export const BookMapsLogo = styled(Link)`
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
   span {
     font-size: 2.5rem;
-    padding-left: 10px;
+    padding: 0 10px;
+    margin-top: 5px;
   }
 `;
 

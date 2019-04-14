@@ -204,7 +204,6 @@ class SingleBook extends Component {
                 </p>
                 {this.props.loggedInUser.stripe_email === null && (
                   <div>
-                    <p>Contact {lender}</p>
                     <Button
                       variant="contained"
                       color="primary"

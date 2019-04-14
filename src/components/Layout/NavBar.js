@@ -34,7 +34,8 @@ class NavBar extends Component {
               <BookMapsLogo to="/">
                 <span role="img" aria-label="books">
                   📚
-                </span>
+                </span>{" "}
+                Bookmaps
               </BookMapsLogo>
               <BurgerMenu />
               <NavLinks>
