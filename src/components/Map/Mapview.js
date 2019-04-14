@@ -134,12 +134,17 @@ class Mapview extends Component {
               color: "#294282"
             }
           ]
+        },
+        {
+          featureType: "road.highway",
+          elementType: "geometry.fill",
+          stylers: [{ color: "#bdbdbd" }]
+        },
+        {
+          featureType: "road.highway",
+          elementType: "geometry.stroke",
+          stylers: [{ color: "#9e9e9e" }]
         }
-        // {
-        //   featureType: "road.highway",
-        //   elementType: "geometry",
-        //   stylers: [{ color: "#325C6A" }]
-        // }
         // {
         //   featureType: "poi",
         //   elementType: "labels.text.fill",
