@@ -105,7 +105,29 @@ class Mapview extends Component {
     var map = new window.google.maps.Map(document.getElementById("map"), {
       center: this.state.location,
       zoom: this.state.zoom,
-      mapTypeControl: false
+      mapTypeControl: false,
+      styles: [
+        {
+          featureType: "water",
+          elementType: "geometry",
+          stylers: [{ color: "#6A9A9E" }]
+        },
+        {
+          featureType: "poi",
+          elementType: "geometry",
+          stylers: [{ color: "#C5DDDD" }]
+        }
+        // {
+        //   featureType: "road.highway",
+        //   elementType: "geometry",
+        //   stylers: [{ color: "#325C6A" }]
+        // }
+        // {
+        //   featureType: "poi",
+        //   elementType: "labels.text.fill",
+        //   stylers: [{ color: "#C5DDDD" }]
+        // }
+      ]
     });
 
     //------------------------- SEARCH BAR STUFF -------------------------//
