@@ -9,6 +9,10 @@ import { Link } from "react-router-dom";
 import { ChatWrapper, BackButtonWrapper, ChatButtonWrapper } from "../Styles/ChatStyles";
 import Button from "@material-ui/core/Button";
 import Loading from "../Loading/Loading.js";
+import baseUrl from "../../url";
+import { deleteCheckoutRequest } from "../../redux/actions/checkoutActions.js";
+import { withRouter } from "react-router-dom";
+
 class SingleRequest extends Component {
   constructor(props) {
     super(props);
@@ -26,13 +30,59 @@ class SingleRequest extends Component {
     this.props.getLoggedInUser();
   }
 
+  deleteRequest = () => {
+    const { lenderId, checkoutRequestId } = this.props.singleCheckoutRequest;
+    this.props.deleteCheckoutRequest(lenderId, checkoutRequestId);
+    this.sendEmail();
+    this.props.history.push("/notifications");
+  };
+
+  sendEmail = () => {
+    const {
+      lenderEmail,
+      lender,
+      title,
+      lenderId,
+      borrowerEmail,
+      borrower
+    } = this.props.singleCheckoutRequest;
+    const otherUserEmail =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? borrowerEmail
+        : lenderEmail;
+    const lenderBorrowerName =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? borrower
+        : lender;
+    const borrowerLenderName =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? lender
+        : borrower;
+    const anymoreText =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? null
+        : " anymore";
+    localStorage.getItem("userId");
+    const email = {
+      recipient: otherUserEmail,
+      sender: "blkfltchr@gmail.com",
+      subject: `${borrowerLenderName} doesn't want to exchange ${title}${anymoreText}`,
+      html: `Hey ${lenderBorrowerName}, unfortunately ${borrowerLenderName} does not want to exchange ${title}${anymoreText}. Find your next book on <a href="https://bookmaps.netlify.com/">Book Maps</a>!`
+    };
+    fetch(
+      `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
+        email.sender
+      }&topic=${email.subject}&html=${email.html}`
+    ).catch(err => console.error(err));
+    this.forceUpdate();
+  };
+
   render() {
     if (this.props.loadingRequests || this.props.singleCheckoutRequest.lenderId === undefined) {
       return <Loading />;
     }
     const {
       title,
-      authors,
       borrower,
       borrowerId,
       lender,
@@ -71,6 +121,14 @@ class SingleRequest extends Component {
               </h2>
             )}
           <ChatApp user={this.props.loggedInUser} otherUserId={borrowerId} />
+          <Button
+            style={{ margin: "10px 0" }}
+            variant="outlined"
+            color="secondary"
+            onClick={this.deleteRequest}
+          >
+            Delete request
+          </Button>
         </ChatWrapper>
       </>
     );
@@ -88,5 +146,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getSingleCheckoutRequest, getLoggedInUser }
-)(Auth(SingleRequest));
+  { getSingleCheckoutRequest, getLoggedInUser, deleteCheckoutRequest }
+)(withRouter(Auth(SingleRequest)));
