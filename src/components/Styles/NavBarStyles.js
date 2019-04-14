@@ -32,6 +32,18 @@ export const BookMapsLogo = styled(Link)`
   }
 `;
 
+export const MenuLinks = styled(NavLink)`
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
+
 export const NavLinks = styled.div`
   display: flex;
   justify-content: space-evenly;

@@ -5,7 +5,6 @@ import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import Button from "@material-ui/core/Button";
 import UpdateUserProfile from "./UpdateUserProfile";
 import UserProfileCard from "./UserProfileCard";
-import TransactionsComponent from "./Transactions";
 import { ProfileWrapper } from "../Styles/UserProfileStyles";
 
 import Auth from "../Auth/Auth";
@@ -69,10 +68,6 @@ class UserProfile extends Component {
             >
               Log out
             </Button>
-          </div>
-
-          <div>
-            <TransactionsComponent />
           </div>
         </ProfileWrapper>
       );
