@@ -24,6 +24,7 @@ import BookSearch from "./components/AddBook/BookSearch.js";
 import UserProfile from "./components/Profile/UserProfile";
 import SingleRequest from "./components/Requests/SingleRequest.js";
 import LibraryList from "./components/ViewLibraries/LibraryList";
+import TransactionsComponent from "./components/Profile/Transactions";
 
 import { AppContainer, Html } from "./components/Styles/AppStyles.js";
 
@@ -112,6 +113,11 @@ class App extends Component {
               exact
               path="/users/:userId/library"
               render={props => <LibraryList {...props} />}
+            />
+            <Route
+              exact
+              path="/history"
+              render={props => <TransactionsComponent {...props} />}
             />
           </AppContainer>
           <ToastContainer
