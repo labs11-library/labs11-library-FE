@@ -16,7 +16,7 @@ export const BookDetailsWrapper = styled.div`
   p {
     font-size: 14px;
   }
-  @media (max-width: 750px) {
+  @media (max-width: 850px) {
     display: flex;
     flex-direction: column;
     width: 90vw;
@@ -29,7 +29,7 @@ export const BookWrapper = styled.div`
   display: flex;
   width: 35vw;
 
-  @media (max-width: 750px) {
+  @media (max-width: 850px) {
     width: 80vw;
   }
 `;
@@ -39,11 +39,13 @@ export const BookCardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 5px;
+  margin-left: 5px;
   padding: 10px;
+  background: white;
 
-  @media (max-width: 750px) {
+  @media (max-width: 850px) {
     margin-top: 10px;
-    width: 80vw;
+    width: 87vw;
     display: ${props => (props.value === 1 ? "none" : "block")};
   }
 `;
@@ -72,17 +74,28 @@ export const BookButtonsWrapper = styled.div`
   height: 180px;
   // padding: 10px;
 
-  @media (max-width: 750px) {
-    width: 70vw;
+  @media (max-width: 850px) {
+    width: 100%;
   }
 `;
+
+export const AvatarWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    justify-content: space-evenly;
+  }
+`;
+
 export const MapWrapper = styled.div`
   width: 100%;
   height: 360px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   // position: fixed;
   // right: 0;
-  @media (max-width: 750px) {
+  @media (max-width: 850px) {
     display: ${props => (props.value === 0 ? "none" : "block")};
     margin-top: 10px;
   }
@@ -96,7 +109,7 @@ export const BookImg = styled.img`
 `;
 
 export const Availability = styled.p`
-  color: ${props => (props.available ? "green" : "red")};
+  color: ${props => (props.available ? "#6A9A9E" : "red")};
 `;
 
 export const DueDate = styled.p`
@@ -107,7 +120,7 @@ export const TabsWrapper = styled.div`
   // border: 1px solid orange;
   width: 100%;
 
-  @media (min-width: 750px) {
+  @media (min-width: 850px) {
     display: none;
   }
 `;

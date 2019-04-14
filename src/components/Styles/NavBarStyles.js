@@ -9,15 +9,12 @@ export const NavBarWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-
-  background-image:
-    linear-gradient(
-      to right, 
-      #88b875, #b3d48f
-    );
+  background: white;
+  // background-image: linear-gradient(to right, #5386ca, #aadaff);
+  // background-image: linear-gradient(to left, #4f9a4b, #c0ecae);
 
   a {
-    color: black;
+    color: #325c6c;
     text-decoration: none;
   }
 `;
@@ -70,6 +67,18 @@ export const BookMapsLogo = styled(Link)`
   span {
     font-size: 2.5rem;
     padding-left: 10px;
+  }
+`;
+
+export const MenuLinks = styled(NavLink)`
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
   }
 `;
 
