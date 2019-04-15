@@ -5,12 +5,22 @@ import CheckedOutList from "../CheckedOut/CheckedOutList.js";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import UserProfileCard from "../Profile/UserProfileCard";
+import { ProfileWrapper } from "../Styles/UserProfileStyles";
+import { getLoggedInUser } from "../../redux/actions/authActions.js";
+import Auth from "../Auth/Auth";
+import { connect } from "react-redux";
+
+
 // import ProfileNavBar from "./ProfileNavBar.js";
 
 class MyLibrary extends Component {
   state = {
     value: 0
   };
+  componentDidMount() {
+    this.props.getLoggedInUser();
+  }
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -20,9 +30,15 @@ class MyLibrary extends Component {
     });
   };
   render() {
+    const { loggedInUser } = this.props;
     return (
       <div>
         <React.Fragment>
+        <ProfileWrapper>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <UserProfileCard loggedInUser={loggedInUser} />
+          </div>
+        </ProfileWrapper>
           <MyLibraryTabsWrapper>
             <Paper>
               <Tabs
@@ -48,4 +64,13 @@ class MyLibrary extends Component {
   }
 }
 
-export default MyLibrary;
+const mapStateToProps = state => ({
+  loggedInUser: state.authReducer.loggedInUser,
+  loading: state.authReducer.fetchingUser
+});
+
+// export default MyLibrary;
+export default connect(
+  mapStateToProps,
+  { getLoggedInUser }
+)(Auth(MyLibrary));
