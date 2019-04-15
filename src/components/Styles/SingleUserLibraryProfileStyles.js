@@ -1,31 +1,27 @@
 import styled from "styled-components";
 
-export const MyLibraryTabsWrapper = styled.div`
-  width: 89%;
-  margin: 20px auto;
-`;
-
-// export const ProfileWrapper = styled.div`
-// margin-left:10%;
-// display:flex;
-
-// `
 export const ProfileWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 200px;
+  max-width: 500px;
   padding: 10px;
-  margin-top: 5vw;
+  margin-top: -5vw;
   flex-direction: column;
+  margin-left:23%;
+//   background:#009EE5;
 
   h1,
   p {
     padding: 5px;
+    margin-left:45%;
+    width:400px;
+    // color:#FFF;
   }
 
   h1 {
     font-size: 2rem;
+    margin-top:-50%;
   }
 
   p {
@@ -36,4 +32,3 @@ export const ProfileWrapper = styled.div`
     justify-content: ;
   }
 `;
-
