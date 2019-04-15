@@ -4,9 +4,10 @@ import bookLover from "../../images/landing/bookLover.svg";
 import bibliophile from "../../images/landing/bibliophile.svg";
 import readingList from "../../images/landing/readingList.svg";
 import map from "../../images/landing/map.svg";
+import beginChat from "../../images/landing/beginChat.svg";
 import backendBaseUrl from "../../url";
 
-const Landing = () => {
+const Landing = props => {
     return (
         <div>
             <section className="fdb-block">
@@ -15,6 +16,7 @@ const Landing = () => {
                     <div className="col-12 col-md-12 col-lg-6 col-xl-5">
                         <h1 style={{fontSize: "3.5rem"}}>Help Your Shelf.</h1>
                         <p className="lead mb-5" style={{margin: "20px auto"}}>Discover your next favourite book in your neighbor's bookshelf. No matter where you are, Bookmaps allows you to share books with the people around you.</p>
+                        <p className="h3 mt-4"><a href="https://bookmaps.netlify.com/browse" className="btn btn-primary">Browse books</a></p>
                     </div>
                     <div className="col-12 col-md-8 m-auto ml-lg-auto mr-lg-0 col-lg-6 pt-5 pt-lg-0">
                         <img alt="bibliophile" className="img-fluid" src={bibliophile} />
@@ -31,7 +33,7 @@ const Landing = () => {
                     </div>
 
                     <div className="col-12 col-md-5 m-md-auto">
-                        <h2 style={{fontSize: "2.5rem"}}><strong>Step One</strong></h2>
+                        <h2 style={{fontSize: "2.5rem"}}><strong>Share your books</strong></h2>
                         <p className="lead" style={{margin: "20px auto"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc laoreet dolor ut elit imperdiet, vitae aliquet tortor molestie. Aliquam sed quam metus.</p>
                     </div>
                     </div>
@@ -42,23 +44,36 @@ const Landing = () => {
                     </div>
 
                     <div className="col-12 col-md-5">
-                        <h2 style={{fontSize: "2.5rem"}}><strong>Step Two</strong></h2>
+                        <h2 style={{fontSize: "2.5rem"}}><strong>Explore the books in your neighborhood</strong></h2>
                         <p className="lead" style={{margin: "20px auto"}}>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In at tincidunt odio. Vivamus ultricies a arcu eget suscipit. Nunc arcu mi, aliquam ut eros in, sagittis sollicitudin nisi.</p>
                     </div>
                     </div>
 
                     <div className="row text-left align-items-center pt-5">
                     <div className="col-4 col-md-5">
-                        <img alt="bookLover" className="img-fluid" src={bookLover} />
+                        <img alt="begin-chat" className="img-fluid" src={beginChat} />
                     </div>
 
                     <div className="col-12 col-md-5 m-md-auto">
-                        <h2 style={{fontSize: "2.5rem"}}><strong>Step Three</strong></h2>
+                        <h2 style={{fontSize: "2.5rem"}}><strong>Connect with people in your area</strong></h2>
                         <p className="lead" style={{margin: "20px auto"}}> Nullam at augue ut nibh sagittis gravida et in mi. Donec tincidunt elit sed felis feugiat consequat. Integer a bibendum mauris. Morbi in felis velit.
                         </p>
                     </div>
                     </div>
+
+                    <div className="row text-left align-items-center pt-5 pb-md-5">
+                    <div className="col-4 col-md-5 m-md-auto order-md-5">
+                        <img alt="book-lover" className="img-fluid" src={bookLover} />
+                    </div>
+
+                    <div className="col-12 col-md-5">
+                        <h2 style={{fontSize: "2.5rem"}}><strong>Expand your book collection</strong></h2>
+                        <p className="lead" style={{margin: "20px auto"}}>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In at tincidunt odio. Vivamus ultricies a arcu eget suscipit. Nunc arcu mi, aliquam ut eros in, sagittis sollicitudin nisi.</p>
+                    </div>
+                    </div>
                 </div>
+
+                
             </section>
             <section className="fdb-block">
                 <div className="container">

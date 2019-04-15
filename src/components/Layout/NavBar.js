@@ -52,7 +52,7 @@ class NavBar extends Component {
         {loggedIn && (
           <NavBarWrapper>
             <NavContentWrapper>
-              <BookMapsLogo to="/">
+              <BookMapsLogo to="/browse">
                 {/* <span role="img" aria-label="books">
                   📚
                 </span> */}
@@ -127,7 +127,7 @@ class NavBar extends Component {
         {!loggedIn && (
           <NavBarWrapper>
             <NavContentWrapper>
-              <BookMapsLogo to="/">
+              <BookMapsLogo to="/browse">
                 <span role="img" aria-label="books">
                   📚
                 </span>

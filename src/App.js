@@ -60,8 +60,8 @@ class App extends Component {
         <Html>
           <NavBar />
           <AppContainer>
-            <Route exact path="/" component={LandingPage} />
-            <Route exact path="/landing" component={Landing} />
+            <Route exact path="/browse" component={LandingPage} />
+            <Route exact path="/" component={Landing} />
             <Route exact path="/books" component={BookList} />
             <Route exact path="/users" component={Users} />
             <Route exact path="/signup" component={Signup} />
