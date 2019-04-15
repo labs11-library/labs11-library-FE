@@ -49,9 +49,9 @@ background: #325C6C;
 }
 &:active${Button} {
  background: #325C6C;
-  background: -webkit-gradient(linear, left top, left bottom, from(#346832), to(#25a84e));
-  background: -moz-linear-gradient(top, #346832, #25a84e);
-  background: linear-gradient(to bottom, #346832, #25a84e);
+  background: -webkit-gradient(linear, left top, left bottom, from(#325C6C), to(#325C6C));
+  background: -moz-linear-gradient(top, #325C6C, #325C6C);
+  background: linear-gradient(to bottom, #325C6C, #325C6C);
 }
 `
 
