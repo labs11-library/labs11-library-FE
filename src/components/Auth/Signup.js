@@ -15,11 +15,17 @@ class Signup extends Component {
         style={{ margin: "0 auto", width: "400px" }}
       >
         <Paper>
-          {/* <Typography component="h1" variant="h5">
-            <div style={{margin:"0 0 0 40%"}}>
+          <Typography component="h1" variant="h5">
+            <div
+              style={{
+                margin: "0 0 0 40%",
+                fontWeight: "300",
+                padding: "14px 0 0"
+              }}
+            >
               Sign up
             </div>
-          </Typography> */}
+          </Typography>
           <FormControl margin="normal" required fullWidth>
             <a
               href={`${backendBaseUrl}/auth/google`}
