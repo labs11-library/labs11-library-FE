@@ -34,16 +34,16 @@ export const Button = styled.div` {
   // box-shadow: #ff5959 0px 0px 0px 0px;
   // text-shadow: #325C6C 1px 1px 1px;
   font: normal normal bold 20px trebuchet ms;
-  color: #325C6C;
+  color: #009EE5;
   text-decoration: none;
 }
 &:hover${Button},
 &:focus${Button} {
-  border: 1px solid #325C6C;
-background: #325C6C;
-  background: -webkit-gradient(linear, left top, left bottom, from(#68d064), to(#325C6C));
-  background: -moz-linear-gradient(top, #325C6C, #325C6C);
-  background: linear-gradient(to bottom, #325C6C, #325C6C);
+  border: 1px solid #009EE5;
+background: #009EE5;
+  background: -webkit-gradient(linear, left top, left bottom, from(#009EE5), to(#009EE5));
+  background: -moz-linear-gradient(top, #009EE5, #009EE5);
+  background: linear-gradient(to bottom, #009EE5, #009EE5);
   color: white;
   text-decoration: none;
 }
