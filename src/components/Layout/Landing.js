@@ -13,22 +13,22 @@ const Landing = props => {
             <section className="fdb-block">
                 <div className="container">
                     <div className="row align-items-center">
-                    <div className="col-12 col-md-12 col-lg-6 col-xl-5">
+                    <div className="order-md-8 m-auto ml-lg-auto mr-lg-0 col-md-6 pt-2 pt-lg-0">
+                        <img alt="bibliophile" className="img-fluid" src={bibliophile} />
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-5">
                         <h1 style={{fontSize: "3.5rem"}}>Help Your Shelf.</h1>
                         <p className="lead mb-5" style={{margin: "20px auto"}}>Discover your next favourite book in your neighbor's bookshelf. No matter where you are, Bookmaps allows you to share books with the people around you.</p>
                         <p className="h3 mt-4"><a href="https://bookmaps.netlify.com/browse" className="btn btn-primary">Browse books</a></p>
                     </div>
-                    <div className="col-12 col-md-8 m-auto ml-lg-auto mr-lg-0 col-lg-6 pt-5 pt-lg-0">
-                        <img alt="bibliophile" className="img-fluid" src={bibliophile} />
-                    </div>
                     </div>
                 </div>
             </section>
-            <section className="fdb-block">
+            <section className="fdb-block" style={{backgroundColor: "#F3F2F2"}}>
                 <div className="container">
 
                     <div className="row text-left align-items-center pt-5 pb-md-5">
-                    <div className="col-4 col-md-5">
+                    <div className="col-8 col-md-5 m-auto">
                         <img alt="reading-list" className="img-fluid" src={readingList} />
                     </div>
 
@@ -39,7 +39,7 @@ const Landing = props => {
                     </div>
 
                     <div className="row text-left align-items-center pt-5 pb-md-5">
-                    <div className="col-4 col-md-5 m-md-auto order-md-5">
+                    <div className="col-8 col-md-5 m-md-auto order-md-5 m-auto">
                         <img alt="map" className="img-fluid" src={map} />
                     </div>
 
@@ -50,7 +50,7 @@ const Landing = props => {
                     </div>
 
                     <div className="row text-left align-items-center pt-5">
-                    <div className="col-4 col-md-5">
+                    <div className="col-8 col-md-5 m-auto">
                         <img alt="begin-chat" className="img-fluid" src={beginChat} />
                     </div>
 
@@ -62,7 +62,7 @@ const Landing = props => {
                     </div>
 
                     <div className="row text-left align-items-center pt-5 pb-md-5">
-                    <div className="col-4 col-md-5 m-md-auto order-md-5">
+                    <div className="col-8 col-md-5 m-md-auto order-md-5 m-auto">
                         <img alt="book-lover" className="img-fluid" src={bookLover} />
                     </div>
 
