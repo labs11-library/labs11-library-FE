@@ -35,7 +35,7 @@ const BookDetails = props => {
     .local()
     .format("dddd, MMMM Do");
 const availability = available ? 
-<div>Available <FontAwesome className="far fa-check-square" size="1x"></FontAwesome></div> : "Checked out";
+  <div>Available <FontAwesome className="far fa-check-circle" size="1x"></FontAwesome></div> : "Checked out";
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
