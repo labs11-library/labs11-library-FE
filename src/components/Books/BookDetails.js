@@ -1,6 +1,7 @@
 import React from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import Button from "@material-ui/core/Button";
+// import 'font-awesome/css/font-awesome.min.css';
 import { Link } from "react-router-dom";
 import * as moment from "moment";
 import {
@@ -26,12 +27,15 @@ const BookDetails = props => {
     lenderId
   } = props.book;
 
+  var FontAwesome = require('react-fontawesome')
+
 
   const dateDue = moment
     .utc(dueDate)
     .local()
     .format("dddd, MMMM Do");
-  const availability = available ? "Available" : "Checked out";
+const availability = available ? 
+<div>Available <FontAwesome className="far fa-check-square" size="1x"></FontAwesome></div> : "Checked out";
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -45,9 +49,6 @@ const BookDetails = props => {
         <p>by {authors}</p>
         <Availability available={available}>
           {availability}
-          if ({available} === "Available") {
-            <div><i class="far fa-check-circle"></i></div>
-          }
         </Availability>
 
         {dueDate && <p>Due date: {dateDue}</p>}
