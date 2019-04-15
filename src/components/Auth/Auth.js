@@ -22,9 +22,16 @@ export default function(Component) {
       const token = localStorage.getItem("jwt");
       const notLoggedIn = (
         <React.Fragment>
-          <p style={{ color: "red" }}>
-            Unauthorized to view this page. Please log in.
-          </p>
+          <h2
+            style={{
+              color: "#ff5454",
+              fontSize: "2rem",
+              margin: "0 auto 24px",
+              textAlign: "center"
+            }}
+          >
+            Unauthorized to view this page. Please log in to continue.
+          </h2>
           <Login />
         </React.Fragment>
       );
