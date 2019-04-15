@@ -26,10 +26,11 @@ export const BookDetailsWrapper = styled.div`
   margin: 20px auto;
   padding: 10px auto;
   width: 480px;
+  border-radius: 7px;
 
   h2 {
     font-size: 18px;
-    color: #009EE5;
+    color: #009ee5;
   }
 
   p {
@@ -87,4 +88,5 @@ export const RequestDescription = styled.div`
 
 export const BookDetailsContainer = styled.div`
   display: flex;
+  border-radius: 7px;
 `;

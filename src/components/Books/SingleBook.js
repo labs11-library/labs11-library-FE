@@ -147,9 +147,12 @@ class SingleBook extends Component {
                   <BookImg alt={title} src={image} />
                 </BookImgWrapper>
                 <BookInfoWrapper>
-                  <h2>{title}</h2>
+                  <h2 style={{ color: " #009EE5" }}>{title}</h2>
                   <p>by {authors}</p>
-                  <Availability available={available}>
+                  <Availability
+                    style={{ color: "#00d369" }}
+                    available={available}
+                  >
                     {availability}
                   </Availability>
                   {/* {!available && <p>Time until due: {timeRemaining(dueDate)}</p>} */}
@@ -183,7 +186,15 @@ class SingleBook extends Component {
                           widgetDimension="30px"
                         />
                       </Ratings>
-                      <div>Goodreads rating: {avgRating}</div>
+                      <div
+                        style={{
+                          marginTop: ".5rem",
+                          color: "#838281",
+                          fontSize: ".8rem"
+                        }}
+                      >
+                        Goodreads rating: {avgRating}
+                      </div>
                     </div>
                   )}
                 </BookInfoWrapper>
@@ -221,7 +232,7 @@ class SingleBook extends Component {
                           to={`/users/${lenderId}/library`}
                           style={{
                             textDecoration: "none",
-                            color: "#325C6C",
+                            color: "#009EE5",
                             fontSize: "14px"
                           }}
                         >
