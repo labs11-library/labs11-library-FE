@@ -19,7 +19,7 @@ class Payment extends React.Component {
         stripeKey="pk_test_paiLlNo6bPnrx0Nnb2ORgRLu00CRdEJXhe"
         token={this.onToken}
         zipCode
-        label="Request checkout"
+        label="Add payment info to request checkout"
         email={this.props.email}
       />
     );
