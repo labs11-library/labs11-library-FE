@@ -12,12 +12,14 @@ import Loading from "../Loading/Loading.js";
 import baseUrl from "../../url";
 import { deleteCheckoutRequest } from "../../redux/actions/checkoutActions.js";
 import { withRouter } from "react-router-dom";
+import DeleteRequest from './DeleteRequest';
 
 class SingleRequest extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      singleCheckoutRequest: {}
+      singleCheckoutRequest: {},
+      open: false
     };
   }
 
@@ -77,6 +79,14 @@ class SingleRequest extends Component {
     this.forceUpdate();
   };
 
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   render() {
     if (this.props.loadingRequests || this.props.singleCheckoutRequest.lenderId === undefined) {
       return <Loading />;
@@ -125,10 +135,11 @@ class SingleRequest extends Component {
             style={{ margin: "10px 0" }}
             variant="outlined"
             color="secondary"
-            onClick={this.deleteRequest}
+            onClick={this.handleClickOpen}
           >
             Delete request
           </Button>
+          <DeleteRequest open={this.state.open} handleClose={this.handleClose} handleClickOpen={this.handleClickOpen} deleteRequest={this.deleteRequest} request={this.props.singleCheckoutRequest} />
         </ChatWrapper>
       </>
     );

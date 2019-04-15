@@ -84,14 +84,7 @@ class SingleInventory extends Component {
             </Button>
             <Button
               variant="outlined"
-              onClick={
-                this.handleClickOpen
-                // () =>
-                // this.deleteInventory(
-                //   this.props.singleInventory.userId,
-                //   this.props.singleInventory.bookId
-                // )
-              }
+              onClick={this.handleClickOpen}
               style={{ margin: "10px 10px 0 0" }}
               color="secondary"
             >
