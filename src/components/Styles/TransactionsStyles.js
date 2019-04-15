@@ -5,7 +5,7 @@ export const TransactionWrapper = styled.div`
   justify-content: center;
   width: 100%;
   padding: 10px;
-  margin: 5vw 10% 0;
+  margin: 5vw autogi 0;
   flex-direction: column;
 
   h2,
