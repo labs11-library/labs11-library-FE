@@ -18,9 +18,9 @@ class MyLibrary extends Component {
   state = {
     value: 0
   };
-  componentDidMount() {
-    this.props.getLoggedInUser();
-  }
+  // componentDidMount() {
+  //   this.props.getLoggedInUser();
+  // }
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -58,13 +58,7 @@ class MyLibrary extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  loggedInUser: state.authReducer.loggedInUser,
-  loading: state.authReducer.fetchingUser
-});
+
 
 export default MyLibrary;
-// export default connect(
-//   mapStateToProps,
-//   { getLoggedInUser }
-// )(Auth(MyLibrary));
+
