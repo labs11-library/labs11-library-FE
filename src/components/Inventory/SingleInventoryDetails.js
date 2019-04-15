@@ -38,7 +38,9 @@ const SingleInventoryDetails = props => {
         <BookContentWrapper>
           <h2>{title}</h2> {/* {title.substr(0, 20)} */}
           <p>by {authors}</p>
-          <Availability available={available}>{availability}</Availability>
+          <Availability style={{ color: "#00d369" }} available={available}>
+            {availability}
+          </Availability>
           {!available && (
             <p>
               Date due:{" "}
@@ -63,15 +65,17 @@ export default SingleInventoryDetails;
 
 const BookDetailsWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   height: 180px;
 
   h2 {
     font-size: 1.5rem;
+    color: #009ee5;
   }
 
   p {
     font-size: 1rem;
+    color: #838281;
   }
 `;
 const BookImgWrapper = styled.div`
