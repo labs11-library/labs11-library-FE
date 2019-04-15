@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import BookDetails from "./BookDetails";
 
+import { Link } from "react-router-dom";
+
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -15,7 +17,9 @@ import { getBooks } from "../../redux/actions/bookActions.js";
 import Loading from "../Loading/Loading.js";
 import {
   BookListContainer,
-  CardContainer
+  CardContainer,
+  NoBooks,
+  NoBooksLink
 } from "../Styles/LandingPageStyles.js";
 class Books extends Component {
   constructor() {
@@ -94,7 +98,7 @@ class Books extends Component {
             }}
           >
             <InputBase
-              placeholder="Search books"
+              placeholder="Search for books by title, author, or owner"
               type="text"
               name="searchText"
               value={this.state.searchText}
@@ -121,6 +125,15 @@ class Books extends Component {
               <MenuItem value={"mybooks"}>My Books</MenuItem>
             </Select>
           </div>
+          {this.state.searchText.length > 0 &&
+            this.filteredBooks().length === 0 && (
+              <>
+                <NoBooks>Nobody has posted this book yet.</NoBooks>
+                <NoBooksLink to="/add-book">
+                  Be the first to post it to BookMaps.
+                </NoBooksLink>
+              </>
+            )}
           <CardContainer>
             {this.filteredBooks().map(book => {
               return <BookDetails key={book.bookId} book={book} />;
