@@ -76,6 +76,10 @@ class Books extends Component {
       return this.searchBooks().filter(
         book => book.lenderId.toString() === localStorage.getItem("userId")
       );
+    } else if (filter === "distance") {
+      return this.searchBooks().filter(
+        book => book.lenderId.toString() !== localStorage.getItem("userId")
+      );
     }
   };
 
@@ -119,6 +123,7 @@ class Books extends Component {
             >
               <MenuItem value={"all"}>All</MenuItem>
               <MenuItem value={"available"}>Available</MenuItem>
+              <MenuItem value={"distance"}>Distance</MenuItem>
               <MenuItem value={"mybooks"}>My Books</MenuItem>
             </Select>
           </div>
