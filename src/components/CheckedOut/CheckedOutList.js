@@ -93,17 +93,6 @@ class CheckedOutList extends Component {
               );
             })}
           </div>
-          <CheckoutHeader>Transaction History</CheckoutHeader>
-          <div>
-            {this.filterTransactionHistory().map(checkout => {
-              return (
-                <CheckedOutBookDetails
-                  key={checkout.checkoutId}
-                  checkout={checkout}
-                />
-              );
-            })}
-          </div>
         </div>
       );
     }
