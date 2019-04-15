@@ -10,9 +10,17 @@ const Login = () => {
   return (
     <div style={{ margin: "0 auto", width: "400px" }}>
       <Paper>
-        {/* <Typography component="h1" variant="h5">
-          <div style={{ margin: "0 0 0 40%", padding: "10px 0 0" }}>Log in</div>
-        </Typography> */}
+        <Typography component="h1" variant="h5">
+          <div
+            style={{
+              margin: "0 0 0 40%",
+              padding: "14px 0 0",
+              fontWeight: "300"
+            }}
+          >
+            Log in
+          </div>
+        </Typography>
         <FormControl margin="normal" required fullWidth>
           <a href={`${baseUrl}/auth/google`} style={{ margin: "0 0 0 23%" }}>
             <button class="loginBtn loginBtn--google">Login with Google</button>
