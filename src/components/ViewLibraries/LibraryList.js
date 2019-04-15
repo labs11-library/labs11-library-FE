@@ -13,6 +13,10 @@ import {
   InventoryContainer,
   CardContainer
 } from "../Styles/InventoryStyles.js";
+import SingleUserProfileCard from "../Profile/SingleUserProfileCard";
+import { ProfileWrapper } from "../Styles/SingleUserLibraryProfileStyles.js";
+import { getLoggedInUser } from "../../redux/actions/authActions.js";
+
 
 class LibraryList extends Component {
   constructor() {
@@ -45,8 +49,11 @@ class LibraryList extends Component {
     const userId = this.props.match.params.userId;
     this.props.getAllInventory(userId);
     this.props.getSingleUser(userId);
+    // this.props.getLoggedInUser();
+    
   }
   render() {
+    const { singleUser } = this.props;
     if (this.props.loadingInventory || this.props.loadingUser) {
       return <Loading />;
     } else if (this.props.inventory.length === 0) {
@@ -82,6 +89,11 @@ class LibraryList extends Component {
         //   </div>
         // </div>
         <InventoryContainer>
+           <ProfileWrapper>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <SingleUserProfileCard singleUser={singleUser} />
+          </div>
+        </ProfileWrapper>
           <Paper
             style={{
               width: "80%",
@@ -91,6 +103,7 @@ class LibraryList extends Component {
               alignItems: "center"
             }}
           >
+          
             <InputBase
               placeholder={`Search ${firstName}'s Library`}
               type="text"
@@ -129,5 +142,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { getAllInventory, getSingleUser }
+  { getAllInventory, getSingleUser, getLoggedInUser }
 )(LibraryList);

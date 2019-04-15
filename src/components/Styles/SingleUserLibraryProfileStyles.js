@@ -1,27 +1,20 @@
 import styled from "styled-components";
 
-export const MyLibraryTabsWrapper = styled.div`
-  width: 89%;
-  margin: 20px auto;
-`;
-
-// export const ProfileWrapper = styled.div`
-// margin-left:10%;
-// display:flex;
-
-// `
 export const ProfileWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
   max-width: 200px;
   padding: 10px;
-  margin-top: 5vw;
+  margin-top: -5vw;
   flex-direction: column;
+  margin-left:3.5%;
 
   h1,
   p {
     padding: 5px;
+    margin-left:100px;
+    width:500px;
   }
 
   h1 {
@@ -36,4 +29,3 @@ export const ProfileWrapper = styled.div`
     justify-content: ;
   }
 `;
-
