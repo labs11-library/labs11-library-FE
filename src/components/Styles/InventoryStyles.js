@@ -45,6 +45,13 @@ export const BookDetailsWrapper = styled.div`
   background: white;
   display: flex;
   margin: 20px;
+  h2 {
+    color: #009EE5;
+  }
+  }
+  p {
+    color: #838281;
+  }
   @media (max-width: 800px) {
     width: 80%;
     margin: 10px auto;
@@ -84,7 +91,7 @@ export const BookTextContainer = styled.div`
   }
 `;
 export const Availability = styled.p`
-  color: ${props => (props.available ? "green" : "red")};
+  color: ${props => (props.available ? "#00d369 !important" : "#ff5454 !important")};
 `;
 
 export const DueDate = styled.p`
