@@ -111,14 +111,6 @@ class SingleBook extends Component {
         lenderPicture
       } = this.props.singleBook;
       const availability = available ? "Available" : "Checked out";
-      // function timeRemaining(dueDate) {
-      //   let now = moment(Date.now());
-      //   let end = moment(dueDate);
-      //   let duration = moment.duration(now.diff(end)).humanize();
-      //   return duration;
-      // }
-      // const threeWeeks = moment(checkoutDate, "YYYY-MM-DD").add(21, "days");
-
       const dateDue = moment
         .utc(dueDate)
         .local()
@@ -204,21 +196,7 @@ class SingleBook extends Component {
                 </p>
                 {this.props.loggedInUser.stripe_email === null && (
                   <div>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      disabled
-                      onClick={() => this.requestCheckout(bookId, lenderId)}
-                    >
-                      Request checkout
-                    </Button>
-                    <div>
-                      <i>
-                        Please enter your payment information before requesting
-                        checkout
-                      </i>
-                    </div>
-                    <Payment />
+                    <Payment email={this.props.loggedInUser.email} />
                   </div>
                 )}
                 {this.props.loggedInUser.stripe_email && (
@@ -228,7 +206,7 @@ class SingleBook extends Component {
                       color="primary"
                       onClick={() => this.requestCheckout(bookId, lenderId)}
                     >
-                      Request checkout
+                      REQUEST CHECKOUT
                     </Button>
                     <div>
                       <Avatar src={lenderPicture} alt={`${lender} avatar`} />
@@ -239,7 +217,6 @@ class SingleBook extends Component {
                           paddingLeft: "5px"
                         }}
                       >
-                        {/* <p>{lender}</p> */}
                         <Link
                           to={`/users/${lenderId}/library`}
                           style={{
