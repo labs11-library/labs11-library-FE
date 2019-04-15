@@ -27,7 +27,6 @@ export const MenuLinks = styled(NavLink)`
   text-decoration: none;
 
   &:focus,
-  &:hover,
   &:visited,
   &:link,
   &:active {
@@ -60,6 +59,9 @@ export const NavLinkWrapper = styled(NavLink)`
   margin: 0 0.5rem;
   transition: all 0.2s ease;
   &.active {
+    color: #009ee5;
+  }
+  &:hover {
     color: #009ee5;
   }
   @media screen and (max-width: 750px) {
