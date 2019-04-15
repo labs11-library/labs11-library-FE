@@ -67,6 +67,9 @@ const BookDetailsWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   height: 180px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 7px;
+  background-color: white;
 
   h2 {
     font-size: 1.5rem;
@@ -84,10 +87,12 @@ const BookImgWrapper = styled.div`
   min-height: 180px;
   max-height: 180px;
   margin-right: 10px;
+  border-radius: 7px;
 `;
 const BookImg = styled.img`
   width: 100%;
   height: 100%;
+  border-radius: 7px 0 0 7px;
 `;
 const BookContentWrapper = styled.div`
   display: flex;

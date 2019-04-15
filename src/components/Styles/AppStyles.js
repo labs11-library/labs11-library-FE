@@ -15,4 +15,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     background: #F3F2F2;
   }
+  * {
+    box-sizing: border-box;
+  }
 `;

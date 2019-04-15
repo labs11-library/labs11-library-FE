@@ -91,7 +91,8 @@ export const BookTextContainer = styled.div`
   }
 `;
 export const Availability = styled.p`
-  color: ${props => (props.available ? "#00d369 !important" : "#ff5454 !important")};
+  color: ${props =>
+    props.available ? "#00d369 !important" : "#ff5454 !important"};
 `;
 
 export const DueDate = styled.p`
