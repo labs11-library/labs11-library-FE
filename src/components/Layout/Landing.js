@@ -116,7 +116,9 @@ const Landing = props => {
               <div className="fdb-box fdb-touch">
                 <div className="row">
                   <div className="col">
-                    <h2 style={{ fontSize: "2.5rem" }}>Sign Up</h2>
+                    <h2 style={{ fontSize: "2.5rem", fontWeight: "300" }}>
+                      Sign Up
+                    </h2>
                   </div>
                 </div>
                 <div className="row">
@@ -137,12 +139,18 @@ const Landing = props => {
                       href={`${backendBaseUrl}/auth/facebook`}
                       style={{ margin: "0 auto" }}
                     >
-                      <button class="loginBtn loginBtn--facebook">
+                      <button
+                        style={{ marginBottom: ".8rem" }}
+                        class="loginBtn loginBtn--facebook"
+                      >
                         Signup with Facebook
                       </button>
                     </a>
                     <p>
-                      <a href="https://bookmaps.netlify.com/login">
+                      <a
+                        style={{ fontSize: ".9rem" }}
+                        href="https://bookmaps.netlify.com/login"
+                      >
                         Already have an account?
                       </a>
                     </p>
