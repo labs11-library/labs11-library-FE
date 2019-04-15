@@ -26,11 +26,11 @@ const BookDetails = props => {
     lenderId
   } = props.book;
 
+
   const dateDue = moment
     .utc(dueDate)
     .local()
     .format("dddd, MMMM Do");
-
   const availability = available ? "Available" : "Checked out";
   return (
     <BookDetailsWrapper>
@@ -43,7 +43,12 @@ const BookDetails = props => {
           {title.length > 28 && "..."}
         </h2>
         <p>by {authors}</p>
-        <Availability available={available}>{availability}</Availability>
+        <Availability available={available}>
+          {availability}
+          if ({available} === "Available") {
+            <div><i class="far fa-check-circle"></i></div>
+          }
+        </Availability>
 
         {dueDate && <p>Due date: {dateDue}</p>}
         <AvatarWrapper>
