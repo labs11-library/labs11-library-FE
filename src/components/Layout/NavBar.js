@@ -5,7 +5,7 @@ import Avatar from "@material-ui/core/Avatar";
 import {
   NavBarWrapper,
   NavContentWrapper,
-  BookMapsLogo,
+  // BookMapsLogo,
   NavLinks,
   NavLinksShow,
   NavLinkWrapper,
@@ -52,42 +52,17 @@ class NavBar extends Component {
         {loggedIn && (
           <NavBarWrapper>
             <NavContentWrapper>
-              <BookMapsLogo to="/">
-                {/* <span role="img" aria-label="books">
-                  📚
-                </span> */}
-                <Button>
-                  Home
-                </Button>
-              </BookMapsLogo>
+              <NavLinkWrapper exact to="/browse">
+                Home
+              </NavLinkWrapper>
               <BurgerMenu />
               <NavLinks>
-                <NavLinkWrapper to="/my-library">
-                  {/* <span role="img" aria-label="books">
-                    📚
-                  </span>{" "} */}
-                  <Button>
-                    My Library
-                  </Button>
-                  
-                </NavLinkWrapper>
-                <NavLinkWrapper to="/add-book">
-                  {/* <span role="img" aria-label="plus">
-                    📖
-                  </span>{" "} */}
-                   <Button>
-                     Add book 
-                  </Button>
-                </NavLinkWrapper>
+                <NavLinkWrapper to="/my-library">My Library</NavLinkWrapper>
+                <NavLinkWrapper to="/add-book">Add book</NavLinkWrapper>
                 <NavLinkWrapper to="/notifications">
-                  {/* <span role="img" aria-label="bell">
-                    🔔
-                  </span>{" "} */}
-                  <Button>
-                    Notifications
-                  </Button>
+                  Notifications
                 </NavLinkWrapper>
-                <NavLinkWrapper>
+                <NavLinkWrapper style={{ borderBottom: "none" }}>
                   <Avatar
                     style={{
                       boxShadow:
@@ -127,18 +102,15 @@ class NavBar extends Component {
         {!loggedIn && (
           <NavBarWrapper>
             <NavContentWrapper>
-              <BookMapsLogo to="/">
+
+              <NavLinkWrapper to="/browse">Home</NavLinkWrapper>
+              <NavLinkWrapper to="/browse">
                 <span role="img" aria-label="books">
                   📚
                 </span>
-              </BookMapsLogo>
+              </NavLinkWrapper>
               <NavLinksShow>
-                <NavLinkWrapper to="/signup">
-                  <span role="img" aria-label="wave">
-                    👋
-                  </span>{" "}
-                  Sign up
-                </NavLinkWrapper>
+                <NavLinkWrapper to="/signup">Sign up</NavLinkWrapper>
               </NavLinksShow>
             </NavContentWrapper>
           </NavBarWrapper>

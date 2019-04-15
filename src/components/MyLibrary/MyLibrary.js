@@ -1,16 +1,26 @@
 import React, { Component } from "react";
-import { MyLibraryTabsWrapper } from "../Styles/MyLibraryStyles.js";
+import { MyLibraryTabsWrapper} from "../Styles/MyLibraryStyles.js";
 import InventoryList from "../Inventory/InventoryList.js";
 import CheckedOutList from "../CheckedOut/CheckedOutList.js";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+// import UserProfileCard from "../Profile/UserProfileCard";
+// import { ProfileWrapper } from "../Styles/MyLibraryStyles.js";
+// import { getLoggedInUser } from "../../redux/actions/authActions.js";
+// import Auth from "../Auth/Auth";
+// import { connect } from "react-redux";
+
+
 // import ProfileNavBar from "./ProfileNavBar.js";
 
 class MyLibrary extends Component {
   state = {
     value: 0
   };
+  // componentDidMount() {
+  //   this.props.getLoggedInUser();
+  // }
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -48,4 +58,7 @@ class MyLibrary extends Component {
   }
 }
 
+
+
 export default MyLibrary;
+
