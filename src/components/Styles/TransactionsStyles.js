@@ -5,7 +5,7 @@ export const TransactionWrapper = styled.div`
   justify-content: center;
   width: 100%;
   padding: 10px;
-  margin: 5vw auto 0;
+  margin: 5vw autogi 0;
   flex-direction: column;
 
   h2,
@@ -16,9 +16,11 @@ export const TransactionWrapper = styled.div`
   h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    color: #009EE5;
   }
 
   p {
     font-size: 1rem;
+    color: #838281;
   }
 `;

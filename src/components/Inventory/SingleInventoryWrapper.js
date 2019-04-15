@@ -14,7 +14,7 @@ import ChatApp from "../Chat/ChatApp";
 import UpdateInventoryForm from "./UpdateInventoryForm.js";
 import SingleInventoryDetails from "./SingleInventoryDetails.js";
 import Auth from "../Auth/Auth";
-
+import DeleteInventory from './DeleteInventory';
 import Loading from "../Loading/Loading.js";
 class SingleInventory extends Component {
   constructor(props) {
@@ -22,7 +22,8 @@ class SingleInventory extends Component {
     this.state = {
       singleInventory: {},
       updating: false,
-      showChat: false
+      showChat: false,
+      open: false
     };
   }
 
@@ -54,6 +55,12 @@ class SingleInventory extends Component {
     let duration = moment.duration(now.diff(end)).humanize();
     return duration;
   };
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+  handleClose = () => {
+    this.setState({ open: false });
+  };
   render() {
     if (this.props.loading) {
       return <Loading />;
@@ -73,21 +80,21 @@ class SingleInventory extends Component {
               style={{ margin: "10px 10px 0 0" }}
               onClick={this.toggleUpdate}
             >
-              {this.state.updating ? "Cancel Changes" : "Edit/Add Description"}
+              {this.state.updating
+                ? "Cancel Changes"
+                : this.props.singleInventory.description
+                ? "Edit Description"
+                : "Add Description"}
             </Button>
             <Button
               variant="outlined"
-              onClick={() =>
-                this.deleteInventory(
-                  this.props.singleInventory.userId,
-                  this.props.singleInventory.bookId
-                )
-              }
+              onClick={this.handleClickOpen}
               style={{ margin: "10px 10px 0 0" }}
               color="secondary"
             >
               Delete from inventory
             </Button>
+            <DeleteInventory open={this.state.open} handleClose={this.handleClose} handleClickOpen={this.handleClickOpen} deleteInventory={this.deleteInventory} singleInventory={this.props.singleInventory} />
           </div>
         </React.Fragment>
       );
@@ -99,7 +106,12 @@ class SingleInventory extends Component {
               singleInventory={this.props.singleInventory}
               editInventory={this.editInventory}
             />
-            <Button style={{float: "right", width: "163px"}} color="secondary" variant="outlined" onClick={this.toggleUpdate}>
+            <Button
+              style={{ float: "right", width: "163px" }}
+              color="secondary"
+              variant="outlined"
+              onClick={this.toggleUpdate}
+            >
               Cancel Changes
             </Button>
           </div>

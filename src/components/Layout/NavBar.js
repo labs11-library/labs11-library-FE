@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import Avatar from "@material-ui/core/Avatar";
 import {
@@ -10,6 +9,7 @@ import {
   NavLinks,
   NavLinksShow,
   NavLinkWrapper,
+  Button,
   MenuLinks
 } from "../Styles/NavBarStyles.js";
 import Menu from "@material-ui/core/Menu";
@@ -53,29 +53,39 @@ class NavBar extends Component {
           <NavBarWrapper>
             <NavContentWrapper>
               <BookMapsLogo to="/">
-                <span role="img" aria-label="books">
+                {/* <span role="img" aria-label="books">
                   📚
-                </span>
+                </span> */}
+                <Button>
+                  Home
+                </Button>
               </BookMapsLogo>
               <BurgerMenu />
               <NavLinks>
                 <NavLinkWrapper to="/my-library">
-                  <span role="img" aria-label="books">
+                  {/* <span role="img" aria-label="books">
                     📚
-                  </span>{" "}
-                  My Library
+                  </span>{" "} */}
+                  <Button>
+                    My Library
+                  </Button>
+                  
                 </NavLinkWrapper>
                 <NavLinkWrapper to="/add-book">
-                  <span role="img" aria-label="plus">
+                  {/* <span role="img" aria-label="plus">
                     📖
-                  </span>{" "}
-                  Add book
+                  </span>{" "} */}
+                   <Button>
+                     Add book 
+                  </Button>
                 </NavLinkWrapper>
                 <NavLinkWrapper to="/notifications">
-                  <span role="img" aria-label="bell">
+                  {/* <span role="img" aria-label="bell">
                     🔔
-                  </span>{" "}
-                  Notifications
+                  </span>{" "} */}
+                  <Button>
+                    Notifications
+                  </Button>
                 </NavLinkWrapper>
                 <NavLinkWrapper>
                   <Avatar

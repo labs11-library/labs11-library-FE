@@ -4,7 +4,6 @@ import { createGlobalStyle } from "styled-components";
 export const Html = styled.html`
   font-size: 62.5%;
   font-family: "Roboto", sans-serif;
-  color: #28345a;
 `;
 
 export const AppContainer = styled.div`

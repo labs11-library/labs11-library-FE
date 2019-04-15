@@ -19,10 +19,12 @@ import {
   BookTextContainer
 } from "../Styles/InventoryStyles";
 import Button from "@material-ui/core/Button";
+import DeleteRequest from './DeleteRequest';
 
 class RequestDetails extends Component {
   state = {
-    value: 0
+    value: 0,
+    open: false
   };
   deleteRequest = () => {
     const { lenderId, checkoutRequestId } = this.props.request;
@@ -72,7 +74,7 @@ class RequestDetails extends Component {
       recipient: otherUserEmail,
       sender: "blkfltchr@gmail.com",
       subject: `${borrowerLenderName} doesn't want to exchange ${title}${anymoreText}`,
-      html: `Hey ${lenderBorrowerName}, unfortunately ${borrowerLenderName} does not want to exchange ${title}${anymoreText}. Find your next book on <a href="https://bookmaps.netlify.com/">Book Maps</a>!`
+      html: `Hey ${lenderBorrowerName}, unfortunately ${borrowerLenderName} does not want to exchange ${title}${anymoreText}. Find your next book on <a href="https://bookmaps.netlify.com/">Bookmaps</a>!`
     };
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
@@ -80,6 +82,14 @@ class RequestDetails extends Component {
       }&topic=${email.subject}&html=${email.html}`
     ).catch(err => console.error(err));
     this.forceUpdate();
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   render() {
@@ -157,10 +167,11 @@ class RequestDetails extends Component {
             style={{ margin: "10px 5px" }}
             variant="outlined"
             color="secondary"
-            onClick={this.deleteRequest}
+            onClick={this.handleClickOpen}
           >
             Delete request
           </Button>
+          <DeleteRequest open={this.state.open} handleClose={this.handleClose} handleClickOpen={this.handleClickOpen} deleteRequest={this.deleteRequest} request={this.props.request} />
         </ButtonContainer>
       </BookDetailsWrapper>
     );

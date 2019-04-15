@@ -18,6 +18,43 @@ export const NavBarWrapper = styled.div`
     text-decoration: none;
   }
 `;
+
+export const Button = styled.div` {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  padding: 12px 24px;
+  // border: 1px solid #325C6C;
+  border-radius: 8px;
+  // background: -webkit-gradient(linear, left top, left bottom, from(#57ad53), to(#25a84e));
+  // background: -moz-linear-gradient(top, #57ad53, #25a84e);
+  // background: linear-gradient(to bottom, #57ad53, #25a84e);
+  -webkit-box-shadow: #ff5959 0px 0px 0px 0px;
+  -moz-box-shadow: #ff5959 0px 0px 0px 0px;
+  // box-shadow: #ff5959 0px 0px 0px 0px;
+  // text-shadow: #325C6C 1px 1px 1px;
+  font: normal normal bold 20px trebuchet ms;
+  color: #009EE5;
+  text-decoration: none;
+}
+&:hover${Button},
+&:focus${Button} {
+  border: 1px solid #009EE5;
+background: #009EE5;
+  background: -webkit-gradient(linear, left top, left bottom, from(#009EE5), to(#009EE5));
+  background: -moz-linear-gradient(top, #009EE5, #009EE5);
+  background: linear-gradient(to bottom, #009EE5, #009EE5);
+  color: white;
+  text-decoration: none;
+}
+&:active${Button} {
+ background: #3ea8e5;
+  background: -webkit-gradient(linear, left top, left bottom, from(#3ea8e5), to(#3ea8e5));
+  background: -moz-linear-gradient(top, #3ea8e5, #3ea8e5);
+  background: linear-gradient(to bottom, #3ea8e5, #3ea8e5);
+}
+`
+
 export const NavContentWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
@@ -26,9 +63,13 @@ export const NavContentWrapper = styled.div`
   align-items: center;
 `;
 export const BookMapsLogo = styled(Link)`
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
   span {
     font-size: 2.5rem;
-    padding-left: 10px;
+    padding: 0 10px;
+    margin-top: 5px;
   }
 `;
 

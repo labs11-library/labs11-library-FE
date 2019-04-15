@@ -5,6 +5,16 @@ export const NoRequests = styled.h2`
   font-size: 1.5rem;
   max-width: 90%;
   margin: 20px auto;
+
+  a {
+    color: blue;
+  }
+
+  span {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+  }
 `;
 
 export const BookDetailsWrapper = styled.div`
@@ -19,12 +29,14 @@ export const BookDetailsWrapper = styled.div`
 
   h2 {
     font-size: 18px;
+    color: #009EE5;
   }
 
   p {
     font-size: 14px;
     margin: 12px 0px 6px;
     width: 90%;
+    color: #838281;
   }
   @media (max-width: 500px) {
     width: 90%;
