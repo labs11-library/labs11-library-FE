@@ -19,6 +19,7 @@ import ReviewForm from "./components/Reviews/ReviewForm";
 import Payment from "./components/Stripe/Payment";
 import MyLibrary from "./components/MyLibrary/MyLibrary";
 import LandingPage from "./components/Layout/LandingPage";
+import Landing from "./components/Layout/Landing";
 import RequestList from "./components/Requests/RequestList";
 import BookSearch from "./components/AddBook/BookSearch.js";
 import UserProfile from "./components/Profile/UserProfile";
@@ -59,7 +60,8 @@ class App extends Component {
         <Html>
           <NavBar />
           <AppContainer>
-            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/browse" component={LandingPage} />
+            <Route exact path="/" component={Landing} />
             <Route exact path="/books" component={BookList} />
             <Route exact path="/users" component={Users} />
             <Route exact path="/signup" component={Signup} />
