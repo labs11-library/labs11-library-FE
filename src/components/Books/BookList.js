@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import BookDetails from "./BookDetails";
+import Distance from "./Distance";
 
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -121,6 +122,7 @@ class Books extends Component {
               <MenuItem value={"mybooks"}>My Books</MenuItem>
             </Select>
           </div>
+          <Distance />
           <CardContainer>
             {this.filteredBooks().map(book => {
               return <BookDetails key={book.bookId} book={book} />;
