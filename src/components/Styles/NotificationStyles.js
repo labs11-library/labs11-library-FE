@@ -5,6 +5,16 @@ export const NoRequests = styled.h2`
   font-size: 1.5rem;
   max-width: 90%;
   margin: 20px auto;
+
+  a {
+    color: blue;
+  }
+
+  span {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+  }
 `;
 
 export const BookDetailsWrapper = styled.div`
