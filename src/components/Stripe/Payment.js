@@ -14,12 +14,13 @@ class Payment extends React.Component {
     return (
       <StripeCheckout
         billingAddress
-        description="Please enter this email associated with this account."
+        description="Please enter your payment info."
         locale="auto"
         stripeKey="pk_test_paiLlNo6bPnrx0Nnb2ORgRLu00CRdEJXhe"
         token={this.onToken}
         zipCode
-        label="Update Payment Information"
+        label="Request checkout"
+        email={this.props.email}
       />
     );
   }

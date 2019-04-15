@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import Avatar from "@material-ui/core/Avatar";
 import {

@@ -68,7 +68,7 @@ export default function checkoutReducer(state = initialState, action) {
         error: ""
       };
     case ADD_CHECKOUT_REQUEST_SUCCESS:
-      toast.info("Checkout request sent.");
+      toast.info("Your request is being reviewed. Please coordinate an exchange in the message thread.");
       return {
         ...state,
         loadingRequests: false,
