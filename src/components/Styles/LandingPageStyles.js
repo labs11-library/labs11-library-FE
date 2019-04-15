@@ -66,13 +66,17 @@ export const BookTextContainer = styled.div`
   h2 {
     font-size: 1.5rem;
     padding-right: 6px;
+    color: #009EE5;
+  }
+
   }
   p {
     font-size: 1rem;
+    color: #838281;
   }
 `;
 export const Availability = styled.p`
-  color: ${props => (props.available ? "#6A9A9E" : "red")};
+  color: ${props => (props.available ? "#00d369 !important" : "#ff5454 !important")};
 `;
 
 export const DueDate = styled.p`

@@ -16,9 +16,11 @@ export const TransactionWrapper = styled.div`
   h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    color: #009EE5;
   }
 
   p {
     font-size: 1rem;
+    color: #838281;
   }
 `;

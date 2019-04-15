@@ -76,7 +76,7 @@ const availability = available ?
                 to={`/users/${lenderId}/library`}
                 style={{
                   textDecoration: "none",
-                  color: "#325C6C",
+                  color: "#009EE5",
                   fontSize: "14px"
                 }}
               >

@@ -12,9 +12,11 @@ export const BookDetailsWrapper = styled.div`
   top: 40px;
   h2 {
     font-size: 18px;
+    color: #009ee5;
   }
   p {
     font-size: 14px;
+    color: #838281;
   }
   @media (max-width: 850px) {
     display: flex;
@@ -109,7 +111,7 @@ export const BookImg = styled.img`
 `;
 
 export const Availability = styled.p`
-  color: ${props => (props.available ? "#6A9A9E" : "red")};
+  color: ${props => (props.available ? "#00d369" : "red")};
 `;
 
 export const DueDate = styled.p`
