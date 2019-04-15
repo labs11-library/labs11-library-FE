@@ -48,10 +48,10 @@ background: #325C6C;
   text-decoration: none;
 }
 &:active${Button} {
- background: #325C6C;
-  background: -webkit-gradient(linear, left top, left bottom, from(#325C6C), to(#325C6C));
-  background: -moz-linear-gradient(top, #325C6C, #325C6C);
-  background: linear-gradient(to bottom, #325C6C, #325C6C);
+ background: #3ea8e5;
+  background: -webkit-gradient(linear, left top, left bottom, from(#3ea8e5), to(#3ea8e5));
+  background: -moz-linear-gradient(top, #3ea8e5, #3ea8e5);
+  background: linear-gradient(to bottom, #3ea8e5, #3ea8e5);
 }
 `
 
