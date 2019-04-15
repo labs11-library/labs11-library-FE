@@ -52,7 +52,7 @@ class NavBar extends Component {
         {loggedIn && (
           <NavBarWrapper>
             <NavContentWrapper>
-              <NavLinkWrapper exact to="/">
+              <NavLinkWrapper exact to="/browse">
                 Home
               </NavLinkWrapper>
               <BurgerMenu />
@@ -102,7 +102,7 @@ class NavBar extends Component {
         {!loggedIn && (
           <NavBarWrapper>
             <NavContentWrapper>
-              <NavLinkWrapper to="/">
+              <NavLinkWrapper to="/browse">
                 <span role="img" aria-label="books">
                   📚
                 </span>
