@@ -1,25 +1,24 @@
-import React from 'react';
-import Dropzone from 'react-dropzone';
-import request from 'superagent';
+import React, { Component } from 'react';
 
-export default class ContactForm extends React.Component {
+export default class UpdateProfilePhoto extends Component {
 
-    render() {
-        <Dropzone
-        onDrop={this.onImageDrop.bind(this)}
-        accept="image/*"
-        multiple={false}>
-          {({getRootProps, getInputProps}) => {
-            return (
-              <div
-                {...getRootProps()}
-              >
-                <input {...getInputProps()} />
-                {
-                <p>Try dropping some files here, or click to select files to upload.</p>
-                }
-              </div>
-            )
-        }}
-      </Dropzone>
+    state = {
+
     }
+
+    handleFile(e){
+        
+    }
+
+    render(){
+        return(
+            <div className="profileUpload">
+                <h1>Profile Photo Upload </h1>
+                <form>
+                    <label>Select file to upload </label>
+                    <input type="file" name="file" onChange={(e) => this.handFile(e)} />
+                </form>
+            </div>
+        )
+    }
+}
