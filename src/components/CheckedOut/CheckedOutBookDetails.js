@@ -101,7 +101,7 @@ class BookDetails extends Component {
         : "Lender";
 
     const buttonText =
-    this.overdue() === null && returned === false && lenderBorrower === "Borrower"
+    this.overdue() === undefined && returned === false && lenderBorrower === "Borrower"
         ? "Confirm Return"
         : this.overdue() > 0 &&
           returned === false &&
@@ -109,7 +109,7 @@ class BookDetails extends Component {
         ? `Confirm Return (and charge $${this.overdue() /
             100} late fee)`
         : null;
-    console.log(title, buttonText)
+    console.log(title, this.overdue())
     return (
       <BookDetailsWrapper>
         <BookDetailsContainer>
@@ -136,8 +136,8 @@ class BookDetails extends Component {
             {/* <Button style={{ margin: "10px 5px" }} color="primary" variant="outlined">Send email reminder</Button> */}
             {buttonText !== null && (
               <Button
-                color="secondary"
-                variant="contained"
+                color="primary"
+                variant="outlined"
                 style={{ margin: "10px 5px", maxWidth: "200px" }}
                 onClick={
                   this.overdue() === null
