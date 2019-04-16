@@ -19,7 +19,7 @@ import {
   BookTextContainer
 } from "../Styles/InventoryStyles";
 import Button from "@material-ui/core/Button";
-import DeleteRequest from './DeleteRequest';
+import DeleteRequest from "./DeleteRequest";
 
 class RequestDetails extends Component {
   state = {
@@ -66,9 +66,7 @@ class RequestDetails extends Component {
         ? lender
         : borrower;
     const anymoreText =
-      lenderId.toString() === localStorage.getItem("userId")
-        ? null
-        : " anymore";
+      lenderId.toString() === localStorage.getItem("userId") ? "" : " anymore";
     localStorage.getItem("userId");
     const email = {
       recipient: otherUserEmail,
@@ -171,7 +169,13 @@ class RequestDetails extends Component {
           >
             Delete request
           </Button>
-          <DeleteRequest open={this.state.open} handleClose={this.handleClose} handleClickOpen={this.handleClickOpen} deleteRequest={this.deleteRequest} request={this.props.request} />
+          <DeleteRequest
+            open={this.state.open}
+            handleClose={this.handleClose}
+            handleClickOpen={this.handleClickOpen}
+            deleteRequest={this.deleteRequest}
+            request={this.props.request}
+          />
         </ButtonContainer>
       </BookDetailsWrapper>
     );
