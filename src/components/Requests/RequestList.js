@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import RequestDetails from "./RequestDetails";
 import { connect } from "react-redux";
 import { getCheckoutRequests } from "../../redux/actions/checkoutActions.js";
@@ -85,7 +86,15 @@ class Requests extends Component {
               <div>
                 {this.filterIncomingRequests().length === 0 && (
                   <NoRequests>
-                    You have no incoming checkout requests.  Check out your <span onClick={() => {this.setState({value: 1})}}>outbound requests</span> or add a book <a href="/">here</a>.
+                    You have no incoming checkout requests. Check out your{" "}
+                    <span
+                      onClick={() => {
+                        this.setState({ value: 1 });
+                      }}
+                    >
+                      outbound requests
+                    </span>{" "}
+                    or add a book <Link to="/add-book">here</Link>.
                   </NoRequests>
                 )}
                 {this.filterIncomingRequests().length > 0 &&
@@ -104,7 +113,19 @@ class Requests extends Component {
               <div>
                 {this.filterOutgoingRequests().length === 0 && (
                   <NoRequests>
-                    You have no outbound checkout requests. Check out your <span onClick={() => {this.setState({value: 0})}}>incoming requests</span> or find a book <a href="/">here</a>.
+                    You have no outbound checkout requests. Check out your{" "}
+                    <span
+                      onClick={() => {
+                        this.setState({ value: 0 });
+                      }}
+                    >
+                      incoming requests
+                    </span>{" "}
+                    or find a book{" "}
+                    <Link to="/" style={{ color: "##757582" }}>
+                      here
+                    </Link>
+                    .
                   </NoRequests>
                 )}
                 {this.filterOutgoingRequests().length > 0 &&
