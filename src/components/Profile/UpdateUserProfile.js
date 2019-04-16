@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { editProfile } from "../../redux/actions/authActions.js";
 import styled from "styled-components";
+import UpdateProfilePhoto from "./UpdateProfilePhoto";
 
 const FormWrapper = styled.form`
   width: 400px;
@@ -50,6 +51,7 @@ class UpdateUserProfile extends Component {
   };
   render() {
     return (
+    <div>  
       <FormWrapper>
         <div>
           <TextField
@@ -110,6 +112,8 @@ class UpdateUserProfile extends Component {
           </Button>
         </div>
       </FormWrapper>
+      <UpdateProfilePhoto />
+    </div>
     );
   }
 }
