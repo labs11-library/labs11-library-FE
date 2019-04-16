@@ -39,7 +39,6 @@ class Inventory extends Component {
   };
 
   searchBooks = () => {
-    console.log("hello searched");
     if (this.state.searchText.length === 0) {
       return this.props.inventory;
     } else if (this.state.searchText.length > 0) {
@@ -51,14 +50,10 @@ class Inventory extends Component {
     }
   };
   filteredBooks = () => {
-    console.log("hello");
     const { filter } = this.state;
 
     if (filter === "all") {
       return this.searchBooks().filter(function(book) {
-        console.log(book.userId.toString(), "book.userId");
-        console.log(localStorage.getItem("userId"), "localstorage");
-        console.log(book.available);
         return book.userId.toString() === localStorage.getItem("userId");
       });
     } else if (filter === "available") {

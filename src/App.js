@@ -45,7 +45,6 @@ class App extends Component {
 
   componentWillMount() {
     var query = queryString.parse(this.props.location.search);
-    console.log(query);
     if (query.token && query.userId) {
       window.localStorage.setItem("jwt", query.token);
       window.localStorage.setItem("userId", query.userId);

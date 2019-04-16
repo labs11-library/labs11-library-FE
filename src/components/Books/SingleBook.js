@@ -248,7 +248,7 @@ class SingleBook extends Component {
                     >
                       REQUEST CHECKOUT
                     </Button>
-                    <div>
+                    <div style={{display: "flex", alignItems: "center"}}>
                       <Avatar src={lenderPicture} alt={`${lender} avatar`} />
                       <div
                         style={{
