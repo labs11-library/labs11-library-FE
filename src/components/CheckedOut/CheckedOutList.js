@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import CheckedOutBookDetails from "./CheckedOutBookDetails";
-
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCheckouts } from "../../redux/actions/checkoutActions.js";
-
 import Auth from "../Auth/Auth";
-
 import Loading from "../Loading/Loading.js";
-import { CheckoutHeader } from "../Styles/CheckoutStyles.js";
+import { CheckoutHeader, NoCheckouts } from "../Styles/CheckoutStyles.js";
 class CheckedOutList extends Component {
   constructor(props) {
     super(props);
@@ -71,6 +69,14 @@ class CheckedOutList extends Component {
       return (
         <div>
           <CheckoutHeader>Loaned out books</CheckoutHeader>
+          {
+            (this.filterIncomingCheckouts().length === 0) &&
+              <NoCheckouts>
+                You have no loaned out books in your checkouts.{" "}
+                <Link to="/add-book">Click here</Link> to add books to your library.
+              </NoCheckouts>
+              
+          }
           <div>
             {this.filterIncomingCheckouts().map(checkout => {
               return (
@@ -83,6 +89,14 @@ class CheckedOutList extends Component {
             })}
           </div>
           <CheckoutHeader>Borrowed books</CheckoutHeader>
+          {
+            (this.filterOutgoingCheckouts().length === 0) &&
+              <NoCheckouts>
+                You have no borrowed books in your checkouts.{" "}
+                <Link to="/browse">Click here</Link> to find your next favourite book.
+              </NoCheckouts>
+              
+          }
           <div>
             {this.filterOutgoingCheckouts().map(checkout => {
               return (

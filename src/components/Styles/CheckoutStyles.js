@@ -5,3 +5,9 @@ export const CheckoutHeader = styled.h2`
   font-size: 1.5rem;
   margin-bottom: 15px;
 `;
+
+export const NoCheckouts = styled.p`
+  margin-left: 70px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+`;

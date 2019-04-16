@@ -6,7 +6,7 @@ import Auth from "../Auth/Auth";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-
+import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading.js";
 import { NoRequests } from "../Styles/NotificationStyles.js";
 class Requests extends Component {
@@ -85,7 +85,7 @@ class Requests extends Component {
               <div>
                 {this.filterIncomingRequests().length === 0 && (
                   <NoRequests>
-                    You have no incoming checkout requests.  Check out your <span onClick={() => {this.setState({value: 1})}}>outbound requests</span> or add a book <a href="/browse">here</a>.
+                    You have no incoming checkout requests.  Check out your <span onClick={() => {this.setState({value: 1})}}>outbound requests</span> or <Link to="/add-book">click here</Link> to add books to your library.
                   </NoRequests>
                 )}
                 {this.filterIncomingRequests().length > 0 &&
@@ -104,7 +104,7 @@ class Requests extends Component {
               <div>
                 {this.filterOutgoingRequests().length === 0 && (
                   <NoRequests>
-                    You have no outbound checkout requests. Check out your <span onClick={() => {this.setState({value: 0})}}>incoming requests</span> or find a book <a href="/browse">here</a>.
+                    You have no outbound checkout requests. Check out your <span onClick={() => {this.setState({value: 0})}}>incoming requests</span> or <Link to="/browse">click here</Link> to find your next favourite book.
                   </NoRequests>
                 )}
                 {this.filterOutgoingRequests().length > 0 &&

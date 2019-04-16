@@ -21,7 +21,9 @@ const BookDetails = props => {
     dueDate,
     checkoutDate
   } = props.book;
-  const availability = available ? "Available" : "Checked out";
+  var FontAwesome = require('react-fontawesome')
+  const availability = available ? 
+  <div>Available <FontAwesome className="far fa-check-circle" size="1x"></FontAwesome></div> : "Checked out";
   const threeWeeks = moment(checkoutDate, "YYYY-MM-DD").add(21, "days");
   return (
     <BookDetailsWrapper>
@@ -34,7 +36,9 @@ const BookDetails = props => {
           {title.length > 25 && "..."}
         </h2>
         <p>by {authors}</p>
-        <Availability available={available}>{availability}</Availability>
+        <Availability available={available}>
+          {availability}
+        </Availability>
         {!available && (
           <p>
             Date due:{" "}
