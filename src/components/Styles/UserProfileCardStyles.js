@@ -1,11 +1,22 @@
 import styled from "styled-components";
 
+export const UserProfileCardShadow = styled.div`
+  background-color: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  margin: auto;
+  width: 95%;
+  max-width: 600px;
+`;
+export const OtherUserCard = styled.div`
+  width: 95%;
+  max-width: 600px;
+  margin: 0 auto;
+`;
 export const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   align-items: center;
-  width: 95%;
-  max-width: 600px;
   padding: 10px;
   margin: auto;
   h1,

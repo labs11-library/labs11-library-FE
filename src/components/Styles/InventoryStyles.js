@@ -37,6 +37,35 @@ export const NoBooksLibrary = styled.h2`
 `;
 // copied from /books/styles.js ==========================================================
 
+export const SingleInventoryContainer = styled.div`
+  width: 600px;
+  margin: 20px auto;
+  @media (max-width: 800px) {
+    width: 80%;
+    margin: 10px auto;
+  }
+  @media (max-width: 500px) {
+    width: 90%;
+    margin: 10px auto;
+  }
+`
+
+export const CancelChangesButton = styled.div`
+  float: right; 
+  width: 163px;
+  margin-top: 10px;
+`
+
+export const SaveChangesButton = styled.div`
+  width: 163px;
+  position: absolute;
+  left: 0;
+  bottom: -45px;
+  @media (max-width: 600px) {
+    left: -130px;
+  }
+`
+
 export const BookDetailsWrapper = styled.div`
   width: 45%;
   border-radius: 7px;
