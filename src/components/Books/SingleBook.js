@@ -169,30 +169,30 @@ class SingleBook extends Component {
                       <Ratings rating={avgRating} widgetRatedColors="gold">
                         <Ratings.Widget
                           widgetHoverColor="gold"
-                          widgetDimension="30px"
+                          widgetDimension="22px"
                         />
                         <Ratings.Widget
                           widgetHoverColor="gold"
-                          widgetDimension="30px"
+                          widgetDimension="22px"
                         />
                         <Ratings.Widget
                           widgetHoverColor="gold"
-                          widgetDimension="30px"
+                          widgetDimension="22px"
                         />
                         <Ratings.Widget
                           widgetHoverColor="gold"
-                          widgetDimension="30px"
+                          widgetDimension="22px"
                         />
                         <Ratings.Widget
                           widgetHoverColor="gold"
-                          widgetDimension="30px"
+                          widgetDimension="22px"
                         />
                       </Ratings>
                       <div
                         style={{
                           marginTop: ".5rem",
                           color: "#838281",
-                          fontSize: ".8rem"
+                          fontSize: "1rem"
                         }}
                       >
                         Goodreads rating: {avgRating}

@@ -38,7 +38,7 @@ const SearchedBookTile = props => {
             variant="contained"
             color="primary"
           >
-            Add book to your library!
+            Add book to your library
           </Button>
         </BookTextContainer>
       </BookDetailsWrapper>

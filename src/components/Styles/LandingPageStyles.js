@@ -98,6 +98,10 @@ export const AvatarContainer = styled.div`
   @media (max-width: 1050px) and (min-width: 750px) {
     display: none !important;
   }
+
+  @media(max-width: 500px) {
+    display: none !important;
+  }
 `;
 
 export const ContentContainer = styled.div`
