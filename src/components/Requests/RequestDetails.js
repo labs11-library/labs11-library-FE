@@ -141,7 +141,7 @@ class RequestDetails extends Component {
         <ButtonContainer>
           <NavLink
             style={{ textDecoration: "none" }}
-            to={`/requests/${checkoutRequestId}`}
+            to={`/messages/${checkoutRequestId}`}
           >
             <Button
               style={{ margin: "10px 5px" }}
