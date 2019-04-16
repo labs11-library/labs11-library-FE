@@ -6,9 +6,16 @@ import { editProfile } from "../../redux/actions/authActions.js";
 import styled from "styled-components";
 
 const FormWrapper = styled.form`
-  width: 400px;
+  width: 95%;
+  max-width: 600px;
+  margin: 0 auto;
 `;
-
+const NameWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+`;
 class UpdateUserProfile extends Component {
   constructor(props) {
     super(props);
@@ -50,14 +57,14 @@ class UpdateUserProfile extends Component {
   render() {
     return (
       <FormWrapper>
-        <div>
+        <NameWrapper>
           <TextField
             type="text"
             label="First name"
             name="firstName"
             value={this.state.firstName}
             onChange={this.handleChange}
-            style={{ padding: "5px" }}
+            style={{ width: "49%" }}
           />
           <TextField
             type="text"
@@ -65,49 +72,44 @@ class UpdateUserProfile extends Component {
             name="lastName"
             value={this.state.lastName}
             onChange={this.handleChange}
-            style={{ padding: "5px" }}
+            style={{ width: "49%" }}
           />
-        </div>
-        <div>
-          <TextField
-            type="email"
-            label="Email"
-            name="email"
-            value={this.state.email}
-            onChange={this.handleChange}
-            style={{ padding: "5px" }}
-          />
-        </div>
-        <div>
-          <TextField
-            type="text-area"
-            label="Bio"
-            name="bio"
-            multiline
-            fullWidth
-            value={this.state.bio}
-            onChange={this.handleChange}
-            style={{ padding: "5px" }}
-          />
-        </div>
-        <div>
-          <Button
-            variant="contained"
-            onClick={this.editProfile}
-            style={{ margin: "5px" }}
-            color="primary"
-          >
-            Save Updates
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={this.changeLocation}
-            style={{ margin: "5px" }}
-            color="primary"
-          >
-            Update your location
-          </Button>
-        </div>
+        </NameWrapper>
+        <TextField
+          type="email"
+          label="Email"
+          name="email"
+          value={this.state.email}
+          onChange={this.handleChange}
+          style={{ width: "100%", marginBottom: "5px" }}
+        />
+        <TextField
+          type="text-area"
+          label="Bio"
+          name="bio"
+          multiline
+          fullWidth
+          value={this.state.bio}
+          onChange={this.handleChange}
+          // style={{ padding: "5px" }}
+        />
+        <Button
+          variant="contained"
+          onClick={this.editProfile}
+          style={{ margin: "5px" }}
+          color="primary"
+        >
+          Save Updates
+        </Button>
+        <Button
+          variant="outlined"
+          onClick={this.changeLocation}
+          style={{ margin: "5px" }}
+          color="primary"
+        >
+          Update your location
+        </Button>
+        {/* </div> */}
       </FormWrapper>
     );
   }
