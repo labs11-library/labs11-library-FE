@@ -15,8 +15,11 @@ import InputLabel from "@material-ui/core/InputLabel";
 import {
   InventoryContainer,
   CardContainer,
-  NoBooks
+  NoBooksLibrary
 } from "../Styles/InventoryStyles.js";
+import {  NoBooks,
+  NoBooksLink
+} from "../Styles/LandingPageStyles.js";
 class Inventory extends Component {
   constructor() {
     super();
@@ -77,10 +80,10 @@ class Inventory extends Component {
       return <Loading />;
     } else if (this.props.inventory.length === 0) {
       return (
-        <NoBooks>
+        <NoBooksLibrary>
           You have no books listed in your library.{" "}
           <Link to="/add-book">Click here</Link> to add books to your library.
-        </NoBooks>
+        </NoBooksLibrary>
       );
     } else {
       return (
@@ -122,6 +125,15 @@ class Inventory extends Component {
               <MenuItem value={"available"}>Available</MenuItem>
             </Select>
           </div>
+          {this.state.searchText.length > 0 &&
+            this.filteredBooks().length === 0 && (
+              <>
+                <NoBooks>You have not posted this book yet.</NoBooks>
+                <NoBooksLink to="/add-book">
+                  Add it to your library.
+                </NoBooksLink>
+              </>
+            )}
           <CardContainer>
             {this.filteredBooks().map(book => {
               return (

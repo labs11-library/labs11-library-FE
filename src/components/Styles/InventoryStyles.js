@@ -29,7 +29,7 @@ export const CardContainer = styled.div`
   }
 `;
 
-export const NoBooks = styled.h2`
+export const NoBooksLibrary = styled.h2`
   text-align: center;
   font-size: 1.5rem;
   max-width: 90%;
