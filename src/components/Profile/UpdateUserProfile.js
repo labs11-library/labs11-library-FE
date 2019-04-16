@@ -4,7 +4,9 @@ import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { editProfile } from "../../redux/actions/authActions.js";
 import styled from "styled-components";
-
+import axios from 'axios';
+import baseUrl from '../../url.js';
+// import UpdateProfilePhoto from "./UpdateProfilePhoto";
 const FormWrapper = styled.form`
   width: 95%;
   max-width: 600px;
@@ -19,32 +21,46 @@ const NameWrapper = styled.div`
 class UpdateUserProfile extends Component {
   constructor(props) {
     super(props);
-    const { firstName, lastName, email, bio, userId } = this.props.loggedInUser;
+    const { firstName, lastName, email, bio, userId, picture } = this.props.loggedInUser;
     this.state = {
       firstName,
       lastName,
       email,
       bio,
       userId,
+      picture,
       latitude: null,
-      longitude: null
+      longitude: null,
+      image: '',
+      selectedFile: null,
     };
   }
+
   componentWillReceiveProps(newProps) {
     if (this.props.loggedInUser !== newProps.loggedInUser) {
       this.props.toggleUpdate();
     }
   }
+
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({
       [name]: value
     });
   };
+
   editProfile = e => {
     e.preventDefault();
-    this.props.editProfile(this.state);
+    this.props.editProfile({
+      firstName: this.state.firstName,
+      lastName: this.state.lasName,
+      email: this.state.email,
+      bio: this.state.bio,
+      userId: this.state.bio,
+      picture: this.state.picture
+    });
   };
+
   changeLocation = e => {
     e.preventDefault();
     navigator.geolocation.getCurrentPosition(position => {
@@ -54,8 +70,43 @@ class UpdateUserProfile extends Component {
       });
     });
   };
+
+  fileHandler = e => {
+    this.setState({ selectedFile: e.target.files[0] });
+ };
+
+  editProfilePic = e => {
+      e.preventDefault();
+      this.props.editProfile(this.state);
+  };
+
+ uploadImg = e => {
+    e.preventDefault();
+    // let userId = localStorage.getItem("userId");
+    const fd = new FormData();
+    fd.append('image', this.state.selectedFile);
+
+    axios
+       .post(`${baseUrl}/upload`, fd)
+       .then(res => {
+          console.log('res', res);
+          this.setState({ 
+            image: res.data.image,
+            picture:this.state.image
+          });
+          // this.props.editProfile(this.state);
+       })
+      //  .then(res => {
+      //   this.props.editProfile({
+      //     image: res.data.image,
+      //     picture:this.state.image
+      //   })
+      //  })
+       .catch(err => console.log(err));
+ };
   render() {
     return (
+      <div>
       <FormWrapper>
         <NameWrapper>
           <TextField
@@ -111,6 +162,24 @@ class UpdateUserProfile extends Component {
         </Button>
         {/* </div> */}
       </FormWrapper>
+      {/* <div className="profileUpdate">
+            <h1>Update your profile photo</h1>
+            <form method="/POST" encType="multipart/form-data">
+               <div className="form-group">
+                  <label htmlFor="image">Upload image: </label>
+                  <input
+                     onChange={this.fileHandler}
+                     type="file"
+                     id="image"
+                     name="image"
+                     accept="image/*"
+                     required
+                  />
+                  <button onClick={this.uploadImg}>Upload</button>
+               </div>
+            </form>
+         </div> */}
+      </div>
     );
   }
 }

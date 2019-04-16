@@ -42,16 +42,19 @@ class Books extends Component {
     });
   };
   searchBooks = () => {
-    const { searchText } = this.state;
-    const { books } = this.props;
+    // const { searchText } = this.state;
+    // const { books } = this.props;
 
-    if (searchText.length === 0) {
-      return books;
-    } else if (searchText.length > 0) {
+    if (this.state.searchText.length === 0) {
+      return this.props.books;
+    } else if (this.state.searchText.length > 0) {
       const newText = this.state.searchText.replace(/\\$/, "");
-      const searchRegex = new RegExp(newText, "gi");
+      let searchRegex = new RegExp(newText, "gi");
       // const searchRegex = new RegExp(searchText, "gi");
-      return books.filter(
+      console.log(this.props.books);
+      console.log(searchRegex);
+      console.log(this.props.books[0].title.match(/1984/gi));
+      return this.props.books.filter(
         book =>
           book.title.match(searchRegex) ||
           book.authors.match(searchRegex) ||
@@ -106,7 +109,7 @@ class Books extends Component {
             }}
           >
             <InputBase
-              placeholder="Search for books by title, author, or owner"
+              placeholder="Search by title, author, or owner"
               type="text"
               name="searchText"
               value={this.state.searchText}
