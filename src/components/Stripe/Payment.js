@@ -21,6 +21,7 @@ class Payment extends React.Component {
         zipCode
         label="Add payment info to request checkout"
         email={this.props.email}
+        panelLabel="Save Payment Info"
       />
     );
   }

@@ -43,7 +43,7 @@ export const BookImgWrapper = styled.div`
   max-height: 180px;
   margin-right: 20px;
   @media (max-width: 750px) {
-    margin-right: 10px
+    margin-right: 10px;
   }
 `;
 export const BookImg = styled.img`
@@ -100,14 +100,13 @@ export const AvatarContainer = styled.div`
     display: none !important;
   }
 
-  @media(max-width: 500px) {
+  @media (max-width: 500px) {
     display: none !important;
   }
 `;
 
 export const ContentContainer = styled.div`
   width: 100%;
-  height: calc(100vh - 3.5rem);
   position: relative;
   display: flex;
   flex-direction: row;
@@ -121,8 +120,11 @@ export const MapWrapper = styled.div`
   right: 0;
   top: 3.6rem;
   @media (max-width: 750px) {
-    margin-top: 90px;
-    width: 100%;
+    margin-top: -10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    position: static;
+    width: 90%;
+    // height: 100vh;
     display: ${props => (props.value === 0 ? "none" : "block")};
   }
 `;

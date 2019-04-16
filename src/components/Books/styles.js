@@ -104,6 +104,7 @@ export const MapWrapper = styled.div`
   @media (max-width: 850px) {
     display: ${props => (props.value === 0 ? "none" : "block")};
     margin-top: 10px;
+    margin-bottom: 30px;
   }
 `;
 // export const Ratings = styled.div`
@@ -141,4 +142,4 @@ export const SingleBookMobileBackButton = styled.div`
   @media (min-width: 800px) {
     display: none;
   }
-`
+`;
