@@ -67,6 +67,9 @@ export const BookImgWrapper = styled.div`
   min-height: 180px;
   max-height: 180px;
   margin-right: 20px;
+  @media (max-width: 750px) {
+    margin-right: 10px
+  }
 `;
 export const BookImg = styled.img`
   width: 100%;

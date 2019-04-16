@@ -5,11 +5,9 @@ import Avatar from "@material-ui/core/Avatar";
 import {
   NavBarWrapper,
   NavContentWrapper,
-  // BookMapsLogo,
   NavLinks,
   NavLinksShow,
   NavLinkWrapper,
-  Button,
   MenuLinks
 } from "../Styles/NavBarStyles.js";
 import Menu from "@material-ui/core/Menu";

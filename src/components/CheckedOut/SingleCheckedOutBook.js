@@ -71,7 +71,6 @@ class SingleCheckedOutBook extends Component {
     } else {
       const {
         title,
-        authors,
         lender,
         dueDate,
         lenderId,

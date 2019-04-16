@@ -19,13 +19,10 @@ const BookDetails = props => {
     image,
     available,
     dueDate,
-    description,
     checkoutDate
   } = props.book;
   const availability = available ? "Available" : "Checked out";
   const threeWeeks = moment(checkoutDate, "YYYY-MM-DD").add(21, "days");
-  const descriptionText =
-    description.length > 40 ? `${description.substr(0, 40)} ...` : description;
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -47,15 +44,12 @@ const BookDetails = props => {
               .format("dddd, MMMM Do")}
           </p>
         )}{" "}
-        <p>
-          {description === "" ? "No description provided" : descriptionText}
-        </p>
         <Link
           style={{ textDecoration: "none" }}
           to={`/my-library/my-books/${bookId}`}
         >
           <Button variant="contained" color="primary">
-            See more details
+            More details
           </Button>
         </Link>
       </BookTextContainer>

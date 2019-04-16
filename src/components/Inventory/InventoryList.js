@@ -9,7 +9,6 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import * as moment from "moment";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -61,8 +60,6 @@ class Inventory extends Component {
         console.log(localStorage.getItem("userId"), "localstorage");
         console.log(book.available);
         return book.userId.toString() === localStorage.getItem("userId");
-        // }
-        //   book => book.userId.toString() !== localStorage.getItem("userId")
       });
     } else if (filter === "available") {
       return this.searchBooks().filter(
@@ -141,17 +138,6 @@ class Inventory extends Component {
               );
             })}
           </CardContainer>
-          {/* <CardContainer>
-            {this.searchBooks().map(book => {
-              return (
-                <InventoryDetails
-                  book={book}
-                  viewBook={this.viewBook}
-                  key={book.bookId}
-                />
-              );
-            })}
-          </CardContainer> */}
         </InventoryContainer>
       );
     }
