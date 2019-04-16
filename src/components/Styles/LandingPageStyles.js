@@ -116,7 +116,7 @@ export const MapWrapper = styled.div`
   right: 0;
   top: 3.6rem;
   @media (max-width: 750px) {
-    margin-top: 60px;
+    margin-top: 90px;
     width: 100%;
     display: ${props => (props.value === 0 ? "none" : "block")};
   }
