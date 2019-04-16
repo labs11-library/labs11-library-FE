@@ -77,7 +77,7 @@ class SingleBook extends Component {
       subject: `${
         this.props.loggedInUser.firstName
       } wants to checkout ${title}`,
-      html: `Hey ${lender}, check out <a href="https://bookmaps.netlify.com/notifications">your notifications</a> on Bookmaps to coordinate an exchange with ${
+      html: `Hey ${lender}, check out <a href="https://bookmaps.netlify.com/requests">your requests</a> on Bookmaps to coordinate an exchange with ${
         this.props.loggedInUser.firstName
       }!`
     };

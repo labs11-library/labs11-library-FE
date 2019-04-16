@@ -92,7 +92,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/notifications"
+              path="/requests"
               render={props => <RequestList {...props} />}
             />
             <Route
@@ -113,7 +113,7 @@ class App extends Component {
 
             <Route
               exact
-              path="/notifications/:checkoutRequestId"
+              path="/requests/:checkoutRequestId"
               render={props => <SingleRequest {...props} />}
             />
             <Route

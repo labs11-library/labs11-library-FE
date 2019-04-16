@@ -68,11 +68,11 @@ class CheckedOutList extends Component {
     } else {
       return (
         <div>
-          <CheckoutHeader>Loaned out books</CheckoutHeader>
+          <CheckoutHeader>On loan</CheckoutHeader>
           {
             (this.filterIncomingCheckouts().length === 0) &&
               <NoCheckouts>
-                You have no loaned out books in your checkouts.{" "}
+                You have not loaned out any books.{" "}
                 <Link to="/add-book">Click here</Link> to add books to your library.
               </NoCheckouts>
               
@@ -88,11 +88,11 @@ class CheckedOutList extends Component {
               );
             })}
           </div>
-          <CheckoutHeader>Borrowed books</CheckoutHeader>
+          <CheckoutHeader>Borrowing</CheckoutHeader>
           {
             (this.filterOutgoingCheckouts().length === 0) &&
               <NoCheckouts>
-                You have no borrowed books in your checkouts.{" "}
+                You have not borrowed any books.{" "}
                 <Link to="/browse">Click here</Link> to find your next favourite book.
               </NoCheckouts>
               
