@@ -162,7 +162,7 @@ class UpdateUserProfile extends Component {
         </Button>
         {/* </div> */}
       </FormWrapper>
-      {/* <div className="profileUpdate">
+      <div className="profileUpdate">
             <h1>Update your profile photo</h1>
             <form method="/POST" encType="multipart/form-data">
                <div className="form-group">
@@ -178,7 +178,7 @@ class UpdateUserProfile extends Component {
                   <button onClick={this.uploadImg}>Upload</button>
                </div>
             </form>
-         </div> */}
+         </div>
       </div>
     );
   }
