@@ -50,7 +50,6 @@ class UpdateUserProfile extends Component {
       lastName: this.state.lasName,
       email: this.state.email,
       bio: this.state.bio,
-      userId: this.state.bio,
       picture: this.state.picture
     });
   };
@@ -86,7 +85,7 @@ class UpdateUserProfile extends Component {
           console.log('res', res);
           this.setState({ 
             image: res.data.image,
-            picture:this.state.image
+            picture:res.data.image
           });
           // this.props.editProfile(this.state);
        })
@@ -126,6 +125,7 @@ class UpdateUserProfile extends Component {
             label="Email"
             name="email"
             value={this.state.email}
+            fullwidth
             onChange={this.handleChange}
             style={{ padding: "5px" }}
           />
