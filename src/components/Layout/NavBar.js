@@ -102,18 +102,15 @@ class NavBar extends Component {
         {!loggedIn && (
           <NavBarWrapper>
             <NavContentWrapper>
+
+              <NavLinkWrapper to="/browse">Home</NavLinkWrapper>
               <NavLinkWrapper to="/browse">
                 <span role="img" aria-label="books">
                   📚
                 </span>
               </NavLinkWrapper>
               <NavLinksShow>
-                <NavLinkWrapper to="/signup">
-                  <span role="img" aria-label="wave">
-                    👋
-                  </span>{" "}
-                  Sign up
-                </NavLinkWrapper>
+                <NavLinkWrapper to="/signup">Sign up</NavLinkWrapper>
               </NavLinksShow>
             </NavContentWrapper>
           </NavBarWrapper>

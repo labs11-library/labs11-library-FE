@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 export const BookListContainer = styled.div`
   max-width: 1000px;
   text-align: center;
@@ -76,7 +76,8 @@ export const BookTextContainer = styled.div`
   }
 `;
 export const Availability = styled.p`
-  color: ${props => (props.available ? "#00d369 !important" : "#ff5454 !important")};
+  color: ${props =>
+    props.available ? "#00d369 !important" : "#ff5454 !important"};
 `;
 
 export const DueDate = styled.p`
@@ -132,7 +133,17 @@ export const BooksWrapper = styled.div`
     display: ${props => (props.value === 1 ? "none" : "block")};
   }
 `;
+export const NoBooks = styled.h2`
+  text-align: center;
+  font-size: 1.5rem;
+  max-width: 90%;
+  margin: 20px auto;
+`;
 
+export const NoBooksLink = styled(Link)`
+  font-size: 1.2rem;
+  color: #009ee5;
+`;
 export const TabsWrapper = styled.div`
   width: 100%;
 
