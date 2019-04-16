@@ -20,7 +20,11 @@ const UserProfileCard = props => {
         {firstName} {lastName}
       </h1>
       <p>{email}</p>
-      <Bio>{bio}</Bio>
+      <Bio>
+        {bio === "" || bio === null
+          ? "You have not provided a bio yet! Please provide a few sentence description of your interests so that other users can get to know you better."
+          : bio}
+      </Bio>
     </ProfileWrapper>
   );
 };
