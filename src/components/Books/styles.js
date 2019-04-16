@@ -45,6 +45,10 @@ export const BookCardWrapper = styled.div`
   padding: 10px;
   background: white;
 
+  p {
+    font-size: 1rem;
+  }
+
   @media (max-width: 850px) {
     margin-top: 10px;
     width: 87vw;

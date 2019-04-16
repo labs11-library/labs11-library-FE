@@ -14,6 +14,8 @@ import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Avatar from "@material-ui/core/Avatar";
+import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
 import {
   BookDetailsWrapper,
   BookImgWrapper,
@@ -115,7 +117,7 @@ class SingleBook extends Component {
         .utc(dueDate)
         .local()
         .format("dddd, MMMM Do");
-
+      var FontAwesome = require('react-fontawesome')
       return (
         <div>
           <LinkContainer>
@@ -167,30 +169,30 @@ class SingleBook extends Component {
                       <Ratings rating={avgRating} widgetRatedColors="gold">
                         <Ratings.Widget
                           widgetHoverColor="gold"
-                          widgetDimension="30px"
+                          widgetDimension="22px"
                         />
                         <Ratings.Widget
                           widgetHoverColor="gold"
-                          widgetDimension="30px"
+                          widgetDimension="22px"
                         />
                         <Ratings.Widget
                           widgetHoverColor="gold"
-                          widgetDimension="30px"
+                          widgetDimension="22px"
                         />
                         <Ratings.Widget
                           widgetHoverColor="gold"
-                          widgetDimension="30px"
+                          widgetDimension="22px"
                         />
                         <Ratings.Widget
                           widgetHoverColor="gold"
-                          widgetDimension="30px"
+                          widgetDimension="22px"
                         />
                       </Ratings>
                       <div
                         style={{
                           marginTop: ".5rem",
                           color: "#838281",
-                          fontSize: ".8rem"
+                          fontSize: "1rem"
                         }}
                       >
                         Goodreads rating: {avgRating}
@@ -207,6 +209,16 @@ class SingleBook extends Component {
                 </p>
                 {this.props.loggedInUser.stripe_email === null && (
                   <div>
+                    <Tooltip 
+                      title={
+                        <React.Fragment>
+                          <Typography color="inherit">Here's why...</Typography>
+                          {"Bookmaps is like the library. It's free until you're late and we will never charge you otherwise. By taking your payment info, we are ensuring that the owner will be compensated if you return the book late."}
+                        </React.Fragment>
+                      }
+                      placement="top">
+                      <p style={{paddingBottom: "5px"}}>Why do we ask for your payment information? <FontAwesome className="far fa-question-circle" size="1x"></FontAwesome></p>
+                    </Tooltip>
                     <Payment email={this.props.loggedInUser.email} />
                   </div>
                 )}

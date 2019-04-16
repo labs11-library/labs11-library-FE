@@ -98,6 +98,10 @@ export const AvatarContainer = styled.div`
   @media (max-width: 1050px) and (min-width: 750px) {
     display: none !important;
   }
+
+  @media(max-width: 500px) {
+    display: none !important;
+  }
 `;
 
 export const ContentContainer = styled.div`
@@ -116,7 +120,7 @@ export const MapWrapper = styled.div`
   right: 0;
   top: 3.6rem;
   @media (max-width: 750px) {
-    margin-top: 60px;
+    margin-top: 90px;
     width: 100%;
     display: ${props => (props.value === 0 ? "none" : "block")};
   }

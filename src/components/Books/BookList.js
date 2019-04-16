@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import BookDetails from "./BookDetails";
+import Distance from "./Distance";
 
 import { Link } from "react-router-dom";
 
@@ -27,7 +28,8 @@ class Books extends Component {
     this.state = {
       books: [],
       filter: "available",
-      searchText: ""
+      searchText: "",
+      showSlider: false
     };
   }
 
@@ -62,6 +64,9 @@ class Books extends Component {
   handleSelect = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
+    if (value === "distance") {
+      this.setState({ showSlider: true });
+    } else this.setState({ showSlider: false });
   };
   filteredBooks = () => {
     const { filter } = this.state;
@@ -79,10 +84,15 @@ class Books extends Component {
       return this.searchBooks().filter(
         book => book.lenderId.toString() === localStorage.getItem("userId")
       );
+    } else if (filter === "distance") {
+      return this.searchBooks().filter(
+        book => book.lenderId.toString() !== localStorage.getItem("userId")
+      );
     }
   };
 
   render() {
+    let none;
     if (this.props.fetchingBooks) {
       return <Loading />;
     } else {
@@ -122,9 +132,12 @@ class Books extends Component {
             >
               <MenuItem value={"all"}>All</MenuItem>
               <MenuItem value={"available"}>Available</MenuItem>
+              <MenuItem value={"distance"}>Distance</MenuItem>
               <MenuItem value={"mybooks"}>My Books</MenuItem>
             </Select>
           </div>
+          {this.state.showSlider ? <Distance /> : none}
+          {/* <Distance /> */}
           {this.state.searchText.length > 0 &&
             this.filteredBooks().length === 0 && (
               <>

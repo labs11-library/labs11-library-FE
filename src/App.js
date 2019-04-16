@@ -49,7 +49,7 @@ class App extends Component {
     if (query.token && query.userId) {
       window.localStorage.setItem("jwt", query.token);
       window.localStorage.setItem("userId", query.userId);
-      this.props.history.push("/");
+      this.props.history.push("/browse");
     }
   }
   render() {
