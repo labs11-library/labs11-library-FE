@@ -14,7 +14,6 @@ import {
   CardContainer
 } from "../Styles/InventoryStyles.js";
 import SingleUserProfileCard from "../Profile/SingleUserProfileCard";
-import { ProfileWrapper } from "../Styles/SingleUserLibraryProfileStyles.js";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 
 

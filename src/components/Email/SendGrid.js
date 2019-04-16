@@ -19,7 +19,7 @@ class Sendgrid extends Component {
         email.sender
       }&topic=${email.subject}&text=${email.text}&html=${email.html}`
     )
-      .then(console.log("success"))
+      .then(res => console.log(res.data))
       .catch(err => console.error(err));
   };
 

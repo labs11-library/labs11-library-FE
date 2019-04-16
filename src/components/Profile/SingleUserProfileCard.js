@@ -3,9 +3,8 @@ import Avatar from "@material-ui/core/Avatar";
 import { ProfileWrapper } from "../Styles/UserProfileCardStyles";
 
 const SingleUserProfileCard = props => {
-  const { firstName, lastName, email, bio, picture } = props.singleUser;
+  const { firstName, lastName, bio, picture } = props.singleUser;
 
-  console.log(props.checkouts);
   return (
     <ProfileWrapper>
       <div>
@@ -23,7 +22,6 @@ const SingleUserProfileCard = props => {
         <h1>
           {firstName} {lastName}
         </h1>
-        {/* <p>{email}</p> */}
         <p>{bio}</p>
       </div>
     </ProfileWrapper>

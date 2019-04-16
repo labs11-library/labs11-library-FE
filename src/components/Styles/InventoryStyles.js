@@ -29,7 +29,7 @@ export const CardContainer = styled.div`
   }
 `;
 
-export const NoBooks = styled.h2`
+export const NoBooksLibrary = styled.h2`
   text-align: center;
   font-size: 1.5rem;
   max-width: 90%;
@@ -67,6 +67,9 @@ export const BookImgWrapper = styled.div`
   min-height: 180px;
   max-height: 180px;
   margin-right: 20px;
+  @media (max-width: 750px) {
+    margin-right: 10px
+  }
 `;
 export const BookImg = styled.img`
   width: 100%;
@@ -88,6 +91,9 @@ export const BookTextContainer = styled.div`
   }
   p {
     font-size: 1rem;
+  }
+  @media (max-width: 750px) {
+    word-break: break-word;
   }
 `;
 export const Availability = styled.p`

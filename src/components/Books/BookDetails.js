@@ -50,7 +50,6 @@ const availability = available ?
         <Availability available={available}>
           {availability}
         </Availability>
-
         {dueDate && <p>Due date: {dateDue}</p>}
         <AvatarWrapper>
           <Link style={{ textDecoration: "none" }} to={`/books/${bookId}`}>
@@ -59,7 +58,7 @@ const availability = available ?
               variant="contained"
               color="primary"
             >
-              See more details
+              More details
             </Button>
           </Link>
           <AvatarContainer>
@@ -71,7 +70,6 @@ const availability = available ?
                 paddingLeft: "5px"
               }}
             >
-              {/* <p>{lender}</p> */}
               <Link
                 to={`/users/${lenderId}/library`}
                 style={{

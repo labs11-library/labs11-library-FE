@@ -5,11 +5,9 @@ import Avatar from "@material-ui/core/Avatar";
 import {
   NavBarWrapper,
   NavContentWrapper,
-  // BookMapsLogo,
   NavLinks,
   NavLinksShow,
   NavLinkWrapper,
-  Button,
   MenuLinks
 } from "../Styles/NavBarStyles.js";
 import Menu from "@material-ui/core/Menu";
@@ -59,8 +57,8 @@ class NavBar extends Component {
               <NavLinks>
                 <NavLinkWrapper to="/my-library">My Library</NavLinkWrapper>
                 <NavLinkWrapper to="/add-book">Add book</NavLinkWrapper>
-                <NavLinkWrapper to="/notifications">
-                  Notifications
+                <NavLinkWrapper to="/requests">
+                  Requests
                 </NavLinkWrapper>
                 <NavLinkWrapper style={{ borderBottom: "none" }}>
                   <Avatar
