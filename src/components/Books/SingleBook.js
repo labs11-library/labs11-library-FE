@@ -16,7 +16,7 @@ import Tab from "@material-ui/core/Tab";
 import Avatar from "@material-ui/core/Avatar";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import {
   BookDetailsWrapper,
   BookImgWrapper,
@@ -127,11 +127,11 @@ class SingleBook extends Component {
         .utc(dueDate)
         .local()
         .format("dddd, MMMM Do");
-      var FontAwesome = require('react-fontawesome')
+      var FontAwesome = require("react-fontawesome");
       return (
         <div>
           <BackButtonWrapper>
-            <Link to={"/"} style={{ textDecoration: "none" }}>
+            <Link to={"/browse"} style={{ textDecoration: "none" }}>
               <Button variant="outlined" color="primary">
                 ← Back to Bookmaps
               </Button>
@@ -220,7 +220,7 @@ class SingleBook extends Component {
                 {this.props.loggedInUser.stripe_email === null && (
                   <ClickAwayListener onClickAway={this.handleTooltipClose}>
                     <div>
-                      <Tooltip 
+                      <Tooltip
                         onClose={this.handleTooltipClose}
                         open={this.state.open}
                         disableFocusListener
@@ -228,12 +228,26 @@ class SingleBook extends Component {
                         disableTouchListener
                         title={
                           <React.Fragment>
-                            <Typography color="inherit">Here's why...</Typography>
-                            {"Bookmaps is like the library. It's free until you're late and we will never charge you otherwise. By taking your payment info, we are ensuring that the owner will be compensated if you return the book late."}
+                            <Typography color="inherit">
+                              Here's why...
+                            </Typography>
+                            {
+                              "Bookmaps is like the library. It's free until you're late and we will never charge you otherwise. By taking your payment info, we are ensuring that the owner will be compensated if you return the book late."
+                            }
                           </React.Fragment>
                         }
-                        placement="top">
-                        <p style={{paddingBottom: "5px"}} onClick={this.handleTooltipOpen}>Why do we ask for your payment information? <FontAwesome className="far fa-question-circle" size="1x"></FontAwesome></p>
+                        placement="top"
+                      >
+                        <p
+                          style={{ paddingBottom: "5px" }}
+                          onClick={this.handleTooltipOpen}
+                        >
+                          Why do we ask for your payment information?{" "}
+                          <FontAwesome
+                            className="far fa-question-circle"
+                            size="1x"
+                          />
+                        </p>
                       </Tooltip>
                       <Payment email={this.props.loggedInUser.email} />
                     </div>
@@ -248,7 +262,7 @@ class SingleBook extends Component {
                     >
                       REQUEST CHECKOUT
                     </Button>
-                    <div style={{display: "flex", alignItems: "center"}}>
+                    <div style={{ display: "flex", alignItems: "center" }}>
                       <Avatar src={lenderPicture} alt={`${lender} avatar`} />
                       <div
                         style={{
@@ -279,12 +293,14 @@ class SingleBook extends Component {
               <SingleBookMapview owner={lenderId} />
             </MapWrapper>
             <SingleBookMobileBackButton>
-              <Link to="/" style={{textDecoration: "none", margin: "20px 0 0 20px"}}>
-                  <Button 
-                      color="primary" 
-                      variant="outlined" 
-                    >← Back to Bookmaps</Button>
-                </Link>
+              <Link
+                to="/browse"
+                style={{ textDecoration: "none", margin: "20px 0 0 20px" }}
+              >
+                <Button color="primary" variant="outlined">
+                  ← Back to Bookmaps
+                </Button>
+              </Link>
             </SingleBookMobileBackButton>
           </BookDetailsWrapper>
         </div>
