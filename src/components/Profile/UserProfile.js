@@ -5,7 +5,7 @@ import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import Button from "@material-ui/core/Button";
 import UpdateUserProfile from "./UpdateUserProfile";
 import UserProfileCard from "./UserProfileCard";
-import { ProfileWrapper } from "../Styles/UserProfileCardStyles";
+import { ProfileWrapper, ButtonWrapper } from "../Styles/UserProfileCardStyles";
 
 import Auth from "../Auth/Auth";
 
@@ -50,22 +50,24 @@ class UserProfile extends Component {
       return (
         <ProfileWrapper>
           <UserProfileCard loggedInUser={loggedInUser} />
-          <Button
-            variant="contained"
-            onClick={this.toggleUpdate}
-            style={{ margin: "5px", width: "100%", maxWidth: "200px" }}
-            color="primary"
-          >
-            Edit Profile
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={this.logOut}
-            style={{ margin: "5px", width: "100%", maxWidth: "200px" }}
-            color="secondary"
-          >
-            Log out
-          </Button>
+          <ButtonWrapper>
+            <Button
+              variant="contained"
+              onClick={this.toggleUpdate}
+              style={{ margin: "5px", width: "50%", maxWidth: "200px" }}
+              color="primary"
+            >
+              Edit Profile
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={this.logOut}
+              style={{ margin: "5px", width: "50%", maxWidth: "200px" }}
+              color="secondary"
+            >
+              Log out
+            </Button>
+          </ButtonWrapper>
         </ProfileWrapper>
       );
     }

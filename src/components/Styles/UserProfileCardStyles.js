@@ -4,7 +4,7 @@ export const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;
+  width: 95%;
   max-width: 600px;
   padding: 10px;
   margin: auto;
@@ -19,6 +19,15 @@ export const ProfileWrapper = styled.div`
     font-size: 1rem;
   }
 `;
+
 export const Bio = styled.p`
   text-align: left;
+`;
+
+export const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  text-align: center;
 `;
