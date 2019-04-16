@@ -92,6 +92,9 @@ export const BookTextContainer = styled.div`
   p {
     font-size: 1rem;
   }
+  @media (max-width: 750px) {
+    word-break: break-word;
+  }
 `;
 export const Availability = styled.p`
   color: ${props =>
