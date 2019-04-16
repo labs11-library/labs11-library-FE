@@ -107,7 +107,7 @@ class SingleInventory extends Component {
               editInventory={this.editInventory}
             />
             <Button
-              style={{ float: "right", width: "163px" }}
+              style={{ float: "right", width: "370px" }}
               color="secondary"
               variant="outlined"
               onClick={this.toggleUpdate}

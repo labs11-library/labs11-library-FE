@@ -25,25 +25,36 @@ class UpdateUserProfile extends Component {
       picture,
       latitude: null,
       longitude: null,
-      // image: '',
-      // selectedFile: null,
+      image: '',
+      selectedFile: null,
     };
   }
+
   componentWillReceiveProps(newProps) {
     if (this.props.loggedInUser !== newProps.loggedInUser) {
       this.props.toggleUpdate();
     }
   }
+
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({
       [name]: value
     });
   };
+
   editProfile = e => {
     e.preventDefault();
-    this.props.editProfile(this.state);
+    this.props.editProfile({
+      firstName: this.state.firstName,
+      lastName: this.state.lasName,
+      email: this.state.email,
+      bio: this.state.bio,
+      userId: this.state.bio,
+      picture: this.state.picture
+    });
   };
+
   changeLocation = e => {
     e.preventDefault();
     navigator.geolocation.getCurrentPosition(position => {
@@ -53,9 +64,11 @@ class UpdateUserProfile extends Component {
       });
     });
   };
+
   fileHandler = e => {
     this.setState({ selectedFile: e.target.files[0] });
  };
+
   editProfilePic = e => {
       e.preventDefault();
       this.props.editProfile(this.state);
@@ -75,8 +88,14 @@ class UpdateUserProfile extends Component {
             image: res.data.image,
             picture:this.state.image
           });
-          this.props.editProfile(this.state);
+          // this.props.editProfile(this.state);
        })
+      //  .then(res => {
+      //   this.props.editProfile({
+      //     image: res.data.image,
+      //     picture:this.state.image
+      //   })
+      //  })
        .catch(err => console.log(err));
  };
   render() {
