@@ -9,8 +9,16 @@ import Loading from "../Loading/Loading.js";
 import styled from "styled-components";
 
 const AddBookWrapper = styled.div`
+  @media (max-width: 500px) {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   margin: 20px auto;
-  width: 450px;
+  max-width: 450px;
+  width: 100%;
 `;
 
 const AddBookContentWrapper = styled.div`

@@ -33,7 +33,7 @@ class Books extends Component {
 
   componentDidMount() {
     this.props.getBooks();
-  };
+  }
 
   handleChange = e => {
     const { name, value } = e.target;
@@ -109,7 +109,7 @@ class Books extends Component {
             }}
           >
             <InputBase
-              placeholder="Search for books by title, author, or owner"
+              placeholder="Search by title, author, or owner"
               type="text"
               name="searchText"
               value={this.state.searchText}
