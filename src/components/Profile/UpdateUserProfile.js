@@ -4,24 +4,29 @@ import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { editProfile } from "../../redux/actions/authActions.js";
 import styled from "styled-components";
-import UpdateProfilePhoto from "./UpdateProfilePhoto";
-
+import axios from 'axios';
+import baseUrl from '../../url.js';
+// import UpdateProfilePhoto from "./UpdateProfilePhoto";
 const FormWrapper = styled.form`
   width: 400px;
 `;
 
+
 class UpdateUserProfile extends Component {
   constructor(props) {
     super(props);
-    const { firstName, lastName, email, bio, userId } = this.props.loggedInUser;
+    const { firstName, lastName, email, bio, userId, picture } = this.props.loggedInUser;
     this.state = {
       firstName,
       lastName,
       email,
       bio,
       userId,
+      picture,
       latitude: null,
-      longitude: null
+      longitude: null,
+      // image: '',
+      // selectedFile: null,
     };
   }
   componentWillReceiveProps(newProps) {
@@ -49,9 +54,35 @@ class UpdateUserProfile extends Component {
       });
     });
   };
+  fileHandler = e => {
+    this.setState({ selectedFile: e.target.files[0] });
+ };
+  editProfilePic = e => {
+      e.preventDefault();
+      this.props.editProfile(this.state);
+  };
+
+ uploadImg = e => {
+    e.preventDefault();
+    // let userId = localStorage.getItem("userId");
+    const fd = new FormData();
+    fd.append('image', this.state.selectedFile);
+
+    axios
+       .post(`${baseUrl}/upload`, fd)
+       .then(res => {
+          console.log('res', res);
+          this.setState({ 
+            image: res.data.image,
+            picture:this.state.image
+          });
+          this.props.editProfile(this.state);
+       })
+       .catch(err => console.log(err));
+ };
   render() {
     return (
-    <div>  
+      <div>
       <FormWrapper>
         <div>
           <TextField
@@ -111,9 +142,26 @@ class UpdateUserProfile extends Component {
             Update your location
           </Button>
         </div>
+        
       </FormWrapper>
-      <UpdateProfilePhoto />
-    </div>
+      <div className="profileUpdate">
+            <h1>Update your profile photo</h1>
+            <form method="/POST" encType="multipart/form-data">
+               <div className="form-group">
+                  <label htmlFor="image">Upload image: </label>
+                  <input
+                     onChange={this.fileHandler}
+                     type="file"
+                     id="image"
+                     name="image"
+                     accept="image/*"
+                     required
+                  />
+                  <button onClick={this.uploadImg}>Upload</button>
+               </div>
+            </form>
+         </div>
+      </div>
     );
   }
 }
