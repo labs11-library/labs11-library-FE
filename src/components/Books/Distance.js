@@ -15,31 +15,28 @@ const styles = {
 };
 
 class Distance extends React.Component {
-  state = {
-    value: 25
-  };
+  // state = {
+  //   miles: 25
+  // };
 
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
+  // handleChange = (event, miles) => {
+  //   this.setState({ miles });
+  // };
 
   render() {
-    const { classes } = this.props;
-    const { value } = this.state;
+    const { classes, miles, distanceChange } = this.props;
 
     return (
       <div className={classes.root}>
-        <Typography id="label">
-          Maximum distance: {this.state.value} miles
-        </Typography>
+        <Typography id="label">Maximum distance: {miles} miles</Typography>
         <Slider
           classes={{ container: classes.slider }}
-          value={value}
+          value={miles}
           min={1}
           max={50}
           step={1}
           aria-labelledby="label"
-          onChange={this.handleChange}
+          onChange={distanceChange}
         />
       </div>
     );
