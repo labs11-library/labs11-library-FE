@@ -9,15 +9,17 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import * as moment from "moment";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import {
   InventoryContainer,
   CardContainer,
-  NoBooks
+  NoBooksLibrary
 } from "../Styles/InventoryStyles.js";
+import {  NoBooks,
+  NoBooksLink
+} from "../Styles/LandingPageStyles.js";
 class Inventory extends Component {
   constructor() {
     super();
@@ -40,7 +42,6 @@ class Inventory extends Component {
   };
 
   searchBooks = () => {
-    console.log("hello searched");
     if (this.state.searchText.length === 0) {
       return this.props.inventory;
     } else if (this.state.searchText.length > 0) {
@@ -52,17 +53,11 @@ class Inventory extends Component {
     }
   };
   filteredBooks = () => {
-    console.log("hello");
     const { filter } = this.state;
 
     if (filter === "all") {
       return this.searchBooks().filter(function(book) {
-        console.log(book.userId.toString(), "book.userId");
-        console.log(localStorage.getItem("userId"), "localstorage");
-        console.log(book.available);
         return book.userId.toString() === localStorage.getItem("userId");
-        // }
-        //   book => book.userId.toString() !== localStorage.getItem("userId")
       });
     } else if (filter === "available") {
       return this.searchBooks().filter(
@@ -85,10 +80,10 @@ class Inventory extends Component {
       return <Loading />;
     } else if (this.props.inventory.length === 0) {
       return (
-        <NoBooks>
+        <NoBooksLibrary>
           You have no books listed in your library.{" "}
           <Link to="/add-book">Click here</Link> to add books to your library.
-        </NoBooks>
+        </NoBooksLibrary>
       );
     } else {
       return (
@@ -130,6 +125,15 @@ class Inventory extends Component {
               <MenuItem value={"available"}>Available</MenuItem>
             </Select>
           </div>
+          {this.state.searchText.length > 0 &&
+            this.filteredBooks().length === 0 && (
+              <>
+                <NoBooks>You have not posted this book yet.</NoBooks>
+                <NoBooksLink to="/add-book">
+                  Add it to your library.
+                </NoBooksLink>
+              </>
+            )}
           <CardContainer>
             {this.filteredBooks().map(book => {
               return (
@@ -141,17 +145,6 @@ class Inventory extends Component {
               );
             })}
           </CardContainer>
-          {/* <CardContainer>
-            {this.searchBooks().map(book => {
-              return (
-                <InventoryDetails
-                  book={book}
-                  viewBook={this.viewBook}
-                  key={book.bookId}
-                />
-              );
-            })}
-          </CardContainer> */}
         </InventoryContainer>
       );
     }

@@ -45,7 +45,6 @@ class BookDetails extends Component {
   };
 
   confirmBookReturn = () => {
-    console.log("I;ve been invoked");
     this.props.confirmReturn(this.props.checkout.checkoutId);
     this.props.returnBook(this.props.checkout.bookId);
     this.props.goToMyLibrary();
@@ -63,7 +62,6 @@ class BookDetails extends Component {
 
       .then(res => console.log(res.data))
       .catch(err => console.log("Frontend error:", err));
-    console.log(this.props.checkout.checkoutId, this.overdue());
     this.props.setLateFee(this.props.checkout.checkoutId, this.overdue());
   };
   render() {
@@ -108,7 +106,6 @@ class BookDetails extends Component {
           lenderBorrower === "Borrower"
         ? `Confirm Return (and charge $${this.overdue() / 100} late fee)`
         : null;
-    console.log(title, this.overdue());
     return (
       <BookDetailsWrapper>
         <BookDetailsContainer>

@@ -5,7 +5,6 @@ import { ProfileWrapper, Bio } from "../Styles/UserProfileCardStyles";
 const UserProfileCard = props => {
   const { firstName, lastName, email, bio, picture } = props.loggedInUser;
 
-  console.log(props.checkouts);
   return (
     <ProfileWrapper>
       <Avatar

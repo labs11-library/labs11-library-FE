@@ -36,7 +36,6 @@ class Mapview extends Component {
       },
       () => {
         // Gets user location from IP address if they block the web browser request
-        console.log("User blocked access to location");
         fetch("https://ipapi.co/json")
           .then(res => res.json())
           .then(location => {
@@ -81,7 +80,7 @@ class Mapview extends Component {
         );
       })
       .catch(err => {
-        console.log("Error" + err);
+        console.log(err);
       });
   };
 
@@ -185,7 +184,6 @@ class Mapview extends Component {
       var bounds = new window.google.maps.LatLngBounds();
       places.forEach(function(place) {
         if (!place.geometry) {
-          console.log("Returned place contains no geometry");
           return;
         }
         // var icon = {
@@ -253,6 +251,7 @@ class Mapview extends Component {
     return (
       <main>
         <div id="map" />
+
         <input
           id="pac-input"
           className="controls"

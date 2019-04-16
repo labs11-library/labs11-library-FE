@@ -44,7 +44,7 @@ const LibraryDetails = props => {
         {!available && <p>Due: {dueDate} </p>}{" "}
         <Link style={{ textDecoration: "none" }} to={`/books/${bookId}`}>
           <Button variant="contained" color="primary">
-            See more details
+            More details
           </Button>
         </Link>
       </BookTextContainer>

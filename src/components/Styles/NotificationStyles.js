@@ -7,13 +7,16 @@ export const NoRequests = styled.h2`
   margin: 20px auto;
 
   a {
-    color: blue;
+    color: #009EE5;
   }
 
   span {
-    text-decoration: underline;
-    color: blue;
+    color: #009EE5;
     cursor: pointer;
+
+    :hover {
+      text-decoration: underline;
+    }
   }
 `;
 

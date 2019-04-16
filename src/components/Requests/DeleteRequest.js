@@ -7,7 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 const DeleteInventory = props => {
-    const { title, userId, bookId, lender } = props.request
+    const { title, lender } = props.request
 
     return (
       <div>
