@@ -87,7 +87,7 @@ class BookSearch extends Component {
               }}
             >
               <InputBase
-                placeholder="Enter the title or author of the book you own"
+                placeholder="Enter a book by title or author"
                 type="text"
                 name="searchText"
                 value={this.state.searchText}

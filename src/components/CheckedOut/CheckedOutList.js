@@ -67,16 +67,15 @@ class CheckedOutList extends Component {
       return <Loading />;
     } else {
       return (
-        <div>
+        <div style={{ width: "90%", margin: "0 auto" }}>
           <CheckoutHeader>On loan</CheckoutHeader>
-          {
-            (this.filterIncomingCheckouts().length === 0) &&
-              <NoCheckouts>
-                You have not loaned out any books.{" "}
-                <Link to="/add-book">Click here</Link> to add books to your library.
-              </NoCheckouts>
-              
-          }
+          {this.filterIncomingCheckouts().length === 0 && (
+            <NoCheckouts>
+              You have not loaned out any books.{" "}
+              <Link to="/add-book">Click here</Link> to add books to your
+              library.
+            </NoCheckouts>
+          )}
           <div>
             {this.filterIncomingCheckouts().map(checkout => {
               return (
@@ -89,14 +88,13 @@ class CheckedOutList extends Component {
             })}
           </div>
           <CheckoutHeader>Borrowing</CheckoutHeader>
-          {
-            (this.filterOutgoingCheckouts().length === 0) &&
-              <NoCheckouts>
-                You have not borrowed any books.{" "}
-                <Link to="/browse">Click here</Link> to find your next favourite book.
-              </NoCheckouts>
-              
-          }
+          {this.filterOutgoingCheckouts().length === 0 && (
+            <NoCheckouts>
+              You have not borrowed any books.{" "}
+              <Link to="/browse">Click here</Link> to find your next favourite
+              book.
+            </NoCheckouts>
+          )}
           <div>
             {this.filterOutgoingCheckouts().map(checkout => {
               return (
