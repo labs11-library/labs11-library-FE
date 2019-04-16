@@ -28,7 +28,8 @@ class Books extends Component {
     this.state = {
       books: [],
       filter: "available",
-      searchText: ""
+      searchText: "",
+      showSlider: false
     };
   }
 
@@ -63,6 +64,9 @@ class Books extends Component {
   handleSelect = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
+    if (value === "distance") {
+      this.setState({ showSlider: true });
+    } else this.setState({ showSlider: false });
   };
   filteredBooks = () => {
     const { filter } = this.state;
@@ -88,6 +92,7 @@ class Books extends Component {
   };
 
   render() {
+    let none;
     if (this.props.fetchingBooks) {
       return <Loading />;
     } else {
@@ -131,7 +136,8 @@ class Books extends Component {
               <MenuItem value={"mybooks"}>My Books</MenuItem>
             </Select>
           </div>
-          <Distance />
+          {this.state.showSlider ? <Distance /> : none}
+          {/* <Distance /> */}
           {this.state.searchText.length > 0 &&
             this.filteredBooks().length === 0 && (
               <>
