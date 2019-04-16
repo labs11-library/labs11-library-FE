@@ -16,7 +16,6 @@ import {
 import SingleUserProfileCard from "../Profile/SingleUserProfileCard";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 
-
 class LibraryList extends Component {
   constructor() {
     super();
@@ -49,7 +48,6 @@ class LibraryList extends Component {
     this.props.getAllInventory(userId);
     this.props.getSingleUser(userId);
     // this.props.getLoggedInUser();
-    
   }
   render() {
     const { singleUser } = this.props;
@@ -66,11 +64,7 @@ class LibraryList extends Component {
       const { firstName } = this.props.singleUser;
       return (
         <InventoryContainer>
-           <div>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-              <SingleUserProfileCard singleUser={singleUser} />
-            </div>
-          </div>
+          <SingleUserProfileCard singleUser={singleUser} />
           <Paper
             style={{
               width: "80%",
@@ -80,7 +74,6 @@ class LibraryList extends Component {
               alignItems: "center"
             }}
           >
-          
             <InputBase
               placeholder={`Search ${firstName}'s Library`}
               type="text"

@@ -19,7 +19,11 @@ const SingleUserProfileCard = props => {
       <h1>
         {firstName} {lastName}
       </h1>
-      <Bio>{bio}</Bio>
+      <Bio>
+        {bio === null || bio === ""
+          ? `${firstName} has not provided a bio.`
+          : bio}
+      </Bio>
     </ProfileWrapper>
   );
 };
