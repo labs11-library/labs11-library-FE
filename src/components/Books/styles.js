@@ -45,6 +45,10 @@ export const BookCardWrapper = styled.div`
   padding: 10px;
   background: white;
 
+  p {
+    font-size: 1rem;
+  }
+
   @media (max-width: 850px) {
     margin-top: 10px;
     width: 87vw;
@@ -131,3 +135,10 @@ export const LinkContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+export const SingleBookMobileBackButton = styled.div`
+  margin-top: 20px;
+  @media (min-width: 800px) {
+    display: none;
+  }
+`

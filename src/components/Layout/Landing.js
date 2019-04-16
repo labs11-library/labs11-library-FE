@@ -119,6 +119,7 @@ const Landing = props => {
                     <h2 style={{ fontSize: "2.5rem", fontWeight: "300" }}>
                       Sign Up
                     </h2>
+                    <p className="lead" style={{ margin: "10px auto" }}>Join the Bookmaps community</p>
                   </div>
                 </div>
                 <div className="row">

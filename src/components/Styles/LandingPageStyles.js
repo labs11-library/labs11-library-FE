@@ -32,6 +32,7 @@ export const BookDetailsWrapper = styled.div`
     width: 96%;
     margin: auto;
     margin-bottom: 20px;
+    word-break: break-word;
   }
 `;
 
@@ -41,11 +42,9 @@ export const BookImgWrapper = styled.div`
   min-height: 180px;
   max-height: 180px;
   margin-right: 20px;
-  // max-width: 120px;
-  // width: 100%;
-  // height: auto;
-  // object-fit: cover;
-  // margin-right: 20px;
+  @media (max-width: 750px) {
+    margin-right: 10px
+  }
 `;
 export const BookImg = styled.img`
   width: 100%;
@@ -57,7 +56,10 @@ export const BookTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  padding-right: 10px;
+  margin-right: 10px;
+  @media (max-width: 750px) {
+    padding-right: 5px
+  }
   width: 100%;
   h2,
   p {
@@ -68,7 +70,6 @@ export const BookTextContainer = styled.div`
     padding-right: 6px;
     color: #009EE5;
   }
-
   }
   p {
     font-size: 1rem;
@@ -96,6 +97,10 @@ export const LandingPageWrapper = styled.div`
 
 export const AvatarContainer = styled.div`
   @media (max-width: 1050px) and (min-width: 750px) {
+    display: none !important;
+  }
+
+  @media(max-width: 500px) {
     display: none !important;
   }
 `;

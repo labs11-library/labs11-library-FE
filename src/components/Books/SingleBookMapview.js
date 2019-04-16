@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "./bookmapview.css";
-import baseUrl from "../../url";
 import Loading from "../Loading/Loading";
 import { connect } from "react-redux";
 import { getSingleUser } from "../../redux/actions/userActions.js";
