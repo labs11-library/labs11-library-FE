@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import BookDetails from "./BookDetails";
 import Distance from "./Distance";
 
+import { Link } from "react-router-dom";
+
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -114,41 +116,32 @@ class Books extends Component {
         book => book.lenderId.toString() === localStorage.getItem("userId")
       );
     } else if (filter === "distance") {
-      return this.searchBooks().filter(book => {
-        // if (book.latitude && book.longitude) {
-        //   return (
-        this.distance(
-          book.latitude,
-          book.longitude,
-          this.props.loggedInUser.latitude,
-          this.props.loggedInUser.longitude,
-          this.state.miles
-        ) === true;
-        // );
-        // }
+      let newArr = this.searchBooks().filter(book => {
+        if (
+          book.latitude &&
+          book.longitude &&
+          book.lenderId.toString() !== localStorage.getItem("userId")
+        ) {
+          return (
+            this.distance(
+              book.latitude,
+              book.longitude,
+              this.props.loggedInUser.latitude,
+              this.props.loggedInUser.longitude,
+              this.state.miles
+            ) === true
+          );
+        }
       });
-      // return newArr;
-      // return this.searchBooks().filter(
-      //   book => book.lenderId.toString() === localStorage.getItem("userId")
-      // );
+      return newArr;
     }
   };
 
   render() {
-    console.log(
-      this.distance(
-        book.latitude,
-        book.longitude,
-        this.props.loggedInUser.latitude,
-        this.props.loggedInUser.longitude,
-        this.state.miles
-      )
-    );
     let none;
     if (this.props.fetchingBooks) {
       return <Loading />;
     } else {
-      console.log(this.state.miles);
       return (
         <BookListContainer>
           <Paper
