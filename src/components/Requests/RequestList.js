@@ -85,7 +85,7 @@ class Requests extends Component {
               <div>
                 {this.filterIncomingRequests().length === 0 && (
                   <NoRequests>
-                    You have no incoming checkout requests.  Check out your <span onClick={() => {this.setState({value: 1})}}>outbound requests</span> or add a book <a href="/">here</a>.
+                    You have no incoming checkout requests.  Check out your <span onClick={() => {this.setState({value: 1})}}>outbound requests</span> or add a book <a href="/browse">here</a>.
                   </NoRequests>
                 )}
                 {this.filterIncomingRequests().length > 0 &&
@@ -104,7 +104,7 @@ class Requests extends Component {
               <div>
                 {this.filterOutgoingRequests().length === 0 && (
                   <NoRequests>
-                    You have no outbound checkout requests. Check out your <span onClick={() => {this.setState({value: 0})}}>incoming requests</span> or find a book <a href="/">here</a>.
+                    You have no outbound checkout requests. Check out your <span onClick={() => {this.setState({value: 0})}}>incoming requests</span> or find a book <a href="/browse">here</a>.
                   </NoRequests>
                 )}
                 {this.filterOutgoingRequests().length > 0 &&

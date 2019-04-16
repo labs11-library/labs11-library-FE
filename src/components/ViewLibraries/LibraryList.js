@@ -66,34 +66,12 @@ class LibraryList extends Component {
     } else {
       const { firstName } = this.props.singleUser;
       return (
-        // <div>
-        //   <h1>
-        //     {firstName} {lastName}'s Library
-        //   </h1>
-        //   <input
-        //     placeholder="Search inventory"
-        //     name="searchText"
-        //     value={this.state.searchText}
-        //     onChange={this.handleChange}
-        //   />
-        //   <div>
-        //     {this.searchBooks().map(book => {
-        //       return (
-        //         <LibraryDetails
-        //           book={book}
-        //           viewBook={this.viewBook}
-        //           key={book.bookId}
-        //         />
-        //       );
-        //     })}
-        //   </div>
-        // </div>
         <InventoryContainer>
-           <ProfileWrapper>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <SingleUserProfileCard singleUser={singleUser} />
+           <div>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <SingleUserProfileCard singleUser={singleUser} />
+            </div>
           </div>
-        </ProfileWrapper>
           <Paper
             style={{
               width: "80%",
