@@ -253,6 +253,7 @@ class Mapview extends Component {
     return (
       <main>
         <div id="map" />
+
         <input
           id="pac-input"
           className="controls"
