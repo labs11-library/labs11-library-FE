@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import BookDetails from "./BookDetails";
+import Distance from "./Distance";
 
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -15,7 +16,9 @@ import { getBooks } from "../../redux/actions/bookActions.js";
 import Loading from "../Loading/Loading.js";
 import {
   BookListContainer,
-  CardContainer
+  CardContainer,
+  NoBooks,
+  NoBooksLink
 } from "../Styles/LandingPageStyles.js";
 class Books extends Component {
   constructor() {
@@ -23,7 +26,8 @@ class Books extends Component {
     this.state = {
       books: [],
       filter: "available",
-      searchText: ""
+      searchText: "",
+      showSlider: false
     };
   }
 
@@ -58,6 +62,9 @@ class Books extends Component {
   handleSelect = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
+    if (value === "distance") {
+      this.setState({ showSlider: true });
+    } else this.setState({ showSlider: false });
   };
   filteredBooks = () => {
     const { filter } = this.state;
@@ -75,10 +82,15 @@ class Books extends Component {
       return this.searchBooks().filter(
         book => book.lenderId.toString() === localStorage.getItem("userId")
       );
+    } else if (filter === "distance") {
+      return this.searchBooks().filter(
+        book => book.lenderId.toString() !== localStorage.getItem("userId")
+      );
     }
   };
 
   render() {
+    let none;
     if (this.props.fetchingBooks) {
       return <Loading />;
     } else {
@@ -94,7 +106,7 @@ class Books extends Component {
             }}
           >
             <InputBase
-              placeholder="Search books"
+              placeholder="Search for books by title, author, or owner"
               type="text"
               name="searchText"
               value={this.state.searchText}
@@ -118,9 +130,21 @@ class Books extends Component {
             >
               <MenuItem value={"all"}>All</MenuItem>
               <MenuItem value={"available"}>Available</MenuItem>
+              <MenuItem value={"distance"}>Distance</MenuItem>
               <MenuItem value={"mybooks"}>My Books</MenuItem>
             </Select>
           </div>
+          {this.state.showSlider ? <Distance /> : none}
+          {/* <Distance /> */}
+          {this.state.searchText.length > 0 &&
+            this.filteredBooks().length === 0 && (
+              <>
+                <NoBooks>Nobody has posted this book yet.</NoBooks>
+                <NoBooksLink to="/add-book">
+                  Be the first to post it to BookMaps.
+                </NoBooksLink>
+              </>
+            )}
           <CardContainer>
             {this.filteredBooks().map(book => {
               return <BookDetails key={book.bookId} book={book} />;

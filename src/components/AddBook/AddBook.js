@@ -97,7 +97,7 @@ class AddBook extends Component {
           </AddBookRating>
           <div>
             <TextField
-              label="Add a description"
+              label="Provide a description of your copy"
               name="description"
               multiline
               fullWidth
@@ -113,7 +113,7 @@ class AddBook extends Component {
               style={{ margin: "5px" }}
               color="primary"
             >
-              Add book to your library
+              Add To My Library
             </Button>
             <Button
               variant="outlined"

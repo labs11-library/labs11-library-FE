@@ -2,27 +2,32 @@ import styled from "styled-components";
 
 export const ProfileWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 200px;
-  padding: 10px;
-  margin-top: 5vw;
   flex-direction: column;
-
+  align-items: center;
+  width: 95%;
+  max-width: 600px;
+  padding: 10px;
+  margin: auto;
   h1,
   p {
     padding: 5px;
   }
-
   h1 {
     font-size: 2rem;
   }
-
   p {
     font-size: 1rem;
   }
+`;
 
-  @media (max-width 1050px) {
-    justify-content: ;
-  }
+export const Bio = styled.p`
+  text-align: left;
+`;
+
+export const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  text-align: center;
 `;

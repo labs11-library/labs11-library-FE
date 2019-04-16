@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
 export const CheckoutHeader = styled.h2`
-  margin-left: 70px;
+  text-align: center;
   font-size: 1.5rem;
+  margin-bottom: 15px;
+`;
+
+export const NoCheckouts = styled.p`
+  text-align: center;
+  font-size: 1rem;
   margin-bottom: 15px;
 `;

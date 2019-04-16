@@ -14,9 +14,7 @@ import {
   CardContainer
 } from "../Styles/InventoryStyles.js";
 import SingleUserProfileCard from "../Profile/SingleUserProfileCard";
-import { ProfileWrapper } from "../Styles/SingleUserLibraryProfileStyles.js";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
-
 
 class LibraryList extends Component {
   constructor() {
@@ -50,7 +48,6 @@ class LibraryList extends Component {
     this.props.getAllInventory(userId);
     this.props.getSingleUser(userId);
     // this.props.getLoggedInUser();
-    
   }
   render() {
     const { singleUser } = this.props;
@@ -66,34 +63,8 @@ class LibraryList extends Component {
     } else {
       const { firstName } = this.props.singleUser;
       return (
-        // <div>
-        //   <h1>
-        //     {firstName} {lastName}'s Library
-        //   </h1>
-        //   <input
-        //     placeholder="Search inventory"
-        //     name="searchText"
-        //     value={this.state.searchText}
-        //     onChange={this.handleChange}
-        //   />
-        //   <div>
-        //     {this.searchBooks().map(book => {
-        //       return (
-        //         <LibraryDetails
-        //           book={book}
-        //           viewBook={this.viewBook}
-        //           key={book.bookId}
-        //         />
-        //       );
-        //     })}
-        //   </div>
-        // </div>
         <InventoryContainer>
-           <ProfileWrapper>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <SingleUserProfileCard singleUser={singleUser} />
-          </div>
-        </ProfileWrapper>
+          <SingleUserProfileCard singleUser={singleUser} />
           <Paper
             style={{
               width: "80%",
@@ -103,7 +74,6 @@ class LibraryList extends Component {
               alignItems: "center"
             }}
           >
-          
             <InputBase
               placeholder={`Search ${firstName}'s Library`}
               type="text"

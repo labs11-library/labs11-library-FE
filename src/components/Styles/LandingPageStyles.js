@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 export const BookListContainer = styled.div`
   max-width: 1000px;
   text-align: center;
@@ -32,6 +32,7 @@ export const BookDetailsWrapper = styled.div`
     width: 96%;
     margin: auto;
     margin-bottom: 20px;
+    word-break: break-word;
   }
 `;
 
@@ -41,11 +42,9 @@ export const BookImgWrapper = styled.div`
   min-height: 180px;
   max-height: 180px;
   margin-right: 20px;
-  // max-width: 120px;
-  // width: 100%;
-  // height: auto;
-  // object-fit: cover;
-  // margin-right: 20px;
+  @media (max-width: 750px) {
+    margin-right: 10px
+  }
 `;
 export const BookImg = styled.img`
   width: 100%;
@@ -57,7 +56,10 @@ export const BookTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  padding-right: 10px;
+  margin-right: 10px;
+  @media (max-width: 750px) {
+    padding-right: 5px
+  }
   width: 100%;
   h2,
   p {
@@ -68,7 +70,6 @@ export const BookTextContainer = styled.div`
     padding-right: 6px;
     color: #009EE5;
   }
-
   }
   p {
     font-size: 1rem;
@@ -76,7 +77,8 @@ export const BookTextContainer = styled.div`
   }
 `;
 export const Availability = styled.p`
-  color: ${props => (props.available ? "#00d369 !important" : "#ff5454 !important")};
+  color: ${props =>
+    props.available ? "#00d369 !important" : "#ff5454 !important"};
 `;
 
 export const DueDate = styled.p`
@@ -97,6 +99,10 @@ export const AvatarContainer = styled.div`
   @media (max-width: 1050px) and (min-width: 750px) {
     display: none !important;
   }
+
+  @media(max-width: 500px) {
+    display: none !important;
+  }
 `;
 
 export const ContentContainer = styled.div`
@@ -115,7 +121,7 @@ export const MapWrapper = styled.div`
   right: 0;
   top: 3.6rem;
   @media (max-width: 750px) {
-    margin-top: 60px;
+    margin-top: 90px;
     width: 100%;
     display: ${props => (props.value === 0 ? "none" : "block")};
   }
@@ -132,7 +138,17 @@ export const BooksWrapper = styled.div`
     display: ${props => (props.value === 1 ? "none" : "block")};
   }
 `;
+export const NoBooks = styled.h2`
+  text-align: center;
+  font-size: 1.5rem;
+  max-width: 90%;
+  margin: 20px auto;
+`;
 
+export const NoBooksLink = styled(Link)`
+  font-size: 1.2rem;
+  color: #009ee5;
+`;
 export const TabsWrapper = styled.div`
   width: 100%;
 

@@ -45,11 +45,10 @@ class App extends Component {
 
   componentWillMount() {
     var query = queryString.parse(this.props.location.search);
-    console.log(query);
     if (query.token && query.userId) {
       window.localStorage.setItem("jwt", query.token);
       window.localStorage.setItem("userId", query.userId);
-      this.props.history.push("/");
+      this.props.history.push("/browse");
     }
   }
   render() {
@@ -93,7 +92,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/notifications"
+              path="/requests"
               render={props => <RequestList {...props} />}
             />
             <Route
@@ -114,7 +113,7 @@ class App extends Component {
 
             <Route
               exact
-              path="/notifications/:checkoutRequestId"
+              path="/requests/:checkoutRequestId"
               render={props => <SingleRequest {...props} />}
             />
             <Route
