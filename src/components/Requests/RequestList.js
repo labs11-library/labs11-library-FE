@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import RequestDetails from "./RequestDetails";
 import { connect } from "react-redux";
 import { getCheckoutRequests } from "../../redux/actions/checkoutActions.js";
@@ -6,7 +7,6 @@ import Auth from "../Auth/Auth";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading.js";
 import { NoRequests } from "../Styles/NotificationStyles.js";
 class Requests extends Component {
