@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
+import Avatar from "@material-ui/core/Avatar";
 import { editProfile } from "../../redux/actions/authActions.js";
 import styled from "styled-components";
 import axios from 'axios';
@@ -106,7 +107,9 @@ class UpdateUserProfile extends Component {
   render() {
     return (
       <div>
+      
       <FormWrapper>
+      <Avatar src={this.state.picture} />
         <NameWrapper>
           <TextField
             type="text"
