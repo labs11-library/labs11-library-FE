@@ -23,3 +23,9 @@ body {
   border: none;
   border-radius: 6px;
 }
+
+@media (max-width: 750px) {
+  #map {
+    height: 70vh;
+  }
+}

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import BookDetails from "./BookDetails";
 import Distance from "./Distance";
 
+import { Link } from "react-router-dom";
+
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -9,6 +11,7 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
+import { getLoggedInUser } from "../../redux/actions/authActions.js";
 
 import { connect } from "react-redux";
 import { getBooks } from "../../redux/actions/bookActions.js";
@@ -27,12 +30,14 @@ class Books extends Component {
       books: [],
       filter: "available",
       searchText: "",
-      showSlider: false
+      showSlider: false,
+      miles: 25
     };
   }
 
   componentDidMount() {
     this.props.getBooks();
+    this.props.getLoggedInUser();
   }
 
   handleChange = e => {
@@ -41,20 +46,45 @@ class Books extends Component {
       [name]: value
     });
   };
-  searchBooks = () => {
-    // const { searchText } = this.state;
-    // const { books } = this.props;
+  distanceChange = (event, miles) => {
+    this.setState({ miles });
+  };
+  distance = (lat1, lon1, lat2, lon2, miles) => {
+    if (lat1 == lat2 && lon1 == lon2) {
+      return true;
+    } else {
+      var radlat1 = (Math.PI * lat1) / 180;
+      var radlat2 = (Math.PI * lat2) / 180;
+      var theta = lon1 - lon2;
+      var radtheta = (Math.PI * theta) / 180;
+      var dist =
+        Math.sin(radlat1) * Math.sin(radlat2) +
+        Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+      if (dist > 1) {
+        dist = 1;
+      }
+      dist = Math.acos(dist);
+      dist = (dist * 180) / Math.PI;
+      dist = dist * 60 * 1.1515;
 
-    if (this.state.searchText.length === 0) {
-      return this.props.books;
-    } else if (this.state.searchText.length > 0) {
+      if (dist < miles) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
+  searchBooks = () => {
+    const { searchText } = this.state;
+    const { books } = this.props;
+
+    if (searchText.length === 0) {
+      return books;
+    } else if (searchText.length > 0) {
       const newText = this.state.searchText.replace(/\\$/, "");
-      let searchRegex = new RegExp(newText, "gi");
+      const searchRegex = new RegExp(newText, "gi");
       // const searchRegex = new RegExp(searchText, "gi");
-      console.log(this.props.books);
-      console.log(searchRegex);
-      console.log(this.props.books[0].title.match(/1984/gi));
-      return this.props.books.filter(
+      return books.filter(
         book =>
           book.title.match(searchRegex) ||
           book.authors.match(searchRegex) ||
@@ -86,9 +116,24 @@ class Books extends Component {
         book => book.lenderId.toString() === localStorage.getItem("userId")
       );
     } else if (filter === "distance") {
-      return this.searchBooks().filter(
-        book => book.lenderId.toString() !== localStorage.getItem("userId")
-      );
+      let newArr = this.searchBooks().filter(book => {
+        if (
+          book.latitude &&
+          book.longitude &&
+          book.lenderId.toString() !== localStorage.getItem("userId")
+        ) {
+          return (
+            this.distance(
+              book.latitude,
+              book.longitude,
+              this.props.loggedInUser.latitude,
+              this.props.loggedInUser.longitude,
+              this.state.miles
+            ) === true
+          );
+        }
+      });
+      return newArr;
     }
   };
 
@@ -109,7 +154,7 @@ class Books extends Component {
             }}
           >
             <InputBase
-              placeholder="Search by title, author, or owner"
+              placeholder="Search for books by title, author, or owner"
               type="text"
               name="searchText"
               value={this.state.searchText}
@@ -137,8 +182,14 @@ class Books extends Component {
               <MenuItem value={"mybooks"}>My Books</MenuItem>
             </Select>
           </div>
-          {this.state.showSlider ? <Distance /> : none}
-          {/* <Distance /> */}
+          {this.state.showSlider ? (
+            <Distance
+              distanceChange={this.distanceChange}
+              miles={this.state.miles}
+            />
+          ) : (
+            none
+          )}
           {this.state.searchText.length > 0 &&
             this.filteredBooks().length === 0 && (
               <>
@@ -161,9 +212,10 @@ class Books extends Component {
 
 const mapStateToProps = state => ({
   fetchingBooks: state.bookReducer.fetchingBooks,
-  books: state.bookReducer.books
+  books: state.bookReducer.books,
+  loggedInUser: state.authReducer.loggedInUser
 });
 export default connect(
   mapStateToProps,
-  { getBooks }
+  { getBooks, getLoggedInUser }
 )(Books);
