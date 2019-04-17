@@ -150,7 +150,7 @@ class RequestDetails extends Component {
         <ButtonContainer>
           <NavLink
             style={{ textDecoration: "none" }}
-            to={`/messages/${checkoutRequestId}`}
+            to={`/notifications/${checkoutRequestId}`}
           >
             <Button
               style={{ margin: "10px 5px" }}
@@ -178,7 +178,7 @@ class RequestDetails extends Component {
             color="secondary"
             onClick={this.handleClickOpen}
           >
-            Delete request
+            {this.props.deleteText}
           </Button>
           <DeleteRequest
             open={this.state.open}

@@ -76,8 +76,8 @@ class Requests extends Component {
               centered
               variant="fullWidth"
             >
-              <Tab style={{ outline: "none" }} label="Incoming Messages" />
-              <Tab style={{ outline: "none" }} label="Outgoing Messages" />
+              <Tab style={{ outline: "none" }} label="Incoming Requests" />
+              <Tab style={{ outline: "none" }} label="Outbound Requests" />
             </Tabs>
           </Paper>
           {this.state.value === 0 ? (
@@ -91,7 +91,7 @@ class Requests extends Component {
                         this.setState({ value: 1 });
                       }}
                     >
-                      outbound messages
+                      outbound request list.
                     </span>{" "}
                     or <Link to="/add-book">click here</Link> to add books to
                     your library.
@@ -103,6 +103,7 @@ class Requests extends Component {
                       <RequestDetails
                         key={request.checkoutRequestId}
                         request={request}
+                        deleteText="Deny Request"
                       />
                     );
                   })}
@@ -119,7 +120,7 @@ class Requests extends Component {
                         this.setState({ value: 0 });
                       }}
                     >
-                      incoming messages
+                      incoming request list.
                     </span>{" "}
                     or <Link to="/browse">click here</Link> to find your next
                     favourite book.
@@ -131,6 +132,7 @@ class Requests extends Component {
                       <RequestDetails
                         key={request.checkoutRequestId}
                         request={request}
+                        deleteText="Cancel Request"
                       />
                     );
                   })}
