@@ -26,6 +26,6 @@ body {
 
 @media (max-width: 750px) {
   #map {
-    height: 80vh;
+    height: 70vh;
   }
 }
