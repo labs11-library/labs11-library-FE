@@ -185,6 +185,14 @@ class UpdateUserProfile extends Component {
             >
               Update your location
             </Button>
+            <Button
+              variant="outlined"
+              onClick={this.props.toggleUpdate}
+              color="secondary"
+              style={{ margin: "5px" }}
+            >
+            Cancel
+          </Button>
          </FormWrapper>
       </div>
     );

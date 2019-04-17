@@ -40,14 +40,14 @@ class UserProfile extends Component {
             loggedInUser={loggedInUser}
             toggleUpdate={this.toggleUpdate}
           />
-          <Button
+          {/* <Button
             variant="outlined"
             onClick={this.toggleUpdate}
             color="secondary"
-            style={{ margin: "5px" }}
+            style={{ marginLeft:"25.7%" }}
           >
             Cancel
-          </Button>
+          </Button> */}
         </React.Fragment>
       );
     } else {
