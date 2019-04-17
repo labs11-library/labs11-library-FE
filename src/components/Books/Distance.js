@@ -15,14 +15,6 @@ const styles = {
 };
 
 class Distance extends React.Component {
-  // state = {
-  //   miles: 25
-  // };
-
-  // handleChange = (event, miles) => {
-  //   this.setState({ miles });
-  // };
-
   render() {
     const { classes, miles, distanceChange } = this.props;
 

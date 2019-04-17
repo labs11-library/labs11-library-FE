@@ -76,8 +76,8 @@ class Requests extends Component {
               centered
               variant="fullWidth"
             >
-              <Tab label="Incoming Requests" />
-              <Tab label="Outbound Requests" />
+              <Tab style={{ outline: "none" }} label="Incoming Requests" />
+              <Tab style={{ outline: "none" }} label="Outbound Requests" />
             </Tabs>
           </Paper>
           {this.state.value === 0 ? (
