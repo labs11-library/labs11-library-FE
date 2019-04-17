@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import BookDetails from "./BookDetails";
 import Distance from "./Distance";
 
-import { Link } from "react-router-dom";
-
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -140,7 +138,6 @@ class Books extends Component {
   };
 
   render() {
-    let none;
     if (this.props.fetchingBooks) {
       return <Loading />;
     } else {

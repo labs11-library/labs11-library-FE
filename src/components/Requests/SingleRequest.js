@@ -73,7 +73,7 @@ class SingleRequest extends Component {
       recipient: otherUserEmail,
       sender: "blkfltchr@gmail.com",
       subject: `${borrowerLenderName} doesn't want to exchange ${title}${anymoreText}`,
-      html: `Hey ${lenderBorrowerName}, unfortunately ${borrowerLenderName} does not want to exchange ${title}${anymoreText}. Find your next book on <a href="https://bookmaps.netlify.com/">Bookmaps</a>!`
+      html: `Hey ${lenderBorrowerName}, unfortunately ${borrowerLenderName} does not want to exchange ${title}${anymoreText}. Find your next book on <a href="https://bookmaps.netlify.com/">BookMaps</a>!`
     };
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${

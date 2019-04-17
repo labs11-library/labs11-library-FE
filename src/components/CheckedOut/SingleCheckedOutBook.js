@@ -9,7 +9,6 @@ import baseUrl from "../../url";
 import Auth from "../Auth/Auth";
 import { ChatWrapper, BackButtonWrapper, ChatButtonWrapper } from "../Styles/ChatStyles";
 import Loading from "../Loading/Loading.js";
-import { toast } from "react-toastify";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 
@@ -61,7 +60,6 @@ class SingleCheckedOutBook extends Component {
         email.sender
       }&topic=${email.subject}&html=${email.html}`
     ).catch(err => console.error(err));
-    toast.info("Email notification sent!");
   };
 
   render() {
