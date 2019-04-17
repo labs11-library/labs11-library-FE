@@ -214,7 +214,7 @@ class SingleBook extends Component {
                     : `Description: ${description}`}
                 </p>
                 {this.props.loggedInUser.stripe_email === null && (
-                  <ClickAwayListener onClickAway={this.handleTooltipToggle}>
+                  <ClickAwayListener>
                     <div>
                       <Tooltip
                         onClose={this.handleTooltipToggle}
