@@ -7,6 +7,7 @@ import { editProfile } from "../../redux/actions/authActions.js";
 import styled from "styled-components";
 import axios from 'axios';
 import baseUrl from '../../url.js';
+import { toast } from "react-toastify";
 // import UpdateProfilePhoto from "./UpdateProfilePhoto";
 const FormWrapper = styled.form`
   width: 95%;
@@ -94,15 +95,10 @@ class UpdateUserProfile extends Component {
             image: res.data.image,
             picture:res.data.image
           });
-          // this.props.editProfile(this.state);
+          toast.info('Your new profile photo has been successfully uploaded.');
        })
-      //  .then(res => {
-      //   this.props.editProfile({
-      //     image: res.data.image,
-      //     picture:this.state.image
-      //   })
-      //  })
        .catch(err => console.log(err));
+      
  };
   render() {
     return (
