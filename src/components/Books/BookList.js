@@ -102,7 +102,8 @@ class Books extends Component {
               width: "85%",
               padding: "2px 4px",
               display: "flex",
-              alignItems: "center"
+              alignItems: "center",
+              maxWidth: "400px"
             }}
           >
             <InputBase

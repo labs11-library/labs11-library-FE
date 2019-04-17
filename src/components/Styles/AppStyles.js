@@ -7,7 +7,8 @@ export const Html = styled.html`
 `;
 
 export const AppContainer = styled.div`
-  max-width: 1200px;
+  // max-width: 1200px;
+  width: 100%;
   margin: 5rem auto 0;
 `;
 
