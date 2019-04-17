@@ -40,7 +40,6 @@ import {
   ChatButtonWrapper
 } from "../Styles/ChatStyles";
 import Loading from "../Loading/Loading.js";
-import { toast } from "react-toastify";
 class SingleBook extends Component {
   constructor(props) {
     super(props);

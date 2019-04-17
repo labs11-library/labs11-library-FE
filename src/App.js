@@ -130,7 +130,7 @@ class App extends Component {
           <ToastContainer
             position="bottom-right"
             style={{ zIndex: "999999999999", fontSize: "1.2rem" }}
-            autoClose={3500}
+            autoClose={5000}
           />
         </Html>
       </React.Fragment>

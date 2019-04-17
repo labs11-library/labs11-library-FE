@@ -9,7 +9,6 @@ import baseUrl from "../../url";
 import Auth from "../Auth/Auth";
 import { ChatWrapper, BackButtonWrapper, ChatButtonWrapper } from "../Styles/ChatStyles";
 import Loading from "../Loading/Loading.js";
-import { toast } from "react-toastify";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 
