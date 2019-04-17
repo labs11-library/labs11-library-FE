@@ -77,8 +77,10 @@ export const BookButtonsWrapper = styled.div`
   justify-content: space-between;
   margin: 10px 0 0 0;
   width: 35vw;
-  height: 180px;
-  // padding: 10px;
+
+  p {
+    margin-bottom: 10px;
+  }
 
   @media (max-width: 850px) {
     width: 100%;
@@ -141,4 +143,4 @@ export const SingleBookMobileBackButton = styled.div`
   @media (min-width: 800px) {
     display: none;
   }
-`
+`;
