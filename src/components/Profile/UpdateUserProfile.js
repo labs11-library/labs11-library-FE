@@ -109,7 +109,7 @@ class UpdateUserProfile extends Component {
       <div>
       
       <FormWrapper>
-      <Avatar src={this.state.picture} />
+      <Avatar src={this.state.picture} style={{margin:"0 auto 10px auto", height: "100px", width: "100px", boxShadow:"0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"}} />
         <NameWrapper>
           <TextField
             type="text"
@@ -146,12 +146,39 @@ class UpdateUserProfile extends Component {
           onChange={this.handleChange}
           // style={{ padding: "5px" }}
         />
-        <Button
-          variant="contained"
-          onClick={this.editProfile}
-          style={{ margin: "5px", marginLeft:"-1px" }}
-          color="primary"
-        >
+        {/* </div> */}
+      </FormWrapper>
+      <FormWrapper>
+            <div style={{display: "flex", marginTop:"5px", alignItems:"center", height:"60px"}}>
+              <div style={{display: "flex", flexDirection: "column", justifyContent:"space-between"}}>
+                <h1 style={{fontSize:"1rem", marginTop:"2%", }}>Update your profile photo</h1>
+                <form method="/POST" encType="multipart/form-data">
+                  <div className="form-group">
+                      {/* <label htmlFor="image" style={{fontSize:".9rem", marginTop:"2%"}}>Upload image: </label> */}
+                      <input
+                        onChange={this.fileHandler}
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/*"
+                        required
+                        style={{marginTop:"10px"}}
+                      />
+                      
+                  </div>
+                </form>
+              </div>
+              <div>
+                <Button style={{ margin: "5px", marginLeft:"-1px", marginTop:"-13px" }} color="primary" variant="contained" onClick={this.uploadImg}>Upload</Button>
+              </div>
+              
+            </div> 
+            <Button
+              variant="contained"
+              onClick={this.editProfile}
+              style={{ margin: "5px", marginLeft:"-1px" }}
+              color="primary"
+            >
           Save Updates
         </Button>
         <Button
@@ -162,24 +189,6 @@ class UpdateUserProfile extends Component {
         >
           Update your location
         </Button>
-        {/* </div> */}
-      </FormWrapper>
-      <FormWrapper>
-            <h1 style={{fontSize:"1rem", marginTop:"2%"}}>Update your profile photo</h1>
-            <form method="/POST" encType="multipart/form-data">
-               <div className="form-group">
-                  <label htmlFor="image" style={{fontSize:".9rem", marginTop:"2%"}}>Upload image: </label>
-                  <input
-                     onChange={this.fileHandler}
-                     type="file"
-                     id="image"
-                     name="image"
-                     accept="image/*"
-                     required
-                  />
-                  <Button style={{ marginLeft: "-6%", marginTop:"-3%" }} color="primary" variant="outlined" onClick={this.uploadImg}>Upload</Button>
-               </div>
-            </form>
          </FormWrapper>
       </div>
     );
