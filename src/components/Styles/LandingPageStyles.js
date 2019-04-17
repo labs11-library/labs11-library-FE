@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 export const BookListContainer = styled.div`
-  max-width: 1000px;
+  // max-width: 1000px;
   text-align: center;
   z-index: 0;
   h1 {
@@ -23,6 +23,7 @@ export const CardContainer = styled.div`
 export const BookDetailsWrapper = styled.div`
   width: 85%;
   border-radius: 7px;
+  max-width: 510px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
@@ -109,7 +110,7 @@ export const ContentContainer = styled.div`
   width: 100%;
   position: relative;
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   @media (max-width: 750px) {
     justify-content: center;
   }

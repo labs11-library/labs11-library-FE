@@ -4,10 +4,12 @@ import { createGlobalStyle } from "styled-components";
 export const Html = styled.html`
   font-size: 62.5%;
   font-family: "Roboto", sans-serif;
+  outline: none;
 `;
 
 export const AppContainer = styled.div`
-  max-width: 1200px;
+  // max-width: 1200px;
+  width: 100%;
   margin: 5rem auto 0;
 `;
 

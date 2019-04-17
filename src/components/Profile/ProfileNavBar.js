@@ -13,7 +13,7 @@ const ProfileNavBar = props => {
   return (
     <div>
       <TabsWrapper>
-        <Paper>
+        <Paper style={{ width: "90%", maxWidth: "1068px", margin: "0 auto" }}>
           <Tabs
             value={props.value}
             onChange={this.handleChange}

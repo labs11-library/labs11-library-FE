@@ -50,16 +50,18 @@ class NavBar extends Component {
         {loggedIn && (
           <NavBarWrapper>
             <NavContentWrapper>
-              <NavLinkWrapper exact to="/browse">
+              <NavLinkWrapper style={{ marginLeft: "12px" }} exact to="/browse">
                 Home
               </NavLinkWrapper>
               <BurgerMenu />
               <NavLinks>
                 <NavLinkWrapper to="/my-library">My Library</NavLinkWrapper>
                 <NavLinkWrapper to="/add-book">Add book</NavLinkWrapper>
+
                 <NavLinkWrapper to="/messages">
                   Messages
                 </NavLinkWrapper>
+
                 <NavLinkWrapper style={{ borderBottom: "none" }}>
                   <Avatar
                     style={{

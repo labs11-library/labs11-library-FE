@@ -16,7 +16,7 @@ export const NavBarWrapper = styled.div`
 `;
 
 export const NavContentWrapper = styled.div`
-  max-width: 1200px;
+  // max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;

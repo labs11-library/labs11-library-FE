@@ -67,7 +67,7 @@ class Requests extends Component {
     } else if (this.props.checkoutRequests) {
       return (
         <>
-          <Paper style={{ width: "90%", margin: "0 auto 48px" }}>
+          <Paper style={{ width: "90%", maxWidth: "1068px", margin: "0 auto" }}>
             <Tabs
               value={this.state.value}
               onChange={this.handleChange}
@@ -76,8 +76,8 @@ class Requests extends Component {
               centered
               variant="fullWidth"
             >
-              <Tab label="Incoming Messages" />
-              <Tab label="Outgoing Messages" />
+              <Tab style={{ outline: "none" }} label="Incoming Messages" />
+              <Tab style={{ outline: "none" }} label="Outgoing Messages" />
             </Tabs>
           </Paper>
           {this.state.value === 0 ? (
@@ -85,7 +85,16 @@ class Requests extends Component {
               <div>
                 {this.filterIncomingRequests().length === 0 && (
                   <NoRequests>
-                    You have no incoming checkout requests.  Check out your <span onClick={() => {this.setState({value: 1})}}>outbound messages</span> or <Link to="/add-book">click here</Link> to add books to your library.
+                    You have no incoming checkout requests. Check out your{" "}
+                    <span
+                      onClick={() => {
+                        this.setState({ value: 1 });
+                      }}
+                    >
+                      outbound messages
+                    </span>{" "}
+                    or <Link to="/add-book">click here</Link> to add books to
+                    your library.
                   </NoRequests>
                 )}
                 {this.filterIncomingRequests().length > 0 &&
@@ -104,7 +113,16 @@ class Requests extends Component {
               <div>
                 {this.filterOutgoingRequests().length === 0 && (
                   <NoRequests>
-                    You have no outbound checkout requests. Check out your <span onClick={() => {this.setState({value: 0})}}>incoming messages</span> or <Link to="/browse">click here</Link> to find your next favourite book.
+                    You have no outbound checkout requests. Check out your{" "}
+                    <span
+                      onClick={() => {
+                        this.setState({ value: 0 });
+                      }}
+                    >
+                      incoming messages
+                    </span>{" "}
+                    or <Link to="/browse">click here</Link> to find your next
+                    favourite book.
                   </NoRequests>
                 )}
                 {this.filterOutgoingRequests().length > 0 &&

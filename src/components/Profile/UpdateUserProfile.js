@@ -56,7 +56,6 @@ class UpdateUserProfile extends Component {
       lastName: this.state.lasName,
       email: this.state.email,
       bio: this.state.bio,
-      userId: this.state.bio,
       picture: this.state.picture
     });
   };
@@ -92,7 +91,7 @@ class UpdateUserProfile extends Component {
           console.log('res', res);
           this.setState({ 
             image: res.data.image,
-            picture:this.state.image
+            picture:res.data.image
           });
           // this.props.editProfile(this.state);
        })
@@ -147,7 +146,7 @@ class UpdateUserProfile extends Component {
         <Button
           variant="contained"
           onClick={this.editProfile}
-          style={{ margin: "5px" }}
+          style={{ margin: "5px", marginLeft:"-1px" }}
           color="primary"
         >
           Save Updates
@@ -162,11 +161,11 @@ class UpdateUserProfile extends Component {
         </Button>
         {/* </div> */}
       </FormWrapper>
-      <div className="profileUpdate">
-            <h1>Update your profile photo</h1>
+      <FormWrapper>
+            <h1 style={{fontSize:"1rem", marginTop:"2%"}}>Update your profile photo</h1>
             <form method="/POST" encType="multipart/form-data">
                <div className="form-group">
-                  <label htmlFor="image">Upload image: </label>
+                  <label htmlFor="image" style={{fontSize:".9rem", marginTop:"2%"}}>Upload image: </label>
                   <input
                      onChange={this.fileHandler}
                      type="file"
@@ -175,10 +174,10 @@ class UpdateUserProfile extends Component {
                      accept="image/*"
                      required
                   />
-                  <button onClick={this.uploadImg}>Upload</button>
+                  <Button style={{ marginLeft: "-6%", marginTop:"-3%" }} color="primary" variant="outlined" onClick={this.uploadImg}>Upload</Button>
                </div>
             </form>
-         </div>
+         </FormWrapper>
       </div>
     );
   }
