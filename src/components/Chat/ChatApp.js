@@ -11,7 +11,7 @@ class ChatApp extends Component {
     this.state = {
       error: null,
       isLoading: true,
-      messages: []
+      notifications: []
     };
 
     this.user = {
@@ -20,7 +20,7 @@ class ChatApp extends Component {
     };
 
     this.setupChatClient = this.setupChatClient.bind(this);
-    this.messagesLoaded = this.messagesLoaded.bind(this);
+    this.notificationsLoaded = this.notificationsLoaded.bind(this);
     this.messageAdded = this.messageAdded.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.handleError = this.handleError.bind(this);
@@ -71,7 +71,7 @@ class ChatApp extends Component {
       .then(() => {
         // Success!
         this.setState({ isLoading: false });
-        this.channel.getMessages().then(this.messagesLoaded);
+        this.channel.getnotifications().then(this.notificationsLoaded);
         this.channel.on("messageAdded", this.messageAdded);
       })
       .catch(this.handleError);
@@ -91,16 +91,16 @@ class ChatApp extends Component {
     };
   }
 
-  messagesLoaded(messagePage) {
+  notificationsLoaded(messagePage) {
     this.setState({
-      messages: messagePage.items.map(this.twilioMessageToKendoMessage)
+      notifications: messagePage.items.map(this.twilioMessageToKendoMessage)
     });
   }
 
   messageAdded(message) {
     this.setState(prevState => ({
-      messages: [
-        ...prevState.messages,
+      notifications: [
+        ...prevState.notifications,
         this.twilioMessageToKendoMessage(message)
       ]
     }));
@@ -124,13 +124,13 @@ class ChatApp extends Component {
     ) {
       return <Loading />;
     }
-   
+
     return (
       <>
         <ChatUI
           user={this.user}
-          messages={this.state.messages}
-          onMessageSend={this.sendMessage}
+          notifications={this.state.notifications}
+          onnotificationsend={this.sendMessage}
         />
       </>
     );
