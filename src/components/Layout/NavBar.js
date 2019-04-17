@@ -8,10 +8,12 @@ import {
   NavLinks,
   NavLinksShow,
   NavLinkWrapper,
-  MenuLinks
+  MenuLinks,
+  NavLogoWrapper
 } from "../Styles/NavBarStyles.js";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import BookMaps_combo from "../../images/BookMapsLogos/BookMaps_combo.png";
 
 import BurgerMenu from "./BurgerMenu";
 
@@ -50,8 +52,8 @@ class NavBar extends Component {
         {loggedIn && (
           <NavBarWrapper>
             <NavContentWrapper>
-              <NavLinkWrapper style={{ marginLeft: "12px" }} exact to="/browse">
-                Home
+              <NavLinkWrapper exact to="/browse">
+                <NavLogoWrapper src={BookMaps_combo} />
               </NavLinkWrapper>
               <BurgerMenu />
               <NavLinks>
