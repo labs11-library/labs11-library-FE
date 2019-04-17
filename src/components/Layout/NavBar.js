@@ -60,6 +60,7 @@ class NavBar extends Component {
                 <NavLinkWrapper to="/notifications">
                   Notifications
                 </NavLinkWrapper>
+
                 <NavLinkWrapper style={{ borderBottom: "none" }}>
                   <Avatar
                     style={{
