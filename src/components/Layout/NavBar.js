@@ -57,7 +57,11 @@ class NavBar extends Component {
               <NavLinks>
                 <NavLinkWrapper to="/my-library">My Library</NavLinkWrapper>
                 <NavLinkWrapper to="/add-book">Add book</NavLinkWrapper>
-                <NavLinkWrapper to="/requests">Requests</NavLinkWrapper>
+
+                <NavLinkWrapper to="/messages">
+                  Messages
+                </NavLinkWrapper>
+
                 <NavLinkWrapper style={{ borderBottom: "none" }}>
                   <Avatar
                     style={{

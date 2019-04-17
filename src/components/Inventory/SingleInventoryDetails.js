@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Loading from "../Loading/Loading";
-import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
 import * as moment from "moment";
+import { BookImgWrapper, BookImg } from "../Styles/InventoryStyles";
 
 const Availability = styled.p`
   color: ${props => (props.available ? "green" : "red")};
@@ -24,13 +23,7 @@ const SingleInventoryDetails = props => {
   const availability = available ? "Available" : "Checked out";
   const threeWeeks = moment(checkoutDate, "YYYY-MM-DD").add(21, "days");
   return (
-    <div>
-      <Link
-        style={{ position: "absolute", left: "10px", textDecoration: "none" }}
-        to="/my-library"
-      >
-        <Button variant="outlined">← Back</Button>
-      </Link>
+    <div style={{marginTop: "10px"}}>
       <BookDetailsWrapper>
         <BookImgWrapper>
           <BookImg alt={title} src={image} />
@@ -81,21 +74,11 @@ const BookDetailsWrapper = styled.div`
     color: #838281;
   }
 `;
-const BookImgWrapper = styled.div`
-  min-width: 120px;
-  max-width: 120px;
-  min-height: 180px;
-  max-height: 180px;
-  margin-right: 10px;
-  border-radius: 7px;
-`;
-const BookImg = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: 7px 0 0 7px;
-`;
+
 const BookContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  width: 100%;
+  padding-right: 5px;
 `;
