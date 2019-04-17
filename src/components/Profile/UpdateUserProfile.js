@@ -95,7 +95,7 @@ class UpdateUserProfile extends Component {
             image: res.data.image,
             picture:res.data.image
           });
-          toast.info('Your new profile photo has been successfully uploaded.');
+          toast.info('Your new profile photo has been successfully uploaded. Please click Save Updates to confirm changes.');
        })
        .catch(err => console.log(err));
       
@@ -175,16 +175,16 @@ class UpdateUserProfile extends Component {
               style={{ margin: "5px", marginLeft:"-1px" }}
               color="primary"
             >
-          Save Updates
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={this.changeLocation}
-          style={{ margin: "5px" }}
-          color="primary"
-        >
-          Update your location
-        </Button>
+              Save Updates
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={this.changeLocation}
+              style={{ margin: "5px" }}
+              color="primary"
+            >
+              Update your location
+            </Button>
          </FormWrapper>
       </div>
     );
