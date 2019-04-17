@@ -42,8 +42,8 @@ class MyLibrary extends Component {
                 centered
                 variant="fullWidth"
               >
-                <Tab label="My books" />
-                <Tab label="Checkouts" />
+                <Tab style={{ outline: "none" }} label="My books" />
+                <Tab style={{ outline: "none" }} label="Checkouts" />
               </Tabs>
             </Paper>
           </MyLibraryTabsWrapper>
