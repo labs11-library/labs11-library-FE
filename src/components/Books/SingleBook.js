@@ -97,12 +97,8 @@ class SingleBook extends Component {
     });
   };
 
-  handleTooltipClose = () => {
-    this.setState({ open: false });
-  };
-
-  handleTooltipOpen = () => {
-    this.setState({ open: true });
+  handleTooltipToggle = () => {
+    this.setState({ open: !this.state.open });
   };
 
   render() {
@@ -218,10 +214,10 @@ class SingleBook extends Component {
                     : `Description: ${description}`}
                 </p>
                 {this.props.loggedInUser.stripe_email === null && (
-                  <ClickAwayListener onClickAway={this.handleTooltipClose}>
+                  <ClickAwayListener>
                     <div>
                       <Tooltip
-                        onClose={this.handleTooltipClose}
+                        onClose={this.handleTooltipToggle}
                         open={this.state.open}
                         disableFocusListener
                         disableHoverListener
@@ -239,13 +235,19 @@ class SingleBook extends Component {
                         placement="top"
                       >
                         <p
-                          style={{ paddingBottom: "5px" }}
-                          onClick={this.handleTooltipOpen}
+                          style={{
+                            paddingBottom: "5px",
+                            fontSize: ".8rem",
+                            cursor: "pointer"
+                          }}
+                          onMouseEnter={this.handleTooltipToggle}
+                          onMouseLeave={this.handleTooltipToggle}
                         >
                           Why do we ask for your payment information?{" "}
                           <FontAwesome
                             className="far fa-question-circle"
                             size="1x"
+                            style={{ cursor: "pointer" }}
                           />
                         </p>
                       </Tooltip>
