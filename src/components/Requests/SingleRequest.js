@@ -6,13 +6,17 @@ import ChatApp from "../Chat/ChatApp";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import Auth from "../Auth/Auth";
 import { Link } from "react-router-dom";
-import { ChatWrapper, BackButtonWrapper, ChatButtonWrapper } from "../Styles/ChatStyles";
+import {
+  ChatWrapper,
+  BackButtonWrapper,
+  ChatButtonWrapper
+} from "../Styles/ChatStyles";
 import Button from "@material-ui/core/Button";
 import Loading from "../Loading/Loading.js";
 import baseUrl from "../../url";
 import { deleteCheckoutRequest } from "../../redux/actions/checkoutActions.js";
 import { withRouter } from "react-router-dom";
-import DeleteRequest from './DeleteRequest';
+import DeleteRequest from "./DeleteRequest";
 
 class SingleRequest extends Component {
   constructor(props) {
@@ -36,7 +40,7 @@ class SingleRequest extends Component {
     const { lenderId, checkoutRequestId } = this.props.singleCheckoutRequest;
     this.props.deleteCheckoutRequest(lenderId, checkoutRequestId);
     this.sendEmail();
-    this.props.history.push("/messages");
+    this.props.history.push("/notifications");
   };
 
   sendEmail = () => {
@@ -88,7 +92,10 @@ class SingleRequest extends Component {
   };
 
   render() {
-    if (this.props.loadingRequests || this.props.singleCheckoutRequest.lenderId === undefined) {
+    if (
+      this.props.loadingRequests ||
+      this.props.singleCheckoutRequest.lenderId === undefined
+    ) {
       return <Loading />;
     }
     const {
@@ -101,35 +108,37 @@ class SingleRequest extends Component {
     const lenderBorrowerName =
       lenderId.toString() === localStorage.getItem("userId")
         ? borrower
-    : lender;
+        : lender;
     return (
       <>
         <BackButtonWrapper>
-          <Link to="/messages" style={{textDecoration: "none"}}>
-            <Button 
-                color="primary" 
-                variant="outlined" 
-              >← Back</Button>
+          <Link to="/notifications" style={{ textDecoration: "none" }}>
+            <Button color="primary" variant="outlined">
+              ← Back
+            </Button>
           </Link>
         </BackButtonWrapper>
         <ChatWrapper>
           <ChatButtonWrapper>
-            <Link to="/messages" style={{textDecoration: "none"}}>
-              <Button 
-                  color="primary" 
-                  variant="outlined" 
-                >← Back</Button>
+            <Link to="/notifications" style={{ textDecoration: "none" }}>
+              <Button color="primary" variant="outlined">
+                ← Back
+              </Button>
             </Link>
           </ChatButtonWrapper>
-            {this.state.error ? (
-              <h2>
-                {lender} hasn't accepted your previous request yet. Talk to{" "}{borrower} about exchanging {title.substr(0, 25)}{title.length > 25 && "..."}
-              </h2>
-            ) : (
-              <h2>
-                Talk to {lenderBorrowerName} about exchanging {title.substr(0, 25)}{title.length > 25 && "..."}
-              </h2>
-            )}
+          {this.state.error ? (
+            <h2>
+              {lender} hasn't accepted your previous request yet. Talk to{" "}
+              {borrower} about exchanging {title.substr(0, 25)}
+              {title.length > 25 && "..."}
+            </h2>
+          ) : (
+            <h2>
+              Talk to {lenderBorrowerName} about exchanging{" "}
+              {title.substr(0, 25)}
+              {title.length > 25 && "..."}
+            </h2>
+          )}
           <ChatApp user={this.props.loggedInUser} otherUserId={borrowerId} />
           <Button
             style={{ margin: "10px 0" }}
@@ -139,7 +148,13 @@ class SingleRequest extends Component {
           >
             Delete request
           </Button>
-          <DeleteRequest open={this.state.open} handleClose={this.handleClose} handleClickOpen={this.handleClickOpen} deleteRequest={this.deleteRequest} request={this.props.singleCheckoutRequest} />
+          <DeleteRequest
+            open={this.state.open}
+            handleClose={this.handleClose}
+            handleClickOpen={this.handleClickOpen}
+            deleteRequest={this.deleteRequest}
+            request={this.props.singleCheckoutRequest}
+          />
         </ChatWrapper>
       </>
     );

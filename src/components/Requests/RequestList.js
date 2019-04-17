@@ -76,8 +76,8 @@ class Requests extends Component {
               centered
               variant="fullWidth"
             >
-              <Tab label="Incoming Messages" />
-              <Tab label="Outgoing Messages" />
+              <Tab label="Incoming Requests" />
+              <Tab label="Outbound Requests" />
             </Tabs>
           </Paper>
           {this.state.value === 0 ? (
@@ -85,8 +85,16 @@ class Requests extends Component {
               <div>
                 {this.filterIncomingRequests().length === 0 && (
                   <NoRequests>
-
-                    You have no incoming checkout requests.  Check out your <span onClick={() => {this.setState({value: 1})}}>outbound messages</span> or <Link to="/add-book">click here</Link> to add books to your library.
+                    You have no incoming checkout requests. Check out your{" "}
+                    <span
+                      onClick={() => {
+                        this.setState({ value: 1 });
+                      }}
+                    >
+                      outbound request list.
+                    </span>{" "}
+                    or <Link to="/add-book">click here</Link> to add books to
+                    your library.
                   </NoRequests>
                 )}
                 {this.filterIncomingRequests().length > 0 &&
@@ -95,6 +103,7 @@ class Requests extends Component {
                       <RequestDetails
                         key={request.checkoutRequestId}
                         request={request}
+                        deleteText="Deny Request"
                       />
                     );
                   })}
@@ -105,8 +114,16 @@ class Requests extends Component {
               <div>
                 {this.filterOutgoingRequests().length === 0 && (
                   <NoRequests>
-
-                    You have no outbound checkout requests. Check out your <span onClick={() => {this.setState({value: 0})}}>incoming messages</span> or <Link to="/browse">click here</Link> to find your next favourite book.
+                    You have no outbound checkout requests. Check out your{" "}
+                    <span
+                      onClick={() => {
+                        this.setState({ value: 0 });
+                      }}
+                    >
+                      incoming request list.
+                    </span>{" "}
+                    or <Link to="/browse">click here</Link> to find your next
+                    favourite book.
                   </NoRequests>
                 )}
                 {this.filterOutgoingRequests().length > 0 &&
@@ -115,6 +132,7 @@ class Requests extends Component {
                       <RequestDetails
                         key={request.checkoutRequestId}
                         request={request}
+                        deleteText="Cancel Request"
                       />
                     );
                   })}
