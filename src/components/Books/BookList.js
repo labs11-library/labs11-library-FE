@@ -30,7 +30,7 @@ class Books extends Component {
       books: [],
       filter: "available",
       searchText: "",
-      showSlider: false,
+      // showSlider: false,
       miles: 25
     };
   }
@@ -95,27 +95,15 @@ class Books extends Component {
   handleSelect = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
-    if (value === "distance") {
-      this.setState({ showSlider: true });
-    } else this.setState({ showSlider: false });
+    // if (value === "distance") {
+    //   this.setState({ showSlider: true });
+    // } else this.setState({ showSlider: false });
   };
   filteredBooks = () => {
     const { filter } = this.state;
     if (filter === "all") {
-      return this.searchBooks().filter(
-        book => book.lenderId.toString() !== localStorage.getItem("userId")
-      );
-    } else if (filter === "available") {
-      return this.searchBooks().filter(
-        book =>
-          book.available === true &&
-          book.lenderId.toString() !== localStorage.getItem("userId")
-      );
-    } else if (filter === "mybooks") {
-      return this.searchBooks().filter(
-        book => book.lenderId.toString() === localStorage.getItem("userId")
-      );
-    } else if (filter === "distance") {
+      // return this.searchBooks().filter(
+      //   book => book.lenderId.toString() !== localStorage.getItem("userId")
       let newArr = this.searchBooks().filter(book => {
         if (
           book.latitude &&
@@ -134,6 +122,53 @@ class Books extends Component {
         }
       });
       return newArr;
+    } else if (filter === "available") {
+      // return this.searchBooks().filter(
+      //   book =>
+      //     book.available === true &&
+      //     book.lenderId.toString() !== localStorage.getItem("userId")
+      let newArr = this.searchBooks().filter(book => {
+        if (
+          book.latitude &&
+          book.longitude &&
+          book.available === true &&
+          book.lenderId.toString() !== localStorage.getItem("userId")
+        ) {
+          return (
+            this.distance(
+              book.latitude,
+              book.longitude,
+              this.props.loggedInUser.latitude,
+              this.props.loggedInUser.longitude,
+              this.state.miles
+            ) === true
+          );
+        }
+      });
+      return newArr;
+      // } else if (filter === "mybooks") {
+      //   return this.searchBooks().filter(
+      //     book => book.lenderId.toString() === localStorage.getItem("userId")
+      //   );
+      // } else if (filter === "distance") {
+      //   let newArr = this.searchBooks().filter(book => {
+      //     if (
+      //       book.latitude &&
+      //       book.longitude &&
+      //       book.lenderId.toString() !== localStorage.getItem("userId")
+      //     ) {
+      //       return (
+      //         this.distance(
+      //           book.latitude,
+      //           book.longitude,
+      //           this.props.loggedInUser.latitude,
+      //           this.props.loggedInUser.longitude,
+      //           this.state.miles
+      //         ) === true
+      //       );
+      //     }
+      //   });
+      //   return newArr;
     }
   };
 
@@ -178,18 +213,20 @@ class Books extends Component {
             >
               <MenuItem value={"all"}>All</MenuItem>
               <MenuItem value={"available"}>Available</MenuItem>
-              <MenuItem value={"distance"}>Distance</MenuItem>
-              <MenuItem value={"mybooks"}>My Books</MenuItem>
             </Select>
           </div>
-          {this.state.showSlider ? (
+          {/* {this.state.showSlider ? (
             <Distance
               distanceChange={this.distanceChange}
               miles={this.state.miles}
             />
           ) : (
             none
-          )}
+          )} */}
+          <Distance
+            distanceChange={this.distanceChange}
+            miles={this.state.miles}
+          />
           {this.state.searchText.length > 0 &&
             this.filteredBooks().length === 0 && (
               <>
