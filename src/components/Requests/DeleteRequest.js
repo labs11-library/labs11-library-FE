@@ -10,37 +10,34 @@ const DeleteInventory = props => {
   const { title, lender } = props.request;
 
   return (
-    <div>
-      <Dialog
-        open={props.open}
-        onClose={props.handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Are you sure you'd like to cancel your request?"}
-        </DialogTitle>
-        {/* <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Deleting your request for {title} means you will no longer be able
-            to borrow it from {lender} at this time.
-          </DialogContentText>
-        </DialogContent> */}
-        <DialogActions>
-          <Button onClick={props.handleClose} color="primary">
-            No
-          </Button>
-          <Button
-            onClick={() => {
-              props.deleteRequest();
-            }}
-            color="secondary"
-          >
-            Yes
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <Dialog
+      open={props.open}
+      onClose={props.handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle id="alert-dialog-title">
+        {"Are you sure you'd like to remove this request?"}
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-description">
+          This action cannot be undone.
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={props.handleClose} color="primary">
+          No
+        </Button>
+        <Button
+          onClick={() => {
+            props.deleteRequest();
+          }}
+          color="secondary"
+        >
+          Yes
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 

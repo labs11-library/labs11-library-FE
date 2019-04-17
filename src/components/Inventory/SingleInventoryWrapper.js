@@ -14,9 +14,12 @@ import ChatApp from "../Chat/ChatApp";
 import UpdateInventoryForm from "./UpdateInventoryForm.js";
 import SingleInventoryDetails from "./SingleInventoryDetails.js";
 import Auth from "../Auth/Auth";
-import DeleteInventory from './DeleteInventory';
+import DeleteInventory from "./DeleteInventory";
 import Loading from "../Loading/Loading.js";
-import { SingleInventoryContainer, CancelChangesButton } from "../Styles/InventoryStyles";
+import {
+  SingleInventoryContainer,
+  CancelChangesButton
+} from "../Styles/InventoryStyles";
 import { BackButtonWrapper, ChatButtonWrapper } from "../Styles/ChatStyles";
 
 class SingleInventory extends Component {
@@ -71,14 +74,18 @@ class SingleInventory extends Component {
       return (
         <React.Fragment>
           <BackButtonWrapper>
-            <Link style={{textDecoration: "none" }} to="/my-library">
-              <Button variant="outlined" color="primary">← Back</Button>
+            <Link style={{ textDecoration: "none" }} to="/my-library">
+              <Button variant="outlined" color="primary">
+                ← Back
+              </Button>
             </Link>
           </BackButtonWrapper>
           <SingleInventoryContainer>
             <ChatButtonWrapper>
-              <Link style={{textDecoration: "none" }} to="/my-library">
-                <Button variant="outlined" color="primary">← Back</Button>
+              <Link style={{ textDecoration: "none" }} to="/my-library">
+                <Button variant="outlined" color="primary">
+                  ← Back
+                </Button>
               </Link>
             </ChatButtonWrapper>
             <SingleInventoryDetails
@@ -105,9 +112,15 @@ class SingleInventory extends Component {
               style={{ margin: "10px 10px 0 0" }}
               color="secondary"
             >
-              Delete from inventory
+              Remove from my library
             </Button>
-            <DeleteInventory open={this.state.open} handleClose={this.handleClose} handleClickOpen={this.handleClickOpen} deleteInventory={this.deleteInventory} singleInventory={this.props.singleInventory} />
+            <DeleteInventory
+              open={this.state.open}
+              handleClose={this.handleClose}
+              handleClickOpen={this.handleClickOpen}
+              deleteInventory={this.deleteInventory}
+              singleInventory={this.props.singleInventory}
+            />
           </SingleInventoryContainer>
         </React.Fragment>
       );
