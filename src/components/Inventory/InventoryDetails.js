@@ -2,6 +2,7 @@ import React from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import * as moment from "moment";
 import {
   BookDetailsWrapper,
   BookImgWrapper,
@@ -18,11 +19,12 @@ const BookDetails = props => {
     image,
     available,
     dueDate,
-    description
+    checkoutDate
   } = props.book;
-  const availability = available ? "Available" : "Checked out";
-  const descriptionText =
-    description.length > 40 ? `${description.substr(0, 40)} ...` : description;
+  var FontAwesome = require('react-fontawesome')
+  const availability = available ? 
+  <div>Available <FontAwesome className="far fa-check-circle" size="1x"></FontAwesome></div> : "Checked out";
+  const threeWeeks = moment(checkoutDate, "YYYY-MM-DD").add(21, "days");
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -34,17 +36,24 @@ const BookDetails = props => {
           {title.length > 25 && "..."}
         </h2>
         <p>by {authors}</p>
-        <Availability available={available}>{availability}</Availability>
-        {!available && <p>Due: {dueDate} </p>}{" "}
-        <p>
-          {description === "" ? "No description provided" : descriptionText}
-        </p>
+        <Availability available={available}>
+          {availability}
+        </Availability>
+        {!available && (
+          <p>
+            Date due:{" "}
+            {moment(dueDate)
+              .utc(threeWeeks)
+              .local()
+              .format("dddd, MMMM Do")}
+          </p>
+        )}{" "}
         <Link
           style={{ textDecoration: "none" }}
           to={`/my-library/my-books/${bookId}`}
         >
           <Button variant="contained" color="primary">
-            See more details
+            More details
           </Button>
         </Link>
       </BookTextContainer>

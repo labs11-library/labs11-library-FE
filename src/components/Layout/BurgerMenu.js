@@ -46,10 +46,10 @@ class BurgerMenu extends React.Component {
             }
           }}
         >
-          <NoFocus style={{textDecoration: "none"}} to="/"><MenuItem onClick={this.handleClose}>Home</MenuItem></NoFocus>
+          <NoFocus style={{textDecoration: "none"}} to="/browse"><MenuItem onClick={this.handleClose}>Home</MenuItem></NoFocus>
           <NavLink style={{textDecoration: "none"}} to="/my-library"><MenuItem onClick={this.handleClose}>My Library</MenuItem></NavLink>
           <NavLink style={{textDecoration: "none"}} to="/add-book"><MenuItem onClick={this.handleClose}>Add book</MenuItem></NavLink>
-          <NavLink style={{textDecoration: "none"}} to="/notifications"><MenuItem onClick={this.handleClose}>Notifications</MenuItem></NavLink>
+          <NavLink style={{textDecoration: "none"}} to="/messages"><MenuItem onClick={this.handleClose}>Messages</MenuItem></NavLink>
           <NavLink style={{textDecoration: "none"}} to="/profile"><MenuItem onClick={this.handleClose}>Profile</MenuItem></NavLink>
         </Menu>
       </BurgerDiv>

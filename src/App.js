@@ -19,16 +19,23 @@ import ReviewForm from "./components/Reviews/ReviewForm";
 import Payment from "./components/Stripe/Payment";
 import MyLibrary from "./components/MyLibrary/MyLibrary";
 import LandingPage from "./components/Layout/LandingPage";
+import Landing from "./components/Layout/Landing";
 import RequestList from "./components/Requests/RequestList";
 import BookSearch from "./components/AddBook/BookSearch.js";
 import UserProfile from "./components/Profile/UserProfile";
 import SingleRequest from "./components/Requests/SingleRequest.js";
 import LibraryList from "./components/ViewLibraries/LibraryList";
+import TransactionsComponent from "./components/Profile/Transactions";
 
-import { AppContainer, Html } from "./components/Styles/AppStyles.js";
+import {
+  AppContainer,
+  Html,
+  GlobalStyle
+} from "./components/Styles/AppStyles.js";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 class App extends Component {
   setUsername = event => {
     this.setState({
@@ -38,21 +45,22 @@ class App extends Component {
 
   componentWillMount() {
     var query = queryString.parse(this.props.location.search);
-    console.log(query);
     if (query.token && query.userId) {
       window.localStorage.setItem("jwt", query.token);
       window.localStorage.setItem("userId", query.userId);
-      this.props.history.push("/");
+      this.props.history.push("/browse");
     }
   }
   render() {
     return (
       <React.Fragment>
+        <GlobalStyle />
         <Reset />
         <Html>
           <NavBar />
           <AppContainer>
-            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/browse" component={LandingPage} />
+            <Route exact path="/" component={Landing} />
             <Route exact path="/books" component={BookList} />
             <Route exact path="/users" component={Users} />
             <Route exact path="/signup" component={Signup} />
@@ -84,7 +92,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/notifications"
+              path="/messages"
               render={props => <RequestList {...props} />}
             />
             <Route
@@ -105,13 +113,18 @@ class App extends Component {
 
             <Route
               exact
-              path="/notifications/:checkoutRequestId"
+              path="/messages/:checkoutRequestId"
               render={props => <SingleRequest {...props} />}
             />
             <Route
               exact
               path="/users/:userId/library"
               render={props => <LibraryList {...props} />}
+            />
+            <Route
+              exact
+              path="/history"
+              render={props => <TransactionsComponent {...props} />}
             />
           </AppContainer>
           <ToastContainer

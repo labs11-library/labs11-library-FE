@@ -3,15 +3,23 @@ import { withRouter } from "react-router-dom";
 import { addNewBook } from "../../redux/actions/bookActions.js";
 import { connect } from "react-redux";
 import Ratings from "react-ratings-declarative";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import Loading from "../Loading/Loading.js";
 import styled from "styled-components";
 
 const AddBookWrapper = styled.div`
+  @media (max-width: 500px) {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   margin: 20px auto;
-  width: 450px;
-`
+  max-width: 450px;
+  width: 100%;
+`;
 
 const AddBookContentWrapper = styled.div`
   display: flex;
@@ -26,12 +34,15 @@ const AddBookContentWrapper = styled.div`
 
   h2 {
     font-size: 1.5rem;
+    color: #009ee5;
   }
 
   p {
     font-size: 1rem;
+    margin-top: 1rem;
+    color: #838281;
   }
-`
+`;
 
 const AddBookRating = styled.div`
   padding-top: 10px;
@@ -39,7 +50,7 @@ const AddBookRating = styled.div`
   p {
     font-size: 1rem;
   }
-`
+`;
 
 class AddBook extends Component {
   constructor(props) {
@@ -88,32 +99,34 @@ class AddBook extends Component {
               <Ratings.Widget widgetHoverColor="gold" widgetDimension="45px" />
               <Ratings.Widget widgetHoverColor="gold" widgetDimension="45px" />
             </Ratings>
-            <p>Goodreads rating: {this.state.avgRating}</p>
+            <p style={{ color: "#838281", marginTop: "0.5rem" }}>
+              Goodreads rating: {this.state.avgRating}
+            </p>
           </AddBookRating>
           <div>
             <TextField
-              label="Add a description"
+              label="Provide a description of your copy"
               name="description"
               multiline
               fullWidth
               value={this.state.description}
               onChange={this.handleChange}
-              style={{padding: "5px", width: "350px"}}
+              style={{ padding: "5px 5px 5px 0px", width: "350px" }}
             />
           </div>
           <div>
-            <Button 
-              variant="contained" 
+            <Button
+              variant="contained"
               onClick={this.addBook}
-              style={{margin: "5px"}}
+              style={{ margin: "5px" }}
               color="primary"
             >
-              Add book to your library
+              Add To My Library
             </Button>
-            <Button 
-              variant="outlined" 
+            <Button
+              variant="outlined"
               onClick={() => this.props.cancelAdd()}
-              style={{margin: "5px"}}
+              style={{ margin: "5px" }}
               color="secondary"
             >
               Cancel

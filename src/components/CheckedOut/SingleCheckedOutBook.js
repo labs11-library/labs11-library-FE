@@ -5,11 +5,14 @@ import { connect } from "react-redux";
 import { getSingleCheckout } from "../../redux/actions/checkoutActions.js";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import ChatApp from "../Chat/ChatApp";
-import { Button } from "@progress/kendo-react-buttons";
 import baseUrl from "../../url";
 import Auth from "../Auth/Auth";
-
+import { ChatWrapper, BackButtonWrapper, ChatButtonWrapper } from "../Styles/ChatStyles";
 import Loading from "../Loading/Loading.js";
+import { toast } from "react-toastify";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+
 class SingleCheckedOutBook extends Component {
   componentDidMount() {
     const userId = localStorage.getItem("userId");
@@ -31,7 +34,8 @@ class SingleCheckedOutBook extends Component {
       title,
       lenderId,
       borrowerEmail,
-      borrower
+      borrower,
+      checkoutId
     } = this.props.singleCheckout;
     const otherUserEmail =
       lenderId.toString() === localStorage.getItem("userId")
@@ -41,22 +45,23 @@ class SingleCheckedOutBook extends Component {
       lenderId.toString() === localStorage.getItem("userId")
         ? borrower
         : lender;
+    const borrowerLenderName =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? lender
+        : borrower;
     const email = {
       recipient: otherUserEmail,
       sender: "blkfltchr@gmail.com",
-      subject: `${
-        this.props.loggedInUser.firstName
-      } wants to coordinate a return of ${title}`,
-      text: `Hey ${lenderBorrowerName}, check out bookmaps.app/notifications to coordinate a book return with ${
-        this.props.loggedInUser.firstName
-      }`
+      subject: `${borrowerLenderName} wants to coordinate a return of ${title}`,
+      html: `Hey ${lenderBorrowerName}, check out <a href="https://bookmaps.netlify.com/my-library/checkouts/${checkoutId}">this message thread</a> to coordinate a book return with ${borrowerLenderName}`
     };
+
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
         email.sender
-      }&topic=${email.subject}&text=${email.text}`
-    ) //query string url
-      .catch(err => console.error(err));
+      }&topic=${email.subject}&html=${email.html}`
+    ).catch(err => console.error(err));
+    toast.info("Email notification sent!");
   };
 
   render() {
@@ -66,7 +71,6 @@ class SingleCheckedOutBook extends Component {
     } else {
       const {
         title,
-        authors,
         lender,
         dueDate,
         lenderId,
@@ -87,18 +91,34 @@ class SingleCheckedOutBook extends Component {
           ? borrowerId
           : lenderId;
       return (
-        <div>
-          <h2>
-            Talk to {lenderBorrowerName} about returning {title} by {authors}
-          </h2>
-          <p>
-            Due: {dateDue} ({this.timeRemaining(dueDate)} from now)
-          </p>
-          <Button onClick={this.sendEmail}>
+        <>
+          <BackButtonWrapper>
+            <Link to="/my-library" style={{textDecoration: "none"}}>
+              <Button 
+                  color="primary" 
+                  variant="outlined" 
+                >← Back</Button>
+            </Link>
+          </BackButtonWrapper>
+          <ChatWrapper>
+            <ChatButtonWrapper>
+              <Link to="/my-library" style={{textDecoration: "none"}}>
+                <Button 
+                    color="primary" 
+                    variant="outlined" 
+                  >← Back</Button>
+              </Link>
+            </ChatButtonWrapper>
+            <h2>Talk to {lenderBorrowerName} about returning {title.substr(0, 25)}{title.length > 25 && "..."}</h2>
+            <p>
+              Due: {dateDue} ({this.timeRemaining(dueDate)} from now)
+            </p>
+            <ChatApp user={this.props.loggedInUser} otherUserId={otherUserId} />
+        </ChatWrapper>
+          {/* <Button onClick={this.sendEmail}>
             Send {lenderBorrowerName} an email notification
-          </Button>{" "}
-          <ChatApp user={this.props.loggedInUser} otherUserId={otherUserId} />
-        </div>
+          </Button>{" "} */}
+        </>
       );
     }
   }

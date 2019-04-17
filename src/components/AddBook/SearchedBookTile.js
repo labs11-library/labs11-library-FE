@@ -5,7 +5,7 @@ import {
   BookImgWrapper,
   BookImg,
   BookTextContainer
-} from "../Styles/SearchStyles";
+} from "../Styles/InventoryStyles";
 
 const SearchedBookTile = props => {
   if (!props.book) {
@@ -21,8 +21,8 @@ const SearchedBookTile = props => {
         </BookImgWrapper>
         <BookTextContainer>
           <h2>
-            {props.book.title.substr(0, 24)}
-            {props.book.title.length > 24 && "..."}
+            {props.book.title.substr(0, 25)}
+            {props.book.title.length > 25 && "..."}
           </h2>
           <p>by {props.book.authors}</p>
           <Button
@@ -38,7 +38,7 @@ const SearchedBookTile = props => {
             variant="contained"
             color="primary"
           >
-            Add book to your library!
+            Add To My Library
           </Button>
         </BookTextContainer>
       </BookDetailsWrapper>

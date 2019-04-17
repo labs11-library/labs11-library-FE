@@ -29,14 +29,13 @@ class Mapview extends Component {
             lng: position.coords.longitude
           },
           haveUserLocation: true,
-          zoom: 15
+          zoom: 13
         });
         this.updateLocation();
         this.renderMap();
       },
       () => {
         // Gets user location from IP address if they block the web browser request
-        console.log("User blocked access to location");
         fetch("https://ipapi.co/json")
           .then(res => res.json())
           .then(location => {
@@ -81,7 +80,7 @@ class Mapview extends Component {
         );
       })
       .catch(err => {
-        console.log("Error" + err);
+        console.log(err);
       });
   };
 
@@ -105,7 +104,52 @@ class Mapview extends Component {
     var map = new window.google.maps.Map(document.getElementById("map"), {
       center: this.state.location,
       zoom: this.state.zoom,
-      mapTypeControl: false
+      mapTypeControl: false,
+      styles: [
+        {
+          featureType: "water",
+          elementType: "geometry"
+          // stylers: [{ color: "#6A9A9E" }]
+        },
+        {
+          featureType: "poi",
+          elementType: "geometry"
+          // stylers: [{ color: "#C5DDDD" }]
+        },
+        {
+          featureType: "poi",
+          elementType: "labels.icon"
+          // stylers: [
+          //   {
+          //     color: "#294282"
+          //   }
+          // ]
+        },
+        {
+          featureType: "poi",
+          elementType: "labels.text.fill"
+          // stylers: [
+          //   {
+          //     color: "#294282"
+          //   }
+          // ]
+        },
+        {
+          featureType: "road.highway",
+          elementType: "geometry.fill"
+          // stylers: [{ color: "#bdbdbd" }]
+        },
+        {
+          featureType: "road.highway",
+          elementType: "geometry.stroke"
+          // stylers: [{ color: "#9e9e9e" }]
+        }
+        // {
+        //   featureType: "poi",
+        //   elementType: "labels.text.fill",
+        //   stylers: [{ color: "#C5DDDD" }]
+        // }
+      ]
     });
 
     //------------------------- SEARCH BAR STUFF -------------------------//
@@ -140,7 +184,6 @@ class Mapview extends Component {
       var bounds = new window.google.maps.LatLngBounds();
       places.forEach(function(place) {
         if (!place.geometry) {
-          console.log("Returned place contains no geometry");
           return;
         }
         // var icon = {
@@ -177,7 +220,7 @@ class Mapview extends Component {
     this.state.users.map(allUsers => {
       var str = `<a href="https://bookmaps.netlify.com/users/${
         allUsers.userId
-      }/library" target="_blank">HERE</a><br>`;
+      }/library">HERE</a><br>`;
       var contentString = `Click ${str} to visit ${
         allUsers.firstName
       }'s bookshelf`;
@@ -208,6 +251,7 @@ class Mapview extends Component {
     return (
       <main>
         <div id="map" />
+
         <input
           id="pac-input"
           className="controls"

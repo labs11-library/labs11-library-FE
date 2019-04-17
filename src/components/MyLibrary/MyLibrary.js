@@ -5,12 +5,21 @@ import CheckedOutList from "../CheckedOut/CheckedOutList.js";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+// import UserProfileCard from "../Profile/UserProfileCard";
+// import { ProfileWrapper } from "../Styles/MyLibraryStyles.js";
+// import { getLoggedInUser } from "../../redux/actions/authActions.js";
+// import Auth from "../Auth/Auth";
+// import { connect } from "react-redux";
+
 // import ProfileNavBar from "./ProfileNavBar.js";
 
 class MyLibrary extends Component {
   state = {
     value: 0
   };
+  // componentDidMount() {
+  //   this.props.getLoggedInUser();
+  // }
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -24,7 +33,7 @@ class MyLibrary extends Component {
       <div>
         <React.Fragment>
           <MyLibraryTabsWrapper>
-            <Paper>
+            <Paper style={{ maxWidth: "1068px", margin: "0 auto" }}>
               <Tabs
                 value={this.state.value}
                 onChange={this.handleChange}
@@ -33,8 +42,8 @@ class MyLibrary extends Component {
                 centered
                 variant="fullWidth"
               >
-                <Tab label="My books" />
-                <Tab label="Checkouts" />
+                <Tab style={{ outline: "none" }} label="My books" />
+                <Tab style={{ outline: "none" }} label="Checkouts" />
               </Tabs>
             </Paper>
           </MyLibraryTabsWrapper>

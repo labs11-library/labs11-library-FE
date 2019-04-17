@@ -13,7 +13,7 @@ const ProfileNavBar = props => {
   return (
     <div>
       <TabsWrapper>
-        <Paper>
+        <Paper style={{ width: "90%", maxWidth: "1068px", margin: "0 auto" }}>
           <Tabs
             value={props.value}
             onChange={this.handleChange}
@@ -27,11 +27,6 @@ const ProfileNavBar = props => {
           </Tabs>
         </Paper>
       </TabsWrapper>
-      {/* <NavLink style={{margin: "10px"}} to="/library/inventory">My books</NavLink> */}
-      {/* <NavLink style={{margin: "10px"}} to="/library/add-book">Add to My Library</NavLink> */}
-      {/* <NavLink style={{margin: "10px"}} to="/library/checkouts">Checkouts</NavLink> */}
-      {/* <NavLink style={{margin: "10px"}} to="/library/my-info">My Info</NavLink> */}
-      {/* <NavLink style={{margin: "10px"}} to="/library/requests">Checkout requests</NavLink> */}
     </div>
   );
 };

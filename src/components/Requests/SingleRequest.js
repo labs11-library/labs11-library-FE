@@ -5,13 +5,21 @@ import { getSingleCheckoutRequest } from "../../redux/actions/checkoutActions.js
 import ChatApp from "../Chat/ChatApp";
 import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import Auth from "../Auth/Auth";
-
+import { Link } from "react-router-dom";
+import { ChatWrapper, BackButtonWrapper, ChatButtonWrapper } from "../Styles/ChatStyles";
+import Button from "@material-ui/core/Button";
 import Loading from "../Loading/Loading.js";
+import baseUrl from "../../url";
+import { deleteCheckoutRequest } from "../../redux/actions/checkoutActions.js";
+import { withRouter } from "react-router-dom";
+import DeleteRequest from './DeleteRequest';
+
 class SingleRequest extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      singleCheckoutRequest: {}
+      singleCheckoutRequest: {},
+      open: false
     };
   }
 
@@ -24,13 +32,67 @@ class SingleRequest extends Component {
     this.props.getLoggedInUser();
   }
 
+  deleteRequest = () => {
+    const { lenderId, checkoutRequestId } = this.props.singleCheckoutRequest;
+    this.props.deleteCheckoutRequest(lenderId, checkoutRequestId);
+    this.sendEmail();
+    this.props.history.push("/messages");
+  };
+
+  sendEmail = () => {
+    const {
+      lenderEmail,
+      lender,
+      title,
+      lenderId,
+      borrowerEmail,
+      borrower
+    } = this.props.singleCheckoutRequest;
+    const otherUserEmail =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? borrowerEmail
+        : lenderEmail;
+    const lenderBorrowerName =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? borrower
+        : lender;
+    const borrowerLenderName =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? lender
+        : borrower;
+    const anymoreText =
+      lenderId.toString() === localStorage.getItem("userId")
+        ? null
+        : " anymore";
+    localStorage.getItem("userId");
+    const email = {
+      recipient: otherUserEmail,
+      sender: "blkfltchr@gmail.com",
+      subject: `${borrowerLenderName} doesn't want to exchange ${title}${anymoreText}`,
+      html: `Hey ${lenderBorrowerName}, unfortunately ${borrowerLenderName} does not want to exchange ${title}${anymoreText}. Find your next book on <a href="https://bookmaps.netlify.com/">Bookmaps</a>!`
+    };
+    fetch(
+      `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
+        email.sender
+      }&topic=${email.subject}&html=${email.html}`
+    ).catch(err => console.error(err));
+    this.forceUpdate();
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   render() {
     if (this.props.loadingRequests || this.props.singleCheckoutRequest.lenderId === undefined) {
       return <Loading />;
     }
     const {
       title,
-      authors,
       borrower,
       borrowerId,
       lender,
@@ -41,19 +103,45 @@ class SingleRequest extends Component {
         ? borrower
     : lender;
     return (
-      <div>
-        {this.state.error ? (
-          <h2 style={{ textAlign: "center" }}>
-            {lender} hasn't accepted your previous request yet. Talk to{" "}
-            {borrower} about exchanging {title} by {authors}
-          </h2>
-        ) : (
-          <h2 style={{ textAlign: "center" }}>
-            Talk to {lenderBorrowerName} about exchanging {title} by {authors}
-          </h2>
-        )}
-        <ChatApp user={this.props.loggedInUser} otherUserId={borrowerId} />
-      </div>
+      <>
+        <BackButtonWrapper>
+          <Link to="/messages" style={{textDecoration: "none"}}>
+            <Button 
+                color="primary" 
+                variant="outlined" 
+              >← Back</Button>
+          </Link>
+        </BackButtonWrapper>
+        <ChatWrapper>
+          <ChatButtonWrapper>
+            <Link to="/messages" style={{textDecoration: "none"}}>
+              <Button 
+                  color="primary" 
+                  variant="outlined" 
+                >← Back</Button>
+            </Link>
+          </ChatButtonWrapper>
+            {this.state.error ? (
+              <h2>
+                {lender} hasn't accepted your previous request yet. Talk to{" "}{borrower} about exchanging {title.substr(0, 25)}{title.length > 25 && "..."}
+              </h2>
+            ) : (
+              <h2>
+                Talk to {lenderBorrowerName} about exchanging {title.substr(0, 25)}{title.length > 25 && "..."}
+              </h2>
+            )}
+          <ChatApp user={this.props.loggedInUser} otherUserId={borrowerId} />
+          <Button
+            style={{ margin: "10px 0" }}
+            variant="outlined"
+            color="secondary"
+            onClick={this.handleClickOpen}
+          >
+            Delete request
+          </Button>
+          <DeleteRequest open={this.state.open} handleClose={this.handleClose} handleClickOpen={this.handleClickOpen} deleteRequest={this.deleteRequest} request={this.props.singleCheckoutRequest} />
+        </ChatWrapper>
+      </>
     );
   }
 }
@@ -69,5 +157,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getSingleCheckoutRequest, getLoggedInUser }
-)(Auth(SingleRequest));
+  { getSingleCheckoutRequest, getLoggedInUser, deleteCheckoutRequest }
+)(withRouter(Auth(SingleRequest)));

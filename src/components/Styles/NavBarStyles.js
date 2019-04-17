@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
-
-/* Header styles */
+import { NavLink } from "react-router-dom";
 
 export const NavBarWrapper = styled.div`
   height: 3.5rem;
@@ -11,33 +9,32 @@ export const NavBarWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  background-color: white;
-
+  background: white;
   a {
-    color: black;
     text-decoration: none;
   }
 `;
 
-export const BookMapsLogo = styled(Link)`
-  position: absolute;
-  top: 12px;
-  z-index: 100;
+export const NavContentWrapper = styled.div`
+  // max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
-  span {
-    font-size: 2.5rem;
-    padding-left: 10px;
-  }
+export const MenuLinks = styled(NavLink)`
+  text-decoration: none;
 
-  @media screen and (max-width: 750px) {
-    display: none;
+  &:focus,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
   }
 `;
 
 export const NavLinks = styled.div`
-  position: absolute;
-  /* top: 18px; */
-  right: 12px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -50,18 +47,31 @@ export const NavLinks = styled.div`
 `;
 
 export const NavLinksShow = styled.div`
-  position: absolute;
-  /* top: 18px; */
-  right: 12px;
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
   font-size: 1.2rem;
   height: 3.5rem;
 `;
 
-export const NavLinkWrapper = styled(Link)`
+export const NavLinkWrapper = styled(NavLink)`
+  font-size: 1.2rem;
+  color: #757582;
   margin: 0 0.5rem;
+  transition: all 0.2s ease;
+  &.active {
+    color: #009ee5;
+  }
+  &:hover {
+    color: #009ee5;
+  }
+  @media screen and (max-width: 750px) {
+    &.active {
+      border-bottom: none;
+    }
+  }
+  @media screen and (min-width: 750px) {
+    border-bottom: none;
+  }
 `;
 
 export const BurgerDiv = styled.div`
@@ -71,5 +81,5 @@ export const BurgerDiv = styled.div`
 `;
 
 export const NoFocus = styled(NavLink)`
-  outline: none
-`
+  outline: none;
+`;

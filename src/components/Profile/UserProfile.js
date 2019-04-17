@@ -5,6 +5,11 @@ import { getLoggedInUser } from "../../redux/actions/authActions.js";
 import Button from "@material-ui/core/Button";
 import UpdateUserProfile from "./UpdateUserProfile";
 import UserProfileCard from "./UserProfileCard";
+import {
+  UserProfileCardShadow,
+  ProfileWrapper,
+  ButtonWrapper
+} from "../Styles/UserProfileCardStyles";
 
 import Auth from "../Auth/Auth";
 
@@ -30,7 +35,7 @@ class UserProfile extends Component {
     const { loggedInUser } = this.props;
     if (this.state.updatingInfo) {
       return (
-        <div style={{ margin: "5vw auto auto auto" }}>
+        <React.Fragment>
           <UpdateUserProfile
             loggedInUser={loggedInUser}
             toggleUpdate={this.toggleUpdate}
@@ -43,29 +48,33 @@ class UserProfile extends Component {
           >
             Cancel
           </Button>
-        </div>
+        </React.Fragment>
       );
     } else {
       return (
-        <div style={{ margin: "10px" }}>
-          <UserProfileCard loggedInUser={loggedInUser} />
-          <Button
-            variant="contained"
-            onClick={this.toggleUpdate}
-            style={{ margin: "5px" }}
-            color="primary"
-          >
-            Edit Profile
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={this.logOut}
-            style={{ margin: "5px" }}
-            color="secondary"
-          >
-            Log out
-          </Button>
-        </div>
+        <UserProfileCardShadow>
+          <ProfileWrapper>
+            <UserProfileCard loggedInUser={loggedInUser} />
+            <ButtonWrapper>
+              <Button
+                variant="contained"
+                onClick={this.toggleUpdate}
+                style={{ margin: "5px", width: "50%", maxWidth: "200px" }}
+                color="primary"
+              >
+                Edit Profile
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={this.logOut}
+                style={{ margin: "5px", width: "50%", maxWidth: "200px" }}
+                color="secondary"
+              >
+                Log out
+              </Button>
+            </ButtonWrapper>
+          </ProfileWrapper>
+        </UserProfileCardShadow>
       );
     }
   }

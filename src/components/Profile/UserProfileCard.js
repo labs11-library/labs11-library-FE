@@ -1,51 +1,30 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
-import styled from "styled-components";
-
-const ProfileWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 400px;
-  padding: 10px;
-  margin-top: 5vw;
-
-  h1,
-  p {
-    padding: 5px;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  p {
-    font-size: 1rem;
-  }
-`;
+import { ProfileWrapper, Bio } from "../Styles/UserProfileCardStyles";
 
 const UserProfileCard = props => {
   const { firstName, lastName, email, bio, picture } = props.loggedInUser;
+
   return (
     <ProfileWrapper>
-      <div>
-        <Avatar
-          src={picture}
-          style={{
-            height: "80px",
-            width: "80px",
-            boxShadow:
-              "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)",
-            padding: "5px"
-          }}
-        />
-      </div>
-      <div>
-        <h1>
-          {firstName} {lastName}
-        </h1>
-        <p>{email}</p>
-        <p>{bio}</p>
-      </div>
+      <Avatar
+        src={picture}
+        style={{
+          height: "100px",
+          width: "100px",
+          boxShadow:
+            "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"
+        }}
+      />
+      <h1>
+        {firstName} {lastName}
+      </h1>
+      <p>{email}</p>
+      <Bio>
+        {bio === "" || bio === null
+          ? "You have not provided a bio yet! Please provide a few sentence description of your interests so that other users can get to know you better."
+          : bio}
+      </Bio>
     </ProfileWrapper>
   );
 };

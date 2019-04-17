@@ -15,7 +15,9 @@ import {
   GETTING_SINGLE_CHECKOUT,
   GET_SINGLE_CHECKOUT_SUCCESS,
   DELETING_CHECKOUT,
-  DELETE_CHECKOUT_SUCCESS
+  DELETE_CHECKOUT_SUCCESS,
+  SETTING_LATE_FEE,
+  SET_LATE_FEE_SUCCESS
 } from "../actions/checkoutActions.js";
 
 import { toast } from "react-toastify";
@@ -66,7 +68,7 @@ export default function checkoutReducer(state = initialState, action) {
         error: ""
       };
     case ADD_CHECKOUT_REQUEST_SUCCESS:
-      toast.info("Checkout request sent.");
+      toast.info("Your request is being reviewed. Please coordinate an exchange in the message thread.", {autoClose: false});
       return {
         ...state,
         loadingRequests: false,
@@ -141,12 +143,22 @@ export default function checkoutReducer(state = initialState, action) {
         error: ""
       };
     case DELETE_CHECKOUT_SUCCESS:
-      toast.info("Book return confirmed.");
+      toast.info("Book return confirmed.", {autoClose: false});
       return {
         ...state,
         loadingCheckouts: false,
         error: ""
       };
+    case SETTING_LATE_FEE:
+      return {
+        ...state,
+        loadingCheckouts: true
+      }
+    case SET_LATE_FEE_SUCCESS:
+      return {
+        ...state,
+        loadingCheckouts: false
+      }
     default:
       return state;
   }

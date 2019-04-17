@@ -1,17 +1,19 @@
 import React from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import Button from "@material-ui/core/Button";
+// import 'font-awesome/css/font-awesome.min.css';
 import { Link } from "react-router-dom";
+import * as moment from "moment";
 import {
   BookDetailsWrapper,
   BookImgWrapper,
   BookImg,
   Availability,
-  BookTextContainer
+  BookTextContainer,
+  AvatarContainer
 } from "../Styles/LandingPageStyles.js";
-
-import * as moment from "moment";
-
+import Avatar from "@material-ui/core/Avatar";
+import { AvatarWrapper } from "./styles";
 const BookDetails = props => {
   const {
     bookId,
@@ -20,20 +22,20 @@ const BookDetails = props => {
     image,
     available,
     dueDate,
+    lender,
+    lenderPicture,
+    lenderId
   } = props.book;
-  const availability = available ? "Available" : "Checked out";
 
-  function timeRemaining(dueDate) {
-    let now = moment(Date.now());
-    let end = moment(dueDate);
-    if (end.isBefore(moment(now))) {
-      let duration = `overdue by $Ò{moment.duration(now.diff(end)).humanize()}`;
-      return duration;
-    } else {
-      let duration = moment.duration(now.diff(end)).humanize();
-      return duration;
-    }
-  }
+  var FontAwesome = require('react-fontawesome')
+
+
+  const dateDue = moment
+    .utc(dueDate)
+    .local()
+    .format("dddd, MMMM Do");
+const availability = available ? 
+  <div>Available <FontAwesome className="far fa-check-circle" size="1x"></FontAwesome></div> : "Checked out";
   return (
     <BookDetailsWrapper>
       <BookImgWrapper>
@@ -45,17 +47,44 @@ const BookDetails = props => {
           {title.length > 28 && "..."}
         </h2>
         <p>by {authors}</p>
-        <Availability available={available}>{availability}</Availability>
-        {!available && <p>Time until due: {timeRemaining(dueDate)}</p>}
-        <Link style={{ textDecoration: "none" }} to={`/books/${bookId}`}>
-          <Button
-            style={{ padding: "10px 20px" }}
-            variant="contained"
-            color="primary"
-          >
-            See more details
-          </Button>
-        </Link>
+        <Availability available={available}>
+          {availability}
+        </Availability>
+        {dueDate && <p>Due date: {dateDue}</p>}
+        <AvatarWrapper>
+          <Link style={{ textDecoration: "none" }} to={`/books/${bookId}`}>
+            <Button
+              style={{ padding: "10px 20px" }}
+              variant="contained"
+              color="primary"
+            >
+              More details
+            </Button>
+          </Link>
+          <AvatarContainer>
+            <Avatar src={lenderPicture} alt={`${lender} avatar`} />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                paddingLeft: "5px"
+              }}
+            >
+              <Link
+                to={`/users/${lenderId}/library`}
+                style={{
+                  textDecoration: "none",
+                  color: "#009EE5",
+                  fontSize: "14px"
+                }}
+              >
+                Visit {lender}'s
+                <br />
+                Library →
+              </Link>
+            </div>
+          </AvatarContainer>
+        </AvatarWrapper>
       </BookTextContainer>
     </BookDetailsWrapper>
   );

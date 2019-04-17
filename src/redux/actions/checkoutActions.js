@@ -27,6 +27,9 @@ export const DELETE_CHECKOUT_REQUEST_SUCCESS =
 export const DELETING_CHECKOUT = "DELETING_CHECKOUT";
 export const DELETE_CHECKOUT_SUCCESS = "DELETE_CHECKOUT_SUCCESS";
 
+export const SETTING_LATE_FEE = 'SETTING_LATE_FEE'
+export const SET_LATE_FEE_SUCCESS = 'SET_LATE_FEE_SUCCESS'
+
 export const getCheckoutRequests = userId => dispatch => {
   dispatch({ type: GETTING_CHECKOUT_REQUESTS });
   axios
@@ -151,3 +154,16 @@ export const confirmReturn = checkoutId => dispatch => {
     })
     .catch(err => console.log(err));
 };
+
+export const setLateFee = (checkoutId, lateFee) => dispatch => {
+  dispatch({type: SETTING_LATE_FEE})
+  const userId = localStorage.getItem("userId");
+  axios
+  .put(`${baseUrl}/users/${userId}/checkOut/${checkoutId}`, {
+    lateFee: lateFee
+  })
+  .then(res => {
+    dispatch({type: SET_LATE_FEE_SUCCESS})
+  })
+  .catch(err => console.log(err));
+}
