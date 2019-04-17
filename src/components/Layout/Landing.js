@@ -129,7 +129,7 @@ const Landing = props => {
                       style={{ margin: "0 auto" }}
                     >
                       <button class="loginBtn loginBtn--google">
-                        Signup with Google
+                        Sign up with Google
                       </button>
                     </a>
                   </div>
@@ -144,7 +144,7 @@ const Landing = props => {
                         style={{ marginBottom: ".8rem" }}
                         class="loginBtn loginBtn--facebook"
                       >
-                        Signup with Facebook
+                        Sign up with Facebook
                       </button>
                     </a>
                     <p>
