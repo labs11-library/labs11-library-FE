@@ -92,7 +92,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/messages"
+              path="/notifications"
               render={props => <RequestList {...props} />}
             />
             <Route
@@ -113,7 +113,7 @@ class App extends Component {
 
             <Route
               exact
-              path="/messages/:checkoutRequestId"
+              path="/notifications/:checkoutRequestId"
               render={props => <SingleRequest {...props} />}
             />
             <Route
@@ -130,7 +130,7 @@ class App extends Component {
           <ToastContainer
             position="bottom-right"
             style={{ zIndex: "999999999999", fontSize: "1.2rem" }}
-            autoClose={3500}
+            autoClose={5000}
           />
         </Html>
       </React.Fragment>

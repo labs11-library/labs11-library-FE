@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
+import Avatar from "@material-ui/core/Avatar";
 import { editProfile } from "../../redux/actions/authActions.js";
 import styled from "styled-components";
 import axios from 'axios';
 import baseUrl from '../../url.js';
+import { toast } from "react-toastify";
 // import UpdateProfilePhoto from "./UpdateProfilePhoto";
 const FormWrapper = styled.form`
   width: 95%;
@@ -93,20 +95,17 @@ class UpdateUserProfile extends Component {
             image: res.data.image,
             picture:res.data.image
           });
-          // this.props.editProfile(this.state);
+          toast.info('Your new profile photo has been successfully uploaded. Please click Save Updates to confirm changes.');
        })
-      //  .then(res => {
-      //   this.props.editProfile({
-      //     image: res.data.image,
-      //     picture:this.state.image
-      //   })
-      //  })
        .catch(err => console.log(err));
+      
  };
   render() {
     return (
       <div>
+      
       <FormWrapper>
+      <Avatar src={this.state.picture} style={{margin:"0 auto 10px auto", height: "100px", width: "100px", boxShadow:"0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"}} />
         <NameWrapper>
           <TextField
             type="text"
@@ -143,40 +142,57 @@ class UpdateUserProfile extends Component {
           onChange={this.handleChange}
           // style={{ padding: "5px" }}
         />
-        <Button
-          variant="contained"
-          onClick={this.editProfile}
-          style={{ margin: "5px", marginLeft:"-1px" }}
-          color="primary"
-        >
-          Save Updates
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={this.changeLocation}
-          style={{ margin: "5px" }}
-          color="primary"
-        >
-          Update your location
-        </Button>
         {/* </div> */}
       </FormWrapper>
       <FormWrapper>
-            <h1 style={{fontSize:"1rem", marginTop:"2%"}}>Update your profile photo</h1>
-            <form method="/POST" encType="multipart/form-data">
-               <div className="form-group">
-                  <label htmlFor="image" style={{fontSize:".9rem", marginTop:"2%"}}>Upload image: </label>
-                  <input
-                     onChange={this.fileHandler}
-                     type="file"
-                     id="image"
-                     name="image"
-                     accept="image/*"
-                     required
-                  />
-                  <Button style={{ marginLeft: "-6%", marginTop:"-3%" }} color="primary" variant="outlined" onClick={this.uploadImg}>Upload</Button>
-               </div>
-            </form>
+            <div style={{display: "flex", marginTop:"5px", alignItems:"center", height:"60px"}}>
+              <div style={{display: "flex", flexDirection: "column", justifyContent:"space-between"}}>
+                <h1 style={{fontSize:"1rem", marginTop:"2%", }}>Update your profile photo</h1>
+                <form method="/POST" encType="multipart/form-data">
+                  <div className="form-group">
+                      {/* <label htmlFor="image" style={{fontSize:".9rem", marginTop:"2%"}}>Upload image: </label> */}
+                      <input
+                        onChange={this.fileHandler}
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/*"
+                        required
+                        style={{marginTop:"10px"}}
+                      />
+                      
+                  </div>
+                </form>
+              </div>
+              <div>
+                <Button style={{ margin: "5px", marginLeft:"-1px", marginTop:"-13px" }} color="primary" variant="contained" onClick={this.uploadImg}>Upload</Button>
+              </div>
+              
+            </div> 
+            <Button
+              variant="contained"
+              onClick={this.editProfile}
+              style={{ margin: "5px", marginLeft:"-1px" }}
+              color="primary"
+            >
+              Save Updates
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={this.changeLocation}
+              style={{ margin: "5px" }}
+              color="primary"
+            >
+              Update your location
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={this.props.toggleUpdate}
+              color="secondary"
+              style={{ margin: "5px" }}
+            >
+            Cancel
+          </Button>
          </FormWrapper>
       </div>
     );

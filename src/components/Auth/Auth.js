@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import baseUrl from "../../url";
 
-import Login from "./Login";
+import Signup from "./Signup";
 // axios defaults and interceptors
 axios.defaults.baseURL = `${baseUrl}`;
 axios.interceptors.request.use(
@@ -25,14 +25,15 @@ export default function(Component) {
           <h2
             style={{
               color: "#ff5454",
-              fontSize: "2rem",
+              fontSize: "1.5rem",
               margin: "0 auto 24px",
-              textAlign: "center"
+              textAlign: "center",
+              width: "70%"
             }}
           >
-            Unauthorized to view this page. Please log in to continue.
+            You have to be a member of BookMaps to access this feature. Please sign up or log in to continue.
           </h2>
-          <Login />
+          <Signup />
         </React.Fragment>
       );
 

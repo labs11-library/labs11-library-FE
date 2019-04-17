@@ -72,7 +72,7 @@ class RequestDetails extends Component {
       recipient: otherUserEmail,
       sender: "blkfltchr@gmail.com",
       subject: `${borrowerLenderName} doesn't want to exchange ${title}${anymoreText}`,
-      html: `Hey ${lenderBorrowerName}, unfortunately ${borrowerLenderName} does not want to exchange ${title}${anymoreText}. Find your next book on <a href="https://bookmaps.netlify.com/">Bookmaps</a>!`
+      html: `Hey ${lenderBorrowerName}, unfortunately ${borrowerLenderName} does not want to exchange ${title}${anymoreText}. Find your next book on <a href="https://bookmaps.netlify.com/">BookMaps</a>!`
     };
     fetch(
       `${baseUrl}/send-email?recipient=${email.recipient}&sender=${
@@ -108,12 +108,13 @@ class RequestDetails extends Component {
         : lender;
     const lenderBorrower =
       lenderId.toString() === localStorage.getItem("userId")
-        ? "Borrower"
+        ? "borrow"
         : "Lender";
     const descriptionText =
       description.length > 55
         ? `${description.substr(0, 55)} ...`
         : description;
+      var FontAwesome = require('react-fontawesome')
     return (
       <BookDetailsWrapper>
         <BookDetailsContainer>
@@ -131,15 +132,25 @@ class RequestDetails extends Component {
                 ? "No description provided"
                 : "Description: " + descriptionText}
             </p>
-            <p>
-              {lenderBorrower}: {lenderBorrowerName}
-            </p>
+            { lenderBorrower === "borrow" &&
+              <p style={{color: "#00d369"}}>
+                {lenderBorrowerName} wants to {lenderBorrower} your book <FontAwesome className="fas fa-book-reader" size="1x"></FontAwesome>
+              </p>
+            }
+            {/* { lenderBorrower === "borrow" && 
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {lenderBorrowerName} wants to {lenderBorrower} your book! 
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          } */}
           </BookTextContainer>
         </BookDetailsContainer>
         <ButtonContainer>
           <NavLink
             style={{ textDecoration: "none" }}
-            to={`/messages/${checkoutRequestId}`}
+            to={`/notifications/${checkoutRequestId}`}
           >
             <Button
               style={{ margin: "10px 5px" }}
@@ -167,7 +178,7 @@ class RequestDetails extends Component {
             color="secondary"
             onClick={this.handleClickOpen}
           >
-            Delete request
+            {this.props.deleteText}
           </Button>
           <DeleteRequest
             open={this.state.open}

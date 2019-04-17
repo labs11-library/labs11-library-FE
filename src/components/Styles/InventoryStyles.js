@@ -52,12 +52,12 @@ export const SingleInventoryContainer = styled.div`
 
 export const CancelChangesButton = styled.div`
   float: right; 
-  width: 163px;
+  width: 160px;
   margin-top: 10px;
 `
 
 export const SaveChangesButton = styled.div`
-  width: 163px;
+  width: 160px;
   position: absolute;
   left: 0;
   bottom: -45px;
@@ -111,6 +111,7 @@ export const BookTextContainer = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   padding-right: 5px;
+  width: 100%;
   h2,
   p {
     margin-bottom: 7px;

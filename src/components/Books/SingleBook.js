@@ -40,7 +40,6 @@ import {
   ChatButtonWrapper
 } from "../Styles/ChatStyles";
 import Loading from "../Loading/Loading.js";
-import { toast } from "react-toastify";
 class SingleBook extends Component {
   constructor(props) {
     super(props);
@@ -77,7 +76,7 @@ class SingleBook extends Component {
       subject: `${
         this.props.loggedInUser.firstName
       } wants to checkout ${title}`,
-      html: `Hey ${lender}, check out <a href="https://bookmaps.netlify.com/messages">your messages</a> on Bookmaps to coordinate an exchange with ${
+      html: `Hey ${lender}, check out <a href="https://bookmaps.netlify.com/notifications">your notofications</a> on Bookmaps to coordinate an exchange with ${
         this.props.loggedInUser.firstName
       }!`
     };
@@ -86,7 +85,6 @@ class SingleBook extends Component {
         email.sender
       }&topic=${email.subject}&html=${email.html}`
     ).catch(err => console.error(err));
-    toast.info(`Email notification sent to ${lender}.`);
   };
 
   requestCheckout = (bookId, lenderId) => {
@@ -129,7 +127,7 @@ class SingleBook extends Component {
           <BackButtonWrapper>
             <Link to={"/browse"} style={{ textDecoration: "none" }}>
               <Button variant="outlined" color="primary">
-                ← Back to Bookmaps
+                ← Back to BookMaps
               </Button>
             </Link>
           </BackButtonWrapper>
@@ -228,7 +226,7 @@ class SingleBook extends Component {
                               Here's why...
                             </Typography>
                             {
-                              "Bookmaps is like the library. It's free until you're late and we will never charge you otherwise. By taking your payment info, we are ensuring that the owner will be compensated if you return the book late."
+                              "BookMaps is like the library. It's free until you're late and we will never charge you otherwise. By taking your payment info, we are ensuring that the owner will be compensated if you return the book late."
                             }
                           </React.Fragment>
                         }
@@ -300,7 +298,7 @@ class SingleBook extends Component {
                 style={{ textDecoration: "none", margin: "20px 0 0 20px" }}
               >
                 <Button color="primary" variant="outlined">
-                  ← Back to Bookmaps
+                  ← Back to BookMaps
                 </Button>
               </Link>
             </SingleBookMobileBackButton>
