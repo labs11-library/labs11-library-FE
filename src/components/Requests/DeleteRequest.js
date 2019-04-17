@@ -7,8 +7,6 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 const DeleteInventory = props => {
-  const { title, lender } = props.request;
-
   return (
     <Dialog
       open={props.open}

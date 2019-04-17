@@ -14,7 +14,8 @@ import { toast } from "react-toastify";
 const initialState = {
   loadingInventory: false,
   inventory: [],
-  singleInventory: {}
+  singleInventory: {},
+  deletingInventory: false
 };
 
 export default function inventoryReducer(state = initialState, action) {
@@ -56,13 +57,13 @@ export default function inventoryReducer(state = initialState, action) {
     case DELETING_INVENTORY:
       return {
         ...state,
-        loadingInventory: true
+        deletingInventory: true
       };
     case DELETE_INVENTORY_SUCCESS:
       toast.info("Book successfully deleted.");
       return {
         ...state,
-        loadingInventory: false
+        deletingInventory: false
       };
     default:
       return state;

@@ -38,6 +38,11 @@ class SingleInventory extends Component {
     this.props.getSingleInventory(userId, this.props.match.params.bookId);
     this.props.getLoggedInUser();
   }
+  componentWillReceiveProps(newProps) {
+    if (newProps.deletingInventory === true) {
+      this.props.history.push("/my-library");
+    }
+  }
   toggleUpdate = () => {
     this.setState(prevState => {
       return {
@@ -158,6 +163,7 @@ class SingleInventory extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.inventoryReducer.loadingInventory,
+    deletingInventory: state.inventoryReducer.deletingInventory,
     singleInventory: state.inventoryReducer.singleInventory,
     loggedInUser: state.authReducer.loggedInUser
   };
