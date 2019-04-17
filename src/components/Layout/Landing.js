@@ -99,7 +99,7 @@ const Landing = props => {
                 <strong>BookMaps has a book-back guarantee</strong>
               </h2>
               <p className="lead" style={{ margin: "20px auto" }}>
-                Bookmaps is like the library. It's free unless you're late, and
+                BookMaps is like the library. It's free unless you're late, and
                 we will never charge you otherwise. Automatic late fees ensure
                 that you'll get your book back on time or get reimbursed.
               </p>
