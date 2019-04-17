@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MyLibraryTabsWrapper} from "../Styles/MyLibraryStyles.js";
+import { MyLibraryTabsWrapper } from "../Styles/MyLibraryStyles.js";
 import InventoryList from "../Inventory/InventoryList.js";
 import CheckedOutList from "../CheckedOut/CheckedOutList.js";
 import Paper from "@material-ui/core/Paper";
@@ -10,7 +10,6 @@ import Tab from "@material-ui/core/Tab";
 // import { getLoggedInUser } from "../../redux/actions/authActions.js";
 // import Auth from "../Auth/Auth";
 // import { connect } from "react-redux";
-
 
 // import ProfileNavBar from "./ProfileNavBar.js";
 
@@ -34,7 +33,7 @@ class MyLibrary extends Component {
       <div>
         <React.Fragment>
           <MyLibraryTabsWrapper>
-            <Paper>
+            <Paper style={{ maxWidth: "1068px", margin: "0 auto" }}>
               <Tabs
                 value={this.state.value}
                 onChange={this.handleChange}
@@ -58,7 +57,4 @@ class MyLibrary extends Component {
   }
 }
 
-
-
 export default MyLibrary;
-
