@@ -36,7 +36,7 @@ class SingleRequest extends Component {
     const { lenderId, checkoutRequestId } = this.props.singleCheckoutRequest;
     this.props.deleteCheckoutRequest(lenderId, checkoutRequestId);
     this.sendEmail();
-    this.props.history.push("/requests");
+    this.props.history.push("/messages");
   };
 
   sendEmail = () => {
@@ -105,7 +105,7 @@ class SingleRequest extends Component {
     return (
       <>
         <BackButtonWrapper>
-          <Link to="/requests" style={{textDecoration: "none"}}>
+          <Link to="/messages" style={{textDecoration: "none"}}>
             <Button 
                 color="primary" 
                 variant="outlined" 
@@ -114,7 +114,7 @@ class SingleRequest extends Component {
         </BackButtonWrapper>
         <ChatWrapper>
           <ChatButtonWrapper>
-            <Link to="/requests" style={{textDecoration: "none"}}>
+            <Link to="/messages" style={{textDecoration: "none"}}>
               <Button 
                   color="primary" 
                   variant="outlined" 
