@@ -76,7 +76,13 @@ class AddBook extends Component {
     this.setState({ errorGiven: true });
   };
   addBook = () => {
-    this.props.addNewBook(this.state);
+    this.props.addNewBook({
+      title: this.state.title,
+      authors: this.state.authors,
+      image: this.state.image,
+      description: this.state.description,
+      avgRating: this.state.avgRating
+    });
   };
   componentWillReceiveProps(newProps) {
     if (newProps.fetchingBooks === false) {
