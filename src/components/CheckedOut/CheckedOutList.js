@@ -68,7 +68,7 @@ class CheckedOutList extends Component {
     } else {
       return (
         <div style={{ width: "90%", margin: "0 auto" }}>
-          <CheckoutHeader>On loan</CheckoutHeader>
+          <CheckoutHeader>Loaned Out</CheckoutHeader>
           {this.filterIncomingCheckouts().length === 0 && (
             <NoCheckouts>
               You have not loaned out any books.{" "}
