@@ -77,6 +77,7 @@ export const BookButtonsWrapper = styled.div`
   justify-content: space-between;
   margin: 10px 0 0 0;
   width: 35vw;
+  min-height: 175px;
 
   p {
     margin-bottom: 10px;
@@ -100,7 +101,8 @@ export const AvatarWrapper = styled.div`
 export const MapWrapper = styled.div`
   width: 100%;
   height: 360px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 32px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   // position: fixed;
   // right: 0;
   @media (max-width: 850px) {
