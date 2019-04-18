@@ -47,7 +47,7 @@ class ChatApp extends Component {
       this.props.user.userId > this.props.otherUserId
         ? this.props.otherUserId
         : this.props.user.userId;
-    return `${userTwo}-${userOne}`;
+    return `${userOne}--${userTwo}`;
   };
 
   setupChatClient(client) {
