@@ -71,6 +71,30 @@ class Books extends Component {
       }
     }
   };
+
+  //========================= Proximity & Quicksort===========================//
+  proximity = (lat1, lon1, lat2, lon2) => {
+    if (lat1 == lat2 && lon1 == lon2) {
+      return 1;
+    } else {
+      var radlat1 = (Math.PI * lat1) / 180;
+      var radlat2 = (Math.PI * lat2) / 180;
+      var theta = lon1 - lon2;
+      var radtheta = (Math.PI * theta) / 180;
+      var prox =
+        Math.sin(radlat1) * Math.sin(radlat2) +
+        Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+      if (prox > 1) {
+        prox = 1;
+      }
+      prox = Math.acos(prox);
+      prox = (prox * 180) / Math.PI;
+      prox = prox * 60 * 1.1515;
+      return prox;
+    }
+  };
+  //===========================================================================//
+
   searchBooks = () => {
     const { searchText } = this.state;
     const { books } = this.props;
