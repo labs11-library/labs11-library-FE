@@ -14,6 +14,7 @@ import {
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import BookMaps_combo from "../../images/BookMapsLogos/BookMaps_combo.png";
+import BookMaps_combo_grey from "../../images/BookMapsLogos/BookMaps_combo_grey.png";
 
 import BurgerMenu from "./BurgerMenu";
 
@@ -53,7 +54,7 @@ class NavBar extends Component {
           <NavBarWrapper>
             <NavContentWrapper>
               <NavLinkWrapper exact to="/browse">
-                <NavLogoWrapper src={BookMaps_combo} />
+                <NavLogoWrapper src={BookMaps_combo} alt="bookmaps logo" />
               </NavLinkWrapper>
               <BurgerMenu />
               <NavLinks>
