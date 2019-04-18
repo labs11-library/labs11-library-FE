@@ -60,18 +60,29 @@ class AddBook extends Component {
       authors: this.props.book.authors,
       image: this.props.book.covers[0],
       description: "",
-      avgRating: parseFloat(this.props.book.average_rating[0])
+      avgRating: parseFloat(this.props.book.average_rating[0]),
+      errorGiven: false
     };
   }
   handleChange = e => {
     e.preventDefault();
     const { name, value } = e.target;
     this.setState({
-      [name]: value
+      [name]: value,
+      errorGiven: false
     });
   };
+  handleError = () => {
+    this.setState({ errorGiven: true });
+  };
   addBook = () => {
-    this.props.addNewBook(this.state);
+    this.props.addNewBook({
+      title: this.state.title,
+      authors: this.state.authors,
+      image: this.state.image,
+      description: this.state.description,
+      avgRating: this.state.avgRating
+    });
   };
   componentWillReceiveProps(newProps) {
     if (newProps.fetchingBooks === false) {
@@ -105,33 +116,61 @@ class AddBook extends Component {
           </AddBookRating>
           <div>
             <TextField
-              label="Provide a description of your copy"
+              label="Provide a description"
               name="description"
               multiline
               fullWidth
               value={this.state.description}
               onChange={this.handleChange}
-              style={{ padding: "5px 5px 5px 0px", width: "350px" }}
+              required
+              error={this.state.errorGiven}
+              autoFocus
+              style={{
+                padding: "5px 5px 5px 0px",
+                width: "100%",
+                marginRight: "100px"
+              }}
             />
           </div>
-          <div>
-            <Button
-              variant="contained"
-              onClick={this.addBook}
-              style={{ margin: "5px" }}
-              color="primary"
-            >
-              Add To My Library
-            </Button>
-            <Button
-              variant="outlined"
-              onClick={() => this.props.cancelAdd()}
-              style={{ margin: "5px" }}
-              color="secondary"
-            >
-              Cancel
-            </Button>
-          </div>
+          {this.state.description.length > 0 ? (
+            <div>
+              <Button
+                variant="contained"
+                onClick={this.addBook}
+                style={{ margin: "5px" }}
+                color="primary"
+              >
+                Add To My Library
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={() => this.props.cancelAdd()}
+                style={{ margin: "5px" }}
+                color="secondary"
+              >
+                Cancel
+              </Button>
+            </div>
+          ) : (
+            <div>
+              <Button
+                variant="contained"
+                onClick={this.handleError}
+                style={{ margin: "5px" }}
+                color="primary"
+              >
+                Add To My Library
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={() => this.props.cancelAdd()}
+                style={{ margin: "5px" }}
+                color="secondary"
+              >
+                Cancel
+              </Button>
+            </div>
+          )}
         </AddBookWrapper>
       );
     }

@@ -8,11 +8,14 @@ import {
   NavLinks,
   NavLinksShow,
   NavLinkWrapper,
-  MenuLinks
+  MenuLinks,
+  NavLogoWrapper
 } from "../Styles/NavBarStyles.js";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withRouter } from "react-router-dom";
+import BookMaps_combo from "../../images/BookMapsLogos/BookMaps_combo.png";
+
 import BurgerMenu from "./BurgerMenu";
 import { toast } from "react-toastify";
 
@@ -52,8 +55,8 @@ class NavBar extends Component {
         {loggedIn && (
           <NavBarWrapper>
             <NavContentWrapper>
-              <NavLinkWrapper style={{ marginLeft: "12px" }} exact to="/browse">
-                Home
+              <NavLinkWrapper exact to="/browse">
+                <NavLogoWrapper src={BookMaps_combo} />
               </NavLinkWrapper>
               <BurgerMenu />
               <NavLinks>
@@ -62,6 +65,7 @@ class NavBar extends Component {
                 <NavLinkWrapper to="/notifications">
                   Notifications
                 </NavLinkWrapper>
+
                 <NavLinkWrapper style={{ borderBottom: "none" }}>
                   <Avatar
                     style={{

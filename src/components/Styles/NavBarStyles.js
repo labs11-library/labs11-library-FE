@@ -73,6 +73,10 @@ export const NavLinkWrapper = styled(NavLink)`
     border-bottom: none;
   }
 `;
+export const NavLogoWrapper = styled.img`
+  // margin: 0 0.5rem;
+  height: 55px;
+`;
 
 export const BurgerDiv = styled.div`
   @media screen and (min-width: 750px) {

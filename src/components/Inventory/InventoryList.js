@@ -17,9 +17,7 @@ import {
   CardContainer,
   NoBooksLibrary
 } from "../Styles/InventoryStyles.js";
-import {  NoBooks,
-  NoBooksLink
-} from "../Styles/LandingPageStyles.js";
+import { NoBooks, NoBooksLink } from "../Styles/LandingPageStyles.js";
 class Inventory extends Component {
   constructor() {
     super();
@@ -75,8 +73,18 @@ class Inventory extends Component {
     const userId = localStorage.getItem("userId");
     this.props.getAllInventory(userId);
   }
+  componentWillReceiveProps(newProps) {
+    if (newProps.deletingInventory === true) {
+      const userId = localStorage.getItem("userId");
+      this.props.getAllInventory(userId);
+    }
+  }
   render() {
-    if (this.props.addingBook || this.props.loadingInventory) {
+    if (
+      this.props.addingBook ||
+      this.props.loadingInventory ||
+      this.props.deletingInventory
+    ) {
       return <Loading />;
     } else if (this.props.inventory.length === 0) {
       return (
@@ -153,6 +161,7 @@ class Inventory extends Component {
 
 const mapStateToProps = state => ({
   loadingInventory: state.inventoryReducer.loadingInventory,
+  deletingInventory: state.inventoryReducer.deletingInventory,
   addingBook: state.bookReducer.fetchingBooks,
   inventory: state.inventoryReducer.inventory
 });
