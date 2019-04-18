@@ -106,7 +106,7 @@ class NavBar extends Component {
         {!loggedIn && (
           <NavBarWrapper>
             <NavContentWrapper>
-              <NavLinkWrapper to="/browse">Home</NavLinkWrapper>
+              <NavLinkWrapper to="/browse"><NavLogoWrapper src={BookMaps_combo} /></NavLinkWrapper>
               <div style={{ display: "flex" }}>
                 <NavLinksShow>
                   <NavLinkWrapper to="/login">Login</NavLinkWrapper>

@@ -47,9 +47,7 @@ const Landing = props => {
                 <strong>Share your books</strong>
               </h2>
               <p className="lead" style={{ margin: "20px auto" }}>
-                Do you have a favorite book that you just can't shut up about?
-                Post it to your BookMaps profile so that your neighbors can
-                check it out!
+                We believe that books are for reading, not for collecting dust. Post your unused books to your BookMaps library and give the gift of reading.
               </p>
             </div>
           </div>
