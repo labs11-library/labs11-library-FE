@@ -18,16 +18,16 @@ const Login = () => {
               fontWeight: "300"
             }}
           >
-            Log in
+            Login
           </div>
         </Typography>
         <FormControl margin="normal" required fullWidth>
           <a href={`${baseUrl}/auth/google`} style={{ margin: "0 0 0 23%" }}>
-            <button class="loginBtn loginBtn--google">Login with Google</button>
+            <button class="loginBtn loginBtn--google">Log in with Google</button>
           </a>
           <a href={`${baseUrl}/auth/facebook`} style={{ margin: "0 0 0 21%" }}>
             <button class="loginBtn loginBtn--facebook">
-              Login with Facebook
+              Log in with Facebook
             </button>
           </a>
           <Link

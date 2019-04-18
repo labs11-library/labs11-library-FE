@@ -47,9 +47,7 @@ const Landing = props => {
                 <strong>Share your books</strong>
               </h2>
               <p className="lead" style={{ margin: "20px auto" }}>
-                Do you have a favorite book that you just can't shut up about?
-                Post it to your BookMaps profile so that your neighbors can
-                check it out!
+                We believe that books are for reading, not for collecting dust. Post your unused books to your BookMaps library and share them with the people in your area.
               </p>
             </div>
           </div>
@@ -129,7 +127,7 @@ const Landing = props => {
                       style={{ margin: "0 auto" }}
                     >
                       <button class="loginBtn loginBtn--google">
-                        Signup with Google
+                        Sign up with Google
                       </button>
                     </a>
                   </div>
@@ -144,7 +142,7 @@ const Landing = props => {
                         style={{ marginBottom: ".8rem" }}
                         class="loginBtn loginBtn--facebook"
                       >
-                        Signup with Facebook
+                        Sign up with Facebook
                       </button>
                     </a>
                     <p>
