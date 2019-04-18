@@ -68,7 +68,7 @@ export default function checkoutReducer(state = initialState, action) {
         error: ""
       };
     case ADD_CHECKOUT_REQUEST_SUCCESS:
-      toast.info("Your request is being reviewed. Please coordinate an exchange in the message thread.", {autoClose: false});
+      toast.info("In the mean time, please coordinate an exchange in the message thread.", {autoClose: false});
       return {
         ...state,
         loadingRequests: false,
@@ -143,7 +143,7 @@ export default function checkoutReducer(state = initialState, action) {
         error: ""
       };
     case DELETE_CHECKOUT_SUCCESS:
-      toast.info("Book return confirmed.", {autoClose: false});
+      toast.info("Book return confirmed.");
       return {
         ...state,
         loadingCheckouts: false,

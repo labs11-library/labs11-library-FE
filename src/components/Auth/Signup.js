@@ -32,7 +32,7 @@ class Signup extends Component {
               style={{ margin: "0 0 0 23%" }}
             >
               <button class="loginBtn loginBtn--google">
-                Signup with Google
+                Sign up with Google
               </button>
             </a>
             <a
@@ -40,7 +40,7 @@ class Signup extends Component {
               style={{ margin: "0 0 0 21%" }}
             >
               <button class="loginBtn loginBtn--facebook">
-                Signup with Facebook
+                Sign up with Facebook
               </button>
             </a>
             <Link
@@ -53,7 +53,7 @@ class Signup extends Component {
                 textAlign: "center"
               }}
             >
-              Already have an account? Click here to login.
+              Already have an account? Click here to log in.
             </Link>
           </FormControl>
         </Paper>

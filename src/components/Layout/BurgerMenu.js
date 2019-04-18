@@ -4,7 +4,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuIcon from "@material-ui/icons/Menu";
 import { NavLink } from "react-router-dom";
-import { NoFocus, BurgerDiv } from "../Styles/NavBarStyles"
+import { NoFocus, BurgerDiv } from "../Styles/NavBarStyles";
 
 class BurgerMenu extends React.Component {
   state = {
@@ -46,11 +46,21 @@ class BurgerMenu extends React.Component {
             }
           }}
         >
-          <NoFocus style={{textDecoration: "none"}} to="/browse"><MenuItem onClick={this.handleClose}>Home</MenuItem></NoFocus>
-          <NavLink style={{textDecoration: "none"}} to="/my-library"><MenuItem onClick={this.handleClose}>My Library</MenuItem></NavLink>
-          <NavLink style={{textDecoration: "none"}} to="/add-book"><MenuItem onClick={this.handleClose}>Add book</MenuItem></NavLink>
-          <NavLink style={{textDecoration: "none"}} to="/messages"><MenuItem onClick={this.handleClose}>Messages</MenuItem></NavLink>
-          <NavLink style={{textDecoration: "none"}} to="/profile"><MenuItem onClick={this.handleClose}>Profile</MenuItem></NavLink>
+          <NoFocus style={{ textDecoration: "none" }} to="/browse">
+            <MenuItem onClick={this.handleClose}>Home</MenuItem>
+          </NoFocus>
+          <NavLink style={{ textDecoration: "none" }} to="/my-library">
+            <MenuItem onClick={this.handleClose}>My Library</MenuItem>
+          </NavLink>
+          <NavLink style={{ textDecoration: "none" }} to="/add-book">
+            <MenuItem onClick={this.handleClose}>Add book</MenuItem>
+          </NavLink>
+          <NavLink style={{ textDecoration: "none" }} to="/notifications">
+            <MenuItem onClick={this.handleClose}>Notifications</MenuItem>
+          </NavLink>
+          <NavLink style={{ textDecoration: "none" }} to="/profile">
+            <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+          </NavLink>
         </Menu>
       </BurgerDiv>
     );

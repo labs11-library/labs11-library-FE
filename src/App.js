@@ -14,7 +14,6 @@ import ChatApp from "./components/Chat/ChatApp";
 import SingleInventoryWrapper from "./components/Inventory/SingleInventoryWrapper.js";
 import SingleBook from "./components/Books/SingleBook";
 import SingleCheckedOutBook from "./components/CheckedOut/SingleCheckedOutBook";
-import Sendgrid from "./components/Email/SendGrid";
 import ReviewForm from "./components/Reviews/ReviewForm";
 import Payment from "./components/Stripe/Payment";
 import MyLibrary from "./components/MyLibrary/MyLibrary";
@@ -77,7 +76,6 @@ class App extends Component {
               path="/my-library/my-books/:bookId"
               render={props => <SingleInventoryWrapper {...props} />}
             />
-            <Route exact path="/sendgrid" component={Sendgrid} />
             <Route
               exact
               path="/books/:bookId"
@@ -92,7 +90,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/messages"
+              path="/notifications"
               render={props => <RequestList {...props} />}
             />
             <Route
@@ -113,7 +111,7 @@ class App extends Component {
 
             <Route
               exact
-              path="/messages/:checkoutRequestId"
+              path="/notifications/:checkoutRequestId"
               render={props => <SingleRequest {...props} />}
             />
             <Route
@@ -130,7 +128,7 @@ class App extends Component {
           <ToastContainer
             position="bottom-right"
             style={{ zIndex: "999999999999", fontSize: "1.2rem" }}
-            autoClose={3500}
+            autoClose={5000}
           />
         </Html>
       </React.Fragment>
