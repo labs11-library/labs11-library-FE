@@ -47,7 +47,7 @@ const Landing = props => {
                 <strong>Share your books</strong>
               </h2>
               <p className="lead" style={{ margin: "20px auto" }}>
-                We believe that books are for reading, not for collecting dust. Post your unused books to your BookMaps library and give the gift of reading.
+                We believe that books are for reading, not for collecting dust. Post your unused books to your BookMaps library and share them with the people in your area.
               </p>
             </div>
           </div>
