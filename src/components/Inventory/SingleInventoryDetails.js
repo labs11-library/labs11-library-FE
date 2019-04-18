@@ -23,7 +23,7 @@ const SingleInventoryDetails = props => {
   const availability = available ? "Available" : "Checked out";
   const threeWeeks = moment(checkoutDate, "YYYY-MM-DD").add(21, "days");
   return (
-    <div style={{marginTop: "10px"}}>
+    <div style={{ marginTop: "10px" }}>
       <BookDetailsWrapper>
         <BookImgWrapper>
           <BookImg alt={title} src={image} />
@@ -59,17 +59,20 @@ export default SingleInventoryDetails;
 const BookDetailsWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
-  height: 180px;
+  min-height: 180px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   border-radius: 7px;
   background-color: white;
+  padding: 0px 0 6px;
 
   h2 {
+    padding-top: 6px;
     font-size: 1.5rem;
     color: #009ee5;
   }
 
   p {
+    padding: 2px 0;
     font-size: 1rem;
     color: #838281;
   }

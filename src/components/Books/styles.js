@@ -44,6 +44,7 @@ export const BookCardWrapper = styled.div`
   margin-left: 5px;
   padding: 10px;
   background: white;
+  min-height: 390px;
 
   p {
     font-size: 1rem;
@@ -58,7 +59,6 @@ export const BookCardWrapper = styled.div`
 export const BookImgWrapper = styled.div`
   // border: 1px dashed purple;
   width: 120px;
-  height: 180px;
   min-width: 120px;
   min-height: 180px;
 `;
