@@ -73,7 +73,7 @@ class Books extends Component {
   };
 
   //========================= Proximity & Quicksort===========================//
-  proximity = (lat1, lon1, lat2, lon2, miles) => {
+  proximity = (lat1, lon1, lat2, lon2) => {
     if (lat1 == lat2 && lon1 == lon2) {
       return 1;
     } else {

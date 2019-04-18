@@ -33,23 +33,23 @@ class Mapview extends Component {
         });
         this.updateLocation();
         this.renderMap();
-      },
-      () => {
-        // Gets user location from IP address if they block the web browser request
-        fetch("https://ipapi.co/json")
-          .then(res => res.json())
-          .then(location => {
-            this.setState({
-              location: {
-                lat: location.latitude,
-                lng: location.longitude
-              },
-              haveUserLocation: true,
-              zoom: 11
-            });
-            this.renderMap();
-          });
       }
+      // () => {
+      //   // Gets user location from IP address if they block the web browser request
+      //   fetch("https://ipapi.co/json")
+      //     .then(res => res.json())
+      //     .then(location => {
+      //       this.setState({
+      //         location: {
+      //           lat: location.latitude,
+      //           lng: location.longitude
+      //         },
+      //         haveUserLocation: true,
+      //         zoom: 11
+      //       });
+      //       this.renderMap();
+      //     });
+      // }
     );
   }
 
