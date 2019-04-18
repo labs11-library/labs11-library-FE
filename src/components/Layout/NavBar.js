@@ -13,9 +13,11 @@ import {
 } from "../Styles/NavBarStyles.js";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import { withRouter } from "react-router-dom";
 import BookMaps_combo from "../../images/BookMapsLogos/BookMaps_combo.png";
 
 import BurgerMenu from "./BurgerMenu";
+import { toast } from "react-toastify";
 
 class NavBar extends Component {
   constructor() {
@@ -41,7 +43,8 @@ class NavBar extends Component {
 
   logOut = () => {
     localStorage.clear();
-    window.location.reload();
+    this.props.history.push("/")
+    toast.info('Thanks for visiting BookMaps. We\'re sad to see you go 😭. See you again soon.');
   };
 
   render() {
@@ -125,7 +128,9 @@ const mapStateToProps = state => ({
   loading: state.authReducer.fetchingUser
 });
 
-export default connect(
+const NavBarRedux = connect(
   mapStateToProps,
   { getLoggedInUser }
 )(NavBar);
+
+export default withRouter(NavBarRedux);

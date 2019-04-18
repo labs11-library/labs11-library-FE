@@ -189,7 +189,7 @@ class RequestDetails extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.bookReducer.loadingCheckouts,
-    error: state.checkoutReducers.error
+    error: state.checkoutReducer.error
   };
 };
 
