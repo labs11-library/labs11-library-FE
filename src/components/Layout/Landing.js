@@ -204,7 +204,7 @@ const FooterContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 30px;
   position: sticky;
   top: 100%;
   svg {
