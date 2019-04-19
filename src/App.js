@@ -25,6 +25,7 @@ import UserProfile from "./components/Profile/UserProfile";
 import SingleRequest from "./components/Requests/SingleRequest.js";
 import LibraryList from "./components/ViewLibraries/LibraryList";
 import TransactionsComponent from "./components/Profile/Transactions";
+import Team from "./components/Layout/Team";
 
 import {
   AppContainer,
@@ -67,6 +68,7 @@ class App extends Component {
             <Route exact path="/my-library" component={MyLibrary} />
             <Route exact path="/review-form" component={ReviewForm} />
             <Route exact path="/payment" component={Payment} />
+            <Route exact path="/team" component={Team} />
             <Route
               exact
               path="/users/:userId/checkedOut/:checkedOutId"
