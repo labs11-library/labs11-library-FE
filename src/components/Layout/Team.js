@@ -14,11 +14,7 @@ import David from "../../images/team/david.jpg";
 import Hank from "../../images/team/hank.jpg";
 import Jacob from "../../images/team/jacob.png";
 import Scott2 from "../../images/team/scott2.jpg";
-
-// import { animateScroll as scroll } from "react-scroll";
-
-//Auth
-// import { login } from "../../Auth/Auth";
+import { scroller, animateScroll as scroll } from "react-scroll";
 
 const styles = theme => ({
   form: {
@@ -46,26 +42,16 @@ const styles = theme => ({
 });
 
 class Team extends React.Component {
-  // scrollToTop() {
-  //   scroll.scrollToTop();
-  // }
+  scrollToTop() {
+    scroll.scrollToTop();
+  }
 
   render() {
+    this.scrollToTop();
     const { classes } = this.props;
     return (
       <>
         <LandingPageContainer>
-          {/* NAVIGATION */}
-          {/* <NavbarContainer>
-            <Link to="/">
-              <img src={Logo} alt="A cute, personable robot" />
-            </Link>
-            <NavbarItemsContainer>
-              <NavbarItem to="/team">Team</NavbarItem>
-              <NavbarItem to="/pricing">Pricing</NavbarItem>
-              <h2 onClick={login}>Sign In</h2>
-            </NavbarItemsContainer>
-          </NavbarContainer> */}
           <TeamContainer>
             <Typography variant="h3">The Team</Typography>
             <TeamInfoContainer>
@@ -75,13 +61,21 @@ class Team extends React.Component {
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
                   <a target="blank" href="https://github.com/blkfltchr">
-                    <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
+                    <FontAwesomeIcon
+                      className="fa-2x"
+                      icon={faGithubSquare}
+                      style={{ width: "30px", height: "30px" }}
+                    />
                   </a>
                   <a
                     target="blank"
                     href="https://www.linkedin.com/in/blkfltchr/"
                   >
-                    <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
+                    <FontAwesomeIcon
+                      className="fa-2x"
+                      icon={faLinkedin}
+                      style={{ width: "30px", height: "30px" }}
+                    />
                   </a>
                 </TeamMemberLinks>
               </TeamMember>
@@ -91,13 +85,21 @@ class Team extends React.Component {
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
                   <a target="blank" href="https://github.com/Zooheck">
-                    <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
+                    <FontAwesomeIcon
+                      className="fa-2x"
+                      icon={faGithubSquare}
+                      style={{ width: "30px", height: "30px" }}
+                    />
                   </a>
                   <a
                     target="blank"
                     href="https://www.linkedin.com/in/davidsflack/"
                   >
-                    <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
+                    <FontAwesomeIcon
+                      className="fa-2x"
+                      icon={faLinkedin}
+                      style={{ width: "30px", height: "30px" }}
+                    />
                   </a>
                 </TeamMemberLinks>
               </TeamMember>
@@ -107,13 +109,21 @@ class Team extends React.Component {
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
                   <a target="blank" href="https://github.com/henron1">
-                    <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
+                    <FontAwesomeIcon
+                      className="fa-2x"
+                      icon={faGithubSquare}
+                      style={{ width: "30px", height: "30px" }}
+                    />
                   </a>
                   <a
                     target="blank"
                     href="https://www.linkedin.com/in/henry-neal-7a9352174/"
                   >
-                    <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
+                    <FontAwesomeIcon
+                      className="fa-2x"
+                      icon={faLinkedin}
+                      style={{ width: "30px", height: "30px" }}
+                    />
                   </a>
                 </TeamMemberLinks>
               </TeamMember>
@@ -123,13 +133,21 @@ class Team extends React.Component {
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
                   <a target="blank" href="https://github.com/JacobLayton">
-                    <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
+                    <FontAwesomeIcon
+                      className="fa-2x"
+                      icon={faGithubSquare}
+                      style={{ width: "30px", height: "30px" }}
+                    />
                   </a>
                   <a
                     target="blank"
                     href="https://www.linkedin.com/in/jacob-layton/"
                   >
-                    <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
+                    <FontAwesomeIcon
+                      className="fa-2x"
+                      icon={faLinkedin}
+                      style={{ width: "30px", height: "30px" }}
+                    />
                   </a>
                 </TeamMemberLinks>
               </TeamMember>
@@ -139,13 +157,21 @@ class Team extends React.Component {
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
                   <a target="blank" href="https://github.com/sk-vojik">
-                    <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
+                    <FontAwesomeIcon
+                      className="fa-2x"
+                      icon={faGithubSquare}
+                      style={{ width: "30px", height: "30px" }}
+                    />
                   </a>
                   <a
                     target="blank"
                     href="https://www.linkedin.com/in/scott-vojik/"
                   >
-                    <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
+                    <FontAwesomeIcon
+                      className="fa-2x"
+                      icon={faLinkedin}
+                      style={{ width: "30px", height: "30px" }}
+                    />
                   </a>
                 </TeamMemberLinks>
               </TeamMember>
@@ -185,19 +211,23 @@ class Team extends React.Component {
               variant="outlined"
               required
             />
-            <Button className={classes.button} type="submit" variant="outlined">
+            <Button
+              className={classes.button}
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
               Send
             </Button>
             {/* </form> */}
           </ContactContainer>
         </LandingPageContainer>
-        {/* <FooterContainer>
+        <FooterContainer>
           <FooterItemsContainer>
-            <Link to="/team">Team</Link>
-            <Link to="/pricing">Pricing</Link>
+            <Link to="/">Home</Link>
+            <Link to="/browse">Browse</Link>
           </FooterItemsContainer>
-          <ArrowUpward onClick={() => this.scrollToTop()} />
-        </FooterContainer> */}
+        </FooterContainer>
       </>
     );
   }
@@ -216,57 +246,6 @@ const LandingPageContainer = styled.div`
   padding-bottom: 20px;
   margin-bottom: 10px;
 `;
-
-const NavbarContainer = styled.nav`
-  height: 75px;
-  background-color: white;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #f0f4f8;
-  padding: 0 25px;
-  box-sizing: border-box;
-  img {
-    width: 50px;
-  }
-  h2 {
-    margin-left: 30px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  h2 {
-    color: #009ee5;
-    border: 1px solid #009ee5;
-    background-color: white;
-    padding: 8px;
-    border-radius: 7%;
-    &:hover {
-      background-color: #009ee5;
-      color: white;
-    }
-  }
-  h3 {
-    color: #009ee5;
-  }
-`;
-const NavbarItemsContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-const NavbarItem = styled(Link)`
-  margin-left: 30px;
-  font-size: 16px;
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-  color: #441476;
-  &:visited {
-    color: #441476;
-  }
-`;
-
 const TeamContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -353,7 +332,9 @@ const FooterContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 75px;
+  position: sticky;
+  top: 100%;
   svg {
     margin: 0 auto;
     font-size: 30px;
@@ -362,11 +343,12 @@ const FooterContainer = styled.div`
 `;
 
 const FooterItemsContainer = styled.div`
-  background-color: #451476;
+  background-color: #009ee5;
   display: flex;
   color: white;
   justify-content: center;
-  width: 90%;
+  width: 100%;
+  border-top: 2px solid white;
   a {
     font-size: 16px;
     font-weight: 500;
