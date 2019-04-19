@@ -19,15 +19,13 @@ import {
 } from "../Styles/InventoryStyles.js";
 
 const LibraryDetails = props => {
-  const {
-    bookId,
-    title,
-    authors,
-    image,
-    available,
-    dueDate
-  } = props.book;
+  const { bookId, title, authors, image, available, dueDate } = props.book;
   const availability = available ? "Available" : "Checked out";
+
+  const dateDue = moment
+    .utc(dueDate)
+    .local()
+    .format("dddd, MMMM Do");
 
   return (
     <BookDetailsWrapper>
@@ -41,7 +39,7 @@ const LibraryDetails = props => {
         </h2>
         <p>by {authors}</p>
         <Availability available={available}>{availability}</Availability>
-        {!available && <p>Due: {dueDate} </p>}{" "}
+        {!available && <p>Due: {dateDue} </p>}{" "}
         <Link style={{ textDecoration: "none" }} to={`/books/${bookId}`}>
           <Button variant="contained" color="primary">
             More details
