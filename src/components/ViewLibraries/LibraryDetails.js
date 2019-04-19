@@ -3,6 +3,8 @@ import "@progress/kendo-theme-material/dist/all.css";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import * as moment from "moment";
+
 // import * as moment from "moment";
 // import {
 //   BookDetailsWrapper,
