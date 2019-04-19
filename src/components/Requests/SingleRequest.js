@@ -109,6 +109,10 @@ class SingleRequest extends Component {
       lenderId.toString() === localStorage.getItem("userId")
         ? borrower
         : lender;
+    const otherUserId =
+        lenderId.toString() === localStorage.getItem("userId")
+          ? borrowerId
+          : lenderId;
     return (
       <>
         <BackButtonWrapper>
@@ -139,7 +143,7 @@ class SingleRequest extends Component {
               {title.length > 25 && "..."}
             </h2>
           )}
-          <ChatApp user={this.props.loggedInUser} otherUserId={borrowerId} />
+          <ChatApp user={this.props.loggedInUser} otherUserId={otherUserId} />
           <Button
             style={{ margin: "10px 0" }}
             variant="outlined"
