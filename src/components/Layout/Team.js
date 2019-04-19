@@ -153,55 +153,51 @@ class Team extends React.Component {
           </TeamContainer>
           <ContactContainer>
             <Typography variant="h3">Contact Us</Typography>
-            <form
+            {/* <form
               action="/success"
               className={classes.form}
               name="contact"
               method="POST"
-            >
-              <input type="hidden" name="form-name" value="contact" />
-              <TextField
-                label="Name"
-                className={classes.textField}
-                margin="normal"
-                name="contact-name"
-                required
-              />
-              <TextField
-                label="Email"
-                className={classes.textField}
-                margin="normal"
-                name="contact-email"
-                required
-              />
-              <TextField
-                label="Message"
-                className={classes.textField}
-                margin="normal"
-                name="contact-message"
-                multiline
-                rows="8"
-                placeholder="Type your message here"
-                variant="outlined"
-                required
-              />
-              <Button
-                className={classes.button}
-                type="submit"
-                variant="outlined"
-              >
-                Send
-              </Button>
-            </form>
+            > */}
+            <input type="hidden" name="form-name" value="contact" />
+            <TextField
+              label="Name"
+              className={classes.textField}
+              margin="normal"
+              name="contact-name"
+              required
+            />
+            <TextField
+              label="Email"
+              className={classes.textField}
+              margin="normal"
+              name="contact-email"
+              required
+            />
+            <TextField
+              label="Message"
+              className={classes.textField}
+              margin="normal"
+              name="contact-message"
+              multiline
+              rows="8"
+              placeholder="Type your message here"
+              variant="outlined"
+              required
+            />
+            <Button className={classes.button} type="submit" variant="outlined">
+              Send
+            </Button>
+            {/* </form> */}
           </ContactContainer>
-          {/* <FooterContainer>
-            <FooterItemsContainer>
-              <Link to="/team">Team</Link>
-              <Link to="/pricing">Pricing</Link>
-            </FooterItemsContainer>
-            <ArrowUpward onClick={() => this.scrollToTop()} />
-          </FooterContainer> */}
         </LandingPageContainer>
+        {/* <FooterContainer>
+          <FooterItemsContainer>
+            <Link to="/team">Team</Link>
+            <Link to="/pricing">Pricing</Link>
+          </FooterItemsContainer>
+          <ArrowUpward onClick={() => this.scrollToTop()} />
+        </FooterContainer> */}
       </>
     );
   }
@@ -211,10 +207,14 @@ export default withStyles(styles)(Team);
 
 const LandingPageContainer = styled.div`
   margin: 0 auto;
-  width: 100%;
+  width: 90%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 10px;
   max-width: 1280px;
   background-color: white;
   box-sizing: border-box;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 const NavbarContainer = styled.nav`
@@ -271,9 +271,9 @@ const TeamContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 95%;
+  width: 90%;
   margin: 40px auto;
-  background-color: #fafafa;
+  background-color: white;
   padding: 30px 20px;
   box-sizing: border-box;
   h3 {
@@ -291,7 +291,7 @@ const TeamContainer = styled.div`
 const TeamInfoContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
 `;
 
 const TeamMember = styled.div`
@@ -331,9 +331,10 @@ const ContactContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 95%;
+  width: 80%;
   margin: 40px auto;
-  background-color: #fafafa;
+  background-color: #f3f2f2;
+  border-radius: 10px;
   padding: 30px 20px;
   box-sizing: border-box;
   h3 {
