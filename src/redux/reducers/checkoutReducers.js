@@ -68,7 +68,9 @@ export default function checkoutReducer(state = initialState, action) {
         error: ""
       };
     case ADD_CHECKOUT_REQUEST_SUCCESS:
-      toast.info("In the mean time, please coordinate an exchange in the message thread.", {autoClose: false});
+      toast.info("Please coordinate an exchange in the message thread.", {
+        autoClose: false
+      });
       return {
         ...state,
         loadingRequests: false,
@@ -153,12 +155,12 @@ export default function checkoutReducer(state = initialState, action) {
       return {
         ...state,
         loadingCheckouts: true
-      }
+      };
     case SET_LATE_FEE_SUCCESS:
       return {
         ...state,
         loadingCheckouts: false
-      }
+      };
     default:
       return state;
   }
