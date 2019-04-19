@@ -35,7 +35,23 @@ const Landing = props => {
           </div>
         </div>
       </section>
-      <section className="fdb-block" style={{ backgroundColor: "#F3F2F2" }}>
+
+<section className="fdb-block" style={{ backgroundColor: "#F3F2F2" }}>
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-8 col-lg-7 col-md-5 text-center">
+              <div className="fdb-box fdb-touch">
+              <h2 style={{ fontSize: "2.5rem", marginBottom: "20px" }}><strong>How It Works</strong></h2>
+                
+                <iframe title="BookMaps Demo - Lambda School Capstone Project" width="100%" height="315" src="https://www.youtube.com/embed/xkDPcGRpGVU" frameborder="0" allowfullscreen></iframe>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="fdb-block">
         <div className="container">
           <div className="row text-left align-items-center pt-5 pb-md-5">
             <div className="col-8 col-md-5 m-auto">
@@ -105,7 +121,8 @@ const Landing = props => {
           </div>
         </div>
       </section>
-      <section className="fdb-block">
+
+      <section className="fdb-block" style={{ backgroundColor: "#F3F2F2" }}>
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12 col-md-8 col-lg-7 col-md-5 text-center">
