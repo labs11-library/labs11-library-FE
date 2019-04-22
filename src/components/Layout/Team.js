@@ -226,6 +226,8 @@ class Team extends React.Component {
           <FooterItemsContainer>
             <Link to="/">Home</Link>
             <Link to="/browse">Browse</Link>
+            <Link to="/team">Team</Link>
+            <Link to="/privacy">Privacy</Link>
           </FooterItemsContainer>
         </FooterContainer>
       </>

@@ -192,6 +192,7 @@ const Landing = props => {
       <FooterContainer>
         <FooterItemsContainer>
           <Link to="/team">Meet the team behind BookMaps</Link>
+          <Link to="/privacy">Privacy Policy</Link>
         </FooterItemsContainer>
       </FooterContainer>
     </div>
