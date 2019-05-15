@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { getAllInventory } from "../../redux/actions/inventoryActions.js";
 import { getSingleUser } from "../../redux/actions/userActions.js";
 import LibraryDetails from "./LibraryDetails";
+
+import { NoBooksLibrary } from "../Styles/InventoryStyles.js";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
@@ -47,7 +49,6 @@ class LibraryList extends Component {
     const userId = this.props.match.params.userId;
     this.props.getAllInventory(userId);
     this.props.getSingleUser(userId);
-    // this.props.getLoggedInUser();
   }
   render() {
     const { singleUser } = this.props;
@@ -56,9 +57,12 @@ class LibraryList extends Component {
     } else if (this.props.inventory.length === 0) {
       const { firstName, lastName } = this.props.singleUser;
       return (
-        <h1>
-          There are no books in {firstName} {lastName}'s library.
-        </h1>
+        <React.Fragment>
+          <SingleUserProfileCard singleUser={singleUser} />
+          <NoBooksLibrary>
+            There are no books in {firstName} {lastName}'s library.
+          </NoBooksLibrary>
+        </React.Fragment>
       );
     } else {
       const { firstName } = this.props.singleUser;
@@ -81,7 +85,6 @@ class LibraryList extends Component {
               value={this.state.searchText}
               onChange={this.handleChange}
               style={{ marginLeft: "8px", flex: "1" }}
-              // onKeyPress={this.lettersOnly}
             />
             <IconButton aria-label="Search" style={{ padding: "10px" }}>
               <SearchIcon />

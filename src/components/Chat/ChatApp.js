@@ -11,7 +11,7 @@ class ChatApp extends Component {
     this.state = {
       error: null,
       isLoading: true,
-      notifications: []
+      messages: []
     };
 
     this.user = {
@@ -20,7 +20,7 @@ class ChatApp extends Component {
     };
 
     this.setupChatClient = this.setupChatClient.bind(this);
-    this.notificationsLoaded = this.notificationsLoaded.bind(this);
+    this.messagesLoaded = this.messagesLoaded.bind(this);
     this.messageAdded = this.messageAdded.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.handleError = this.handleError.bind(this);
@@ -47,7 +47,7 @@ class ChatApp extends Component {
       this.props.user.userId > this.props.otherUserId
         ? this.props.otherUserId
         : this.props.user.userId;
-    return `${userOne}-${userTwo}`;
+    return `${userOne}--${userTwo}`;
   };
 
   setupChatClient(client) {
@@ -71,7 +71,7 @@ class ChatApp extends Component {
       .then(() => {
         // Success!
         this.setState({ isLoading: false });
-        this.channel.getnotifications().then(this.notificationsLoaded);
+        this.channel.getMessages().then(this.messagesLoaded);
         this.channel.on("messageAdded", this.messageAdded);
       })
       .catch(this.handleError);
@@ -91,16 +91,16 @@ class ChatApp extends Component {
     };
   }
 
-  notificationsLoaded(messagePage) {
+  messagesLoaded(messagePage) {
     this.setState({
-      notifications: messagePage.items.map(this.twilioMessageToKendoMessage)
+      messages: messagePage.items.map(this.twilioMessageToKendoMessage)
     });
   }
 
   messageAdded(message) {
     this.setState(prevState => ({
-      notifications: [
-        ...prevState.notifications,
+      messages: [
+        ...prevState.messages,
         this.twilioMessageToKendoMessage(message)
       ]
     }));
@@ -124,13 +124,13 @@ class ChatApp extends Component {
     ) {
       return <Loading />;
     }
-
+   
     return (
       <>
         <ChatUI
           user={this.user}
-          notifications={this.state.notifications}
-          onnotificationsend={this.sendMessage}
+          messages={this.state.messages}
+          onMessageSend={this.sendMessage}
         />
       </>
     );

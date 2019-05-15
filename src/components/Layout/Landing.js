@@ -6,6 +6,8 @@ import readingList from "../../images/landing/readingList.svg";
 import map from "../../images/landing/map.svg";
 import beginChat from "../../images/landing/beginChat.svg";
 import backendBaseUrl from "../../url";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const Landing = props => {
   return (
@@ -35,7 +37,31 @@ const Landing = props => {
           </div>
         </div>
       </section>
+
       <section className="fdb-block" style={{ backgroundColor: "#F3F2F2" }}>
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-8 col-lg-7 col-md-5 text-center">
+              <div className="fdb-box fdb-touch">
+                <h2 style={{ fontSize: "2.5rem", marginBottom: "20px" }}>
+                  <strong>How It Works</strong>
+                </h2>
+
+                <iframe
+                  title="BookMaps Demo - Lambda School Capstone Project"
+                  width="100%"
+                  height="315"
+                  src="https://www.youtube.com/embed/xkDPcGRpGVU"
+                  frameborder="0"
+                  allowfullscreen
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="fdb-block">
         <div className="container">
           <div className="row text-left align-items-center pt-5 pb-md-5">
             <div className="col-8 col-md-5 m-auto">
@@ -47,9 +73,9 @@ const Landing = props => {
                 <strong>Share your books</strong>
               </h2>
               <p className="lead" style={{ margin: "20px auto" }}>
-                Do you have a favorite book that you just can't shut up about?
-                Post it to your BookMaps profile so that your neighbors can
-                check it out!
+                We believe that books are for reading, not for collecting dust.
+                Post your unused books to your BookMaps library and share them
+                with the people in your area.
               </p>
             </div>
           </div>
@@ -107,7 +133,8 @@ const Landing = props => {
           </div>
         </div>
       </section>
-      <section className="fdb-block">
+
+      <section className="fdb-block" style={{ backgroundColor: "#F3F2F2" }}>
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12 col-md-8 col-lg-7 col-md-5 text-center">
@@ -162,8 +189,48 @@ const Landing = props => {
           </div>
         </div>
       </section>
+      <FooterContainer>
+        <FooterItemsContainer>
+          <Link to="/team">Meet the team behind BookMaps</Link>
+          <Link to="/privacy">Privacy Policy</Link>
+        </FooterItemsContainer>
+      </FooterContainer>
     </div>
   );
 };
 
 export default Landing;
+
+const FooterContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  position: sticky;
+  top: 100%;
+  svg {
+    margin: 0 auto;
+    font-size: 30px;
+    cursor: pointer;
+  }
+`;
+
+const FooterItemsContainer = styled.div`
+  background-color: #009ee5;
+  display: flex;
+  color: white;
+  justify-content: center;
+  width: 100%;
+  border-top: 2px solid white;
+  a {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 16px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+  }
+  a:visited {
+    color: white;
+  }
+`;
