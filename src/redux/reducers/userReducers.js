@@ -34,13 +34,11 @@ export default function userReducer(state = initialState, action) {
         isCreatingCustomer: true
       };
     case CREATE_CUSTOMER_SUCCESS:
-      console.log("Customer Created!");
       return {
         ...state,
         isCreatingCustomer: false
       };
     case CREATE_CUSTOMER_FAILURE:
-      console.log("Customer Could Not Be Created");
       return {
         ...state,
         isCreatingCustomer: false

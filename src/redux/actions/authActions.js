@@ -50,7 +50,6 @@ export const createStripeCustomer = body => dispatch => {
     .post(`${baseUrl}/payment/create_customer`, body)
     .then(res => {
       dispatch({ type: CREATE_STRIPE_CUSTOMER_SUCCESS });
-      console.log(res.data);
     })
     .catch(err => console.log("Frontend error:", err));
 };
