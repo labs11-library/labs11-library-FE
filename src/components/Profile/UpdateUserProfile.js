@@ -90,7 +90,6 @@ class UpdateUserProfile extends Component {
     axios
        .post(`${baseUrl}/upload`, fd)
        .then(res => {
-          console.log('res', res);
           this.setState({ 
             image: res.data.image,
             picture:res.data.image

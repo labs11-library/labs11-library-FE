@@ -46,12 +46,7 @@ export const createCustomer = token => dispatch => {
     .then(res => {
       dispatch({
         type: CREATE_CUSTOMER_SUCCESS
-        // payload: res.data
-        // console.log(payload);
       });
     })
-    // .then(() => {
-    //   dispatch(getLoggedInUser());
-    // })
     .catch(err => console.log(err));
 };
