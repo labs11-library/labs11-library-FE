@@ -211,10 +211,20 @@ class Books extends Component {
           {this.state.searchText.length > 0 &&
             this.filteredBooks().length === 0 && (
               <>
-                <NoBooks>Nobody has posted this book yet.</NoBooks>
+                <NoBooks>Nobody in your area has posted this book yet.</NoBooks>
                 <NoBooksLink to="/add-book">
                   Be the first to post it to BookMaps.
                 </NoBooksLink>
+              </>
+            )}
+          {this.state.searchText.length === 0 &&
+            this.filteredBooks().length === 0 && (
+              <>
+                <NoBooks>
+                  There are no{" "}
+                  {this.state.filter === "available" && " available "}books in
+                  this area.
+                </NoBooks>
               </>
             )}
           <CardContainer>
