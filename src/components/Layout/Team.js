@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { ArrowUpward } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -14,7 +13,7 @@ import David from "../../images/team/david.jpg";
 import Hank from "../../images/team/hank.jpg";
 import Jacob from "../../images/team/jacob.png";
 import Scott2 from "../../images/team/scott2.jpg";
-import { scroller, animateScroll as scroll } from "react-scroll";
+import { animateScroll as scroll } from "react-scroll";
 
 const styles = theme => ({
   form: {

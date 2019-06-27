@@ -114,12 +114,6 @@ const PrivacyContainer = styled.div`
   }
 `;
 
-const TeamInfoContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-`;
-
 const FooterContainer = styled.div`
   width: 100%;
   display: flex;

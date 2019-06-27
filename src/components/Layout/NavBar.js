@@ -15,7 +15,6 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withRouter } from "react-router-dom";
 import BookMaps_combo from "../../images/BookMapsLogos/BookMaps_combo.png";
-import BookMaps_combo_grey from "../../images/BookMapsLogos/BookMaps_combo_grey.png";
 
 import BurgerMenu from "./BurgerMenu";
 import { toast } from "react-toastify";
@@ -44,8 +43,10 @@ class NavBar extends Component {
 
   logOut = () => {
     localStorage.clear();
-    this.props.history.push("/")
-    toast.info('Thanks for visiting BookMaps. We\'re sad to see you go 😭. See you again soon.');
+    this.props.history.push("/");
+    toast.info(
+      "Thanks for visiting BookMaps. We're sad to see you go 😭. See you again soon."
+    );
   };
 
   render() {
@@ -107,7 +108,9 @@ class NavBar extends Component {
         {!loggedIn && (
           <NavBarWrapper>
             <NavContentWrapper>
-              <NavLinkWrapper to="/browse"><NavLogoWrapper src={BookMaps_combo} /></NavLinkWrapper>
+              <NavLinkWrapper to="/browse">
+                <NavLogoWrapper src={BookMaps_combo} />
+              </NavLinkWrapper>
               <div style={{ display: "flex" }}>
                 <NavLinksShow>
                   <NavLinkWrapper to="/login">Login</NavLinkWrapper>
