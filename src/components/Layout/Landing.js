@@ -1,5 +1,4 @@
 import React from "react";
-import Iframe from "react-iframe";
 import bookLover from "../../images/landing/bookLover.svg";
 import bibliophile from "../../images/landing/bibliophile.svg";
 import readingList from "../../images/landing/readingList.svg";
