@@ -14,7 +14,7 @@
     "@progress/kendo-react-inputs": "^2.8.0",
     "@progress/kendo-react-intl": "^2.8.0",
     "@progress/kendo-theme-material": "^2.3.2",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "capitalize": "^2.0.0",
     "dotenv": "^7.0.0",
